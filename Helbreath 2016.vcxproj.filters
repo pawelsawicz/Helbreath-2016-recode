@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Shared">
+      <UniqueIdentifier>{db41609d-89f3-4aa7-a7cb-df2314a5e811}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{23B9BE7E-411F-49EC-8414-7B29D198265D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Client382</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>libcp.lib;LIBC.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <IgnoreSpecificDefaultLibraries>libcp.lib;LIBC.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Shared\buffer.cpp" />
+    <ClCompile Include="cClient.cpp" />
+    <ClCompile Include="cLoginServer.cpp" />
+    <ClCompile Include="cMapServer.cpp" />
+    <ClCompile Include="cSocket.cpp" />
+    <ClCompile Include="Source\BuildItem.cpp" />
+    <ClCompile Include="Source\CharInfo.cpp" />
+    <ClCompile Include="Source\Curse.cpp" />
+    <ClCompile Include="Source\DXC_ddraw.cpp" />
+    <ClCompile Include="Source\DXC_dinput.cpp" />
+    <ClCompile Include="Source\DXC_dsound.cpp" />
+    <ClCompile Include="Source\Effect.cpp" />
+    <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\GameMonitor.cpp" />
+    <ClCompile Include="Source\Item.cpp" />
+    <ClCompile Include="Source\ItemName.cpp" />
+    <ClCompile Include="Source\Magic.cpp" />
+    <ClCompile Include="Source\MapData.cpp" />
+    <ClCompile Include="Source\Misc.cpp" />
+    <ClCompile Include="Source\MouseInterface.cpp" />
+    <ClCompile Include="Source\Msg.cpp" />
+    <ClCompile Include="Source\Mydib.cpp" />
+    <ClCompile Include="Source\Skill.cpp" />
+    <ClCompile Include="Source\Sockets.cpp" />
+    <ClCompile Include="Source\SoundBuffer.cpp" />
+    <ClCompile Include="Source\Sprite.cpp" />
+    <ClCompile Include="Source\StrTok.cpp" />
+    <ClCompile Include="Source\Tile.cpp" />
+    <ClCompile Include="Source\TileSpr.cpp" />
+    <ClCompile Include="Source\Wmain.cpp" />
+    <ClCompile Include="Source\YWSound.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Shared\buffer.h" />
+    <ClInclude Include="..\Shared\common.h" />
+    <ClInclude Include="..\Shared\DntSvcs.h" />
+    <ClInclude Include="..\Shared\items.h" />
+    <ClInclude Include="..\Shared\lgnSvcs.h" />
+    <ClInclude Include="..\Shared\magicID.h" />
+    <ClInclude Include="..\Shared\maps.h" />
+    <ClInclude Include="..\Shared\Maths.h" />
+    <ClInclude Include="..\Shared\NetMessages.h" />
+    <ClInclude Include="..\Shared\npcType.h" />
+    <ClInclude Include="..\Shared\Skilltypes.h" />
+    <ClInclude Include="..\Shared\TypeDefs.h" />
+    <ClInclude Include="..\Shared\version.h" />
+    <ClInclude Include="cClient.h" />
+    <ClInclude Include="cLoginServer.h" />
+    <ClInclude Include="cMapServer.h" />
+    <ClInclude Include="cSocket.h" />
+    <ClInclude Include="Header\ActionID.h" />
+    <ClInclude Include="Header\BuildItem.h" />
+    <ClInclude Include="Header\CharInfo.h" />
+    <ClInclude Include="Header\Cint.h" />
+    <ClInclude Include="Header\CNTREVNT.H" />
+    <ClInclude Include="Header\Curse.h" />
+    <ClInclude Include="Header\DDRAW.H" />
+    <ClInclude Include="Header\DINPUT.H" />
+    <ClInclude Include="Header\DSOUND.H" />
+    <ClInclude Include="Header\DXC_ddraw.h" />
+    <ClInclude Include="Header\DXC_dinput.h" />
+    <ClInclude Include="Header\DXC_dsound.h" />
+    <ClInclude Include="Header\DynamicObjectID.h" />
+    <ClInclude Include="Header\Effect.h" />
+    <ClInclude Include="Header\Game.h" />
+    <ClInclude Include="Header\GameMonitor.h" />
+    <ClInclude Include="Header\GlobalDef.h" />
+    <ClInclude Include="Header\GlobalVal.h" />
+    <ClInclude Include="Header\Item.h" />
+    <ClInclude Include="Header\ItemName.h" />
+    <ClInclude Include="Header\JPEGLIB.H" />
+    <ClInclude Include="Header\LAN_ENG.H" />
+    <ClInclude Include="Header\Magic.h" />
+    <ClInclude Include="Header\MapData.h" />
+    <ClInclude Include="Header\Misc.h" />
+    <ClInclude Include="Header\MouseInterface.h" />
+    <ClInclude Include="Header\Msg.h" />
+    <ClInclude Include="Header\Mydib.h" />
+    <ClInclude Include="Header\old NetMessages.h" />
+    <ClInclude Include="Header\Skill.h" />
+    <ClInclude Include="Header\Sockets.h" />
+    <ClInclude Include="Header\SoundBuffer.h" />
+    <ClInclude Include="Header\SoundID.h" />
+    <ClInclude Include="Header\Sprite.h" />
+    <ClInclude Include="Header\SpriteID.h" />
+    <ClInclude Include="Header\StrTok.h" />
+    <ClInclude Include="Header\Tile.h" />
+    <ClInclude Include="Header\TileSpr.h" />
+    <ClInclude Include="Header\Winmain.h" />
+    <ClInclude Include="Header\YWSound.h" />
+    <ClInclude Include="Resource\RESOURCE.H" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\icon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\resource.aps" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource\resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Libs\Cint.lib" />
+    <Library Include="Libs\DDRAW.LIB" />
+    <Library Include="Libs\DINPUT.LIB" />
+    <Library Include="Libs\DSOUND.LIB" />
+    <Library Include="Libs\DXGUID.LIB" />
+    <Library Include="Libs\IMM32.LIB" />
+    <Library Include="Libs\SEARCH.LIB" />
+    <Library Include="Libs\StrTok.lib" />
+    <Library Include="Libs\WINMM.LIB" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

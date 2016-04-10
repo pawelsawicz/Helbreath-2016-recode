@@ -26,6 +26,7 @@ public:
 	SOCKET ConnectSocket(char * ip, u_short port, unsigned int wmEvent);
 	int cSocket::SendSocket(SOCKET acceptedSock, char * data, int Size);
 	int RecvSocket(SOCKET acceptedSock, char * buf, int len);
+	int iGetPeerAddress(SOCKET acceptedSock, char * pAddrString);
 
 	WSADATA wsaData;
 };

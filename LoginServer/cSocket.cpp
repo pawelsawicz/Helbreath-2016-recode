@@ -234,3 +234,14 @@ int cSocket::RecvSocket(SOCKET acceptedSock, char * buf, int len)
 	}
 	return byteReceived;
 }
+int cSocket::iGetPeerAddress(SOCKET acceptedSock, char * pAddrString)
+{
+	SOCKADDR_IN sockaddr;
+	int iRet, iLen;
+	//PutLogList("iGetPeerAddress");
+	iLen = sizeof(sockaddr);
+	iRet = getpeername(acceptedSock, (struct sockaddr *)&sockaddr, &iLen);
+	strcpy(pAddrString, (const char *)inet_ntoa(sockaddr.sin_addr));
+
+	return iRet;
+}

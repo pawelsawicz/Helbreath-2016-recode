@@ -189,29 +189,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_CLIENT_SOCKET:
 		Main.SocketsMessages(message, wParam, lParam);
 		break;
-	/*
-	case WM_MAP_SOCKET_LISTEN:
-		for (UINT i = 0; i < MAXMAPSOCKETS; i++){
-			if (MapServer.mapSocket[i] == NULL){
-				MapServer.mapSocket[i] = Socket.AcceptSocket(LoginServer.mapSocket, WM_MAP_SOCKET_ACCEPT);
-				wsprintf(Log, "Map Socket Accepted: %ld\n", MapServer.mapSocket[i]);
-				DisplayInLogList(Log);
-				return true;
-			}
-		}
-		break;
-		*/
-		/*
-	case WM_CLIENT_SOCKET_LISTEN:
-		//Socket = new class cSockets(BLOCKLIMIT);
-		Socket.ClientListenSocket = Application.bAccept(Socket.ClientListenSocket, Socket.ClientAcceptSocket, 0);//0 = client
-		if (Application.bAccept(Socket.ClientListenSocket, Socket.ClientAcceptSocket, 0) == true) {//0 = client
-			wsprintf(Log, "Client Socket Accepted: %ld\n", Socket.ClientAcceptSocket);
-			Application.DisplayInLogList(Log);
-		}
-		break;
-		*/
+
 	default:
+
+		if ((message >= WM_MAP_SOCKET) && (message < WM_MAP_SOCKET + MAXMAPSOCKETS))
+			Main.SocketsMessages(message, wParam, lParam);
+
+		else if ((message >= WM_CLIENT_SOCKET) && (message < WM_CLIENT_SOCKET + MAXCLIENTSOCKETS))
+			Main.SocketsMessages(message, wParam, lParam);
+
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 	return 0;

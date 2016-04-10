@@ -22,8 +22,16 @@ public:
 	bool bReadConfigFile(char * filename);
 	void OnKeyUp(WPARAM wParam, LPARAM lParam);
 	void SocketsMessages(UINT message, WPARAM wParam, LPARAM lParam);
-	void msgDecode();
+	void IncomingClientMessages(WORD SocketID);
+	void IncomingMapServerMessages(WORD SocketID);
 	UINT MyAux_Get_Error(struct st_mysql *pmySql);
+	bool AccountExists(char *AccountName, MYSQL myConn);
+	void CreateNewAccount(char *Data, WORD ClientID, MYSQL myConn);
+	void MakeGoodName(char *dest, char *source);
+	bool IsSame(char *c1, char *c2);
+	void SafeCopy(char *c1, char *c2, DWORD lenght);
+	int ProcessQuery(MYSQL *myConn, char *cQuery);
+	void Delay(DWORD nTimeMs);
 
 	char IpAddress[46], Version[6], ServerList[36];
 	char MysqlDatabaseName[46], MysqlUserName[21], MysqlPassword[21];

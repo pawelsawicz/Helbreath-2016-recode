@@ -9,6 +9,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LoginServer", "LoginServer\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapServer", "MapServer\MapServer.vcxproj", "{54098976-0F7D-4DC9-8CE9-311424BE407E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{BCE7C0EA-361C-445F-8C11-DD3B3770E8D1}"
+	ProjectSection(SolutionItems) = preProject
+		Shared\buffer.cpp = Shared\buffer.cpp
+		Shared\buffer.h = Shared\buffer.h
+		Shared\NetworkMessages.h = Shared\NetworkMessages.h
+		Shared\TypeDefs.h = Shared\TypeDefs.h
+		Shared\version.h = Shared\version.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32

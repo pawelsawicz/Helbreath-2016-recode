@@ -64,7 +64,7 @@ void cMain::StartUp()
 		mysql_close(&mySQL);
 	}
 	if (iResult != NULL){
-		if (iResult == 2003) 
+		if (iResult == 2003)
 			DisplayInLogList("(!!!) mySql server seems to be offline, please check the IP");
 		mysql_close(&mySQL);
 		return;
@@ -129,6 +129,8 @@ void cMain::SocketsMessages(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	int WSAEvent;
 	char Log[120];
+	UINT iTmp;
+	WORD ID;
 
 
 	/*  FD_READ		notifies when data arrives at our socket
@@ -138,21 +140,24 @@ void cMain::SocketsMessages(UINT message, WPARAM wParam, LPARAM lParam)
 		FD_CLOSE	alerts when a socket has been closed
 		*/
 	WSAEvent = WSAGETSELECTEVENT(lParam);
-	switch (message)
-	{
-	case WM_MAP_SOCKET:
+
+	if ((message >= WM_MAP_SOCKET) && (message < WM_MAP_SOCKET + MAXMAPSOCKETS)){
+		iTmp = WM_MAP_SOCKET;
+		ID = (WORD)(message - iTmp);
+
 		switch (WSAEvent) {
 		case FD_READ:
-			msgDecode();
+			IncomingMapServerMessages(ID);
 			break;
 		case FD_WRITE:
 			break;
+
 		case FD_ACCEPT:
 			// A map server requests to connect to the login server. Accept it.
 			for (UINT i = 0; i < MAXMAPSOCKETS; i++){
 				if (G_pMapSock->acceptedSockets[i] == NULL){
-					G_pMapSock->acceptedSockets[i] = G_pListenSock->AcceptSocket(G_pMapSock->listenSocket, message);
-					wsprintf(Log, "Accepted map server (%d/%d). Socket: %ld\n", i + 1, MAXMAPSOCKETS, G_pMapSock->acceptedSockets[i]);
+					G_pMapSock->acceptedSockets[i] = G_pListenSock->AcceptSocket(G_pMapSock->listenSocket, message + i);
+					wsprintf(Log, "Accepted map server (%d/%d). Socket: %ld Message: %d\n", i + 1, MAXMAPSOCKETS, G_pMapSock->acceptedSockets[i], message + i);
 					DisplayInLogList(Log);
 					return;
 				}
@@ -165,11 +170,14 @@ void cMain::SocketsMessages(UINT message, WPARAM wParam, LPARAM lParam)
 		case FD_CLOSE:
 			break;
 		}
-		break;
-	case WM_CLIENT_SOCKET:
+	}
+	else if ((message >= WM_CLIENT_SOCKET) && (message < WM_CLIENT_SOCKET + MAXCLIENTSOCKETS)){
+		iTmp = WM_CLIENT_SOCKET;
+		ID = (WORD)(message - iTmp);
+
 		switch (WSAEvent) {
 		case FD_READ:
-			msgDecode();
+			IncomingClientMessages(ID);
 			break;
 		case FD_WRITE:
 			break;
@@ -177,7 +185,7 @@ void cMain::SocketsMessages(UINT message, WPARAM wParam, LPARAM lParam)
 			// A client requests to connect to the login server. Accept it.
 			for (UINT i = 0; i < MAXCLIENTSOCKETS; i++){
 				if (G_pClientSock->acceptedSockets[i] == NULL){
-					G_pClientSock->acceptedSockets[i] = G_pListenSock->AcceptSocket(G_pClientSock->listenSocket, message);
+					G_pClientSock->acceptedSockets[i] = G_pListenSock->AcceptSocket(G_pClientSock->listenSocket, message + i);
 					wsprintf(Log, "Accepted client (%d/%d). Socket: %ld\n", i + 1, MAXCLIENTSOCKETS, G_pClientSock->acceptedSockets[i]);
 					DisplayInLogList(Log);
 					return;
@@ -193,7 +201,6 @@ void cMain::SocketsMessages(UINT message, WPARAM wParam, LPARAM lParam)
 		case FD_CLOSE:
 			break;
 		}
-		break;
 	}
 }
 
@@ -314,7 +321,43 @@ bool cMain::bReadConfigFile(char * filename)
 	return TRUE;
 
 }
-void cMain::msgDecode()
+void cMain::IncomingClientMessages(WORD SocketID)
+{
+	const int recvbuflen = 512;
+	char recvbuf[512] = "";
+	int byteReceived;
+	DWORD  *dwpMsgID;
+	char Log[120];
+	MYSQL myConn;
+
+	memset(recvbuf, 0, sizeof recvbuf);
+	byteReceived = G_pListenSock->RecvSocket(G_pClientSock->acceptedSockets[SocketID], recvbuf, recvbuflen);
+	wsprintf(Log, "Byte received:%d data:%s\n", byteReceived, recvbuf);
+	DisplayInLogList(Log);
+
+	mysql_init(&myConn);
+	if (!mysql_real_connect(&myConn, IpAddress, MysqlUserName, MysqlPassword, MysqlDatabaseName, MysqlPort, NULL, NULL)){
+		MyAux_Get_Error(&myConn);
+		mysql_close(&myConn);
+		delete[] recvbuf;
+		return;
+	}
+
+	dwpMsgID = (DWORD *)(recvbuf);
+	switch (*dwpMsgID) {
+
+	case MSGID_REQUEST_CREATENEWACCOUNT:
+		if (byteReceived < 20){
+			delete[] recvbuf;
+			mysql_close(&myConn);
+			return;
+		}
+		CreateNewAccount((recvbuf + 6), SocketID, myConn);
+		break;
+
+	}
+}
+void cMain::IncomingMapServerMessages(WORD SocketID)
 {
 	const int recvbuflen = 512;
 	char recvbuf[512] = "";
@@ -327,7 +370,7 @@ void cMain::msgDecode()
 	char Log[120];
 
 	memset(recvbuf, 0, sizeof recvbuf);
-	byteReceived = G_pListenSock->RecvSocket(G_pMapSock->acceptedSockets[0], recvbuf, recvbuflen);
+	byteReceived = G_pListenSock->RecvSocket(G_pMapSock->acceptedSockets[SocketID], recvbuf, recvbuflen);
 	wsprintf(Log, "Byte received:%d data:%s\n", byteReceived, recvbuf);
 	DisplayInLogList(Log);
 
@@ -361,6 +404,7 @@ void cMain::msgDecode()
 		wsprintf(Log, "Temp1: %d Temp2: %d Temp3: %d \n", Temp1, Temp2, Temp3);
 		DisplayInLogList(Log);
 		break;
+
 	}
 }
 UINT cMain::MyAux_Get_Error(struct st_mysql *pmySql)
@@ -377,4 +421,185 @@ UINT cMain::MyAux_Get_Error(struct st_mysql *pmySql)
 		return ErrNum;
 	}
 	else return NULL;
+}
+int cMain::ProcessQuery(MYSQL *myConn, char *cQuery)
+{
+	BYTE bErrorCount = 0;
+	int iQuery = -1;
+	UINT uiLastError;
+
+	do {
+		if (mysql_ping(myConn) != 0){
+			mysql_close(myConn);
+			mysql_init(myConn);
+			mysql_real_connect(myConn, IpAddress, MysqlUserName, MysqlPassword, MysqlDatabaseName, MysqlPort, NULL, NULL);
+		}
+		else iQuery = mysql_query(myConn, cQuery);
+		bErrorCount++;
+		uiLastError = MyAux_Get_Error(myConn);
+		if (uiLastError) Delay(1000);
+	} while (uiLastError != NULL && bErrorCount < MAXALLOWEDQUERYERROR);
+	if (bErrorCount == MAXALLOWEDQUERYERROR){
+		DisplayInLogList(cQuery);
+		return -1;
+	}
+	return iQuery;
+}
+void cMain::CreateNewAccount(char *Data, WORD ClientID, MYSQL myConn)
+{
+	char NewAccName[11], NewAcc1[11], CreateDate[25], NewEmailAddr[51], safeEmailAddr[51], safeAccQuiz[46], safeAnswer[21];
+	char NewAccountQuiz[46], NewAccountAnswer[21], GoodPass[25], NewPass1[11], Txt50[50], QueryConsult[500];
+	DWORD *dwp;
+	st_mysql_res    *QueryResult = NULL;
+	WORD *wp;
+	char Txt100[100], Txt500[500];
+	_ADDRESS ClientIP;
+	SYSTEMTIME SysTime;
+	GetLocalTime(&SysTime);
+
+
+	ZeroMemory(Txt100, sizeof(Txt100));
+	ZeroMemory(NewAcc1, sizeof(NewAcc1));
+	ZeroMemory(NewPass1, sizeof(NewPass1));
+
+	ZeroMemory(NewEmailAddr, sizeof(NewEmailAddr));
+	ZeroMemory(NewAccountQuiz, sizeof(NewAccountQuiz));
+	ZeroMemory(NewAccountAnswer, sizeof(NewAccountAnswer));
+	sprintf(Txt100, "(!) Create acc in progress.");
+	DisplayInLogList(Txt100);
+
+	SafeCopy(NewAcc1, Data, 10);
+	SafeCopy(NewPass1, Data + 10, 10);
+	SafeCopy(NewEmailAddr, Data + 20, 50);
+	SafeCopy(NewAccountQuiz, Data + 70, 45);
+	SafeCopy(NewAccountAnswer, Data + 115, 20);
+
+	ZeroMemory(ClientIP, sizeof(ClientIP));
+
+	G_pListenSock->iGetPeerAddress(G_pClientSock->acceptedSockets[ClientID], ClientIP);
+	ZeroMemory(CreateDate, sizeof(CreateDate));
+	sprintf(CreateDate, "%d-%d-%d %d:%d:%d", SysTime.wYear, SysTime.wMonth, SysTime.wDay, SysTime.wHour, SysTime.wMinute, SysTime.wSecond);
+
+
+	ZeroMemory(Txt500, sizeof(Txt500));
+	dwp = (DWORD*)Txt500;
+	*dwp = MSGID_RESPONSE_LOG;
+
+	if (AccountExists(NewAcc1, myConn)){
+		wp = (WORD*)(Txt500 + 4);
+		*wp = LOGRESMSGTYPE_ALREADYEXISTINGACCOUNT;
+		//SendMsgToClient(ClientID, Txt500, 6);
+	}
+	else {
+		ZeroMemory(QueryConsult, sizeof(QueryConsult));
+		ZeroMemory(NewAccName, sizeof(NewAccName));
+		MakeGoodName(NewAccName, NewAcc1);
+		ZeroMemory(GoodPass, sizeof(GoodPass));
+		MakeGoodName(GoodPass, NewPass1);
+		ZeroMemory(safeEmailAddr, sizeof(safeEmailAddr));
+		MakeGoodName(safeEmailAddr, NewEmailAddr);
+		ZeroMemory(safeAccQuiz, sizeof(safeAccQuiz));
+		MakeGoodName(safeAccQuiz, NewAccountQuiz);
+		ZeroMemory(safeAnswer, sizeof(safeAnswer));
+		MakeGoodName(safeAnswer, NewAccountAnswer);
+
+		sprintf(QueryConsult, "INSERT INTO `account_database` SET `name` = '%s' , `password` = '%s', `LoginIpAddress` = '%s', `CreateDate` = '%s', `Email` = '%s', `Quiz` = '%s', `Answer` = '%s';", NewAccName, GoodPass, ClientIP, CreateDate, safeEmailAddr, safeAccQuiz, safeAnswer);
+
+		if (ProcessQuery(&myConn, QueryConsult) == -1) return;
+		QueryResult = mysql_store_result(&myConn);
+		mysql_free_result(QueryResult);
+		SafeCopy(Txt50, NewAcc1, strlen(NewAcc1));
+		SafeCopy(Txt50 + 6, NewPass1, strlen(NewPass1));
+		wp = (WORD*)(Txt500 + 4);
+		*wp = LOGRESMSGTYPE_NEWACCOUNTCREATED;
+		//SendMsgToClient(ClientID, Txt500, 6);
+	}
+	mysql_free_result(QueryResult);
+}
+bool cMain::AccountExists(char *AccountName, MYSQL myConn)
+{
+	char QueryConsult[150], GoodAccountName[50];
+	st_mysql_res *QueryResult = NULL;
+	MYSQL_ROW Row;
+
+	ZeroMemory(QueryConsult, sizeof(QueryConsult));
+	ZeroMemory(GoodAccountName, sizeof(GoodAccountName));
+	MakeGoodName(GoodAccountName, AccountName);
+	sprintf(QueryConsult, "SELECT `name` FROM `account_database` WHERE `name` = '%s' LIMIT 1;", GoodAccountName);
+	if (ProcessQuery(&myConn, QueryConsult) == -1) return FALSE;
+	QueryResult = mysql_store_result(&myConn);
+
+	if (mysql_num_rows(QueryResult) == 1){
+		Row = mysql_fetch_row(QueryResult);
+		*AccountName = atoi(Row[0]);
+		mysql_free_result(QueryResult);
+		return TRUE;
+	}
+	mysql_free_result(QueryResult);
+	return FALSE;
+}
+void cMain::SafeCopy(char *c1, char *c2, DWORD lenght)
+{
+	register DWORD d;
+
+	if (lenght == 0){
+		d = 0;
+		if (c2[d] == NULL) return;
+		while (c2[d] != NULL){
+			c1[d] = c2[d];
+			d++;
+		}
+	}
+	else for (d = 0; d < lenght; d++) c1[d] = c2[d];
+
+	c1[d] = NULL;
+}
+
+bool cMain::IsSame(char *c1, char *c2)
+{
+	DWORD size1, size2;
+
+	size1 = strlen(c1);
+	size2 = strlen(c2);
+	if (size1 == size2 && memcmp(c1, c2, size1) == 0) return true;
+	else return false;
+}
+
+void cMain::MakeGoodName(char *dest, char *source)
+{
+	DWORD size, d;
+	char *cp;
+
+	size = strlen(source);
+	if (size == 0) return;
+	d = 0;
+	cp = (char *)dest;
+	while (source[d] != NULL){
+		if (source[d] == '\'' || source[d] == '\\' || source[d] == '\"'){
+
+			cp[0] = '\\';
+			cp++;
+			cp[0] = source[d];
+			cp++;
+		}
+		else{
+			cp[0] = source[d];
+			cp++;
+		}
+		d++;
+	}
+}
+void cMain::Delay(DWORD nTimeMs)
+{
+	MSG msg;
+	DWORD endTick;
+
+	endTick = GetTickCount() + nTimeMs;
+	while (GetTickCount() < endTick){
+		if (PeekMessage(&msg, NULL, 0, 0, TRUE)){
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+	}
+	return;
 }

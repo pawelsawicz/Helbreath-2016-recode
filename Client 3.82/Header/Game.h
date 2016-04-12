@@ -37,7 +37,7 @@
 #include "Effect.h"
 #include "MapData.h"
 #include "ActionID.h"
-#include "../../Shared/NetworkMessagesClient.h"
+#include "../../Shared/NetworkMessages.h"
 #include "MouseInterface.h"
 #include "CharInfo.h"
 #include "Item.h"

@@ -82,10 +82,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Shared\buffer.cpp" />
-    <ClCompile Include="cClient.cpp" />
-    <ClCompile Include="cLoginServer.cpp" />
-    <ClCompile Include="cMapServer.cpp" />
-    <ClCompile Include="cSocket.cpp" />
     <ClCompile Include="Source\BuildItem.cpp" />
     <ClCompile Include="Source\CharInfo.cpp" />
     <ClCompile Include="Source\Curse.cpp" />
@@ -127,10 +123,6 @@
     <ClInclude Include="..\Shared\Skilltypes.h" />
     <ClInclude Include="..\Shared\TypeDefs.h" />
     <ClInclude Include="..\Shared\version.h" />
-    <ClInclude Include="cClient.h" />
-    <ClInclude Include="cLoginServer.h" />
-    <ClInclude Include="cMapServer.h" />
-    <ClInclude Include="cSocket.h" />
     <ClInclude Include="Header\ActionID.h" />
     <ClInclude Include="Header\BuildItem.h" />
     <ClInclude Include="Header\CharInfo.h" />

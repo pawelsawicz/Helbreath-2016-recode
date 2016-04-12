@@ -100,10 +100,6 @@
     <ClCompile Include="Source\Sockets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cMapServer.cpp" />
-    <ClCompile Include="cClient.cpp" />
-    <ClCompile Include="cSocket.cpp" />
-    <ClCompile Include="cLoginServer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\ActionID.h">
@@ -268,10 +264,6 @@
     <ClInclude Include="Header\Sockets.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cMapServer.h" />
-    <ClInclude Include="cClient.h" />
-    <ClInclude Include="cSocket.h" />
-    <ClInclude Include="cLoginServer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resource\icon1.ico">

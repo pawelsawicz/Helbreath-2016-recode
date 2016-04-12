@@ -897,7 +897,7 @@ void CGame::UpdateScreen()
  	if ((m_cTabCheck == 1) && (GetAsyncKeyState(VK_TAB) == NULL))
 	{	m_cCurFocus++;
 		if( m_cCurFocus > m_cMaxFocus) m_cCurFocus = 1;
-		if (m_cGameMode == GAMEMODE_ONMAINGAME) bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TOGGLECOMBATMODE, NULL, NULL, NULL, NULL, NULL);
+		if (m_cGameMode == GAMEMODE_ONMAINGAME) //bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TOGGLECOMBATMODE, NULL, NULL, NULL, NULL, NULL);
 		m_cTabCheck = NULL;
 	}
 	if( m_bInputStatus )
@@ -1039,715 +1039,715 @@ BOOL CGame::bSendCommand(DWORD dwMsgID, WORD wCommand, char cDir, int iV1, int i
 
 	switch (dwMsgID) {
 
-	case REQUEST_ANGEL:	// to Game Server
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-		cp = (char*)(cMsg + 6);
-		memset( cp, 0, 20 );
-		memcpy((char *)cp, pString, strlen(pString) + 1);
-		cp += 20;
-		ip = (int *)cp;
-		*ip = iV1; // Angel ID
-		//iRet = m_pGSock->iSendMsg(cMsg, 30, cKey);
-		break;
-
-	case REQUEST_RESURRECTPLAYER_YES: // By snoopy
-	case REQUEST_RESURRECTPLAYER_NO:  // By snoopy
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-		//iRet = m_pGSock->iSendMsg(cMsg, 6, cKey);
-		break;
-
-	case MSGID_REQUEST_HELDENIAN_SCROLL:// By snoopy
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-		cp = (char*)(cMsg + 6);
-		memset( cp, 0, 20 );
-		memcpy((char *)cp, pString, strlen(pString) + 1);
-		cp += 20;
-		wp = (WORD *)cp;
-		*wp = wCommand; // Item ID
-		//iRet = m_pGSock->iSendMsg(cMsg, 28, cKey);
-		break;
-
-	case MSGID_REQUEST_TELEPORT_LIST:
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-		cp = (char*)(cMsg + 6);
-		memset( cp, 0, 20 );
-		memcpy( cp, "William", 20 );
-		//iRet = m_pGSock->iSendMsg(cMsg, 26, cKey);
-		break;
-
-	case MSGID_REQUEST_HELDENIAN_TP_LIST: // Snoopy: Heldenian TP
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-		cp = (char*)(cMsg + 6);
-		memset( cp, 0, 20 );
-		memcpy( cp, "Gail", 20 );
-		//iRet = m_pGSock->iSendMsg(cMsg, 26, cKey);
-		break;
-
-	case MSGID_REQUEST_HELDENIAN_TP: // Snoopy: Heldenian TP
-	case MSGID_REQUEST_CHARGED_TELEPORT:
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-		ip  = (int *)(cMsg + INDEX2_MSGTYPE + 2);
-		*ip = iV1;
-		//iRet = m_pGSock->iSendMsg(cMsg, 10, cKey);
-		break;
-
-	case MSGID_REQUEST_SELLITEMLIST:
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
-		for (i = 0; i < MAXSELLLIST; i++)
-		{	*cp = m_stSellItemList[i].iIndex;
-			cp++;
-			ip = (int *)cp;
-			*ip = m_stSellItemList[i].iAmount;
-			cp += 4;
-		}
-
-		//iRet = m_pGSock->iSendMsg(cMsg, 70, cKey);
-		break;
-
-	case MSGID_REQUEST_RESTART:
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-
-		//iRet = m_pGSock->iSendMsg(cMsg, 6, cKey);
-		break;
-
-	case MSGID_REQUEST_PANNING:
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
+	//case REQUEST_ANGEL:	// to Game Server
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+	//	cp = (char*)(cMsg + 6);
+	//	memset( cp, 0, 20 );
+	//	memcpy((char *)cp, pString, strlen(pString) + 1);
+	//	cp += 20;
+	//	ip = (int *)cp;
+	//	*ip = iV1; // Angel ID
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 30, cKey);
+	//	break;
+
+	//case REQUEST_RESURRECTPLAYER_YES: // By snoopy
+	//case REQUEST_RESURRECTPLAYER_NO:  // By snoopy
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 6, cKey);
+	//	break;
+
+	//case MSGID_REQUEST_HELDENIAN_SCROLL:// By snoopy
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+	//	cp = (char*)(cMsg + 6);
+	//	memset( cp, 0, 20 );
+	//	memcpy((char *)cp, pString, strlen(pString) + 1);
+	//	cp += 20;
+	//	wp = (WORD *)cp;
+	//	*wp = wCommand; // Item ID
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 28, cKey);
+	//	break;
+
+	//case MSGID_REQUEST_TELEPORT_LIST:
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+	//	cp = (char*)(cMsg + 6);
+	//	memset( cp, 0, 20 );
+	//	memcpy( cp, "William", 20 );
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 26, cKey);
+	//	break;
+
+	//case MSGID_REQUEST_HELDENIAN_TP_LIST: // Snoopy: Heldenian TP
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+	//	cp = (char*)(cMsg + 6);
+	//	memset( cp, 0, 20 );
+	//	memcpy( cp, "Gail", 20 );
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 26, cKey);
+	//	break;
+
+	//case MSGID_REQUEST_HELDENIAN_TP: // Snoopy: Heldenian TP
+	//case MSGID_REQUEST_CHARGED_TELEPORT:
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+	//	ip  = (int *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	*ip = iV1;
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 10, cKey);
+	//	break;
+
+	//case MSGID_REQUEST_SELLITEMLIST:
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	for (i = 0; i < MAXSELLLIST; i++)
+	//	{	*cp = m_stSellItemList[i].iIndex;
+	//		cp++;
+	//		ip = (int *)cp;
+	//		*ip = m_stSellItemList[i].iAmount;
+	//		cp += 4;
+	//	}
+
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 70, cKey);
+	//	break;
+
+	//case MSGID_REQUEST_RESTART:
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 6, cKey);
+	//	break;
+
+	//case MSGID_REQUEST_PANNING:
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
 
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
-		*cp = cDir;
-		cp++;
-
-		//iRet = m_pGSock->iSendMsg(cMsg, 7, cKey);
-		break;
-
-	case MSGID_REQUEST_CHANGEPASSWORD:
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
-
-		ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
-		memcpy(cTxt, m_cAccountName, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
-
-		ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
-		memcpy(cTxt, m_cAccountPassword, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
-
-		ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
-		memcpy(cTxt, m_cNewPassword, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
-
-		ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
-		memcpy(cTxt, m_cNewPassConfirm, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
-
-		//iRet = m_pLSock->iSendMsg(cMsg, 46, cKey);
-		break;
-
-	case MSGID_REQUEST_CREATENEWACCOUNT:
-		// to Log Server
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	*cp = cDir;
+	//	cp++;
+
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 7, cKey);
+	//	break;
+
+	//case MSGID_REQUEST_CHANGEPASSWORD:
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+
+	//	ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
+	//	memcpy(cTxt, m_cAccountName, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
+
+	//	ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
+	//	memcpy(cTxt, m_cAccountPassword, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
+
+	//	ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
+	//	memcpy(cTxt, m_cNewPassword, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
+
+	//	ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
+	//	memcpy(cTxt, m_cNewPassConfirm, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
+
+	//	//iRet = m_pLSock->iSendMsg(cMsg, 46, cKey);
+	//	break;
+
+	//case MSGID_REQUEST_CREATENEWACCOUNT:
+	//	// to Log Server
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
 
-		ZeroMemory(cTxt, sizeof(cTxt));
-		memcpy(cTxt, m_cAccountName, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
-
-		ZeroMemory(cTxt, sizeof(cTxt));
-		memcpy(cTxt, m_cAccountPassword, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
+	//	ZeroMemory(cTxt, sizeof(cTxt));
+	//	memcpy(cTxt, m_cAccountName, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
+
+	//	ZeroMemory(cTxt, sizeof(cTxt));
+	//	memcpy(cTxt, m_cAccountPassword, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
 
-		memcpy(cp, m_cEmailAddr, 50);
-		cp += 50;
+	//	memcpy(cp, m_cEmailAddr, 50);
+	//	cp += 50;
 
-		ZeroMemory(cTxt, sizeof(cTxt));
-		strcpy(cTxt, " "); // gender
-		memcpy(cp, cTxt, 10);
-		cp += 10;
+	//	ZeroMemory(cTxt, sizeof(cTxt));
+	//	strcpy(cTxt, " "); // gender
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
 
-		memcpy(cp, m_cAccountAge, 10);
-		cp += 10;
+	//	memcpy(cp, m_cAccountAge, 10);
+	//	cp += 10;
 
-		memcpy(cp, " ", 4);
-		cp += 4;
+	//	memcpy(cp, " ", 4);
+	//	cp += 4;
 
-		memcpy(cp, " ", 2);
-		cp += 2;
+	//	memcpy(cp, " ", 2);
+	//	cp += 2;
 
-		memcpy(cp, " ", 2);
-		cp += 2;
+	//	memcpy(cp, " ", 2);
+	//	cp += 2;
 
-		memcpy(cp, m_cAccountCountry, 17);
-		cp += 17;
+	//	memcpy(cp, m_cAccountCountry, 17);
+	//	cp += 17;
 
-		memcpy(cp, m_cAccountSSN, 28);
-		cp += 28;
+	//	memcpy(cp, m_cAccountSSN, 28);
+	//	cp += 28;
 
- 		memcpy(cp, m_cAccountQuiz, 45);
-		cp += 45;
+ //		memcpy(cp, m_cAccountQuiz, 45);
+	//	cp += 45;
 
-		memcpy(cp, m_cAccountAnswer, 20);
-		cp += 20;
+	//	memcpy(cp, m_cAccountAnswer, 20);
+	//	cp += 20;
 
-		memcpy(cp, G_cCmdLineTokenA_Lowercase, 50);
+	//	memcpy(cp, G_cCmdLineTokenA_Lowercase, 50);
 
-		//iRet = m_pLSock->iSendMsg(cMsg, 214	+50, cKey);
-		break;
+	//	//iRet = m_pLSock->iSendMsg(cMsg, 214	+50, cKey);
+	//	break;
 
-	case MSGID_GETMINIMUMLOADGATEWAY:
-	case MSGID_REQUEST_LOGIN:
-		// to Log Server
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
-		ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
-		memcpy(cTxt, m_cAccountName, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
-		ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
-		memcpy(cTxt, m_cAccountPassword, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
-		memcpy(cp, m_cWorldServerName, 30);
-		cp += 30;
-		iRet = Sockets.iSendMsg(Sockets.LoginSocket, cMsg, 56, cKey);
+	//case MSGID_GETMINIMUMLOADGATEWAY:
+	//case MSGID_REQUEST_LOGIN:
+	//	// to Log Server
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
+	//	memcpy(cTxt, m_cAccountName, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
+	//	ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
+	//	memcpy(cTxt, m_cAccountPassword, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
+	//	memcpy(cp, m_cWorldServerName, 30);
+	//	cp += 30;
+	//	iRet = Sockets.iSendMsg(Sockets.LoginSocket, cMsg, 56, cKey);
 
-		break;
+	//	break;
 
-	case MSGID_REQUEST_CREATENEWCHARACTER:
-		// to Log Server
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = (WORD)NULL;
+	//case MSGID_REQUEST_CREATENEWCHARACTER:
+	//	// to Log Server
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = (WORD)NULL;
 
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
 
-		memcpy(cp, m_cPlayerName, 10);
-		cp += 10;
+	//	memcpy(cp, m_cPlayerName, 10);
+	//	cp += 10;
 
-		memcpy(cp, m_cAccountName, 10);
-		cp += 10;
+	//	memcpy(cp, m_cAccountName, 10);
+	//	cp += 10;
 
-		memcpy(cp, m_cAccountPassword, 10);
-		cp += 10;
+	//	memcpy(cp, m_cAccountPassword, 10);
+	//	cp += 10;
 
-		memcpy(cp, m_cWorldServerName, 30);
-		cp += 30;
+	//	memcpy(cp, m_cWorldServerName, 30);
+	//	cp += 30;
 
-		*cp = m_cGender;
-		cp++;
+	//	*cp = m_cGender;
+	//	cp++;
 
-		*cp = m_cSkinCol;
-		cp++;
+	//	*cp = m_cSkinCol;
+	//	cp++;
 
-		*cp = m_cHairStyle;
-		cp++;
+	//	*cp = m_cHairStyle;
+	//	cp++;
 
-		*cp = m_cHairCol;
-		cp++;
+	//	*cp = m_cHairCol;
+	//	cp++;
 
-		*cp = m_cUnderCol;
-		cp++;
+	//	*cp = m_cUnderCol;
+	//	cp++;
 
-		*cp = m_ccStr;
-		cp++;
+	//	*cp = m_ccStr;
+	//	cp++;
 
-		*cp = m_ccVit;
-		cp++;
+	//	*cp = m_ccVit;
+	//	cp++;
 
-		*cp = m_ccDex;
-		cp++;
+	//	*cp = m_ccDex;
+	//	cp++;
 
-		*cp = m_ccInt;
-		cp++;
+	//	*cp = m_ccInt;
+	//	cp++;
 
-		*cp = m_ccMag;
-		cp++;
+	//	*cp = m_ccMag;
+	//	cp++;
 
-		*cp = m_ccChr;
-		cp++;
+	//	*cp = m_ccChr;
+	//	cp++;
 
-		//iRet = m_pLSock->iSendMsg(cMsg, 77, cKey);
-		break;
+	//	//iRet = m_pLSock->iSendMsg(cMsg, 77, cKey);
+	//	break;
 
-	case MSGID_REQUEST_ENTERGAME:
-		// to Log Server
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = (WORD)m_wEnterGameType;
+	//case MSGID_REQUEST_ENTERGAME:
+	//	// to Log Server
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = (WORD)//m_wEnterGameType;
 
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
 
-		ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
-		memcpy(cTxt, m_cPlayerName, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
+	//	ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
+	//	memcpy(cTxt, m_cPlayerName, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
 
-		ZeroMemory(cTxt, sizeof(cTxt)); // v1.43
-		memcpy(cTxt, m_cMapName, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
+	//	ZeroMemory(cTxt, sizeof(cTxt)); // v1.43
+	//	memcpy(cTxt, m_cMapName, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
 
-		ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
-		memcpy(cTxt, m_cAccountName, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
+	//	ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
+	//	memcpy(cTxt, m_cAccountName, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
 
-		ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
-		memcpy(cTxt, m_cAccountPassword, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
+	//	ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
+	//	memcpy(cTxt, m_cAccountPassword, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
 
-		ip = (int *)cp;
-		*ip = m_iLevel;
-		cp += 4;
+	//	ip = (int *)cp;
+	//	*ip = m_iLevel;
+	//	cp += 4;
 
-		memcpy(cp, m_cWorldServerName, 30);
-		cp += 30;
+	//	memcpy(cp, m_cWorldServerName, 30);
+	//	cp += 30;
 
-		memcpy(cp, G_cCmdLineTokenA, 120);
-		cp += 120;
+	//	memcpy(cp, G_cCmdLineTokenA, 120);
+	//	cp += 120;
 
-		//iRet = m_pLSock->iSendMsg(cMsg, 200, cKey);
-		break;
+	//	//iRet = m_pLSock->iSendMsg(cMsg, 200, cKey);
+	//	break;
 
-	case MSGID_REQUEST_DELETECHARACTER:
-		// to Log Server
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = (WORD)m_wEnterGameType;
+	//case MSGID_REQUEST_DELETECHARACTER:
+	//	// to Log Server
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = (WORD)//m_wEnterGameType;
 
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
 
-		memcpy(cp, m_pCharList[m_wEnterGameType - 1]->m_cName, 10);
-		cp += 10;
+	//	memcpy(cp, m_pCharList[//m_wEnterGameType - 1]->m_cName, 10);
+	//	cp += 10;
 
-		memcpy(cp, m_cAccountName, 10);
-		cp += 10;
+	//	memcpy(cp, m_cAccountName, 10);
+	//	cp += 10;
 
-		memcpy(cp, m_cAccountPassword, 10);
-		cp += 10;
+	//	memcpy(cp, m_cAccountPassword, 10);
+	//	cp += 10;
 
-		memcpy(cp, m_cWorldServerName, 30);
-		cp += 30;
+	//	memcpy(cp, m_cWorldServerName, 30);
+	//	cp += 30;
 
-		//iRet = m_pLSock->iSendMsg(cMsg, 66, cKey);
-		break;
+	//	//iRet = m_pLSock->iSendMsg(cMsg, 66, cKey);
+	//	break;
 
-	case MSGID_REQUEST_SETITEMPOS:
-		// to Game Server
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
+	//case MSGID_REQUEST_SETITEMPOS:
+	//	// to Game Server
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
 
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
 
-		*cp = cDir;
+	//	*cp = cDir;
 
-		cp++;
+	//	cp++;
 
-		sp = (short *)cp;
-		*sp = (short)iV1;
-		cp += 2;
+	//	sp = (short *)cp;
+	//	*sp = (short)iV1;
+	//	cp += 2;
 
-		sp = (short *)cp;
-		*sp = (short)iV2;
-		cp += 2;
+	//	sp = (short *)cp;
+	//	*sp = (short)iV2;
+	//	cp += 2;
 
-		//iRet = m_pGSock->iSendMsg(cMsg, 11);
-		break;
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 11);
+	//	break;
 
-	case MSGID_COMMAND_CHECKCONNECTION:
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
-		dwp = (DWORD *)cp;
-		*dwp = dwTime;
-		cp += 4;
-		//iRet = m_pGSock->iSendMsg(cMsg, 10, cKey);
+	//case MSGID_COMMAND_CHECKCONNECTION:
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	dwp = (DWORD *)cp;
+	//	*dwp = dwTime;
+	//	cp += 4;
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 10, cKey);
 
-		break;
+	//	break;
 
-	case MSGID_REQUEST_INITDATA:
-	case MSGID_REQUEST_INITPLAYER:
-		// to Game Server
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
+	//case MSGID_REQUEST_INITDATA:
+	//case MSGID_REQUEST_INITPLAYER:
+	//	// to Game Server
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
 
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
 
-		ZeroMemory(cTxt, sizeof(cTxt));
-		memcpy(cTxt, m_cPlayerName, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
+	//	ZeroMemory(cTxt, sizeof(cTxt));
+	//	memcpy(cTxt, m_cPlayerName, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
 
-		ZeroMemory(cTxt, sizeof(cTxt));
-		memcpy(cTxt, m_cAccountName, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
-
-		ZeroMemory(cTxt, sizeof(cTxt));
-		memcpy(cTxt, m_cAccountPassword, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
-
-		*cp = (char)m_bIsObserverMode;
-		cp++;
-
-		// v2.04 Gateway
-		memcpy(cp, m_cGameServerName, 20);
-		cp += 20;
-
-		//iRet = m_pGSock->iSendMsg(cMsg, 37 +21, cKey);
-
-		//m_bIsObserverMode = FALSE;
-		break;
-	case MSGID_LEVELUPSETTINGS:
-		// CLEROTH
-		//if ((m_cLU_Str + m_cLU_Vit + m_cLU_Dex + m_cLU_Int + m_cLU_Mag + m_cLU_Char) > 3) return FALSE;
-
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
-
-		*cp = m_cLU_Str;
-		cp++;
-
-		*cp = m_cLU_Vit;
-		cp++;
-
-		*cp = m_cLU_Dex;
-		cp++;
-
-		*cp = m_cLU_Int;
-		cp++;
-
-		*cp = m_cLU_Mag;
-		cp++;
-
-		*cp = m_cLU_Char;
-		cp++;
-
-		//iRet = m_pGSock->iSendMsg(cMsg, 12);
-		break;
-
-	case MSGID_COMMAND_CHATMSG:
-		if (m_bIsTeleportRequested == TRUE) return FALSE;
-
-		// to Game Server
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
-
-		sp = (short *)cp;
-		*sp = m_sPlayerX;
-		cp += 2;
-
-		sp = (short *)cp;
-		*sp = m_sPlayerY;
-		cp += 2;
-
-		memcpy(cp, m_cPlayerName, 10);
-		cp += 10;
-
-		*cp = (char)iV1;
-		cp++;
-
-		if (bCheckLocalChatCommand(pString) == TRUE) return FALSE;
-		memcpy((char *)cp, pString, strlen(pString) + 1);
-
-		//iRet = m_pGSock->iSendMsg(cMsg, 22 + strlen(pString));
-		break;
-
-	case MSGID_COMMAND_COMMON:
-		if (m_bIsTeleportRequested == TRUE) return FALSE;
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = wCommand;
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
-		sp = (short *)cp;
-		*sp = m_sPlayerX;
-		cp += 2;
-		sp = (short *)cp;
-		*sp = m_sPlayerY;
-		cp += 2;
-		*cp = cDir;
-		cp++;
-		switch (wCommand) {
-		case COMMONTYPE_BUILDITEM:
-			memcpy(cp, pString, 20);
-			cp += 20;
-			*cp = (char)m_stDialogBoxInfo[26].sV1;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV2;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV3;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV4;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV5;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV6;
-			cp++;
-			//iRet = m_pGSock->iSendMsg(cMsg, 37);
-			break;
-
-		case COMMONTYPE_REQ_CREATEPOTION:
-			*cp = (char)m_stDialogBoxInfo[26].sV1;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV2;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV3;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV4;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV5;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV6;
-			cp++;
-			//iRet = m_pGSock->iSendMsg(cMsg, 18);
-			break;
-			
-		//Crafting
-		case COMMONTYPE_CRAFTITEM:
-			memcpy(cp, "                    ", 20);
-			cp += 20;
-			*cp = (char)m_stDialogBoxInfo[26].sV1;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV2;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV3;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV4;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV5;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[26].sV6;
-			cp++;
-			//iRet = m_pGSock->iSendMsg(cMsg, 37);
-			break;
-
-		// Create Slate Request - Diuuude
-		case COMMONTYPE_REQ_CREATESLATE:
-			*cp = (char)m_stDialogBoxInfo[40].sV1;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[40].sV2;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[40].sV3;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[40].sV4;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[40].sV5;
-			cp++;
-			*cp = (char)m_stDialogBoxInfo[40].sV6;
-			cp++;
-			//iRet = m_pGSock->iSendMsg(cMsg, 18);
-			break;
-
-		default:
-			if (pString == NULL)
-			{	ip = (int *)cp;
-				*ip = iV1;
-				cp += 4;
-				ip = (int *)cp;
-				*ip = iV2;
-				cp += 4;
-				ip = (int *)cp;
-				*ip = iV3;
-				cp += 4;
-				dwp = (DWORD *)cp;
-				*dwp = dwTime;
-				cp += 4;
-				//iRet = m_pGSock->iSendMsg(cMsg, 23 +4);
-			}else
-			{	ip = (int *)cp;
-				*ip = iV1;
-				cp += 4;
-				ip = (int *)cp;
-				*ip = iV2;
-				cp += 4;
-				ip = (int *)cp;
-				*ip = iV3;
-				cp += 4;
-				memcpy(cp, pString, 30);
-				cp += 30;
-				ip = (int *)cp;
-				*ip = iV4;
-				cp += 4;
-				//iRet = m_pGSock->iSendMsg(cMsg, 23 + 34);
-			}
-			break;
-		}
-
-		break;
-
-	case MSGID_REQUEST_CREATENEWGUILD:
-	case MSGID_REQUEST_DISBANDGUILD:
-		// to Game Server
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = MSGTYPE_CONFIRM;
-
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
-
-		ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
-		memcpy(cTxt, m_cPlayerName, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
-
-		ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
-		memcpy(cTxt, m_cAccountName, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
-
-		ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
-		memcpy(cTxt, m_cAccountPassword, 10);
-		memcpy(cp, cTxt, 10);
-		cp += 10;
-		char cTemp[21];
-		ZeroMemory(cTemp, sizeof(cTemp));
-		memcpy(cTemp, m_cGuildName, 20);
-		m_Misc.ReplaceString(cTemp, ' ', '_');
-		memcpy(cp, cTemp, 20);
-		cp += 20;
-
-		//iRet = m_pGSock->iSendMsg(cMsg, 56, cKey);
-		break;
-
-	case MSGID_REQUEST_TELEPORT:
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = MSGTYPE_CONFIRM;
-
-		//iRet = m_pGSock->iSendMsg(cMsg, 6);
-
-		m_bIsTeleportRequested = TRUE;
-		break;
-
-	case MSGID_REQUEST_CIVILRIGHT:
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = MSGTYPE_CONFIRM;
-
-		//iRet = m_pGSock->iSendMsg(cMsg, 6);
-		break;
-
-	case MSGID_REQUEST_RETRIEVEITEM:
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = MSGTYPE_CONFIRM;
-
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
-		*cp = (char)iV1;
-
-		//iRet = m_pGSock->iSendMsg(cMsg, 7);
-		break;
-
-	case MSGID_REQUEST_NOTICEMENT:
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
-		ip = (int *)cp;
-		*ip = iV1;
-		cp += 4;
-
-		//iRet = m_pGSock->iSendMsg(cMsg, 10, cKey);
-		break;
-
-	case  MSGID_REQUEST_FIGHTZONE_RESERVE:
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
-		fightzonenum = (int *)cp;
-		*fightzonenum = iV1;
-		cp += 4;
-
-		//iRet = m_pGSock->iSendMsg(cMsg, 10);
-		break;
-
-	case MSGID_STATECHANGEPOINT:
-		// Diuuude
-		dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-		*dwp = dwMsgID;
-		wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
-		*wp = NULL;
-		cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
-		*cp = cStateChange1;
-		cp++;
-		*cp = cStateChange2;
-		cp++;
-		*cp = cStateChange3;
-		cp++;
-		//iRet = m_pGSock->iSendMsg(cMsg, 12);
-		break;
+	//	ZeroMemory(cTxt, sizeof(cTxt));
+	//	memcpy(cTxt, m_cAccountName, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
+
+	//	ZeroMemory(cTxt, sizeof(cTxt));
+	//	memcpy(cTxt, m_cAccountPassword, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
+
+	//	*cp = (char)m_bIsObserverMode;
+	//	cp++;
+
+	//	// v2.04 Gateway
+	//	memcpy(cp, m_cGameServerName, 20);
+	//	cp += 20;
+
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 37 +21, cKey);
+
+	//	//m_bIsObserverMode = FALSE;
+	//	break;
+	//case MSGID_LEVELUPSETTINGS:
+	//	// CLEROTH
+	//	//if ((m_cLU_Str + m_cLU_Vit + m_cLU_Dex + m_cLU_Int + m_cLU_Mag + m_cLU_Char) > 3) return FALSE;
+
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+
+	//	*cp = m_cLU_Str;
+	//	cp++;
+
+	//	*cp = m_cLU_Vit;
+	//	cp++;
+
+	//	*cp = m_cLU_Dex;
+	//	cp++;
+
+	//	*cp = m_cLU_Int;
+	//	cp++;
+
+	//	*cp = m_cLU_Mag;
+	//	cp++;
+
+	//	*cp = m_cLU_Char;
+	//	cp++;
+
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 12);
+	//	break;
+
+	//case MSGID_COMMAND_CHATMSG:
+	//	if (m_bIsTeleportRequested == TRUE) return FALSE;
+
+	//	// to Game Server
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+
+	//	sp = (short *)cp;
+	//	*sp = m_sPlayerX;
+	//	cp += 2;
+
+	//	sp = (short *)cp;
+	//	*sp = m_sPlayerY;
+	//	cp += 2;
+
+	//	memcpy(cp, m_cPlayerName, 10);
+	//	cp += 10;
+
+	//	*cp = (char)iV1;
+	//	cp++;
+
+	//	if (bCheckLocalChatCommand(pString) == TRUE) return FALSE;
+	//	memcpy((char *)cp, pString, strlen(pString) + 1);
+
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 22 + strlen(pString));
+	//	break;
+
+	//case MSGID_COMMAND_COMMON:
+	//	if (m_bIsTeleportRequested == TRUE) return FALSE;
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = wCommand;
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	sp = (short *)cp;
+	//	*sp = m_sPlayerX;
+	//	cp += 2;
+	//	sp = (short *)cp;
+	//	*sp = m_sPlayerY;
+	//	cp += 2;
+	//	*cp = cDir;
+	//	cp++;
+	//	switch (wCommand) {
+	//	case COMMONTYPE_BUILDITEM:
+	//		memcpy(cp, pString, 20);
+	//		cp += 20;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV1;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV2;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV3;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV4;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV5;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV6;
+	//		cp++;
+	//		//iRet = m_pGSock->iSendMsg(cMsg, 37);
+	//		break;
+
+	//	case COMMONTYPE_REQ_CREATEPOTION:
+	//		*cp = (char)m_stDialogBoxInfo[26].sV1;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV2;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV3;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV4;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV5;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV6;
+	//		cp++;
+	//		//iRet = m_pGSock->iSendMsg(cMsg, 18);
+	//		break;
+	//		
+	//	//Crafting
+	//	case COMMONTYPE_CRAFTITEM:
+	//		memcpy(cp, "                    ", 20);
+	//		cp += 20;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV1;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV2;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV3;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV4;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV5;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[26].sV6;
+	//		cp++;
+	//		//iRet = m_pGSock->iSendMsg(cMsg, 37);
+	//		break;
+
+	//	// Create Slate Request - Diuuude
+	//	case COMMONTYPE_REQ_CREATESLATE:
+	//		*cp = (char)m_stDialogBoxInfo[40].sV1;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[40].sV2;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[40].sV3;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[40].sV4;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[40].sV5;
+	//		cp++;
+	//		*cp = (char)m_stDialogBoxInfo[40].sV6;
+	//		cp++;
+	//		//iRet = m_pGSock->iSendMsg(cMsg, 18);
+	//		break;
+
+	//	default:
+	//		if (pString == NULL)
+	//		{	ip = (int *)cp;
+	//			*ip = iV1;
+	//			cp += 4;
+	//			ip = (int *)cp;
+	//			*ip = iV2;
+	//			cp += 4;
+	//			ip = (int *)cp;
+	//			*ip = iV3;
+	//			cp += 4;
+	//			dwp = (DWORD *)cp;
+	//			*dwp = dwTime;
+	//			cp += 4;
+	//			//iRet = m_pGSock->iSendMsg(cMsg, 23 +4);
+	//		}else
+	//		{	ip = (int *)cp;
+	//			*ip = iV1;
+	//			cp += 4;
+	//			ip = (int *)cp;
+	//			*ip = iV2;
+	//			cp += 4;
+	//			ip = (int *)cp;
+	//			*ip = iV3;
+	//			cp += 4;
+	//			memcpy(cp, pString, 30);
+	//			cp += 30;
+	//			ip = (int *)cp;
+	//			*ip = iV4;
+	//			cp += 4;
+	//			//iRet = m_pGSock->iSendMsg(cMsg, 23 + 34);
+	//		}
+	//		break;
+	//	}
+
+	//	break;
+
+	//case MSGID_REQUEST_CREATENEWGUILD:
+	//case MSGID_REQUEST_DISBANDGUILD:
+	//	// to Game Server
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = MSGTYPE_CONFIRM;
+
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+
+	//	ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
+	//	memcpy(cTxt, m_cPlayerName, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
+
+	//	ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
+	//	memcpy(cTxt, m_cAccountName, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
+
+	//	ZeroMemory(cTxt, sizeof(cTxt)); // v1.4
+	//	memcpy(cTxt, m_cAccountPassword, 10);
+	//	memcpy(cp, cTxt, 10);
+	//	cp += 10;
+	//	char cTemp[21];
+	//	ZeroMemory(cTemp, sizeof(cTemp));
+	//	memcpy(cTemp, m_cGuildName, 20);
+	//	m_Misc.ReplaceString(cTemp, ' ', '_');
+	//	memcpy(cp, cTemp, 20);
+	//	cp += 20;
+
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 56, cKey);
+	//	break;
+
+	//case MSGID_REQUEST_TELEPORT:
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = MSGTYPE_CONFIRM;
+
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 6);
+
+	//	m_bIsTeleportRequested = TRUE;
+	//	break;
+
+	//case MSGID_REQUEST_CIVILRIGHT:
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = MSGTYPE_CONFIRM;
+
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 6);
+	//	break;
+
+	//case MSGID_REQUEST_RETRIEVEITEM:
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = MSGTYPE_CONFIRM;
+
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	*cp = (char)iV1;
+
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 7);
+	//	break;
+
+	//case MSGID_REQUEST_NOTICEMENT:
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	ip = (int *)cp;
+	//	*ip = iV1;
+	//	cp += 4;
+
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 10, cKey);
+	//	break;
+
+	//case  MSGID_REQUEST_FIGHTZONE_RESERVE:
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	fightzonenum = (int *)cp;
+	//	*fightzonenum = iV1;
+	//	cp += 4;
+
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 10);
+	//	break;
+
+	//case MSGID_STATECHANGEPOINT:
+	//	// Diuuude
+	//	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
+	//	*dwp = dwMsgID;
+	//	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
+	//	*wp = NULL;
+	//	cp = (char *)(cMsg + INDEX2_MSGTYPE + 2);
+	//	*cp = cStateChange1;
+	//	cp++;
+	//	*cp = cStateChange2;
+	//	cp++;
+	//	*cp = cStateChange3;
+	//	cp++;
+	//	//iRet = m_pGSock->iSendMsg(cMsg, 12);
+	//	break;
 
 	default:
 		if (m_bIsTeleportRequested == TRUE) return FALSE;
@@ -2431,89 +2431,89 @@ void CGame::GameRecvMsgHandler(DWORD dwMsgSize, char * pData)
 { DWORD * dwpMsgID;
 	dwpMsgID = (DWORD *)(pData + INDEX4_MSGID);
 	switch (*dwpMsgID) {
-	case MSGID_RESPONSE_CHARGED_TELEPORT:
-		ResponseChargedTeleport(pData);
-		break;
+	//case MSGID_RESPONSE_CHARGED_TELEPORT:
+	//	ResponseChargedTeleport(pData);
+	//	break;
 
-	case MSGID_RESPONSE_TELEPORT_LIST:
-		ResponseTeleportList(pData);
-		break;
+	//case MSGID_RESPONSE_TELEPORT_LIST:
+	//	ResponseTeleportList(pData);
+	//	break;
 
-	case MSGID_RESPONSE_HELDENIAN_TP_LIST: // Snoopy Heldenian TP
-		ResponseHeldenianTeleportList(pData);
-		break;
+	//case MSGID_RESPONSE_HELDENIAN_TP_LIST: // Snoopy Heldenian TP
+	//	ResponseHeldenianTeleportList(pData);
+	//	break;
 
-	case MSGID_RESPONSE_NOTICEMENT:
-		NoticementHandler(pData);
-		break;
+	//case MSGID_RESPONSE_NOTICEMENT:
+	//	NoticementHandler(pData);
+	//	break;
 
-	case MSGID_DYNAMICOBJECT:
-		DynamicObjectHandler(pData);
-		break;
+	//case MSGID_DYNAMICOBJECT:
+	//	DynamicObjectHandler(pData);
+	//	break;
 
-	case MSGID_RESPONSE_INITPLAYER:
-		InitPlayerResponseHandler(pData);
-		break;
+	//case MSGID_RESPONSE_INITPLAYER:
+	//	InitPlayerResponseHandler(pData);
+	//	break;
 
-	case MSGID_RESPONSE_INITDATA:
-		InitDataResponseHandler(pData);
-		break;
+	//case MSGID_RESPONSE_INITDATA:
+	//	InitDataResponseHandler(pData);
+	//	break;
 
-	case MSGID_RESPONSE_MOTION:
-		MotionResponseHandler(pData);
-		break;
+	//case MSGID_RESPONSE_MOTION:
+	//	MotionResponseHandler(pData);
+	//	break;
 
-	case MSGID_EVENT_COMMON:
-		CommonEventHandler(pData);
-		break;
+	//case MSGID_EVENT_COMMON:
+	//	CommonEventHandler(pData);
+	//	break;
 
-	case MSGID_EVENT_MOTION:
-		MotionEventHandler(pData);
-		break;
+	//case MSGID_EVENT_MOTION:
+	//	MotionEventHandler(pData);
+	//	break;
 
-	case MSGID_EVENT_LOG:
-		LogEventHandler(pData);
-		break;
+	//case MSGID_EVENT_LOG:
+	//	LogEventHandler(pData);
+	//	break;
 
-	case MSGID_COMMAND_CHATMSG:
-		ChatMsgHandler(pData);
-		break;
+	//case MSGID_COMMAND_CHATMSG:
+	//	ChatMsgHandler(pData);
+	//	break;
 
-	case MSGID_PLAYERITEMLISTCONTENTS:
-		InitItemList(pData);
-		break;
+	//case MSGID_PLAYERITEMLISTCONTENTS:
+	//	InitItemList(pData);
+	//	break;
 
-	case MSGID_NOTIFY:
-		NotifyMsgHandler(pData);
-		break;
+	//case MSGID_NOTIFY:
+	//	NotifyMsgHandler(pData);
+	//	break;
 
-	case MSGID_RESPONSE_CREATENEWGUILD:
-		CreateNewGuildResponseHandler(pData);
-		break;
+	//case MSGID_RESPONSE_CREATENEWGUILD:
+	//	CreateNewGuildResponseHandler(pData);
+	//	break;
 
-	case MSGID_RESPONSE_DISBANDGUILD:
-		DisbandGuildResponseHandler(pData);
-		break;
+	//case MSGID_RESPONSE_DISBANDGUILD:
+	//	DisbandGuildResponseHandler(pData);
+	//	break;
 
-	case MSGID_PLAYERCHARACTERCONTENTS:
-		InitPlayerCharacteristics(pData);
-		break;
+	//case MSGID_PLAYERCHARACTERCONTENTS:
+	//	InitPlayerCharacteristics(pData);
+	//	break;
 
-	case MSGID_RESPONSE_CIVILRIGHT:
-		CivilRightAdmissionHandler(pData);
-		break;
+	//case MSGID_RESPONSE_CIVILRIGHT:
+	//	CivilRightAdmissionHandler(pData);
+	//	break;
 
-	case MSGID_RESPONSE_RETRIEVEITEM:
-		RetrieveItemHandler(pData);
-		break;
+	//case MSGID_RESPONSE_RETRIEVEITEM:
+	//	RetrieveItemHandler(pData);
+	//	break;
 
-	case MSGID_RESPONSE_PANNING:
-		ResponsePanningHandler(pData);
-		break;
+	//case MSGID_RESPONSE_PANNING:
+	//	ResponsePanningHandler(pData);
+	//	break;
 
-	case MSGID_RESPONSE_FIGHTZONE_RESERVE:
-		ReserveFightzoneResponseHandler(pData);
-		break;
+	//case MSGID_RESPONSE_FIGHTZONE_RESERVE:
+	//	ReserveFightzoneResponseHandler(pData);
+	//	break;
 	}
 }
 
@@ -2524,32 +2524,32 @@ void CGame::ConnectionEstablishHandler(char cWhere)
 
 	switch (cWhere) {
 	case SERVERTYPE_GAME:
-		bSendCommand(MSGID_REQUEST_INITPLAYER, NULL, NULL, NULL, NULL, NULL, NULL);
+	//	//bSendCommand(MSGID_REQUEST_INITPLAYER, NULL, NULL, NULL, NULL, NULL, NULL);
 		break;
 
 	case SERVERTYPE_LOG:
 		switch (m_dwConnectMode) {
-		case MSGID_REQUEST_LOGIN:
-			bSendCommand(MSGID_REQUEST_LOGIN, NULL, NULL, NULL, NULL, NULL, NULL);
-			break;
-		case MSGID_REQUEST_CREATENEWACCOUNT:
-			bSendCommand(MSGID_REQUEST_CREATENEWACCOUNT, NULL, NULL, NULL, NULL, NULL, NULL);
-			break;
-		case MSGID_REQUEST_CREATENEWCHARACTER:
-			bSendCommand(MSGID_REQUEST_CREATENEWCHARACTER, NULL, NULL, NULL, NULL, NULL, NULL);
-			break;
-		case MSGID_REQUEST_ENTERGAME:
-			bSendCommand(MSGID_REQUEST_ENTERGAME, NULL, NULL, NULL, NULL, NULL, NULL);
+//		case MSGID_REQUEST_LOGIN:
+	//		//bSendCommand(MSGID_REQUEST_LOGIN, NULL, NULL, NULL, NULL, NULL, NULL);
+	//		break;
+		//case MSGID_REQUEST_CREATENEWACCOUNT:
+		//bSendCommand(MSGID_REQUEST_CREATENEWACCOUNT, NULL, NULL, NULL, NULL, NULL, NULL);
+		//	break;
+	//	case MSGID_REQUEST_CREATENEWCHARACTER:
+	//		//bSendCommand(MSGID_REQUEST_CREATENEWCHARACTER, NULL, NULL, NULL, NULL, NULL, NULL);
+	//		break;
+	/*	case MSGID_REQUEST_ENTERGAME:
+			//bSendCommand(MSGID_REQUEST_ENTERGAME, NULL, NULL, NULL, NULL, NULL, NULL);
 			break;
 		case MSGID_REQUEST_DELETECHARACTER:
-			bSendCommand(MSGID_REQUEST_DELETECHARACTER, NULL, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_REQUEST_DELETECHARACTER, NULL, NULL, NULL, NULL, NULL, NULL);
 			break;
 		case MSGID_REQUEST_CHANGEPASSWORD:
-			bSendCommand(MSGID_REQUEST_CHANGEPASSWORD, NULL, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_REQUEST_CHANGEPASSWORD, NULL, NULL, NULL, NULL, NULL, NULL);
 			break;
 		case MSGID_REQUEST_INPUTKEYCODE:
-			bSendCommand(MSGID_REQUEST_INPUTKEYCODE, NULL, NULL, NULL, NULL, NULL, NULL);
-			break;
+			//bSendCommand(MSGID_REQUEST_INPUTKEYCODE, NULL, NULL, NULL, NULL, NULL, NULL);
+			break;*/
 		}
 		break;
 	}
@@ -2560,7 +2560,7 @@ void CGame::InitPlayerResponseHandler(char * pData)
 	wp = (WORD *)(pData + INDEX2_MSGTYPE);
 	switch (*wp) {
 	case MSGTYPE_CONFIRM:
-		bSendCommand(MSGID_REQUEST_INITDATA, NULL, NULL, NULL, NULL, NULL, NULL);
+	//	//bSendCommand(MSGID_REQUEST_INITDATA, NULL, NULL, NULL, NULL, NULL, NULL);
 		ChangeGameMode(GAMEMODE_ONWAITINGINITDATA);
 		break;
 
@@ -3497,7 +3497,7 @@ void CGame::OnTimer()
 		{	m_dwCheckSprTime = dwTime;
 			if( m_bIsProgramActive ) ReleaseUnusedSprites();
 //			if ((m_pGSock != NULL) && (m_pGSock->m_bIsAvailable == TRUE))
-				//bSendCommand(MSGID_COMMAND_CHECKCONNECTION, MSGTYPE_CONFIRM, NULL, NULL, NULL, NULL, NULL);
+				////bSendCommand(MSGID_COMMAND_CHECKCONNECTION, MSGTYPE_CONFIRM, NULL, NULL, NULL, NULL, NULL);
 	}	}
 
 	if (m_cGameMode == GAMEMODE_ONMAINGAME)
@@ -3919,7 +3919,7 @@ void CGame::bItemDrop_ExternalScreen(char cItemID, short msX, short msY)
 
 					ZeroMemory(m_stDialogBoxInfo[20].cStr, sizeof(m_stDialogBoxInfo[20].cStr));
 					strcpy(m_stDialogBoxInfo[20].cStr, cName);
-					//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, cItemID, 1, m_sMCX, m_sMCY, m_pItemList[cItemID]->m_cName); //v1.4
+					////bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, cItemID, 1, m_sMCX, m_sMCY, m_pItemList[cItemID]->m_cName); //v1.4
 					break;
 
 				case 20: // Howard
@@ -3940,7 +3940,7 @@ void CGame::bItemDrop_ExternalScreen(char cItemID, short msX, short msY)
 
 					ZeroMemory(m_stDialogBoxInfo[20].cStr, sizeof(m_stDialogBoxInfo[20].cStr));
 					GetNpcName(sType, m_stDialogBoxInfo[20].cStr);
-					//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, cItemID, 1, m_sMCX, m_sMCY, m_pItemList[cItemID]->m_cName);
+					////bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, cItemID, 1, m_sMCX, m_sMCY, m_pItemList[cItemID]->m_cName);
 					break;
 
 				case 15: // ShopKeeper-W
@@ -3965,7 +3965,7 @@ void CGame::bItemDrop_ExternalScreen(char cItemID, short msX, short msY)
 					break;
 
 				default:
-					bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, cItemID, 1, m_sMCX, m_sMCY, m_pItemList[cItemID]->m_cName);
+					//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, cItemID, 1, m_sMCX, m_sMCY, m_pItemList[cItemID]->m_cName);
 					break;
 				}
 				//m_bIsItemDisabled[cItemID] = TRUE;
@@ -3997,7 +3997,7 @@ void CGame::bItemDrop_ExternalScreen(char cItemID, short msX, short msY)
 				ZeroMemory(m_stDialogBoxInfo[4].cStr, sizeof(m_stDialogBoxInfo[4].cStr));
 				EnableDialogBox(4, cItemID, m_pItemList[cItemID]->m_dwCount, NULL);
 			}else
-			{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_ITEMDROP, NULL, cItemID, 1, NULL, m_pItemList[cItemID]->m_cName);
+			{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_ITEMDROP, NULL, cItemID, 1, NULL, m_pItemList[cItemID]->m_cName);
 		}	}
 		m_bIsItemDisabled[cItemID] = TRUE;
 	}
@@ -4040,24 +4040,24 @@ void CGame::CommonEventHandler(char * pData)
 	cp += 2;
 
 	switch (wEventType) {
-	case COMMONTYPE_ITEMDROP:
-		if ((sV1 == 6) && (sV2 == 0)) {
-			bAddNewEffect(4, sX, sY, NULL, NULL, 0);
-		}
-		m_pMapData->bSetItem(sX, sY, sV1, sV2, (char)sV3);
-		break;
+	//case COMMONTYPE_ITEMDROP:
+	//	if ((sV1 == 6) && (sV2 == 0)) {
+	//		bAddNewEffect(4, sX, sY, NULL, NULL, 0);
+	//	}
+	//	m_pMapData->bSetItem(sX, sY, sV1, sV2, (char)sV3);
+	//	break;
 
-	case COMMONTYPE_SETITEM:
-		m_pMapData->bSetItem(sX, sY, sV1, sV2, (char)sV3, FALSE); // v1.4 color
-		break;
+	//case COMMONTYPE_SETITEM:
+	//	m_pMapData->bSetItem(sX, sY, sV1, sV2, (char)sV3, FALSE); // v1.4 color
+	//	break;
 
-	case COMMONTYPE_MAGIC:
-		bAddNewEffect(sV3, sX, sY, sV1, sV2, 0, sV4);
-		break;
+	//case COMMONTYPE_MAGIC:
+	//	bAddNewEffect(sV3, sX, sY, sV1, sV2, 0, sV4);
+	//	break;
 
-	case COMMONTYPE_CLEARGUILDNAME:
-		ClearGuildNameList();
-		break;
+	//case COMMONTYPE_CLEARGUILDNAME:
+	//	ClearGuildNameList();
+	//	break;
 	}
 }
 
@@ -4390,7 +4390,7 @@ void CGame::DlgBoxClick_GuildMenu(short msX, short msY)
 		{	// Submit
 			if (strcmp(m_cGuildName, "NONE") == 0) return;
 			if (strlen(m_cGuildName) == 0) return;
-			bSendCommand(MSGID_REQUEST_CREATENEWGUILD, MSGTYPE_CONFIRM, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_REQUEST_CREATENEWGUILD, MSGTYPE_CONFIRM, NULL, NULL, NULL, NULL, NULL);
 			m_stDialogBoxInfo[7].cMode = 2;
 			EndInputString();
 			PlaySound('E', 14, 5);
@@ -4420,7 +4420,7 @@ void CGame::DlgBoxClick_GuildMenu(short msX, short msY)
 		{	// Purchase¹
 			ZeroMemory(cTemp, sizeof(cTemp));
 			strcpy(cTemp,"GuildAdmissionTicket");
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_PURCHASEITEM, NULL, 1, NULL, NULL, cTemp);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_PURCHASEITEM, NULL, 1, NULL, NULL, cTemp);
 			m_stDialogBoxInfo[7].cMode = 0;
 			PlaySound('E', 14, 5);
 		}
@@ -4436,7 +4436,7 @@ void CGame::DlgBoxClick_GuildMenu(short msX, short msY)
 		{	// Purchase
 			ZeroMemory(cTemp, sizeof(cTemp));
 			strcpy(cTemp,"GuildSecessionTicket");
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_PURCHASEITEM, NULL, 1, NULL, NULL, cTemp);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_PURCHASEITEM, NULL, 1, NULL, NULL, cTemp);
 			m_stDialogBoxInfo[7].cMode = 0;
 			PlaySound('E', 14, 5);
 		}
@@ -4450,7 +4450,7 @@ void CGame::DlgBoxClick_GuildMenu(short msX, short msY)
 	case 5:
 		if ((msX >= sX + 30) && (msX <= sX + 30 + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY)) {
 			// Confirm
-			bSendCommand(MSGID_REQUEST_DISBANDGUILD, MSGTYPE_CONFIRM, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_REQUEST_DISBANDGUILD, MSGTYPE_CONFIRM, NULL, NULL, NULL, NULL, NULL);
 			m_stDialogBoxInfo[7].cMode = 6;
 			PlaySound('E', 14, 5);
 		}
@@ -4463,49 +4463,49 @@ void CGame::DlgBoxClick_GuildMenu(short msX, short msY)
 
 	case 13:
 		if ((msX > sX + iAdjX + 65) && (msX < sX + iAdjX + 137) && (msY > sY + iAdjY + 168) && (msY < sY + iAdjY + 185))
-		{	bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 1, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 1, NULL, NULL, NULL);
 			m_stDialogBoxInfo[7].cMode = 18;
 			m_iFightzoneNumberTemp = 1;
 			PlaySound('E', 14, 5);
 		}
 		if ((msX > sX + iAdjX + 150) && (msX < sX + iAdjX + 222) && (msY > sY + iAdjY + 168) && (msY < sY + iAdjY + 185))
-		{	bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 2, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 2, NULL, NULL, NULL);
 			m_stDialogBoxInfo[7].cMode = 18;
 			m_iFightzoneNumberTemp = 2;
 			PlaySound('E', 14, 5);
 		}
 		if ((msX > sX + iAdjX + 65) && (msX < sX + iAdjX + 137) && (msY > sY + iAdjY + 188) && (msY < sY + iAdjY + 205))
-		{	bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 3, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 3, NULL, NULL, NULL);
 			m_stDialogBoxInfo[7].cMode = 18;
 			m_iFightzoneNumberTemp = 3;
 			PlaySound('E', 14, 5);
 		}
 		if ((msX > sX + iAdjX + 150) && (msX < sX + iAdjX + 222) && (msY > sY + iAdjY + 188) && (msY < sY + iAdjY + 205))
-		{	bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 4, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 4, NULL, NULL, NULL);
 			m_stDialogBoxInfo[7].cMode = 18;
 			m_iFightzoneNumberTemp = 4;
 			PlaySound('E', 14, 5);
 		}
 		if ((msX > sX + iAdjX + 65) && (msX < sX + iAdjX + 137) && (msY > sY + iAdjY + 208) && (msY < sY + iAdjY + 225))
-		{	bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 5, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 5, NULL, NULL, NULL);
 			m_stDialogBoxInfo[7].cMode = 18;
 			m_iFightzoneNumberTemp = 5;
 			PlaySound('E', 14, 5);
 		}
 		if ((msX > sX + iAdjX + 150) && (msX < sX + iAdjX + 222) && (msY > sY + iAdjY + 208) && (msY < sY + iAdjY + 225))
-		{	bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 6, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 6, NULL, NULL, NULL);
 			m_stDialogBoxInfo[7].cMode = 18;
 			m_iFightzoneNumberTemp = 6;
 			PlaySound('E', 14, 5);
 		}
 		if ((msX > sX + iAdjX + 65) && (msX < sX + iAdjX + 137) && (msY > sY + iAdjY + 228) && (msY < sY + iAdjY + 245))
-		{	bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 7, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 7, NULL, NULL, NULL);
 			m_stDialogBoxInfo[7].cMode = 18;
 			m_iFightzoneNumberTemp = 7;
 			PlaySound('E', 14, 5);
 		}
 		if ((msX > sX + iAdjX + 150) && (msX < sX + iAdjX + 222) && (msY > sY + iAdjY + 228) && (msY < sY + iAdjY + 245))
-		{ 	bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 8, NULL, NULL, NULL);
+		{ 	////bSendCommand(MSGID_REQUEST_FIGHTZONE_RESERVE, NULL, NULL, 8, NULL, NULL, NULL);
 			m_stDialogBoxInfo[7].cMode = 18;
 			m_iFightzoneNumberTemp = 8;
 			PlaySound('E', 14, 5);
@@ -4789,12 +4789,12 @@ void CGame::DlgBoxClick_GuildOp(short msX, short msY)
 		switch (m_stGuildOpList[0].cOpMode) {
 		case 1:
 			strcpy(cName20, m_stGuildOpList[0].cName);
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_JOINGUILDAPPROVE, NULL, NULL, NULL, NULL, cName20);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_JOINGUILDAPPROVE, NULL, NULL, NULL, NULL, cName20);
 			break;
 
 		case 2:
 			strcpy(cName20, m_stGuildOpList[0].cName);
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_DISMISSGUILDAPPROVE, NULL, NULL, NULL, NULL, cName20);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_DISMISSGUILDAPPROVE, NULL, NULL, NULL, NULL, cName20);
 			break;
 		}
 		_ShiftGuildOperationList();
@@ -4808,12 +4808,12 @@ void CGame::DlgBoxClick_GuildOp(short msX, short msY)
 		switch (m_stGuildOpList[0].cOpMode) {
 		case 1:
 			strcpy(cName20, m_stGuildOpList[0].cName);
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_JOINGUILDREJECT, NULL, NULL, NULL, NULL, cName20);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_JOINGUILDREJECT, NULL, NULL, NULL, NULL, cName20);
 			break;
 
 		case 2:
 			strcpy(cName20, m_stGuildOpList[0].cName);
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_DISMISSGUILDREJECT, NULL, NULL, NULL, NULL, cName20);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_DISMISSGUILDREJECT, NULL, NULL, NULL, NULL, cName20);
 			break;
 		}
 
@@ -7664,7 +7664,7 @@ void CGame::RequestFullObjectData(WORD wObjectID)
 	ZeroMemory(cMsg, sizeof(cMsg));
 
 	dwp = (DWORD *)(cMsg + INDEX4_MSGID);
-	*dwp = MSGID_REQUEST_FULLOBJECTDATA;
+	//*dwp = MSGID_REQUEST_FULLOBJECTDATA;
 	wp  = (WORD *)(cMsg + INDEX2_MSGTYPE);
 	*wp = wObjectID;
 
@@ -12957,514 +12957,514 @@ void CGame::LogResponseHandler(char * pData)
 	cp = (char *)(pData + INDEX2_MSGTYPE + 2);
 
 	switch (wResponse) {
-	case LOGRESMSGTYPE_CHARACTERDELETED:
-		cp = (pData + INDEX2_MSGTYPE + 2);
-		//m_iAccountStatus = (int)*cp;
-		cp++;
-		m_iTotalChar = (int)*cp;
-		cp++;
-		for (i = 0; i < 4; i++)
-		if (m_pCharList[i] != NULL)
-		{	delete m_pCharList[i];
-			m_pCharList[i] = NULL;
-		}
-
-		for (i = 0; i < m_iTotalChar; i++) {
-			m_pCharList[i] = new class CCharInfo;
-			memcpy(m_pCharList[i]->m_cName, cp, 10);
-			cp += 10;
-			if (*cp == 0)
-			{	m_pCharList[i]->m_sSex = NULL; // Sex
-				cp += 40;
-			}else
-			{	cp++;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sAppr1 = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sAppr2 = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sAppr3 = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sAppr4 = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sSex = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sSkinCol = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sLevel = *wp;
-				cp += 2;
-				dwp = (DWORD *)cp;
-				m_pCharList[i]->m_iExp = *dwp;
-				cp += 4;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sStr = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sVit = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sDex = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sInt = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sMag = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sChr = *wp;
-				cp += 2;
-				ip = (int *)cp; // v1.4
-				m_pCharList[i]->m_iApprColor = *ip;
-				cp += 4;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iYear = (int)*wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iMonth = (int)*wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iDay = (int)*wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iHour = (int)*wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iMinute = (int)*wp;
-				cp += 2;
-				ZeroMemory(m_pCharList[i]->m_cMapName, sizeof(m_pCharList[i]->m_cMapName));
-				memcpy(m_pCharList[i]->m_cMapName, cp, 10);
-				cp += 10;
-		}	}
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "3A");
-		break;
-
-	case LOGRESMSGTYPE_CONFIRM:
-		cp = (pData + INDEX2_MSGTYPE + 2);
-		wp = (WORD *)cp;
-		wServerUpperVersion = *wp;
-		cp += 2;
-		wp = (WORD *)cp;
-		wServerLowerVersion = *wp;
-		cp += 2;
-//		m_iAccountStatus = (int)*cp;
-		cp++;
-		wp = (WORD *)cp;
-		m_iAccntYear = *wp;
-		cp += 2;
-		wp = (WORD *)cp;
-		m_iAccntMonth = *wp;
-		cp += 2;
-		wp = (WORD *)cp;
-		m_iAccntDay = *wp;
-		cp += 2;
-		wp = (WORD *)cp;
-		m_iIpYear = *wp;
-		cp += 2;
-		wp = (WORD *)cp;
-		m_iIpMonth = *wp;
-		cp += 2;
-		wp = (WORD *)cp;
-		m_iIpDay = *wp;
-		cp += 2;
-		m_iTotalChar = (int)*cp;
-		cp++;
-		for (i = 0; i < 4; i++)
-		if (m_pCharList[i] != NULL)
-		{	delete m_pCharList[i];
-			m_pCharList[i] = NULL;
-		}
-
-		for (i = 0; i < m_iTotalChar; i++)
-		{	m_pCharList[i] = new class CCharInfo;
-			memcpy(m_pCharList[i]->m_cName, cp, 10);
-			cp += 10;
-			if (*cp == 0)
-			{	m_pCharList[i]->m_sSex = NULL;
-				cp += 40;
-			}else
-			{	cp++;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sAppr1 = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sAppr2 = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sAppr3 = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sAppr4 = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sSex = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sSkinCol = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sLevel = *wp;
-				cp += 2;
-				dwp = (DWORD *)cp;
-				m_pCharList[i]->m_iExp = *dwp;
-				cp += 4;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sStr = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sVit = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sDex = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sInt = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sMag = *wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sChr = *wp;
-				cp += 2;
-				ip = (int *)cp;
-				m_pCharList[i]->m_iApprColor = *ip; // v1.4
-				cp += 4;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iYear = (int)*wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iMonth = (int)*wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iDay = (int)*wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iHour = (int)*wp;
-				cp += 2;
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iMinute = (int)*wp;
-				cp += 2;
-				ZeroMemory(m_pCharList[i]->m_cMapName, sizeof(m_pCharList[i]->m_cMapName));
-				memcpy(m_pCharList[i]->m_cMapName, cp, 10);
-				cp += 10;
-		}	}
-		ip = (int *)cp;
-		m_iTimeLeftSecAccount = *ip;
-		cp += 4;
-		ip = (int *)cp;
-		m_iTimeLeftSecIP = *ip;
-		cp += 4;
-		ChangeGameMode(GAMEMODE_ONSELECTCHARACTER);
-		ClearContents_OnSelectCharacter();
-
-#ifndef _DEBUG
-		if ( (wServerUpperVersion!=UPPERVERSION) || (wServerLowerVersion!=LOWERVERSION) )
-			ChangeGameMode(GAMEMODE_ONVERSIONNOTMATCH);
-#endif
-		break;
-
-	case LOGRESMSGTYPE_REJECT:
-		cp = (pData + INDEX2_MSGTYPE + 2);
-		ip = (int *)cp;
-		m_iBlockYear = *ip;
-		cp += 4;
-
-		ip = (int *)cp;
-		m_iBlockMonth = *ip;
-		cp += 4;
-
-		ip = (int *)cp;
-		m_iBlockDay = *ip;
-		cp += 4;
-
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "7H");
-		break;
-
-	case LOGRESMSGTYPE_NOTENOUGHPOINT:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "7I");
-		break;
-
-	case LOGRESMSGTYPE_ACCOUNTLOCKED:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "7K");
-		break;
-
-	case LOGRESMSGTYPE_SERVICENOTAVAILABLE:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "7L");
-		break;
-
-	case LOGRESMSGTYPE_PASSWORDCHANGESUCCESS:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "6B");
-		break;
-
-	case LOGRESMSGTYPE_PASSWORDCHANGEFAIL:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "6C");
-		break;
-
-	case LOGRESMSGTYPE_PASSWORDMISMATCH:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "11");
-		break;
-
-	case LOGRESMSGTYPE_NOTEXISTINGACCOUNT:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "12");
-		break;
-
-	case LOGRESMSGTYPE_NEWACCOUNTCREATED:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "54");
-		break;
-
-	case LOGRESMSGTYPE_NEWACCOUNTFAILED:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "05");
-		break;
-
-	case LOGRESMSGTYPE_ALREADYEXISTINGACCOUNT:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "06");
-		break;
-
-	case LOGRESMSGTYPE_NOTEXISTINGCHARACTER:
-		ChangeGameMode(GAMEMODE_ONMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "Not existing character!");
-		break;
-
-	case LOGRESMSGTYPE_NEWCHARACTERCREATED:
-		ZeroMemory(cCharName, sizeof(cCharName));
-		memcpy(cCharName, cp, 10);
-		cp += 10;
-
-		m_iTotalChar = (int)*cp;
-		cp++;
-
-		for (i = 0; i < 4; i++)
-		if (m_pCharList[i] != NULL) delete m_pCharList[i];
-		//
-		for (i = 0; i < m_iTotalChar; i++) {
-			m_pCharList[i] = new class CCharInfo;
-			memcpy(m_pCharList[i]->m_cName, cp, 10);
-			cp += 10;
-			if (*cp == 0) {
-				m_pCharList[i]->m_sSex = NULL; // Sex
-				cp += 40;
-			}
-			else {
-				cp++;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sAppr1 = *wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sAppr2 = *wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sAppr3 = *wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sAppr4 = *wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sSex = *wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sSkinCol = *wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sLevel = *wp;
-				cp += 2;
-
-				dwp = (DWORD *)cp;
-				m_pCharList[i]->m_iExp = *dwp;
-				cp += 4;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sStr = *wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sVit = *wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sDex = *wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sInt = *wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sMag = *wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_sChr = *wp;
-				cp += 2;
-
-				ip = (int *)cp; // v1.4
-				m_pCharList[i]->m_iApprColor = *ip;
-				cp += 4;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iYear = (int)*wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iMonth = (int)*wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iDay = (int)*wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iHour = (int)*wp;
-				cp += 2;
-
-				wp = (WORD *)cp;
-				m_pCharList[i]->m_iMinute = (int)*wp;
-				cp += 2;
-
-				ZeroMemory(m_pCharList[i]->m_cMapName, sizeof(m_pCharList[i]->m_cMapName));
-				memcpy(m_pCharList[i]->m_cMapName, cp, 10);
-				cp += 10;
-			}
-		}
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "47");
-		break;
-
-	case LOGRESMSGTYPE_NEWCHARACTERFAILED:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "28");
-		break;
-
-	case LOGRESMSGTYPE_ALREADYEXISTINGCHARACTER:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "29");
-		break;
-
-	case ENTERGAMERESTYPE_PLAYING:
-		ChangeGameMode(GAMEMODE_ONQUERYFORCELOGIN);
-		break;
-
-	case ENTERGAMERESTYPE_CONFIRM:
-		{	int iGameServerPort;
-			char cGameServerAddr[16];
-			ZeroMemory(cGameServerAddr, sizeof(cGameServerAddr));
-			cp = (pData + INDEX2_MSGTYPE + 2);
-			memcpy(cGameServerAddr, cp, 16);
-			cp += 16;
-			wp = (WORD *)cp;
-			iGameServerPort = *wp;
-			cp += 2;
-			ZeroMemory(m_cGameServerName, sizeof(m_cGameServerName));
-			memcpy(m_cGameServerName, cp, 20);
-			cp += 20;
-			//m_pGSock = new class XSocket(m_hWnd, SOCKETBLOCKLIMIT);
-			//if (m_iGameServerMode == 1)
-			//{	m_pGSock->bConnect(m_cLogServerAddr, iGameServerPort, WM_USER_GAMESOCKETEVENT);
-			//}else
-			//{	m_pGSock->bConnect(cGameServerAddr, iGameServerPort, WM_USER_GAMESOCKETEVENT);
-		//	}
-			//m_pGSock->bInitBufferSize(30000);
-		}
-		break;
-
-	case ENTERGAMERESTYPE_REJECT:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
-		switch (*cp) {
-		case 1:	strcpy(m_cMsg, "3E"); break;
-		case 2:	strcpy(m_cMsg, "3F"); break;
-		case 3:	strcpy(m_cMsg, "33"); break;
-		case 4: strcpy(m_cMsg, "3D"); break;
-		case 5: strcpy(m_cMsg, "3G"); break;
-		case 6: strcpy(m_cMsg, "3Z"); break;
-		case 7: strcpy(m_cMsg, "3J"); break;
-		}
-		break;
-
-	case ENTERGAMERESTYPE_FORCEDISCONN:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "3X");
-		break;
-
-	case LOGRESMSGTYPE_NOTEXISTINGWORLDSERVER:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "1Y");
-		break;
-
-	case LOGRESMSGTYPE_INPUTKEYCODE:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
-		switch (*cp) {
-		case 1:	strcpy(m_cMsg, "8U"); break; //MainMenu, Keycode registration success
-		case 2:	strcpy(m_cMsg, "82"); break; //MainMenu, Not existing Account
-		case 3:	strcpy(m_cMsg, "81"); break; //MainMenu, Password wrong
-		case 4: strcpy(m_cMsg, "8V"); break; //MainMenu, Invalid Keycode
-		case 5: strcpy(m_cMsg, "8W"); break; //MainMenu, Already Used Keycode
-		}
-		break;
-
-
-	case LOGRESMSGTYPE_FORCECHANGEPASSWORD:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "6M");
-		break;
-
-	case LOGRESMSGTYPE_INVALIDKOREANSSN:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "1a");
-		break;
-
-	case LOGRESMSGTYPE_LESSTHENFIFTEEN:
-		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
-		ZeroMemory(m_cMsg, sizeof(m_cMsg));
-		strcpy(m_cMsg, "1b");
-		break;
+//	case LOGRESMSGTYPE_CHARACTERDELETED:
+//		cp = (pData + INDEX2_MSGTYPE + 2);
+//		//m_iAccountStatus = (int)*cp;
+//		cp++;
+//		m_iTotalChar = (int)*cp;
+//		cp++;
+//		for (i = 0; i < 4; i++)
+//		if (m_pCharList[i] != NULL)
+//		{	delete m_pCharList[i];
+//			m_pCharList[i] = NULL;
+//		}
+//
+//		for (i = 0; i < m_iTotalChar; i++) {
+//			m_pCharList[i] = new class CCharInfo;
+//			memcpy(m_pCharList[i]->m_cName, cp, 10);
+//			cp += 10;
+//			if (*cp == 0)
+//			{	m_pCharList[i]->m_sSex = NULL; // Sex
+//				cp += 40;
+//			}else
+//			{	cp++;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sAppr1 = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sAppr2 = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sAppr3 = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sAppr4 = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sSex = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sSkinCol = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sLevel = *wp;
+//				cp += 2;
+//				dwp = (DWORD *)cp;
+//				m_pCharList[i]->m_iExp = *dwp;
+//				cp += 4;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sStr = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sVit = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sDex = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sInt = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sMag = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sChr = *wp;
+//				cp += 2;
+//				ip = (int *)cp; // v1.4
+//				m_pCharList[i]->m_iApprColor = *ip;
+//				cp += 4;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iYear = (int)*wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iMonth = (int)*wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iDay = (int)*wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iHour = (int)*wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iMinute = (int)*wp;
+//				cp += 2;
+//				ZeroMemory(m_pCharList[i]->m_cMapName, sizeof(m_pCharList[i]->m_cMapName));
+//				memcpy(m_pCharList[i]->m_cMapName, cp, 10);
+//				cp += 10;
+//		}	}
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "3A");
+//		break;
+//
+//	case LOGRESMSGTYPE_CONFIRM:
+//		cp = (pData + INDEX2_MSGTYPE + 2);
+//		wp = (WORD *)cp;
+//		wServerUpperVersion = *wp;
+//		cp += 2;
+//		wp = (WORD *)cp;
+//		wServerLowerVersion = *wp;
+//		cp += 2;
+////		m_iAccountStatus = (int)*cp;
+//		cp++;
+//		wp = (WORD *)cp;
+//		m_iAccntYear = *wp;
+//		cp += 2;
+//		wp = (WORD *)cp;
+//		m_iAccntMonth = *wp;
+//		cp += 2;
+//		wp = (WORD *)cp;
+//		m_iAccntDay = *wp;
+//		cp += 2;
+//		wp = (WORD *)cp;
+//		m_iIpYear = *wp;
+//		cp += 2;
+//		wp = (WORD *)cp;
+//		m_iIpMonth = *wp;
+//		cp += 2;
+//		wp = (WORD *)cp;
+//		m_iIpDay = *wp;
+//		cp += 2;
+//		m_iTotalChar = (int)*cp;
+//		cp++;
+//		for (i = 0; i < 4; i++)
+//		if (m_pCharList[i] != NULL)
+//		{	delete m_pCharList[i];
+//			m_pCharList[i] = NULL;
+//		}
+//
+//		for (i = 0; i < m_iTotalChar; i++)
+//		{	m_pCharList[i] = new class CCharInfo;
+//			memcpy(m_pCharList[i]->m_cName, cp, 10);
+//			cp += 10;
+//			if (*cp == 0)
+//			{	m_pCharList[i]->m_sSex = NULL;
+//				cp += 40;
+//			}else
+//			{	cp++;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sAppr1 = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sAppr2 = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sAppr3 = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sAppr4 = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sSex = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sSkinCol = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sLevel = *wp;
+//				cp += 2;
+//				dwp = (DWORD *)cp;
+//				m_pCharList[i]->m_iExp = *dwp;
+//				cp += 4;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sStr = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sVit = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sDex = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sInt = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sMag = *wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sChr = *wp;
+//				cp += 2;
+//				ip = (int *)cp;
+//				m_pCharList[i]->m_iApprColor = *ip; // v1.4
+//				cp += 4;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iYear = (int)*wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iMonth = (int)*wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iDay = (int)*wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iHour = (int)*wp;
+//				cp += 2;
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iMinute = (int)*wp;
+//				cp += 2;
+//				ZeroMemory(m_pCharList[i]->m_cMapName, sizeof(m_pCharList[i]->m_cMapName));
+//				memcpy(m_pCharList[i]->m_cMapName, cp, 10);
+//				cp += 10;
+//		}	}
+//		ip = (int *)cp;
+//		m_iTimeLeftSecAccount = *ip;
+//		cp += 4;
+//		ip = (int *)cp;
+//		m_iTimeLeftSecIP = *ip;
+//		cp += 4;
+//		ChangeGameMode(GAMEMODE_ONSELECTCHARACTER);
+//		ClearContents_OnSelectCharacter();
+//
+//#ifndef _DEBUG
+//		if ( (wServerUpperVersion!=UPPERVERSION) || (wServerLowerVersion!=LOWERVERSION) )
+//			ChangeGameMode(GAMEMODE_ONVERSIONNOTMATCH);
+//#endif
+//		break;
+//
+//	case LOGRESMSGTYPE_REJECT:
+//		cp = (pData + INDEX2_MSGTYPE + 2);
+//		ip = (int *)cp;
+//		m_iBlockYear = *ip;
+//		cp += 4;
+//
+//		ip = (int *)cp;
+//		m_iBlockMonth = *ip;
+//		cp += 4;
+//
+//		ip = (int *)cp;
+//		m_iBlockDay = *ip;
+//		cp += 4;
+//
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "7H");
+//		break;
+//
+//	case LOGRESMSGTYPE_NOTENOUGHPOINT:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "7I");
+//		break;
+//
+//	case LOGRESMSGTYPE_ACCOUNTLOCKED:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "7K");
+//		break;
+//
+//	case LOGRESMSGTYPE_SERVICENOTAVAILABLE:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "7L");
+//		break;
+//
+//	case LOGRESMSGTYPE_PASSWORDCHANGESUCCESS:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "6B");
+//		break;
+//
+//	case LOGRESMSGTYPE_PASSWORDCHANGEFAIL:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "6C");
+//		break;
+//
+//	case LOGRESMSGTYPE_PASSWORDMISMATCH:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "11");
+//		break;
+//
+//	case LOGRESMSGTYPE_NOTEXISTINGACCOUNT:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "12");
+//		break;
+//
+//	case LOGRESMSGTYPE_NEWACCOUNTCREATED:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "54");
+//		break;
+//
+//	case LOGRESMSGTYPE_NEWACCOUNTFAILED:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "05");
+//		break;
+//
+//	case LOGRESMSGTYPE_ALREADYEXISTINGACCOUNT:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "06");
+//		break;
+//
+//	case LOGRESMSGTYPE_NOTEXISTINGCHARACTER:
+//		ChangeGameMode(GAMEMODE_ONMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "Not existing character!");
+//		break;
+//
+//	case LOGRESMSGTYPE_NEWCHARACTERCREATED:
+//		ZeroMemory(cCharName, sizeof(cCharName));
+//		memcpy(cCharName, cp, 10);
+//		cp += 10;
+//
+//		m_iTotalChar = (int)*cp;
+//		cp++;
+//
+//		for (i = 0; i < 4; i++)
+//		if (m_pCharList[i] != NULL) delete m_pCharList[i];
+//		//
+//		for (i = 0; i < m_iTotalChar; i++) {
+//			m_pCharList[i] = new class CCharInfo;
+//			memcpy(m_pCharList[i]->m_cName, cp, 10);
+//			cp += 10;
+//			if (*cp == 0) {
+//				m_pCharList[i]->m_sSex = NULL; // Sex
+//				cp += 40;
+//			}
+//			else {
+//				cp++;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sAppr1 = *wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sAppr2 = *wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sAppr3 = *wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sAppr4 = *wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sSex = *wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sSkinCol = *wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sLevel = *wp;
+//				cp += 2;
+//
+//				dwp = (DWORD *)cp;
+//				m_pCharList[i]->m_iExp = *dwp;
+//				cp += 4;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sStr = *wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sVit = *wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sDex = *wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sInt = *wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sMag = *wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_sChr = *wp;
+//				cp += 2;
+//
+//				ip = (int *)cp; // v1.4
+//				m_pCharList[i]->m_iApprColor = *ip;
+//				cp += 4;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iYear = (int)*wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iMonth = (int)*wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iDay = (int)*wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iHour = (int)*wp;
+//				cp += 2;
+//
+//				wp = (WORD *)cp;
+//				m_pCharList[i]->m_iMinute = (int)*wp;
+//				cp += 2;
+//
+//				ZeroMemory(m_pCharList[i]->m_cMapName, sizeof(m_pCharList[i]->m_cMapName));
+//				memcpy(m_pCharList[i]->m_cMapName, cp, 10);
+//				cp += 10;
+//			}
+//		}
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "47");
+//		break;
+//
+//	case LOGRESMSGTYPE_NEWCHARACTERFAILED:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "28");
+//		break;
+//
+//	case LOGRESMSGTYPE_ALREADYEXISTINGCHARACTER:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "29");
+//		break;
+//
+//	case ENTERGAMERESTYPE_PLAYING:
+//		ChangeGameMode(GAMEMODE_ONQUERYFORCELOGIN);
+//		break;
+//
+//	case ENTERGAMERESTYPE_CONFIRM:
+//		{	int iGameServerPort;
+//			char cGameServerAddr[16];
+//			ZeroMemory(cGameServerAddr, sizeof(cGameServerAddr));
+//			cp = (pData + INDEX2_MSGTYPE + 2);
+//			memcpy(cGameServerAddr, cp, 16);
+//			cp += 16;
+//			wp = (WORD *)cp;
+//			iGameServerPort = *wp;
+//			cp += 2;
+//			ZeroMemory(m_cGameServerName, sizeof(m_cGameServerName));
+//			memcpy(m_cGameServerName, cp, 20);
+//			cp += 20;
+//			//m_pGSock = new class XSocket(m_hWnd, SOCKETBLOCKLIMIT);
+//			//if (m_iGameServerMode == 1)
+//			//{	m_pGSock->bConnect(m_cLogServerAddr, iGameServerPort, WM_USER_GAMESOCKETEVENT);
+//			//}else
+//			//{	m_pGSock->bConnect(cGameServerAddr, iGameServerPort, WM_USER_GAMESOCKETEVENT);
+//		//	}
+//			//m_pGSock->bInitBufferSize(30000);
+//		}
+//		break;
+//
+//	case ENTERGAMERESTYPE_REJECT:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
+//		switch (*cp) {
+//		case 1:	strcpy(m_cMsg, "3E"); break;
+//		case 2:	strcpy(m_cMsg, "3F"); break;
+//		case 3:	strcpy(m_cMsg, "33"); break;
+//		case 4: strcpy(m_cMsg, "3D"); break;
+//		case 5: strcpy(m_cMsg, "3G"); break;
+//		case 6: strcpy(m_cMsg, "3Z"); break;
+//		case 7: strcpy(m_cMsg, "3J"); break;
+//		}
+//		break;
+//
+//	case ENTERGAMERESTYPE_FORCEDISCONN:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "3X");
+//		break;
+//
+//	case LOGRESMSGTYPE_NOTEXISTINGWORLDSERVER:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "1Y");
+//		break;
+//
+//	case LOGRESMSGTYPE_INPUTKEYCODE:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
+//		switch (*cp) {
+//		case 1:	strcpy(m_cMsg, "8U"); break; //MainMenu, Keycode registration success
+//		case 2:	strcpy(m_cMsg, "82"); break; //MainMenu, Not existing Account
+//		case 3:	strcpy(m_cMsg, "81"); break; //MainMenu, Password wrong
+//		case 4: strcpy(m_cMsg, "8V"); break; //MainMenu, Invalid Keycode
+//		case 5: strcpy(m_cMsg, "8W"); break; //MainMenu, Already Used Keycode
+//		}
+//		break;
+//
+//
+//	case LOGRESMSGTYPE_FORCECHANGEPASSWORD:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "6M");
+//		break;
+//
+//	case LOGRESMSGTYPE_INVALIDKOREANSSN:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "1a");
+//		break;
+//
+//	case LOGRESMSGTYPE_LESSTHENFIFTEEN:
+//		ChangeGameMode(GAMEMODE_ONLOGRESMSG);
+//		ZeroMemory(m_cMsg, sizeof(m_cMsg));
+//		strcpy(m_cMsg, "1b");
+//		break;
 
 	}
 	//delete m_pLSock;
@@ -16427,7 +16427,7 @@ void CGame::DisableDialogBox(int iBoxID)
 
 	case 21:
 		if (m_stDialogBoxInfo[21].sV2 == 500)
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GETMAGICABILITY, NULL, NULL, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GETMAGICABILITY, NULL, NULL, NULL, NULL, NULL);
 		}
 		break;
 
@@ -16577,7 +16577,7 @@ void CGame::DlgBoxClick_IconPannel(short msX, short msY)
 
 	if ((362 < msX)	&& (404 > msX) && (434 < msY) && (475 > msY)) {
 		// Combat Mode Toggle
-		bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TOGGLECOMBATMODE, NULL, NULL, NULL, NULL, NULL);
+		//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TOGGLECOMBATMODE, NULL, NULL, NULL, NULL, NULL);
 		PlaySound('E', 14, 5);
 	}
 
@@ -16854,7 +16854,7 @@ void CGame::DlgBoxClick_Party(short msX, short msY)
 
 		if (m_iPartyStatus != 0) 
 		{	if ((msX > sX + 80) && (msX < sX + 195) && (msY > sY + 120) && (msY < sY + 140)) 
-			{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_JOINPARTY, NULL, 2, NULL, NULL, m_cMCName);
+			{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_JOINPARTY, NULL, 2, NULL, NULL, m_cMCName);
 				m_stDialogBoxInfo[32].cMode = 4;
 				PlaySound('E', 14, 5);
 		}	}
@@ -16864,13 +16864,13 @@ void CGame::DlgBoxClick_Party(short msX, short msY)
 
 	case 1:
 		if ((msX >= sX + LBTNPOSX) && (msX <= sX + LBTNPOSX + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY)) {
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_ACCEPTJOINPARTY, NULL, 1, NULL, NULL, m_stDialogBoxInfo[32].cStr);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_ACCEPTJOINPARTY, NULL, 1, NULL, NULL, m_stDialogBoxInfo[32].cStr);
 			DisableDialogBox(32);
 			PlaySound('E', 14, 5);
 		}
 
 		if ((msX >= sX + RBTNPOSX) && (msX <= sX + RBTNPOSX + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY)) {
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_ACCEPTJOINPARTY, NULL, 0, NULL, NULL, m_stDialogBoxInfo[32].cStr);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_ACCEPTJOINPARTY, NULL, 0, NULL, NULL, m_stDialogBoxInfo[32].cStr);
 			DisableDialogBox(32);
 			PlaySound('E', 14, 5);
 		}
@@ -16886,7 +16886,7 @@ void CGame::DlgBoxClick_Party(short msX, short msY)
 	case 3:
 		if ((msX >= sX + RBTNPOSX) && (msX <= sX + RBTNPOSX + BTNSZX) && (msY > sY + BTNPOSY) && (msY < sY + BTNPOSY + BTNSZY)) {
 			m_stDialogBoxInfo[32].cMode = 0;
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_ACCEPTJOINPARTY, NULL, 2, NULL, NULL, m_stDialogBoxInfo[32].cStr);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_ACCEPTJOINPARTY, NULL, 2, NULL, NULL, m_stDialogBoxInfo[32].cStr);
 			DisableDialogBox(32);
 			PlaySound('E', 14, 5);
 		}
@@ -16906,7 +16906,7 @@ void CGame::DlgBoxClick_Party(short msX, short msY)
 
 	case 11:
 		if ((msX >= sX + LBTNPOSX) && (msX <= sX + LBTNPOSX + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY)) {
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_JOINPARTY, NULL, NULL, NULL, NULL, m_cMCName);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_JOINPARTY, NULL, NULL, NULL, NULL, m_cMCName);
 			m_stDialogBoxInfo[32].cMode = 5;
 			PlaySound('E', 14, 5);
 		}
@@ -16935,37 +16935,37 @@ void CGame::DlgBoxClick_CrusadeJob(short msX, short msY)
 		}else if (m_bAresden == TRUE)
 		{	if (m_iGuildRank == 0)
 			{	if ((msX > sX + 24) && (msX < sX + 246) && (msY > sY + 150) && (msY < sY + 165))
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_SELECTCRUSADEDUTY, NULL, 3, NULL, NULL, NULL);
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_SELECTCRUSADEDUTY, NULL, 3, NULL, NULL, NULL);
 					DisableDialogBox(33);
 					PlaySound('E', 14, 5);
 				}
  			}else
 			{	if ((msX > sX + 24) && (msX < sX + 246) && (msY > sY + 150) && (msY < sY + 165))
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_SELECTCRUSADEDUTY, NULL, 1, NULL, NULL, NULL);
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_SELECTCRUSADEDUTY, NULL, 1, NULL, NULL, NULL);
 					DisableDialogBox(33);
 				}
 				if (m_iGuildRank != -1)
 				{	if ((msX > sX + 24) && (msX < sX + 246) && (msY > sY + 175) && (msY < sY + 190))
-					{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_SELECTCRUSADEDUTY, NULL, 2, NULL, NULL, NULL);
+					{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_SELECTCRUSADEDUTY, NULL, 2, NULL, NULL, NULL);
 						DisableDialogBox(33);
 						PlaySound('E', 14, 5);
 			}	}	}
 		}else if (m_bAresden == FALSE)
 		{	if (m_iGuildRank == 0)
 			{	if ((msX > sX + 24) && (msX < sX + 246) && (msY > sY + 150) && (msY < sY + 165))
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_SELECTCRUSADEDUTY, NULL, 3, NULL, NULL, NULL);
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_SELECTCRUSADEDUTY, NULL, 3, NULL, NULL, NULL);
 					DisableDialogBox(33);
 					PlaySound('E', 14, 5);
 				}
 			}else
 			{	if ((msX > sX + 24) && (msX < sX + 246) && (msY > sY + 150) && (msY < sY + 165))
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_SELECTCRUSADEDUTY, NULL, 1, NULL, NULL, NULL);
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_SELECTCRUSADEDUTY, NULL, 1, NULL, NULL, NULL);
 					DisableDialogBox(33);
 					PlaySound('E', 14, 5);
 				}
 				if (m_iGuildRank != -1)
 				{	if ((msX > sX + 24) && (msX < sX + 246) && (msY > sY + 175) && (msY < sY + 190))
-					{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_SELECTCRUSADEDUTY, NULL, 2, NULL, NULL, NULL);
+					{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_SELECTCRUSADEDUTY, NULL, 2, NULL, NULL, NULL);
 						DisableDialogBox(33);
 						PlaySound('E', 14, 5);
 		} 	}	}	}
@@ -16995,7 +16995,7 @@ void CGame::DlgBoxClick_CrusadeJob(short msX, short msY)
 
 void CGame::_RequestMapStatus(char * pMapName, int iMode)
 {
-	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_MAPSTATUS, NULL, iMode, NULL, NULL, pMapName);
+	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_MAPSTATUS, NULL, iMode, NULL, NULL, pMapName);
 }
 
 void CGame::AddMapStatusInfo(char * pData, BOOL bIsLastData)
@@ -17304,7 +17304,7 @@ void CGame::DlgBoxClick_Commander(int msX, int msY) // Snoopy: Fixed for 351
 			if (tY < 30) tY = 30;
 			if (tX > 494) tX = 494;//722;
 			if (tY > 494) tY = 494;//650;
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SETGUILDTELEPORTLOC, NULL, tX, tY, NULL, "middleland");
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SETGUILDTELEPORTLOC, NULL, tX, tY, NULL, "middleland");
 			m_stDialogBoxInfo[36].cMode = 0;
 			PlaySound('E', 14, 5);
 			_RequestMapStatus("middleland", 1);
@@ -17322,7 +17322,7 @@ void CGame::DlgBoxClick_Commander(int msX, int msY) // Snoopy: Fixed for 351
 
 	case 2: // Use TP
 		if ((msX >= sX +20 +50) && (msX <= sX +20 +46 +50) && (msY >= sY + 340) && (msY <= sY + 340 + 52))
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GUILDTELEPORT, NULL, NULL, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GUILDTELEPORT, NULL, NULL, NULL, NULL, NULL);
 			DisableDialogBox(36);
 			PlaySound('E', 14, 5);
 		}
@@ -17341,50 +17341,50 @@ void CGame::DlgBoxClick_Commander(int msX, int msY) // Snoopy: Fixed for 351
 		if( m_bAresden == TRUE )
 		{	if ((msX >= sX +20) && (msX <= sX +20 +46) && (msY >= sY +220) && (msY <= sY +220 +50))
 			{	if (m_iConstructionPoint >= 3000)
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 47, 1, m_stDialogBoxInfo[36].sV1, NULL);
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 47, 1, m_stDialogBoxInfo[36].sV1, NULL);
 					PlaySound('E', 14, 5);
 					DisableDialogBox(36);
 			}	}
 			if ((msX >= sX +20 +50) && (msX <= sX +20 +50 +45) && (msY >= sY +220) && (msY <= sY +220 +50))
 			{	if (m_iConstructionPoint >= 2000)
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 46, 1, m_stDialogBoxInfo[36].sV1, NULL);
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 46, 1, m_stDialogBoxInfo[36].sV1, NULL);
 					PlaySound('E', 14, 5);
 					DisableDialogBox(36);
 			}	}
 			if ((msX >= sX +20 +100) && (msX <= sX +20 +100 +45) && (msY >= sY +220) && (msY <= sY +220 +50))
 			{	if (m_iConstructionPoint >= 1000)
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 43, 1, m_stDialogBoxInfo[36].sV1, NULL);
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 43, 1, m_stDialogBoxInfo[36].sV1, NULL);
 					PlaySound('E', 14, 5);
 					DisableDialogBox(36);
 			}	}
 			if ((msX >= sX +20 +150) && (msX <= sX +20 +150 +45) && (msY >= sY +220) && (msY <= sY +220 +50))
 			{	if (m_iConstructionPoint >= 1500)
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 51, 1, m_stDialogBoxInfo[36].sV1, NULL);
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 51, 1, m_stDialogBoxInfo[36].sV1, NULL);
 					PlaySound('E', 14, 5);
 					DisableDialogBox(36);
 			}	}
 		}else if (m_bAresden == FALSE)
 		{	if ((msX >= sX +20) && (msX <= sX +20 +46) && (msY >= sY +220) && (msY <= sY +220 +50))
 			{	if (m_iConstructionPoint >= 3000)
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 45, 1, m_stDialogBoxInfo[36].sV1, NULL);
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 45, 1, m_stDialogBoxInfo[36].sV1, NULL);
 					PlaySound('E', 14, 5);
 					DisableDialogBox(36);
 			} 	}
 			if ((msX >= sX +20 +50) && (msX <= sX +20 +50 +45) && (msY >= sY +220) && (msY <= sY +220 +50))
 			{	if (m_iConstructionPoint >= 2000)
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 44, 1, m_stDialogBoxInfo[36].sV1, NULL);
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 44, 1, m_stDialogBoxInfo[36].sV1, NULL);
 					PlaySound('E', 14, 5);
 					DisableDialogBox(36);
 			} 	}
 			if ((msX >= sX +20 +100) && (msX <= sX +20 +100 +45) && (msY >= sY +220) && (msY <= sY +220 +50))
 			{	if (m_iConstructionPoint >= 1000)
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 43, 1, m_stDialogBoxInfo[36].sV1, NULL);
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 43, 1, m_stDialogBoxInfo[36].sV1, NULL);
 					PlaySound('E', 14, 5);
 					DisableDialogBox(36);
 			}	}
 			if ((msX >= sX +20 +150) && (msX <= sX +20 +150 +45) && (msY >= sY +220) && (msY <= sY +220 +50))
 			{	if (m_iConstructionPoint >= 1500)
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 51, 1, m_stDialogBoxInfo[36].sV1, NULL);
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 51, 1, m_stDialogBoxInfo[36].sV1, NULL);
 					PlaySound('E', 14, 5);
 					DisableDialogBox(36);
 		}	}	}
@@ -17422,7 +17422,7 @@ void CGame::DlgBoxClick_Commander(int msX, int msY) // Snoopy: Fixed for 351
 			if (tY < 30) tY = 30;
 			if (tX > 494) tX = 494;//722;
 			if (tY > 494) tY = 494;//650;
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SETGUILDCONSTRUCTLOC, NULL, tX, tY, NULL, "middleland");
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SETGUILDCONSTRUCTLOC, NULL, tX, tY, NULL, "middleland");
 			m_stDialogBoxInfo[36].cMode = 0;
 			PlaySound('E', 14, 5);
 			_RequestMapStatus("middleland", 1);
@@ -17474,22 +17474,22 @@ void CGame::DlgBoxClick_Constructor(int msX, int msY)  // Snoopy: Fixed for 351
 
 	case 1: // Choose building
 		if ((msX >= sX +20) && (msX <= sX +20 +46) && (msY >= sY +220) && (msY <= sY +220 +50))
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 38, 1, m_stDialogBoxInfo[36].sV1, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 38, 1, m_stDialogBoxInfo[36].sV1, NULL);
 			PlaySound('E', 14, 5);
 			DisableDialogBox(37);
 		}
 		if ((msX >= sX +20 +50) && (msX <= sX +20 +50 +45) && (msY >= sY +220) && (msY <= sY +220 +50))
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 39, 1, m_stDialogBoxInfo[36].sV1, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 39, 1, m_stDialogBoxInfo[36].sV1, NULL);
 			PlaySound('E', 14, 5);
 			DisableDialogBox(37);
 		}
 		if ((msX >= sX +20 +100) && (msX <= sX +20 +100 +45) && (msY >= sY +220) && (msY <= sY +220 +50))
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 36, 1, m_stDialogBoxInfo[36].sV1, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 36, 1, m_stDialogBoxInfo[36].sV1, NULL);
 			PlaySound('E', 14, 5);
 			DisableDialogBox(37);
 		}
 		if ((msX >= sX +20 +150) && (msX <= sX +20 +150 +45) && (msY >= sY +220) && (msY <= sY +220 +50))
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 37, 1, m_stDialogBoxInfo[36].sV1, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SUMMONWARUNIT, NULL, 37, 1, m_stDialogBoxInfo[36].sV1, NULL);
 			PlaySound('E', 14, 5);
 			DisableDialogBox(37);
 		}
@@ -17507,7 +17507,7 @@ void CGame::DlgBoxClick_Constructor(int msX, int msY)  // Snoopy: Fixed for 351
 
 	case 2: // Use TP
 		if ((msX >= sX +20 +50) && (msX <= sX +20 +46 +50) && (msY >= sY + 340) && (msY <= sY + 340 + 52))
-		{bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GUILDTELEPORT, NULL, NULL, NULL, NULL, NULL);
+		{//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GUILDTELEPORT, NULL, NULL, NULL, NULL, NULL);
 			DisableDialogBox(37);
 			PlaySound('E', 14, 5);
 		}
@@ -17551,7 +17551,7 @@ void CGame::DlgBoxClick_Soldier(int msX, int msY) // Snoopy: Fixed for 351
 
 	case 1: // Use TP
 		if ((msX >= sX +20) && (msX <= sX +20 +46+50) && (msY >= sY + 340) && (msY <= sY + 340 + 52))
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GUILDTELEPORT, NULL, NULL, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GUILDTELEPORT, NULL, NULL, NULL, NULL, NULL);
 			DisableDialogBox(38);
 			PlaySound('E', 14, 5);
 		}
@@ -18020,7 +18020,7 @@ void CGame::DrawDialogBox_Slates(short msX, short msY, short msZ, char cLB)
 			m_stDialogBoxInfo[40].cStr[0]++;
 		}
 		if (m_stDialogBoxInfo[40].cStr[0] >= 5)
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_CREATESLATE, NULL, m_stDialogBoxInfo[40].sV1, m_stDialogBoxInfo[40].sV2, m_stDialogBoxInfo[40].sV3, NULL, m_stDialogBoxInfo[40].sV4);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_CREATESLATE, NULL, m_stDialogBoxInfo[40].sV1, m_stDialogBoxInfo[40].sV2, m_stDialogBoxInfo[40].sV3, NULL, m_stDialogBoxInfo[40].sV4);
 			DisableDialogBox(40);
 		}
 		break;
@@ -18067,7 +18067,7 @@ void CGame::DlgBoxClick_NpcTalk(int msX, int msY)
 	case 1: // Accept / Decline
 		if ((msX >= sX + LBTNPOSX) && (msX <= sX + LBTNPOSX + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY)) {
 			// Accept
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_QUESTACCEPTED, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_QUESTACCEPTED, NULL, NULL, NULL, NULL, NULL);
 			DisableDialogBox(21);
 			PlaySound('E', 14, 5);
 		}
@@ -18250,7 +18250,7 @@ void CGame::DlgBoxClick_SellList(short msX, short msY)
 
 	if ((msX >= sX + 30) && (msX <= sX + 30 + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY)) {
 		// Sell
-		bSendCommand(MSGID_REQUEST_SELLITEMLIST, NULL, NULL, NULL, NULL, NULL, NULL);
+		//bSendCommand(MSGID_REQUEST_SELLITEMLIST, NULL, NULL, NULL, NULL, NULL, NULL);
 		PlaySound('E', 14, 5);
 		DisableDialogBox(31);
 	}
@@ -18464,7 +18464,7 @@ void CGame::DlgBoxClick_LevelUpSettings(short msX, short msY)
 	if ((msX >= sX + RBTNPOSX) && (msX <= sX + RBTNPOSX + BTNSZX) && (msY > sY + BTNPOSY) && (msY < sY + BTNPOSY + BTNSZY))
 	{	if (m_stDialogBoxInfo[12].sV1 != m_iLU_Point)
 		// Send command to HG - Diuuude, Only if changed - Snoopy
-		bSendCommand(MSGID_LEVELUPSETTINGS, NULL, NULL, NULL, NULL, NULL, NULL);
+		//bSendCommand(MSGID_LEVELUPSETTINGS, NULL, NULL, NULL, NULL, NULL, NULL);
 		//m_cLU_Str = m_cLU_Vit = m_cLU_Dex = m_cLU_Int = m_cLU_Mag = m_cLU_Char = 0;
 		DisableDialogBox(12);
 		PlaySound('E', 14, 5);
@@ -19065,8 +19065,8 @@ void CGame::UpdateScreen_OnSelectCharacter()
 					//m_pLSock->bConnect(m_cLogServerAddr, m_iLogServerPort +(rand()%1), WM_USER_LOGSOCKETEVENT);
 					//m_pLSock->bInitBufferSize(30000);
 					ChangeGameMode(GAMEMODE_ONCONNECTING);
-					m_dwConnectMode  = MSGID_REQUEST_ENTERGAME;
-					m_wEnterGameType = ENTERGAMEMSGTYPE_NEW;
+					//m_dwConnectMode  = MSGID_REQUEST_ENTERGAME;
+					//m_wEnterGameType = ENTERGAMEMSGTYPE_NEW;
 					ZeroMemory(m_cMsg, sizeof(m_cMsg));
 					strcpy(m_cMsg,"33");
 					ZeroMemory(m_cMapName, sizeof(m_cMapName));
@@ -19126,8 +19126,8 @@ void CGame::UpdateScreen_OnSelectCharacter()
 							//m_pLSock->bConnect(m_cLogServerAddr, m_iLogServerPort +(rand()%1), WM_USER_LOGSOCKETEVENT);
 							//m_pLSock->bInitBufferSize(30000);
 							ChangeGameMode(GAMEMODE_ONCONNECTING);
-							m_dwConnectMode  = MSGID_REQUEST_ENTERGAME;
-							m_wEnterGameType = ENTERGAMEMSGTYPE_NEW;
+							//m_dwConnectMode  = MSGID_REQUEST_ENTERGAME;
+							//m_wEnterGameType = ENTERGAMEMSGTYPE_NEW;
 							ZeroMemory(m_cMsg, sizeof(m_cMsg));
 							strcpy(m_cMsg,"33");
 							ZeroMemory(m_cMapName, sizeof(m_cMapName));
@@ -19158,8 +19158,8 @@ void CGame::UpdateScreen_OnSelectCharacter()
 						//m_pLSock->bConnect(m_cLogServerAddr, m_iLogServerPort +(rand()%1), WM_USER_LOGSOCKETEVENT);
 						//m_pLSock->bInitBufferSize(30000);
 						ChangeGameMode(GAMEMODE_ONCONNECTING);
-						m_dwConnectMode  = MSGID_REQUEST_ENTERGAME;
-						m_wEnterGameType = ENTERGAMEMSGTYPE_NEW;
+						//m_dwConnectMode  = MSGID_REQUEST_ENTERGAME;
+						//m_wEnterGameType = ENTERGAMEMSGTYPE_NEW;
 						ZeroMemory(m_cMsg, sizeof(m_cMsg));
 						strcpy(m_cMsg,"33");
 						ZeroMemory(m_cMapName, sizeof(m_cMapName));
@@ -19181,7 +19181,7 @@ void CGame::UpdateScreen_OnSelectCharacter()
 		case 7:
 			if ((m_pCharList[m_cCurFocus - 1] != NULL) && (m_pCharList[m_cCurFocus - 1]->m_sLevel < 50))
 			{	ChangeGameMode(GAMEMODE_ONQUERYDELETECHARACTER);
-				m_wEnterGameType = m_cCurFocus;
+				//m_wEnterGameType = m_cCurFocus;
 				delete pMI;
 				return;
 			}
@@ -19526,7 +19526,7 @@ void CGame::DlgBoxClick_CityhallMenu(short msX, short msY)
 		if ((msX > sX + 35) && (msX < sX + 220) && (msY > sY + 195) && (msY < sY + 220))
 		{	m_stDialogBoxInfo[13].cMode = 10;
 			m_iTeleportMapCount = -1;
-			bSendCommand(MSGID_REQUEST_TELEPORT_LIST, NULL, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_REQUEST_TELEPORT_LIST, NULL, NULL, NULL, NULL, NULL, NULL);
 			PlaySound('E', 14, 5);
 		}
 		if ((msX > sX + 35) && (msX < sX + 220) && (msY > sY + 220) && (msY < sY + 245)) {
@@ -19539,7 +19539,7 @@ void CGame::DlgBoxClick_CityhallMenu(short msX, short msY)
 	case 1:
 		if ((msX >= sX + LBTNPOSX) && (msX <= sX + LBTNPOSX + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY))
 		{	// Yes Click
-			bSendCommand(MSGID_REQUEST_CIVILRIGHT, MSGTYPE_CONFIRM, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_REQUEST_CIVILRIGHT, MSGTYPE_CONFIRM, NULL, NULL, NULL, NULL, NULL);
 			m_stDialogBoxInfo[13].cMode = 2;
 			PlaySound('E', 14, 5);
 		}
@@ -19562,7 +19562,7 @@ void CGame::DlgBoxClick_CityhallMenu(short msX, short msY)
 	case 5:
 		if ((msX >= sX + LBTNPOSX) && (msX <= sX + LBTNPOSX + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY)) {
 			// Yes
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_GETREWARDMONEY, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_GETREWARDMONEY, NULL, NULL, NULL, NULL, NULL);
 			m_stDialogBoxInfo[13].cMode = 0;
 			PlaySound('E', 14, 5);
 
@@ -19664,7 +19664,7 @@ void CGame::DlgBoxClick_CityhallMenu(short msX, short msY)
 	case 8:
 		if ((msX >= sX + LBTNPOSX) && (msX <= sX + LBTNPOSX + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY)) {
 			// Yes
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_CANCELQUEST, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_CANCELQUEST, NULL, NULL, NULL, NULL, NULL);
 			m_stDialogBoxInfo[13].cMode = 0;
 			PlaySound('E', 14, 5);
 		}
@@ -19678,7 +19678,7 @@ void CGame::DlgBoxClick_CityhallMenu(short msX, short msY)
 	case 9:
 		if ((msX >= sX + LBTNPOSX) && (msX <= sX + LBTNPOSX + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY)) {
 			// Yes
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_HUNTMODE, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_HUNTMODE, NULL, NULL, NULL, NULL, NULL);
 			m_stDialogBoxInfo[13].cMode = 0;
 			PlaySound('E', 14, 5);
 		}
@@ -19693,7 +19693,7 @@ void CGame::DlgBoxClick_CityhallMenu(short msX, short msY)
 		if( m_iTeleportMapCount > 0 )
 		{	for( int i=0 ; i<m_iTeleportMapCount ; i++ )
 			{	if( (msX >= sX + LBTNPOSX) && (msX <= sX + RBTNPOSX + BTNSZX) && (msY >= sY + 130 + i*15) && (msY <= sY + 144 + i*15) )
-				{	bSendCommand(MSGID_REQUEST_CHARGED_TELEPORT, NULL, NULL, m_stTeleportList[i].iIndex, NULL, NULL, NULL);
+				{	//bSendCommand(MSGID_REQUEST_CHARGED_TELEPORT, NULL, NULL, m_stTeleportList[i].iIndex, NULL, NULL, NULL);
 					DisableDialogBox(13);
 					return;
 		}	}	}
@@ -19701,7 +19701,7 @@ void CGame::DlgBoxClick_CityhallMenu(short msX, short msY)
 
 	case 11: // Fix Drawjer
 		 if ((msX >= sX + LBTNPOSX) && (msX <= sX + LBTNPOSX + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY))
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_GETHEROMANTLE, NULL, m_stDialogBoxInfo[13].sV1, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_GETHEROMANTLE, NULL, m_stDialogBoxInfo[13].sV1, NULL, NULL, NULL);
 		  	m_stDialogBoxInfo[13].cMode = 0;
 		  	PlaySound('E', 14, 5);
 		}
@@ -19859,8 +19859,8 @@ void CGame::DlgBoxClick_MagicShop(short msX, short msY)
 		if ((m_pMagicCfgList[iCPivot + i] != NULL) && (m_pMagicCfgList[iCPivot + i]->m_bIsVisible)) {
 			if ((msX >= sX + iAdjX + 44) && (msX <= sX + iAdjX + 135 + 44) && (msY >= sY + iAdjY + 70 + iYloc +35) && (msY <= sY + iAdjY + 70 + 14 + iYloc +35)) {
 				if (m_cMagicMastery[iCPivot + i] == 0)
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_STUDYMAGIC, NULL, NULL, NULL, NULL, m_pMagicCfgList[iCPivot + i]->m_cName);
-					//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_STUDYMAGIC, NULL, iCPivot + i, NULL, NULL, NULL); //2002.02.07 »óÇÏ º¯°æ ¹è¿ì°í½ÍÀº ¸ÅÁ÷³×ÀÓ¿¡¼­ ¸¶¹ý¹øÈ£·Î º¯°æ..
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_STUDYMAGIC, NULL, NULL, NULL, NULL, m_pMagicCfgList[iCPivot + i]->m_cName);
+					////bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_STUDYMAGIC, NULL, iCPivot + i, NULL, NULL, NULL); //2002.02.07 »óÇÏ º¯°æ ¹è¿ì°í½ÍÀº ¸ÅÁ÷³×ÀÓ¿¡¼­ ¸¶¹ý¹øÈ£·Î º¯°æ..
 					PlaySound('E', 14, 5);
 				}
 				return;
@@ -20075,37 +20075,37 @@ void CGame::DlgBoxClick_WarningMsg(short msX, short msY)// Á¤Áø±¤.
 
 void CGame::DlgBoxClick_ItemDrop(short msX, short msY)
 {	short sX, sY;
-	if (m_cCommand < 0) return;
+	//if (m_cCommand < 0) return;
 
-	sX = m_stDialogBoxInfo[4].sX;
-	sY = m_stDialogBoxInfo[4].sY;
+	//sX = m_stDialogBoxInfo[4].sX;
+	//sY = m_stDialogBoxInfo[4].sY;
 
-	if ((msX >= sX + 30) && (msX <= sX + 30 + BTNSZX) && (msY >= sY + 55) && (msY <= sY + 55 + BTNSZY))
-	{
-	    m_stDialogBoxInfo[4].cMode = 3;
-        bSendCommand(MSGID_COMMAND_COMMON,
-                     COMMONTYPE_ITEMDROP,
-                     NULL,
-                     m_stDialogBoxInfo[4].sView,
-                     1,
-                     NULL,
-                     m_pItemList[m_stDialogBoxInfo[4].sView]->m_cName);
-		//m_stDialogBoxInfo[40].sView ;
-		DisableDialogBox(4);
-	}
+	//if ((msX >= sX + 30) && (msX <= sX + 30 + BTNSZX) && (msY >= sY + 55) && (msY <= sY + 55 + BTNSZY))
+	//{
+	//    m_stDialogBoxInfo[4].cMode = 3;
+ //       bSendCommand(MSGID_COMMAND_COMMON,
+ //                    COMMONTYPE_ITEMDROP,
+ //                    NULL,
+ //                    m_stDialogBoxInfo[4].sView,
+ //                    1,
+ //                    NULL,
+ //                    m_pItemList[m_stDialogBoxInfo[4].sView]->m_cName);
+	//	//m_stDialogBoxInfo[40].sView ;
+	//	DisableDialogBox(4);
+	//}
 
-	else if ((msX >= sX + 170 ) && (msX <= sX + 170 + BTNSZX ) && (msY >= sY + 55 ) && (msY <= sY + 55 + BTNSZY))
-	{
+	//else if ((msX >= sX + 170 ) && (msX <= sX + 170 + BTNSZX ) && (msY >= sY + 55 ) && (msY <= sY + 55 + BTNSZY))
+	//{
 
-		for (int i = 0; i < MAXSELLLIST; i++)
-	         m_bIsItemDisabled[i] = FALSE;
+	//	for (int i = 0; i < MAXSELLLIST; i++)
+	//         m_bIsItemDisabled[i] = FALSE;
 
-		DisableDialogBox(4);
-	}
-    else if ((msX >= sX + 35) && (msX <= sX + 240 ) && (msY >= sY + 80) && (msY <= sY + 90))
-	{
-	   m_bItemDrop = !m_bItemDrop;
-	}
+	//	DisableDialogBox(4);
+	//}
+ //   else if ((msX >= sX + 35) && (msX <= sX + 240 ) && (msY >= sY + 80) && (msY <= sY + 90))
+	//{
+	//   m_bItemDrop = !m_bItemDrop;
+	//}
 }
 
 void CGame::DlgBoxClick_ItemSellorRepair(short msX, short msY)
@@ -20119,7 +20119,7 @@ void CGame::DlgBoxClick_ItemSellorRepair(short msX, short msY)
 	case 1:
 		if ((msX >= sX + 30) && (msX <= sX + 30 + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY)) {
 			// Sell
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_SELLITEMCONFIRM, NULL, m_stDialogBoxInfo[23].sV1, m_stDialogBoxInfo[23].sV4, m_stDialogBoxInfo[23].sV3, m_pItemList[m_stDialogBoxInfo[23].sV1]->m_cName); //v1.2
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_SELLITEMCONFIRM, NULL, m_stDialogBoxInfo[23].sV1, m_stDialogBoxInfo[23].sV4, m_stDialogBoxInfo[23].sV3, m_pItemList[m_stDialogBoxInfo[23].sV1]->m_cName); //v1.2
 			m_stDialogBoxInfo[23].cMode = 3;
 		}
 		if ((msX >= sX + 154) && (msX <= sX + 154 + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY)) {
@@ -20132,7 +20132,7 @@ void CGame::DlgBoxClick_ItemSellorRepair(short msX, short msY)
 	case 2:
 		if ((msX >= sX + 30) && (msX <= sX + 30 + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY)) {
 			// Repair
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_REPAIRITEMCONFIRM, NULL, m_stDialogBoxInfo[23].sV1, NULL, NULL, m_pItemList[m_stDialogBoxInfo[23].sV1]->m_cName);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_REPAIRITEMCONFIRM, NULL, m_stDialogBoxInfo[23].sV1, NULL, NULL, m_pItemList[m_stDialogBoxInfo[23].sV1]->m_cName);
 			m_stDialogBoxInfo[23].cMode = 4;
 		}
 		if ((msX >= sX + 154) && (msX <= sX + 154 + BTNSZX) && (msY >= sY + BTNPOSY) && (msY <= sY + BTNPOSY + BTNSZY)) {
@@ -20867,8 +20867,8 @@ void CGame::bItemDrop_ExchangeDialog(short msX, short msY)
 		else if (m_stDialogBoxExchangeInfo[3].sV1 == -1)	m_stDialogBoxExchangeInfo[3].sItemID = cItemID;
 		else return; // Impossible case, tested at function beginning
 		m_bIsItemDisabled[cItemID] = TRUE;
-		bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SETEXCHANGEITEM, NULL, cItemID, 1, NULL, NULL);
-//	   :bSendCommand(DWORD dwMsgID,        WORD wCommand,             char cDir, int iV1, int iV2, int iV3, char * pString, int iV4)
+		//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SETEXCHANGEITEM, NULL, cItemID, 1, NULL, NULL);
+//	   ://bSendCommand(DWORD dwMsgID,        WORD wCommand,             char cDir, int iV1, int iV2, int iV3, char * pString, int iV4)
 		return;
 	}
 }
@@ -20884,7 +20884,7 @@ void CGame::DlgBoxClick_Exchange(short msX, short msY)
 	case 1: // Not yet confirmed the exchange
 		if ((msX >= sX + 220) && (msX <= sX + 220 + BTNSZX) && (msY >= sY + 310) && (msY <= sY + 310 + BTNSZY)) // Exchange
 		{	if ( (m_stDialogBoxExchangeInfo[0].sV1 != -1) && (m_stDialogBoxExchangeInfo[4].sV1 != -1))
-			{	/*bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_CONFIRMEXCHANGEITEM, NULL
+			{	/*//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_CONFIRMEXCHANGEITEM, NULL
 					, m_stDialogBoxExchangeInfo[0].sV1 // ItemID; inutilisé par serveur
 					, m_stDialogBoxExchangeInfo[0].sV3 // Amount; inutilisé par serveur
 					, NULL, NULL);	*/
@@ -20900,7 +20900,7 @@ void CGame::DlgBoxClick_Exchange(short msX, short msY)
 			&& (m_bIsDialogEnabled[41] == FALSE)) // Cancel only possible if confirmation is not activated
 		{	DisableDialogBox(27);
 			DisableDialogBox(22);
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_CANCELEXCHANGEITEM, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_CANCELEXCHANGEITEM, NULL, NULL, NULL, NULL, NULL);
 			PlaySound('E', 14, 5);
 			return;
 		}
@@ -20910,7 +20910,7 @@ void CGame::DlgBoxClick_Exchange(short msX, short msY)
 	/*	if ((msX >= sX + 450) && (msX <= sX + 450 + BTNSZX) && (msY >= sY + 310) && (msY <= sY + 310 + BTNSZY))  // Cancel
 		{	DisableDialogBox(27);
 			DisableDialogBox(22);
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_CANCELEXCHANGEITEM, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_CANCELEXCHANGEITEM, NULL, NULL, NULL, NULL, NULL);
 			PlaySound('E', 14, 5);
 			return;
 		}*/
@@ -20923,37 +20923,37 @@ void CGame::DlgBoxClick_Exchange(short msX, short msY)
 **********************************************************************************************************************/
 void CGame::DlgBoxClick_ConfirmExchange(short msX, short msY)
 {short sX, sY;
-	sX = m_stDialogBoxInfo[41].sX ;
-	sY = m_stDialogBoxInfo[41].sY ;
+	//sX = m_stDialogBoxInfo[41].sX ;
+	//sY = m_stDialogBoxInfo[41].sY ;
 
-	switch (m_stDialogBoxInfo[41].cMode) {
-	case 1: // Not yet confirmed the exchange
-		// yes
-		if ((msX >= sX + 30) && (msX <= sX + 30 + BTNSZX) && (msY >= sY + 55) && (msY <= sY + 55 + BTNSZY))
-		{	if ( (m_stDialogBoxExchangeInfo[0].sV1 != -1) && (m_stDialogBoxExchangeInfo[4].sV1 != -1))
-			{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_CONFIRMEXCHANGEITEM, NULL
-					, m_stDialogBoxExchangeInfo[0].sV1 // ItemID; inutilisé par serveur
-					, m_stDialogBoxExchangeInfo[0].sV3 // Amount; inutilisé par serveur
-					, NULL, NULL);
-				PlaySound('E', 14, 5);
-				m_stDialogBoxInfo[27].cMode = 2;
-				m_stDialogBoxInfo[41].cMode = 2;
-			}
-			return;
-		}
-		// No
-		if ((msX >= sX + 170 ) && (msX <= sX + 170 + BTNSZX ) && (msY >= sY + 55 ) && (msY <= sY + 55 + BTNSZY))
-		{	DisableDialogBox(41);
-			DisableDialogBox(27);
-			DisableDialogBox(22);
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_CANCELEXCHANGEITEM, NULL, NULL, NULL, NULL, NULL);
-			PlaySound('E', 14, 5);
-			return;
-		}
-		break;
-	case 2: // waiting for other side to confirm
-		break;
-	}
+	//switch (m_stDialogBoxInfo[41].cMode) {
+	//case 1: // Not yet confirmed the exchange
+	//	// yes
+	//	if ((msX >= sX + 30) && (msX <= sX + 30 + BTNSZX) && (msY >= sY + 55) && (msY <= sY + 55 + BTNSZY))
+	//	{	if ( (m_stDialogBoxExchangeInfo[0].sV1 != -1) && (m_stDialogBoxExchangeInfo[4].sV1 != -1))
+	//		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_CONFIRMEXCHANGEITEM, NULL
+	//				, m_stDialogBoxExchangeInfo[0].sV1 // ItemID; inutilisé par serveur
+	//				, m_stDialogBoxExchangeInfo[0].sV3 // Amount; inutilisé par serveur
+	//				, NULL, NULL);
+	//			PlaySound('E', 14, 5);
+	//			m_stDialogBoxInfo[27].cMode = 2;
+	//			m_stDialogBoxInfo[41].cMode = 2;
+	//		}
+	//		return;
+	//	}
+	//	// No
+	//	if ((msX >= sX + 170 ) && (msX <= sX + 170 + BTNSZX ) && (msY >= sY + 55 ) && (msY <= sY + 55 + BTNSZY))
+	//	{	DisableDialogBox(41);
+	//		DisableDialogBox(27);
+	//		DisableDialogBox(22);
+	//		//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_CANCELEXCHANGEITEM, NULL, NULL, NULL, NULL, NULL);
+	//		PlaySound('E', 14, 5);
+	//		return;
+	//	}
+	//	break;
+	//case 2: // waiting for other side to confirm
+	//	break;
+	//}
 }
 
 void CGame::DlgBoxClick_Quest(int msX, int msY)
@@ -22865,7 +22865,7 @@ void CGame::UpdateScreen_OnCreateNewCharacter()
 			//m_pLSock->bConnect(m_cLogServerAddr, m_iLogServerPort, WM_USER_LOGSOCKETEVENT);
 			//m_pLSock->bInitBufferSize(30000);
 			ChangeGameMode(GAMEMODE_ONCONNECTING);
-			m_dwConnectMode = MSGID_REQUEST_CREATENEWCHARACTER;
+			//m_dwConnectMode = MSGID_REQUEST_CREATENEWCHARACTER;
 			ZeroMemory(m_cMsg, sizeof(m_cMsg));
 			strcpy(m_cMsg,"22");
 			delete pMI;
@@ -23535,7 +23535,7 @@ void CGame::UpdateScreen_OnCreateNewAccount()
 			//m_pLSock->bInitBufferSize(30000);
 
 			ChangeGameMode(GAMEMODE_ONCONNECTING);
-			m_dwConnectMode = MSGID_REQUEST_CREATENEWACCOUNT;
+			//m_dwConnectMode = MSGID_REQUEST_CREATENEWACCOUNT;
 			ZeroMemory(m_cMsg, sizeof(m_cMsg));
 			strcpy(m_cMsg, "00");
 			delete pMI;
@@ -23604,7 +23604,7 @@ void CGame::UpdateScreen_OnCreateNewAccount()
 			//m_pLSock->bConnect(m_cLogServerAddr, m_iLogServerPort, WM_USER_LOGSOCKETEVENT);
 			//m_pLSock->bInitBufferSize(30000);
 			ChangeGameMode(GAMEMODE_ONCONNECTING);
-			m_dwConnectMode = MSGID_REQUEST_CREATENEWACCOUNT;
+			//m_dwConnectMode = MSGID_REQUEST_CREATENEWACCOUNT;
 			ZeroMemory(m_cMsg, sizeof(m_cMsg));
 			strcpy(m_cMsg, "00");
 			delete pMI;
@@ -23726,7 +23726,7 @@ void CGame::UpdateScreen_OnLogin()
 			Sockets.ConnectSocket(Sockets.LoginSocket, m_cLogServerAddr, m_iLogServerPort, WM_LOGIN_CONECTED);
 
 			ChangeGameMode(GAMEMODE_ONCONNECTING);
-			m_dwConnectMode = MSGID_REQUEST_LOGIN;
+			//m_dwConnectMode = MSGID_REQUEST_LOGIN;
 			ZeroMemory(m_cMsg, sizeof(m_cMsg));
 			strcpy(m_cMsg, "11");
 			delete pMI;
@@ -23794,7 +23794,7 @@ void CGame::UpdateScreen_OnLogin()
 			Sockets.ConnectSocket(Sockets.LoginSocket, m_cLogServerAddr, m_iLogServerPort, WM_LOGIN_CONECTED);
 
 			ChangeGameMode(GAMEMODE_ONCONNECTING);
-			m_dwConnectMode = MSGID_REQUEST_LOGIN;
+			//m_dwConnectMode = MSGID_REQUEST_LOGIN;
 			ZeroMemory(m_cMsg, sizeof(m_cMsg));
 			strcpy(m_cMsg, "11");
 			delete pMI;
@@ -24139,12 +24139,12 @@ void CGame::OnKeyUp(WPARAM wParam)
 				pStrTok = new class CStrTok(cBuff, seps);
 				token = pStrTok->pGet();
 				wsprintf( tempid, "/to %s", token );
-				bSendCommand(MSGID_COMMAND_CHATMSG, NULL, NULL, NULL, NULL, NULL, tempid);
+				//bSendCommand(MSGID_COMMAND_CHATMSG, NULL, NULL, NULL, NULL, NULL, tempid);
 				delete pStrTok;
 			}else if( _tmp_sOwnerType < 7 && (strlen(_tmp_cName)>0) && (m_iIlusionOwnerH==NULL)
 						&& ((m_bIsCrusadeMode == FALSE) || _iGetFOE(_tmp_iStatus) >= 0))
 			{	wsprintf( tempid, "/to %s", _tmp_cName );
-				bSendCommand(MSGID_COMMAND_CHATMSG, NULL, NULL, NULL, NULL, NULL, tempid);
+				//bSendCommand(MSGID_COMMAND_CHATMSG, NULL, NULL, NULL, NULL, NULL, tempid);
 			}else
 			{	EndInputString();
 				wsprintf( m_cChatMsg, "/to " );
@@ -24179,7 +24179,7 @@ void CGame::OnKeyUp(WPARAM wParam)
 		for (i = 0; i < MAXITEMS; i++)
 		if ( (m_pItemList[i] != NULL) && (m_bIsItemDisabled[i] != TRUE) &&
 			 (m_pItemList[i]->m_sSprite == 6) && (m_pItemList[i]->m_sSpriteFrame == 1))
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USEITEM, NULL, i, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USEITEM, NULL, i, NULL, NULL, NULL);
 			m_bIsItemDisabled[i] = TRUE;
 			m_bItemUsingStatus = TRUE;
 			return;
@@ -24188,7 +24188,7 @@ void CGame::OnKeyUp(WPARAM wParam)
 		for (i = 0; i < MAXITEMS; i++)
 		if ( (m_pItemList[i] != NULL) && (m_bIsItemDisabled[i] != TRUE) &&
 			 (m_pItemList[i]->m_sSprite == 6) && (m_pItemList[i]->m_sSpriteFrame == 2))
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USEITEM, NULL, i, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USEITEM, NULL, i, NULL, NULL, NULL);
 			m_bIsItemDisabled[i] = TRUE;
 			m_bItemUsingStatus = TRUE;
 			return;
@@ -24209,7 +24209,7 @@ void CGame::OnKeyUp(WPARAM wParam)
 		for (i = 0; i < MAXITEMS; i++)
 		if ( (m_pItemList[i] != NULL) && (m_bIsItemDisabled[i] != TRUE) &&
 			 (m_pItemList[i]->m_sSprite == 6) && (m_pItemList[i]->m_sSpriteFrame == 3))
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USEITEM, NULL, i, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USEITEM, NULL, i, NULL, NULL, NULL);
 			m_bIsItemDisabled[i] = TRUE;
 			m_bItemUsingStatus = TRUE;
 			return;
@@ -24218,7 +24218,7 @@ void CGame::OnKeyUp(WPARAM wParam)
 		for (i = 0; i < MAXITEMS; i++)
 		if ( (m_pItemList[i] != NULL) && (m_bIsItemDisabled[i] != TRUE) &&
 			 (m_pItemList[i]->m_sSprite == 6) && (m_pItemList[i]->m_sSpriteFrame == 4))
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USEITEM, NULL, i, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USEITEM, NULL, i, NULL, NULL, NULL);
 			m_bIsItemDisabled[i] = TRUE;
 			m_bItemUsingStatus = TRUE;
 			return;
@@ -24352,7 +24352,7 @@ void CGame::OnKeyUp(WPARAM wParam)
 			if( m_cCurFocus > m_cMaxFocus) m_cCurFocus = 1;
 		}
 		if (m_cGameMode == GAMEMODE_ONMAINGAME)
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TOGGLECOMBATMODE, NULL, NULL, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TOGGLECOMBATMODE, NULL, NULL, NULL, NULL, NULL);
 		}
 		break;
 
@@ -24363,7 +24363,7 @@ void CGame::OnKeyUp(WPARAM wParam)
 
 	case VK_HOME:
 		if (m_cGameMode == GAMEMODE_ONMAINGAME) {
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TOGGLESAFEATTACKMODE, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TOGGLESAFEATTACKMODE, NULL, NULL, NULL, NULL, NULL);
 		}
 		break;
 
@@ -24395,7 +24395,7 @@ void CGame::OnKeyUp(WPARAM wParam)
 		if (m_bInputStatus) return;
 		if (m_bIsSpecialAbilityEnabled == TRUE)
 		{	if (m_iSpecialAbilityType != 0) {
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_ACTIVATESPECABLTY, NULL, NULL, NULL, NULL, NULL);
+				//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_ACTIVATESPECABLTY, NULL, NULL, NULL, NULL, NULL);
 				m_bIsSpecialAbilityEnabled = FALSE;
 			}
 			else AddEventList(ON_KEY_UP26, 10);
@@ -24656,8 +24656,8 @@ void CGame::UpdateScreen_OnQueryForceLogin()
 			//m_pLSock->bConnect(m_cLogServerAddr, m_iLogServerPort, WM_USER_LOGSOCKETEVENT);
 			//m_pLSock->bInitBufferSize(30000);
 			ChangeGameMode(GAMEMODE_ONCONNECTING);
-			m_dwConnectMode  = MSGID_REQUEST_ENTERGAME;
-			m_wEnterGameType = ENTERGAMEMSGTYPE_NOENTER_FORCEDISCONN;
+			//m_dwConnectMode  = MSGID_REQUEST_ENTERGAME;
+			//m_wEnterGameType = ENTERGAMEMSGTYPE_NOENTER_FORCEDISCONN;
 			ZeroMemory(m_cMsg, sizeof(m_cMsg));
 			strcpy(m_cMsg,"33");
 			delete pMI;
@@ -25038,7 +25038,7 @@ void CGame::UpdateScreen_OnQueryDeleteCharacter()
 			//m_pLSock->bConnect(m_cLogServerAddr, m_iLogServerPort, WM_USER_LOGSOCKETEVENT);
 			//m_pLSock->bInitBufferSize(30000);
 			ChangeGameMode(GAMEMODE_ONCONNECTING);
-			m_dwConnectMode  = MSGID_REQUEST_DELETECHARACTER;
+			//m_dwConnectMode  = MSGID_REQUEST_DELETECHARACTER;
 			ZeroMemory(m_cMsg, sizeof(m_cMsg));
 			strcpy(m_cMsg,"33");
 			delete pMI;
@@ -25067,1642 +25067,1642 @@ void CGame::NotifyMsgHandler(char * pData)
 	wEventType = *wp;
 
 	switch (wEventType) {
-
-	case NOTIFY_SLATE_BERSERK:		// reversed by Snoopy: 0x0BED
-		AddEventList( MSG_NOTIFY_SLATE_BERSERK, 10 );//"Berserk magic casted!"
-		m_bUsingSlate = TRUE;
-		break;
-	
-	case NOTIFY_LOTERY_LOST:		// reversed by Snoopy: 0x0BEE:	
-		AddEventList( MSG_NOTIFY_LOTERY_LOST, 10 );//"You draw a blank. Please try again next time.."
-		break;
-
-	case NOTIFY_0BEF:				// 0x0BEF: // Snoopy: Crash or closes the client? (Calls SE entry !)
-		// I'm noot sure at all of this function's result, so let's quit game...
-		
-		break;
-
-	case NOTIFY_CRAFTING_SUCCESS:	//reversed by Snoopy: 0x0BF0:
-		m_iContribution -= m_iContributionPrice;
-		m_iContributionPrice = 0;
-		DisableDialogBox(25);
-		AddEventList(NOTIFY_MSG_HANDLER42, 10);		// "Item manufacture success!"
-		PlaySound('E', 23, 5);
-		switch (m_sPlayerType) {
-		case 1:
-		case 2:
-		case 3:
-			PlaySound('C', 21, 0);
-			break;
-		case 4:
-		case 5:
-		case 6:
-			PlaySound('C', 22, 0);
-			break;
-		}
-		break;
-
-	case NOTIFY_CRAFTING_FAIL:		//reversed by Snoopy: 0x0BF1:
-		m_iContributionPrice = 0;
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		ip = (int *)cp;
-		iV1 = *ip; // Error reason
-		switch (iV1) {
-		case 1: 
-			AddEventList(MSG_NOTIFY_CRAFTING_NO_PART, 10);		// "There is not enough material"		
-			PlaySound('E', 24, 5);
-			break;
-		case 2: 
-			AddEventList(MSG_NOTIFY_CRAFTING_NO_CONTRIB, 10);	// "There is not enough Contribution Point"	
-			PlaySound('E', 24, 5);
-			break;
-		default:
-		case 3: 
-			AddEventList(MSG_NOTIFY_CRAFTING_FAILED, 10);		// "Crafting failed"	
-			PlaySound('E', 24, 5);
-			break;
-		}
-		break;
-
-	case NOTIFY_ANGELIC_STATS:		// reversed by Snoopy: 0x0BF2
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		ip = (int *)cp;
-		m_iAngelicStr = *ip;  // m_iAngelicStr
-		cp +=4;
-		ip = (int *)cp;
-		m_iAngelicInt = *ip;  // m_iAngelicInt
-		cp +=4;
-		ip = (int *)cp;
-		m_iAngelicDex = *ip;  // m_iAngelicDex
-		cp +=4;
-		ip = (int *)cp;
-		m_iAngelicMag = *ip;  // m_iAngelicMag
-		break;			
-
-	case NOTIFY_ITEM_CANT_RELEASE:	// reversed by Snoopy: 0x0BF3	
-		AddEventList(MSG_NOTIFY_NOT_RELEASED , 10 );//"Item cannot be released"			
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		ItemEquipHandler(*cp);
-		break;
-
-	case NOTIFY_ANGEL_FAILED:		// reversed by Snoopy: 0x0BF4
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		ip = (int *)cp;
-		iV1 = *ip; // Error reason
-		switch (iV1) {
-		case 1: // "BFB9BBF3C4A120BECAC0BA20B9F6B1D7C0D4B4CFB4D92E20A4D02E2EA4D0" (Stolen bytes ?)
-			AddEventList(MSG_NOTIFY_ANGEL_FAILED , 10 ); //"Impossible to get a Tutelary Angel." // Invented by Snoopy.
-			break;
-		case 2: //
-			AddEventList(MSG_NOTIFY_ANGEL_MAJESTIC , 10 );//"You need additional Majesty Points."
-			break;
-		case 3: //
-			AddEventList(MSG_NOTIFY_ANGEL_LOW_LVL , 10 ); //"Only Majesty characters can receive Tutelary Angel"
-			break;
-		}
-		break;
-
-	case NOTIFY_ANGEL_RECEIVED:		// reversed by Snoopy: 0x0BF5:	
-		AddEventList(MSG_NOTIFY_ANGEL_RECEIVED, 10 );// "You have received the Tutelary Angel."
-		break;
-
-	case NOTIFY_SPELL_SKILL:		// reversed by Snoopy: 0x0BF6
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		for (i = 0; i < MAXMAGICTYPE; i++)
-		{	m_cMagicMastery[i] = *cp;
-			cp++;
-		}
-		for (i = 0; i < MAXSKILLTYPE; i++)
-		{	m_cSkillMastery[i] = (unsigned char)*cp;
-			if (m_pSkillCfgList[i] != NULL)
-				m_pSkillCfgList[i]->m_iLevel = (int)*cp;
-			cp++;
-		}
-		break;	
-
-	case NOTIFY_NORECALL: // Snoopy 0x0BD1
-		AddEventList( "You can not recall in this map.", 10 );
-		break;
-
-	case NOTIFY_APOCGATESTARTMSG: // Snoopy 0x0BD2
-		SetTopMsg("The portal to the Apocalypse is opened.", 10);
-		break;
-
-	case NOTIFY_APOCGATEENDMSG: // Snoopy 0x0BD3
-		SetTopMsg("The portal to the Apocalypse is closed.", 10);
-		break;
-
-	case NOTIFY_APOCGATEOPEN: // Snoopy ;  Case BD4 of switch 00454077
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		ip  = (int *)cp;
-		m_iGatePositX = *ip;
-		cp += 4;
-		ip  = (int *)cp;
-		m_iGatePositY = *ip;
-		cp += 4;
-		ZeroMemory(m_cGateMapName, sizeof(m_cGateMapName));
-		memcpy(m_cGateMapName, cp, 10);
-		cp += 10;
-		break;
-
-	case NOTIFY_QUESTCOUNTER: // Snoopy;  Case BE2 of switch 00454077
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		ip  = (int *)cp;
-		m_stQuest.sCurrentCount = (short)*ip;
-		cp += 4;
-		break;
-
-	case NOTIFY_MONSTERCOUNT: // Snoopy ;  Case BE3 of switch 00454077
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp  = (short *)cp;
-		sV1 = *sp;
-		cp+=2;
-		wsprintf(cTxt,"Rest Monster :%d", sV1) ;
-		AddEventList(cTxt, 10);
-		break;
-
-	case NOTIFY_APOCGATECLOSE: // Snoopy ;  Case BD5 of switch 00454077
-		m_iGatePositX = m_iGatePositY = -1;
-		ZeroMemory(m_cGateMapName, sizeof(m_cGateMapName));
-		break;
-
-	case NOTIFY_APOCFORCERECALLPLAYERS: // Snoopy ;  Case BD7 of switch 00454077
-		AddEventList( "You are recalled by force, because the Apocalypse is started.", 10 );
-		break;
-
-	case NOTIFY_ABADDONKILLED: // Snoopy ;  Case BD6 of switch 00454077
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		ZeroMemory(cTxt, sizeof(cTxt));
-		memcpy(cTxt, cp, 10);
-		cp += 10;
-		wsprintf(G_cTxt, "Abaddon is destroyed by %s", cTxt);
-		AddEventList(G_cTxt, 10);
-		break;
-
-	case NOTIFY_0BE5: // Snoopy Abaddon's related? Thunder?;  Case BE5 of switch 00454077
-/*00454255  |> B8 01000000    MOV EAX,1         ;  Case BE5 of switch 00454077
-0045425A  |. 5F             POP EDI
-0045425B  |. 8985 D8380700  MOV DWORD PTR SS:[EBP+738D8],EAX
-00454261  |. 8985 DC380700  MOV DWORD PTR SS:[EBP+738DC],EAX
-00454267  |. 8B85 88250700  MOV EAX,DWORD PTR SS:[EBP+72588]
-0045426D  |. 5E             POP ESI
-0045426E  |. 8985 E0380700  MOV DWORD PTR SS:[EBP+738E0],EAX
-00454274  |. 5D             POP EBP
-00454275  |. 5B             POP EBX
-00454276  |. 81C4 10080000  ADD ESP,810
-0045427C  |. C2 0400        RETN 4*/
-
-		break;
-
-	case NOTIFY_RESURRECTPLAYER: // Case BE9 of switch 00454077
-				EnableDialogBox(50, 0, NULL, NULL);
-		break;
-
-	case NOTIFY_HELDENIANTELEPORT: //;  Case BE6 of switch 00454077
-		SetTopMsg("Teleport to Heldenian field is available from now. Magic casting is forbidden until real battle.", 10);
-		break;
-
-	case NOTIFY_HELDENIANEND: //    ;  Case BE7 of switch 00454077
-		SetTopMsg("Heldenian holy war has been closed.", 10);
-		break;
-
-	case NOTIFY_0BE8: // ;  Case BE8 of switch 00454077
-		SetTopMsg("Characters will be recalled by force as Heldenian begins.", 10);
-		break;
-
-	case NOTIFY_HELDENIANSTART: //  Case BEA of switch 00454077
-		SetTopMsg("Heldenian real battle has been started form now on.", 10);
-		break;
-
-	case NOTIFY_HELDENIANVICTORY: // Case BEB of switch 00454077
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp  = (short *)cp;
-		sV1 = *sp;
-		cp+=2;
-		ShowHeldenianVictory(sV1);
-		m_iHeldenianAresdenLeftTower	= -1;
-		m_iHeldenianElvineLeftTower		= -1;
-		m_iHeldenianAresdenFlags		= -1;
-		m_iHeldenianElvineFlags			= -1;
-		break;
-
-	case NOTIFY_HELDENIANCOUNT: // Case BEC of switch 00454077
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp  = (short *)cp;
-		m_iHeldenianAresdenLeftTower = (int)*sp;
-		cp+=2;
-		sp  = (short *)cp;
-		m_iHeldenianElvineLeftTower = (int)*sp;
-		cp+=2;
-		sp  = (short *)cp;
-		m_iHeldenianAresdenFlags = (int)*sp;
-		cp+=2;
-		sp  = (short *)cp;
-		m_iHeldenianElvineFlags = (int)*sp;
-		cp+=2;
-		break;
-
-	// Slates - Diuuude
-	case NOTIFY_SLATE_CREATESUCCESS:	// 0x0BC1
-		AddEventList( MSG_NOTIFY_SLATE_CREATESUCCESS, 10 );
-		break;
-	case NOTIFY_SLATE_CREATEFAIL:		// 0x0BC2
-		AddEventList( MSG_NOTIFY_SLATE_CREATEFAIL, 10 );
-		break;
-	case NOTIFY_SLATE_INVINCIBLE:		// 0x0BD8
-		AddEventList( MSG_NOTIFY_SLATE_INVINCIBLE, 10 );
-		m_bUsingSlate = TRUE;
-		break;
-	case NOTIFY_SLATE_MANA:				// 0x0BD9
-		AddEventList( MSG_NOTIFY_SLATE_MANA, 10 );
-		m_bUsingSlate = TRUE;
-		break;
-	case NOTIFY_SLATE_EXP:				// 0x0BE0
-		AddEventList( MSG_NOTIFY_SLATE_EXP, 10 );
-		m_bUsingSlate = TRUE;
-		break;
-	case NOTIFY_SLATE_STATUS:			// 0x0BE1
-		AddEventList( MSG_NOTIFY_SLATECLEAR, 10 ); // "The effect of the prophecy-slate is disappeared."
-		m_bUsingSlate = FALSE;
-		break;
-
-	// MJ Stats Change - Diuuude: Erreur, ici il s'agit de sorts et skills, le serveur comme la v351 sont aussi bugués !
-	case NOTIFY_STATECHANGE_SUCCESS:	// 0x0BB5
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		for (i = 0; i < MAXMAGICTYPE; i++)
-		{	m_cMagicMastery[i] = *cp;
-			cp++;
-		}
-		for (i = 0; i < MAXSKILLTYPE; i++)
-		{	m_cSkillMastery[i] = (unsigned char)*cp;
-			if (m_pSkillCfgList[i] != NULL)
-				m_pSkillCfgList[i]->m_iLevel = (int)*cp;
-			//else m_pSkillCfgList[i]->m_iLevel = 0;
-			cp++;
-		}
-		// MJ Stats Change - Diuuude
-		m_iStr += m_cLU_Str;
-		m_iVit += m_cLU_Vit;
-		m_iDex += m_cLU_Dex;
-		m_iInt += m_cLU_Int;
-		m_iMag += m_cLU_Mag;
-		m_iCharisma += m_cLU_Char;
-		m_iLU_Point = m_iLevel*3 - ((m_iStr + m_iVit + m_iDex + m_iInt + m_iMag + m_iCharisma) - 70) - 3;
-		m_cLU_Str = m_cLU_Vit = m_cLU_Dex = m_cLU_Int = m_cLU_Mag = m_cLU_Char = 0;
-		AddEventList( "Your stat has been changed.", 10 ); // "Your stat has been changed."
-		break;
-
-	case NOTIFY_LEVELUP: // 0x0B16
-		NotifyMsg_LevelUp(pData);
-		break;
-
-	case NOTIFY_STATECHANGE_FAILED:		// 0x0BB6
-		m_cLU_Str = m_cLU_Vit = m_cLU_Dex = m_cLU_Int = m_cLU_Mag = m_cLU_Char = 0;
-		m_iLU_Point = m_iLevel*3 - ((m_iStr + m_iVit + m_iDex + m_iInt + m_iMag + m_iCharisma) - 70) - 3;
-		AddEventList( "Your stat has not been changed.", 10 );
-		break;
-
-	case NOTIFY_SETTING_FAILED: // 0x0BB4 -  Case BB4 of switch 00454077
-		AddEventList( "Your stat has not been changed.", 10 );
-		m_cLU_Str = m_cLU_Vit = m_cLU_Dex = m_cLU_Int = m_cLU_Mag = m_cLU_Char = 0;
-		m_iLU_Point = m_iLevel*3 - ((m_iStr + m_iVit + m_iDex + m_iInt + m_iMag + m_iCharisma) - 70) - 3;
-		break;
-
-	// CLEROTH - LU
-	case NOTIFY_SETTING_SUCCESS: // 0x0BB3 - envoie le niv et les stats
-		NotifyMsg_SettingSuccess(pData);
-		break;
-
-	case NOTIFY_AGRICULTURENOAREA:		// 0x0BB2
-		AddEventList( MSG_NOTIFY_AGRICULTURENOAREA, 10 );
-		break;
-	case NOTIFY_AGRICULTURESKILLLIMIT:	// 0x0BB1
-		AddEventList( MSG_NOTIFY_AGRICULTURESKILLLIMIT, 10 );
-		break;
-
-	case NOTIFY_NOMOREAGRICULTURE:		// 0x0BB0
-		AddEventList( MSG_NOTIFY_NOMOREAGRICULTURE, 10 );
-		break;
-	case NOTIFY_SPAWNEVENT:				// 0x0BAA
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		m_sMonsterID = (short)(*cp);
-		cp++;
-		sp  = (short *)cp;
-		m_sEventX = *sp;
-		cp+=2;
-		sp  = (short *)cp;
-		m_sEventY = *sp;
-		cp+=2;
-		m_dwMonsterEventTime = dwTime;
-		break;
-
-	case NOTIFY_CHANGEPLAYMODE:			// 0x0BA9
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		memcpy(m_cLocation, cp, 10);
-		cp += 10;
-		if (memcmp(m_cLocation, "aresden", 7) == 0)
-		{	m_bAresden = TRUE;
-			m_bCitizen = TRUE;
-			m_bHunter = FALSE;
-		}else if (memcmp(m_cLocation, "arehunter", 9) == 0)
-		{	m_bAresden = TRUE;
-			m_bCitizen = TRUE;
-			m_bHunter = TRUE;
-		}else if (memcmp(m_cLocation, "elvine", 6) == 0)
-		{	m_bAresden = FALSE;
-			m_bCitizen = TRUE;
-			m_bHunter = FALSE;
-		}else if (memcmp(m_cLocation, "elvhunter", 9) == 0)
-		{	m_bAresden = FALSE;
-			m_bCitizen = TRUE;
-			m_bHunter = TRUE;
-		}else
-		{	m_bAresden = TRUE;
-			m_bCitizen = FALSE;
-			m_bHunter = TRUE;
-		}
-		AddEventList( MSG_GAMEMODE_CHANGED, 10 );
-		break;
-
-	case NOTIFY_REQGUILDNAMEANSWER:	 //   0x0BA6
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp  = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-		sp  = (short *)cp;
-		sV2 = *sp;
-		cp += 2;
-		ZeroMemory(cTemp, sizeof(cTemp));
-		memcpy(cTemp, cp, 20);
-		cp += 20;
-
-		ZeroMemory( m_stGuildName[sV2].cGuildName, sizeof(m_stGuildName[sV2].cGuildName) );
-		strcpy(m_stGuildName[sV2].cGuildName, cTemp);
-		m_stGuildName[sV2].iGuildRank = sV1;
-		for (i = 0; i < 20; i++) if (m_stGuildName[sV2].cGuildName[i] == '_') m_stGuildName[sV2].cGuildName[i] = ' ';
-		break;
-
-	case NOTIFY_FORCERECALLTIME: // 0x0BA7
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp  = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-		if ( (int)(sV1/20) > 0)
-			wsprintf(G_cTxt,NOTIFY_MSG_FORCERECALLTIME1,(int) (sV1/20)) ;
-		else
-			wsprintf(G_cTxt,NOTIFY_MSG_FORCERECALLTIME2) ;
-		AddEventList(G_cTxt, 10);
-		break;
-
-	case NOTIFY_GIZONITEMUPGRADELEFT: // 0x0BA4// Item upgrade is possible.
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp  = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-		m_iGizonItemUpgradeLeft = sV1;
-		dwp = (DWORD *)cp;
-		switch (*dwp) {
-		case 1: //
-			AddEventList(NOTIFY_MSG_HANDLER_GIZONITEMUPGRADELEFT1, 10);
-			break;
-		}
-		//wsprintf(G_cTxt,"majesty: %d", m_iGizonItemUpgradeLeft);
-		//DebugLog(G_cTxt);
-		cp += 4;
-		break;
-
-	case NOTIFY_GIZONEITEMCHANGE: // 0x0BA5
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp  = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-		m_pItemList[sV1]->m_cItemType = *cp ;
-		cp++ ;
-		wp  = (WORD *)cp;
-		m_pItemList[sV1]->m_wCurLifeSpan = *wp;
-		cp += 2;
-		sp  = (short *)cp;
-		m_pItemList[sV1]->m_sSprite = *sp;
-		cp += 2;
-		sp  = (short *)cp;
-		m_pItemList[sV1]->m_sSpriteFrame = *sp;
-		cp += 2;
-		m_pItemList[sV1]->m_cItemColor = *cp ;
-		cp++ ;
-		m_pItemList[sV1]->m_sItemSpecEffectValue2 = *cp ;
-		cp++ ;
-		dwp = (DWORD *) cp ;
-		m_pItemList[sV1]->m_dwAttribute =  *dwp ;
-		cp +=4 ;
-		ZeroMemory( m_pItemList[sV1]->m_cName, sizeof(m_pItemList[sV1]->m_cName) );
-		memcpy(m_pItemList[sV1]->m_cName,cp,20) ;
-		cp += 20 ;
-		if (m_bIsDialogEnabled[34] == TRUE)
-		{	m_stDialogBoxInfo[34].cMode = 3; // succes
-		}
-		PlaySound('E', 23, 5);
-		switch (m_sPlayerType) {
-		case 1:
-		case 2:
-		case 3:
-			PlaySound('C', 21, 0);
-			break;
-
-		case 4:
-		case 5:
-		case 6:
-			PlaySound('C', 22, 0);
-			break;
-		}
-		break;
-
-	case NOTIFY_ITEMATTRIBUTECHANGE: // 0x0BA3
-	case 0x0BC0: // 0x0BC0 Unknown msg, but real in client v3.51
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp  = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-		dwTemp = m_pItemList[sV1]->m_dwAttribute;
-		dwp  = (DWORD *)cp;
-		m_pItemList[sV1]->m_dwAttribute = *dwp;
-		cp += 4;
-		dwp  = (DWORD *)cp;
-		if (*dwp != 0) m_pItemList[sV1]->m_sItemSpecEffectValue1 = (short)*dwp;
-		cp += 4;
-		dwp  = (DWORD *)cp;
-		if (*dwp != 0) m_pItemList[sV1]->m_sItemSpecEffectValue2 = (short)*dwp;
-		cp += 4;
-		if (dwTemp == m_pItemList[sV1]->m_dwAttribute)
-		{	if (m_bIsDialogEnabled[34] == TRUE)
-			{	m_stDialogBoxInfo[34].cMode = 4;// Failed
-			}
-			PlaySound('E', 24, 5);
-		}else
-		{	if (m_bIsDialogEnabled[34] == TRUE)
-			{	m_stDialogBoxInfo[34].cMode = 3; // Success
-			}
-			PlaySound('E', 23, 5);
-			switch (m_sPlayerType) {
-			case 1:
-			case 2:
-			case 3:
-				PlaySound('C', 21, 0);
-				break;
-			case 4:
-			case 5:
-			case 6:
-				PlaySound('C', 22, 0);
-				break;
-		}	}
-		break;
-
-	case NOTIFY_ITEMUPGRADEFAIL:
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp  = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-		if (m_bIsDialogEnabled[34] == FALSE) return ;
-		PlaySound('E', 24, 5);
-		switch(sV1){
-		case 1:
-			m_stDialogBoxInfo[34].cMode = 8 ; // Failed
-			break ;
-		case 2:
-			m_stDialogBoxInfo[34].cMode = 9 ; // Failed
-			break ;
-		case 3:
-			m_stDialogBoxInfo[34].cMode = 10 ; // Failed
-			break ;
-		}
-		break;
-
-	case NOTIFY_PARTY:
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp  = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-		sp  = (short *)cp;
-		sV2 = *sp;
-		cp += 2;
-		sp  = (short *)cp;
-		sV3 = *sp;
-		cp += 2;
-		switch (sV1) {
-		case 1: //
-			switch (sV2) {
-			case 0:
-				EnableDialogBox(32, NULL, NULL, NULL);
-				m_stDialogBoxInfo[32].cMode = 9;
-				break;
-
-			case 1:
-				m_iPartyStatus = 1;
-				m_iTotalPartyMember = NULL;
-				EnableDialogBox(32, NULL, NULL, NULL);
-				m_stDialogBoxInfo[32].cMode = 8;
-				for (i = 0; i < MAXPARTYMEMBERS; i++) ZeroMemory(m_stPartyMemberNameList[i].cName, sizeof(m_stPartyMemberNameList[i].cName));
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_JOINPARTY, NULL, 2, NULL, NULL, m_cMCName);
-				break;
-			}
-			break;
-
-		case 2: //
-			m_iPartyStatus = 0;
-			m_iTotalPartyMember = NULL;
-			EnableDialogBox(32, NULL, NULL, NULL);
-			m_stDialogBoxInfo[32].cMode = 10;
-			for (i = 0; i < MAXPARTYMEMBERS; i++) ZeroMemory(m_stPartyMemberNameList[i].cName, sizeof(m_stPartyMemberNameList[i].cName));
-			break;
-
-		case 4:
-			ZeroMemory(cTxt, sizeof(cTxt));
-			memcpy(cTxt, cp, 10);
-			cp += 10;
-
-			switch (sV2) {
-			case 0: //
-				EnableDialogBox(32, NULL, NULL, NULL);
-				m_stDialogBoxInfo[32].cMode = 9;
-				break;
-
-			case 1: //
-				if (strcmp(cTxt, m_cPlayerName) == 0) {
-					m_iPartyStatus = 2;
-					EnableDialogBox(32, NULL, NULL, NULL);
-					m_stDialogBoxInfo[32].cMode = 8;
-				}
-				else {
-					wsprintf(G_cTxt, NOTIFY_MSG_HANDLER1, cTxt);
-					AddEventList(G_cTxt, 10);
-				}
-
-				m_iTotalPartyMember++;
-				for (i = 0; i < MAXPARTYMEMBERS; i++)
-				if (strlen(m_stPartyMemberNameList[i].cName) == 0) {
-					ZeroMemory(m_stPartyMemberNameList[i].cName, sizeof(m_stPartyMemberNameList[i].cName));
-					memcpy(m_stPartyMemberNameList[i].cName, cTxt, 10);
-					goto NMH_LOOPBREAK1;
-				}
-NMH_LOOPBREAK1:;
-				break;
-
-			case 2: //
-				break;
-			}
-			break;
-
-		case 5: //
-			m_iTotalPartyMember = NULL;
-			for (i = 0; i < MAXPARTYMEMBERS; i++) ZeroMemory(m_stPartyMemberNameList[i].cName, sizeof(m_stPartyMemberNameList[i].cName));
-
-			m_iTotalPartyMember = sV3;
-			for (i = 1; i <= sV3; i++) {
-				ZeroMemory(m_stPartyMemberNameList[i-1].cName, sizeof(m_stPartyMemberNameList[i-1].cName));
-				memcpy(m_stPartyMemberNameList[i-1].cName, cp, 10);
-				cp += 11;
-			}
-			break;
-
-		default:
-			sp  = (short *)cp;
-			sV4 = *sp;
-			cp += 2;
-			break;
-
-		case 6:
-			ZeroMemory(cTxt, sizeof(cTxt));
-			memcpy(cTxt, cp, 10);
-			cp += 10;
-
-			switch (sV2) {
-			case 0: //
-				EnableDialogBox(32, NULL, NULL, NULL);
-				m_stDialogBoxInfo[32].cMode = 7;
-				break;
-
-			case 1: //
-				if (strcmp(cTxt, m_cPlayerName) == 0) {
-					m_iPartyStatus = 0;
-					EnableDialogBox(32, NULL, NULL, NULL);
-					m_stDialogBoxInfo[32].cMode = 6;
-				}
-				else {
-					wsprintf(G_cTxt, NOTIFY_MSG_HANDLER2 , cTxt);
-					AddEventList(G_cTxt, 10);
-				}
-				for (i = 0; i < MAXPARTYMEMBERS; i++)
-				if (strcmp(m_stPartyMemberNameList[i].cName, cTxt) == 0) {
-					ZeroMemory(m_stPartyMemberNameList[i].cName, sizeof(m_stPartyMemberNameList[i].cName));
-					m_iTotalPartyMember--;
-					goto NMH_LOOPBREAK2;
-				}
-NMH_LOOPBREAK2:;
-				break;
-			}
-			break;
-
-		case 7: //
-			EnableDialogBox(32, NULL, NULL, NULL);
-			m_stDialogBoxInfo[32].cMode = 9;
-			break;
-
-		case 8: //
-			m_iPartyStatus = 0;
-			m_iTotalPartyMember = NULL;
-			for (i = 0; i < MAXPARTYMEMBERS; i++) ZeroMemory(m_stPartyMemberNameList[i].cName, sizeof(m_stPartyMemberNameList[i].cName));
-			break;
-		}
-		break;
-
-	case NOTIFY_CANNOTCONSTRUCT:
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-
-		sp  = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-
-		CannotConstruct(sV1);
-		PlaySound('E', 25, 0, 0);
-		break;
-
-	case NOTIFY_TCLOC:
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-
-		sp  = (short *)cp;
-		m_iTeleportLocX = *sp;
-		cp += 2;
-
-		sp  = (short *)cp;
-		m_iTeleportLocY = *sp;
-		cp += 2;
-
-		ZeroMemory(m_cTeleportMapName, sizeof(m_cTeleportMapName));
-		memcpy(m_cTeleportMapName, cp, 10);
-		cp += 10;
-
-		sp  = (short *)cp;
-		m_iConstructLocX = *sp;
-		cp += 2;
-
-		sp  = (short *)cp;
-		m_iConstructLocY = *sp;
-		cp += 2;
-
-		ZeroMemory(m_cConstructMapName, sizeof(m_cConstructMapName));
-		memcpy(m_cConstructMapName, cp, 10);
-		cp += 10;
-		break;
-
-	case NOTIFY_CONSTRUCTIONPOINT:
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-
-		sp  = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-
-		sp  = (short *)cp;
-		sV2 = *sp;
-		cp += 2;
-
-		sp  = (short *)cp;
-		sV3 = *sp;
-		cp += 2;
-
-		if (sV3 == 0) {
-			if ((sV1 > m_iConstructionPoint) && (sV2 > m_iWarContribution)) {
-				wsprintf(G_cTxt, "%s +%d, %s +%d", m_pGameMsgList[13]->m_pMsg, (sV1 - m_iConstructionPoint), m_pGameMsgList[21]->m_pMsg, (sV2 - m_iWarContribution));
-				SetTopMsg(G_cTxt, 5);
-				PlaySound('E', 23, 0, 0);
-			}
-
-			if ((sV1 > m_iConstructionPoint) && (sV2 == m_iWarContribution)) {
-				if (m_iCrusadeDuty == 3) {
-					wsprintf(G_cTxt, "%s +%d", m_pGameMsgList[13]->m_pMsg, sV1 - m_iConstructionPoint);
-					SetTopMsg(G_cTxt, 5);
-					PlaySound('E', 23, 0, 0);
-				}
-			}
-
-			if ((sV1 == m_iConstructionPoint) && (sV2 > m_iWarContribution)) {
-				wsprintf(G_cTxt, "%s +%d", m_pGameMsgList[21]->m_pMsg, sV2 - m_iWarContribution);
-				SetTopMsg(G_cTxt, 5);
-				PlaySound('E', 23, 0, 0);
-			}
-
-			if (sV1 < m_iConstructionPoint) {
-				if (m_iCrusadeDuty == 3) {
-					wsprintf(G_cTxt, "%s -%d", m_pGameMsgList[13]->m_pMsg, m_iConstructionPoint - sV1);
-					SetTopMsg(G_cTxt, 5);
-					PlaySound('E', 25, 0, 0);
-				}
-			}
-
-			if (sV2 < m_iWarContribution) {
-				wsprintf(G_cTxt, "%s -%d", m_pGameMsgList[21]->m_pMsg, m_iWarContribution - sV2);
-				SetTopMsg(G_cTxt, 5);
-				PlaySound('E', 24, 0, 0);
-			}
-		}
-
-		m_iConstructionPoint = sV1;
-		m_iWarContribution   = sV2;
-		break;
-
-	case NOTIFY_NOMORECRUSADESTRUCTURE:
-		SetTopMsg(m_pGameMsgList[12]->m_pMsg, 5);
-		PlaySound('E', 25, 0, 0);
-		break;
-
-	case NOTIFY_GRANDMAGICRESULT:
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-
-		wp  = (WORD *)cp;
-		sV1 = *wp;
-		cp += 2;
-
-		wp  = (WORD *)cp;
-		sV2 = *wp;
-		cp += 2;
-
-		wp  = (WORD *)cp;
-		sV3 = *wp;
-		cp += 2;
-
-		ZeroMemory(cTxt, sizeof(cTxt));
-		memcpy(cTxt, cp, 10);
-		cp += 10;
-
-		wp  = (WORD *)cp;
-		sV4 = *wp;
-		cp += 2;
-
-		wp  = (WORD *)cp;
-		sV5 = *wp;  //
-		cp += 2;
-
-		if (sV5  > 0 ) {
-			wp  = (WORD *)cp;
-			sV6 = *wp;
-			cp += 2;
-			sV5-- ;
-		}
-		else sV6 = 0 ;
-
-		if ( sV5  > 0 ) {
-			wp  = (WORD *)cp;
-			sV7 = *wp;
-			cp += 2;
-			sV5-- ;
-		}
-		else sV7 = 0 ;
-
-		if ( sV5  > 0 ) {
-			wp  = (WORD *)cp;
-			sV8 = *wp;
-			cp += 2;
-			sV5-- ;
-		}
-		else sV8 = 0 ;
-
-		if ( sV5  > 0 ) {
-			wp  = (WORD *)cp;
-			sV9 = *wp;
-			cp += 2;
-			sV5-- ;
-		}
-		else sV9 = 0 ;
-
-		GrandMagicResult(cTxt, sV1, sV2, sV3, sV4, sV6, sV7, sV8, sV9);
-		break;
-
-	case NOTIFY_METEORSTRIKECOMING:
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		wp  = (WORD *)cp;
-		sV1 = *wp;
-		cp += 2;
-		MeteorStrikeComing(sV1);
-		PlaySound('E', 25, 0, 0);
-		break;
-
-	case NOTIFY_METEORSTRIKEHIT:
-		SetTopMsg(m_pGameMsgList[17]->m_pMsg, 5);
-		//StartMeteorStrikeEffect
-		for( i=0 ; i<36 ; i++ ) bAddNewEffect(60, m_sViewPointX +(rand() % 640), m_sViewPointY +(rand() % 480), NULL, NULL, -(rand() % 80));
-		break;
-
-	case NOTIFY_MAPSTATUSNEXT:
-		AddMapStatusInfo(pData, FALSE);
-		break;
-
-	case NOTIFY_MAPSTATUSLAST:
-		AddMapStatusInfo(pData, TRUE);
-		break;
-
-	case NOTIFY_LOCKEDMAP:
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-
-		ZeroMemory(cTemp, sizeof(cTemp));
-		ZeroMemory(cTxt, sizeof(cTxt));
-		memcpy(cTxt, cp, 10);
-		cp += 10;
-
-		GetOfficialMapName(cTxt, cTemp);
-		wsprintf( G_cTxt, NOTIFY_MSG_HANDLER3, sV1, cTemp );
-		SetTopMsg(G_cTxt, 10);
-		PlaySound('E', 25, 0, 0);
-		break;
-
-	case NOTIFY_CRUSADE: // Crusade msg
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		ip = (int *)cp;
-		iV1 = *ip; // Crusademode
-		cp += 4;
-		ip = (int *)cp;
-		iV2 = *ip; // crusade duty
-		cp += 4;
-		ip = (int *)cp;
-		iV3 = *ip;
-		cp += 4;
-		ip = (int *)cp;
-		iV4 = *ip;
-		cp += 4;
-		if (m_bIsCrusadeMode == FALSE)
-		{	if (iV1 != 0) // begin crusade
-			{	m_bIsCrusadeMode = TRUE;
-				m_iCrusadeDuty = iV2;
-				if( (m_iCrusadeDuty != 3) && (m_bCitizen==TRUE) )
-					_RequestMapStatus("middleland", 3);
-				if (m_iCrusadeDuty != NULL)
-					 EnableDialogBox(33, 2, iV2, NULL);
-				else EnableDialogBox(33, 1, NULL, NULL);
-				if( m_bCitizen == FALSE ) EnableDialogBox(18, 800, NULL, NULL);
-				else if( m_bAresden == TRUE ) EnableDialogBox(18, 801, NULL, NULL);
-				else if( m_bAresden == FALSE ) EnableDialogBox(18, 802, NULL, NULL);
-				if (m_bCitizen == FALSE) SetTopMsg(NOTIFY_MSG_CRUSADESTART_NONE, 10);
-				else SetTopMsg(m_pGameMsgList[9]->m_pMsg, 10);
-				PlaySound('E', 25, 0, 0);
-			}
-			if (iV3 != 0) // Crusade finished, show XP result screen
-			{	CrusadeContributionResult(iV3);
-			}
-			if (iV4 == -1) // The crusade you played in was finished.
-			{	CrusadeContributionResult(0); // You connect in this crusade, but did not connect after previous one => no XP....
-			}
-		}else
-		{	if (iV1 == 0) // crusade finished show result (1st result: winner)
-			{	m_bIsCrusadeMode = FALSE;
-				m_iCrusadeDuty   = NULL;
-				CrusadeWarResult(iV4);
-				SetTopMsg(m_pGameMsgList[57]->m_pMsg, 8);
-			}else
-			{	if (m_iCrusadeDuty != iV2)
-				{	m_iCrusadeDuty = iV2;
-					EnableDialogBox(33, 2, iV2, NULL);
-					PlaySound('E', 25, 0, 0);
-			}	}
-			if (iV4 == -1)
-			{	CrusadeContributionResult(0); // You connect in this crusade, but did not connect after previous one => no XP....
-		}	}
-		break;
-
-	case NOTIFY_SPECIALABILITYSTATUS:
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-		sp = (short *)cp;
-		sV2 = *sp;
-		cp += 2;
-		sp = (short *)cp;
-		sV3 = *sp;
-		cp += 2;
-		if (sV1 == 1) // Use SA
-		{	PlaySound('E', 35, 0);
-			AddEventList(NOTIFY_MSG_HANDLER4, 10); // "Use special ability!"
-			switch (sV2) {
-			case 1: wsprintf(G_cTxt, NOTIFY_MSG_HANDLER5,sV3); break;//"You are untouchable for %d seconds!"
-			case 2: wsprintf(G_cTxt, NOTIFY_MSG_HANDLER6, sV3); break;//"
-			case 3: wsprintf(G_cTxt, NOTIFY_MSG_HANDLER7, sV3); break;//"
-			case 4: wsprintf(G_cTxt, NOTIFY_MSG_HANDLER8, sV3); break;//"
-			case 5: wsprintf(G_cTxt, NOTIFY_MSG_HANDLER9, sV3); break;//"
-			case 50:wsprintf(G_cTxt, NOTIFY_MSG_HANDLER10, sV3); break;//"
-			case 51:wsprintf(G_cTxt, NOTIFY_MSG_HANDLER11, sV3); break;//"
-			case 52:wsprintf(G_cTxt, NOTIFY_MSG_HANDLER12, sV3); break;//"
-			case 55: // Spell effect
-				if (sV3 >90)
-					wsprintf(G_cTxt, "You cast a powerfull incantation, you can't use it again before %d minutes.", sV3/60);
-				else
-					wsprintf(G_cTxt, "You cast a powerfull incantation, you can't use it again before %d seconds.", sV3);
-				break;
-			}
-			AddEventList(G_cTxt, 10);
-		}else if (sV1 == 2) // Finished using
-		{	if (m_iSpecialAbilityType != (int)sV2)
-			{	PlaySound('E', 34, 0);
-				AddEventList(NOTIFY_MSG_HANDLER13, 10);//"Special ability has been set!"
-				if (sV3 >= 60)
-				{	switch (sV2) {
-					case 1: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER14, sV3/60); AddEventList(G_cTxt, 10); break;//"Ability that decreases enemy's HP by 50%: Can use after %dMin"
-					case 2: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER15, sV3/60); AddEventList(G_cTxt, 10); break;//"
-					case 3: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER16, sV3/60); AddEventList(G_cTxt, 10); break;//"
-					case 4: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER17, sV3/60); AddEventList(G_cTxt, 10); break;//"
-					case 5: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER18, sV3/60); AddEventList(G_cTxt, 10); break;//"
-					case 50:wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER19, sV3/60); AddEventList(G_cTxt, 10); break;//"
-					case 51:wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER20, sV3/60); AddEventList(G_cTxt, 10); break;//"
-					case 52:wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER21, sV3/60); AddEventList(G_cTxt, 10); break;//"
-					}
-				}else
-				{	switch (sV2) {
-					case 1: wsprintf(G_cTxt, NOTIFY_MSG_HANDLER22, sV3); AddEventList(G_cTxt, 10); break;//"
-					case 2: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER23, sV3); AddEventList(G_cTxt, 10); break;//"
-					case 3: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER24, sV3); AddEventList(G_cTxt, 10); break;//"
-					case 4: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER25, sV3); AddEventList(G_cTxt, 10); break;//"
-					case 5: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER26, sV3); AddEventList(G_cTxt, 10); break;//"
-					case 50:wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER27, sV3); AddEventList(G_cTxt, 10); break;//"
-					case 51:wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER28, sV3); AddEventList(G_cTxt, 10); break;//"
-					case 52:wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER29, sV3); AddEventList(G_cTxt, 10); break;//""Ability that makes character untouchable: Can use after %dSec"
-			}	}	}
-			m_iSpecialAbilityType = (int)sV2;
-			m_dwSpecialAbilitySettingTime = dwTime;
-			m_iSpecialAbilityTimeLeftSec  = (int)sV3;
-		}else if (sV1 == 3)  // End of using time
-		{	m_bIsSpecialAbilityEnabled = FALSE;
-			m_dwSpecialAbilitySettingTime = dwTime;
-			if (sV3 == 0)
-			{	m_iSpecialAbilityTimeLeftSec  = 1200;
-				AddEventList(NOTIFY_MSG_HANDLER30, 10);//"Special ability has run out! Will be available in 20 minutes."
-			}else
-			{	m_iSpecialAbilityTimeLeftSec  = (int)sV3;
-				if (sV3 >90)
-					 wsprintf(G_cTxt, "Special ability has run out! Will be available in %d minutes." , sV3/60);
-				else wsprintf(G_cTxt, "Special ability has run out! Will be available in %d seconds." , sV3);
-				AddEventList(G_cTxt, 10);
-			}
-		}else if (sV1 == 4) // Unequiped the SA item
-		{	AddEventList(NOTIFY_MSG_HANDLER31, 10);//"Special ability has been released."
-			m_iSpecialAbilityType = 0;
-		}else if (sV1 == 5) // Angel
-		{	PlaySound('E', 52, 0); // Angel
-		}
-		break;
-
-	case NOTIFY_SPECIALABILITYENABLED:
-		if (m_bIsSpecialAbilityEnabled == FALSE) {
-			PlaySound('E', 30, 5);
-			AddEventList(NOTIFY_MSG_HANDLER32, 10);//"
-		}
-		m_bIsSpecialAbilityEnabled = TRUE;
-		break;
-
-	case NOTIFY_ENERGYSPHEREGOALIN:
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-		sp = (short *)cp;
-		sV2 = *sp;
-		cp += 2;
-		sp = (short *)cp;
-		sV3 = *sp;
-		cp += 2;
-		ZeroMemory(cTxt, sizeof(cTxt));
-		memcpy(cTxt, cp, 20);
-
-		if (sV2 == sV3)
-		{	PlaySound('E', 24, 0);
-			if (strcmp(cTxt, m_cPlayerName) == 0)
-			{	AddEventList(NOTIFY_MSG_HANDLER33, 10);//You pushed energy sphere to enemy's energy portal! Contribution point will be decreased by 10 points."
-				m_iContribution += sV1; // fixed, server must match...
-				m_iContributionPrice = 0;
-				if (m_iContribution < 0) m_iContribution = 0;
-			}
-			else {
-				ZeroMemory(G_cTxt, sizeof(G_cTxt));
-				if( m_bAresden == TRUE ) wsprintf(G_cTxt, NOTIFY_MSG_HANDLER34, cTxt);//"%s(Aresden) pushed energy sphere to enemy's portal!!..."
-				else if (m_bAresden == FALSE) wsprintf(G_cTxt, NOTIFY_MSG_HANDLER34_ELV, cTxt);//"%s(Elvine) pushed energy sphere to enemy's portal!!..."
-				AddEventList(G_cTxt, 10);
-			}
-		}else
-		{	PlaySound('E', 23, 0);
-			if (strcmp(cTxt, m_cPlayerName) == 0)
-			{	switch (m_sPlayerType) {
-				case 1:
-				case 2:
-				case 3:	PlaySound('C', 21, 0); break;
-				case 4:
-				case 5:
-				case 6:	PlaySound('C', 22, 0); break;
-				}
-				AddEventList(NOTIFY_MSG_HANDLER35, 10);//"Congulaturations! You brought energy sphere to energy portal and earned experience and prize gold!"
-
-				m_iContribution += 5;
-				if (m_iContribution < 0) m_iContribution = 0;
-			}else
-			{	ZeroMemory(G_cTxt, sizeof(G_cTxt));
-				if (sV3 == 1)
-				{	wsprintf(G_cTxt, NOTIFY_MSG_HANDLER36, cTxt);//"Elvine %s : Goal in!"
-					AddEventList(G_cTxt, 10);
-				}else if (sV3 == 2)
-				{	wsprintf(G_cTxt, NOTIFY_MSG_HANDLER37, cTxt);//"Aresden %s : Goal in!"
-					AddEventList(G_cTxt, 10);
-		}	}	}
-		break;
-
-	case NOTIFY_ENERGYSPHERECREATED:
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-		sp = (short *)cp;
-		sV2 = *sp;
-		cp += 2;
-		ZeroMemory(G_cTxt, sizeof(G_cTxt));
-		wsprintf(G_cTxt, NOTIFY_MSG_HANDLER38, sV1, sV2);//"Energy sphere was dropped in (%d, %d) of middleland!"
-		AddEventList(G_cTxt, 10);
-		AddEventList(NOTIFY_MSG_HANDLER39, 10);//"A player who pushed energy sphere to the energy portal of his city will earn many Exp and Contribution."
-		break;
-
-	case NOTIFY_QUERY_JOINPARTY:
-		EnableDialogBox(32, NULL, NULL, NULL);
-		m_stDialogBoxInfo[32].cMode = 1;
-		ZeroMemory(m_stDialogBoxInfo[32].cStr, sizeof(m_stDialogBoxInfo[32].cStr));
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		strcpy(m_stDialogBoxInfo[32].cStr, cp);
-		break;
-
-	case NOTIFY_RESPONSE_CREATENEWPARTY:
-		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
-		sp = (short *)cp;
-
-		if ((BOOL)*sp == TRUE)
-		{	m_stDialogBoxInfo[32].cMode = 2;
-		}else
-		{	m_stDialogBoxInfo[32].cMode = 3;
-		}
-		break;
-
-	case NOTIFY_DAMAGEMOVE:
-		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
-		sp = (short *)cp;
-		m_sDamageMove = *sp;
-		cp += 2;
-		sp = (short *)cp;
-		m_sDamageMoveAmount = *sp;
-		cp += 2;
-		break;
-
-	case NOTIFY_OBSERVERMODE:
-		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
-		sp = (short *)cp;
-		if (*sp == 1)
-		{	AddEventList(NOTIFY_MSG_HANDLER40);//"Observer Mode On. Press 'SHIFT + ESC' to Log Out..."
-			m_bIsObserverMode = TRUE;
-			m_dwObserverCamTime = timeGetTime();
-			char cName[12];
-			ZeroMemory(cName, sizeof(cName));
-			memcpy(cName, m_cPlayerName, 10);
-			m_pMapData->bSetOwner(m_sPlayerObjectID, -1, -1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, cName, NULL, NULL, NULL, NULL);
-		}else
-		{	AddEventList(NOTIFY_MSG_HANDLER41);//"Observer Mode Off"
-			m_bIsObserverMode = FALSE;
-			m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir, m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor, m_iPlayerStatus, m_cPlayerName, OBJECTSTOP, NULL, NULL, NULL);
-		}
-		break;
-
-	case NOTIFY_BUILDITEMSUCCESS:
-		DisableDialogBox(26);
-		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
-		sp = (short *)cp;
-		sV1 = *sp;
-		cp += 2;
-		sp = (short *)cp;
-		sV2 = *sp;
-		cp += 2;
-		if (sV1 < 10000)
-		{	EnableDialogBox(26, 6, 1, sV1, NULL);
-			m_stDialogBoxInfo[26].sV1 = sV2;
-		}else
-		{	EnableDialogBox(26, 6, 1, -1*(sV1 - 10000), NULL);
-			m_stDialogBoxInfo[26].sV1 = sV2;
-		}
-		AddEventList(NOTIFY_MSG_HANDLER42, 10);
-		PlaySound('E', 23, 5);
-		switch (m_sPlayerType) {
-		case 1:
-		case 2:
-		case 3:
-			PlaySound('C', 21, 0);
-			break;
-
-		case 4:
-		case 5:
-		case 6:
-			PlaySound('C', 22, 0);
-			break;
-		}
-		break;
-
-	case NOTIFY_BUILDITEMFAIL:
-		DisableDialogBox(26);
-		EnableDialogBox(26, 6, 0, NULL);
-		AddEventList(NOTIFY_MSG_HANDLER43, 10);
-		PlaySound('E', 24, 5);
-		break;
-
-	case NOTIFY_QUESTREWARD:
-		NotifyMsg_QuestReward(pData);
-		break;
-
-	case NOTIFY_QUESTCOMPLETED:
-		m_stQuest.bIsQuestCompleted = TRUE;
-		DisableDialogBox(28);
-		EnableDialogBox(28, 1, NULL, NULL);
-		switch (m_sPlayerType) {
-		case 1:
-		case 2:
-		case 3:	PlaySound('C', 21, 0); break;
-		case 4:
-		case 5:
-		case 6:	PlaySound('C', 22, 0); break;
-		}
-		PlaySound('E', 23, 0);
-		AddEventList(NOTIFY_MSG_HANDLER44, 10);
-		break;
-
-	case NOTIFY_QUESTABORTED:
-		m_stQuest.sQuestType = NULL;
-		DisableDialogBox(28);
-		EnableDialogBox(28, 2, NULL, NULL);
-		break;
-
-	case NOTIFY_QUESTCONTENTS:
-		NotifyMsg_QuestContents(pData);
-		break;
-
-	case NOTIFY_ITEMCOLORCHANGE:
-		NotifyMsg_ItemColorChange(pData);
-		break;
-
-	case NOTIFY_DROPITEMFIN_COUNTCHANGED:
-		NotifyMsg_DropItemFin_CountChanged(pData);
-		break;
-
-	case NOTIFY_CANNOTGIVEITEM:
-		NotifyMsg_CannotGiveItem(pData);
-		break;
-
-	case NOTIFY_GIVEITEMFIN_COUNTCHANGED:
-		NotifyMsg_GiveItemFin_CountChanged(pData);
-		break;
-
-	case NOTIFY_EXCHANGEITEMCOMPLETE:
-		AddEventList(NOTIFYMSG_EXCHANGEITEM_COMPLETE1, 10);
-		DisableDialogBox(27);
-		//Snoopy: MultiTrade
-		DisableDialogBox(41);
-		PlaySound('E', 23, 5);
-		break;
-
-	case NOTIFY_CANCELEXCHANGEITEM:
-		PlaySound('E', 24, 5);
-		AddEventList(NOTIFYMSG_CANCEL_EXCHANGEITEM1, 10);
-		AddEventList(NOTIFYMSG_CANCEL_EXCHANGEITEM2, 10);
-		//Snoopy: MultiTrade
-		DisableDialogBox(41);
-		DisableDialogBox(27);
-		break;
-
-	case NOTIFY_SETEXCHANGEITEM:
-		NotifyMsg_SetExchangeItem(pData);
-		break;
-
-	case NOTIFY_OPENEXCHANGEWINDOW:
-		NotifyMsg_OpenExchageWindow(pData);
-		break;
-
-	case NOTIFY_NOTFLAGSPOT:
-		AddEventList(NOTIFY_MSG_HANDLER45, 10);
-		break;
-
-	case NOTIFY_ITEMPOSLIST:
-		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
-		for (i = 0; i < MAXITEMS; i++) {
-			sp = (short *)cp;
-			sX = *sp;
-			cp += 2;
-			sp = (short *)cp;
-			sY = *sp;
-			cp += 2;
-			if (m_pItemList[i] != NULL) {
-				if (sY < -10) sY = -10;
-				if (sX < 0)   sX = 0;
-				if (sX > 170) sX = 170;
-				if (sY > 95)  sY = 95;
-
-				m_pItemList[i]->m_sX = sX;
-				m_pItemList[i]->m_sY = sY;
-			}
-		}
-		break;
-
-	case NOTIFY_ENEMYKILLS:
-		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
-		ip = (int *)cp;
-		m_iEnemyKillCount = *ip;
-		break;
-
-	case NOTIFY_DOWNSKILLINDEXSET:
-		NotifyMsg_DownSkillIndexSet(pData);
-		break;
-
-	case NOTIFY_ADMINIFO:
-		NotifyMsg_AdminInfo(pData);
-		break;
-
-	case NOTIFY_NPCTALK:
-		NpcTalkHandler(pData);
-		break;
-
-	case NOTIFY_POTIONSUCCESS:
-		AddEventList(NOTIFY_MSG_HANDLER46, 10);
-		break;
-
-	case NOTIFY_POTIONFAIL:
-		AddEventList(NOTIFY_MSG_HANDLER47, 10);
-		break;
-
-	case NOTIFY_LOWPOTIONSKILL:
-		AddEventList(NOTIFY_MSG_HANDLER48, 10);
-		break;
-
-	case NOTIFY_NOMATCHINGPOTION:
-		AddEventList(NOTIFY_MSG_HANDLER49, 10);
-		break;
-
-	case NOTIFY_SUPERATTACKLEFT:
-		sp = (short *)(pData + INDEX2_MSGTYPE + 2);
-		m_iSuperAttackLeft = (int)*sp;
-		break;
-
-	case NOTIFY_SAFEATTACKMODE:
-		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
-		switch (*cp) {
-		case 1:
-			if(!m_bIsSafeAttackMode) AddEventList(NOTIFY_MSG_HANDLER50, 10);//"
-			m_bIsSafeAttackMode = TRUE;
-			break;
-		case 0:
-			if(m_bIsSafeAttackMode) AddEventList(NOTIFY_MSG_HANDLER51, 10);//"
-			m_bIsSafeAttackMode = FALSE;
-			break;
-		}
-		break;
-
-	case NOTIFY_IPACCOUNTINFO:
-		ZeroMemory(cTemp, sizeof(cTemp));
-		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
-		strcpy(cTemp, cp);
-		AddEventList(cTemp);
-		break;
-
-	case NOTIFY_REWARDGOLD:
-		dwp = (DWORD *)(pData + INDEX2_MSGTYPE + 2);
-		m_iRewardGold = *dwp;
-		break;
-
-	case NOTIFY_SERVERSHUTDOWN:
-		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
-		if (m_bIsDialogEnabled[25] == FALSE)
-			 EnableDialogBox(25, *cp, NULL, NULL);
-		else m_stDialogBoxInfo[25].cMode = *cp;
-		PlaySound('E', 27, NULL);
-		break;
-
-	case NOTIFY_GLOBALATTACKMODE:
-		NotifyMsg_GlobalAttackMode(pData);
-		break;
-
-	case NOTIFY_WHETHERCHANGE:
-		NotifyMsg_WhetherChange(pData);
-		break;
-
-	case NOTIFY_FISHCANCELED:
-		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
-		wp = (WORD *)cp;
-		switch (*wp) {
-		case NULL:
-			AddEventList(NOTIFY_MSG_HANDLER52, 10);
-			DisableDialogBox(24);
-			break;
-
-		case 1:
-			AddEventList(NOTIFY_MSG_HANDLER53, 10);
-			DisableDialogBox(24);
-			break;
-
-		case 2:
-			AddEventList(NOTIFY_MSG_HANDLER54, 10);
-			DisableDialogBox(24);
-			break;
-		}
-		break;
-
-	case NOTIFY_FISHSUCCESS:
-		AddEventList(NOTIFY_MSG_HANDLER55, 10);
-		PlaySound('E', 23, 5);
-		PlaySound('E', 17, 5);
-		switch (m_sPlayerType) {
-		case 1:
-		case 2:
-		case 3:
-			PlaySound('C', 21, 0);
-			break;
-
-		case 4:
-		case 5:
-		case 6:
-			PlaySound('C', 22, 0);
-			break;
-		}
-		break;
-
-	case NOTIFY_FISHFAIL:
-		AddEventList(NOTIFY_MSG_HANDLER56, 10);
-		PlaySound('E', 24, 5);
-		break;
-
-	case NOTIFY_FISHCHANCE:
-		NotifyMsg_FishChance(pData);
-		break;
-
-	case NOTIFY_EVENTFISHMODE:
-		NotifyMsg_EventFishMode(pData);
-		break;
-
-	case NOTIFY_NOTICEMSG:
-		NotifyMsg_NoticeMsg(pData);
-		break;
-
-	case NOTIFY_RATINGPLAYER:
-		NotifyMsg_RatingPlayer(pData);
-		break;
-
-	case NOTIFY_CANNOTRATING:
-		NotifyMsg_CannotRating(pData);
-		break;
-
-	case NOTIFY_ADMINUSERLEVELLOW:
-		AddEventList(NOTIFY_MSG_HANDLER58, 10);
-		break;
-
-	case NOTIFY_NOGUILDMASTERLEVEL:
-		AddEventList(NOTIFY_MSG_HANDLER59, 10);
-		break;
-	case NOTIFY_SUCCESSBANGUILDMAN:
-		AddEventList(NOTIFY_MSG_HANDLER60, 10);
-		break;
-	case NOTIFY_CANNOTBANGUILDMAN:
-		AddEventList(NOTIFY_MSG_HANDLER61, 10);
-		break;
-
-	case NOTIFY_PLAYERSHUTUP:
-		NotifyMsg_PlayerShutUp(pData);
-		break;
-
-	case NOTIFY_TIMECHANGE:
-		NotifyMsg_TimeChange(pData);
-		break;
-
-	case NOTIFY_TOBERECALLED:
-		AddEventList(NOTIFY_MSG_HANDLER62, 10);
-		break;
-
-	case NOTIFY_HUNGER:
-		NotifyMsg_Hunger(pData);
-		break;
-
-	case NOTIFY_PLAYERPROFILE:
-		NotifyMsg_PlayerProfile(pData);
-		break;
-
-	case NOTIFY_WHISPERMODEON:
-		NotifyMsg_WhisperMode(TRUE, pData);
-		break;
-
-	case NOTIFY_WHISPERMODEOFF:
-		NotifyMsg_WhisperMode(FALSE, pData);
-		break;
-
-	case NOTIFY_PLAYERONGAME:
-		NotifyMsg_PlayerStatus(TRUE, pData);
-		break;
-
-	case NOTIFY_PLAYERNOTONGAME:
-		NotifyMsg_PlayerStatus(FALSE, pData);
-		break;
-
-	case NOTIFY_CHARISMA:
-		NotifyMsg_Charisma(pData);
-		break;
-
-	case NOTIFY_ITEMSOLD:
-		DisableDialogBox(23);
-		break;
-
-	case NOTIFY_ITEMREPAIRED:
-		DisableDialogBox(23);
-		NotifyMsg_ItemRepaired(pData);
-		break;
-
-	case NOTIFY_CANNOTREPAIRITEM:
-		NotifyMsg_CannotRepairItem(pData);
-		break;
-
-	case NOTIFY_CANNOTSELLITEM:
-		NotifyMsg_CannotSellItem(pData);
-		break;
-
-	case NOTIFY_REPAIRITEMPRICE:
-		NotifyMsg_RepairItemPrice(pData);
-		break;
-
-	case NOTIFY_SELLITEMPRICE:
-		NotifyMsg_SellItemPrice(pData);
-		break;
-
-	case NOTIFY_SHOWMAP:
-		NotifyMsg_ShowMap(pData);
-		break;
-
-	case NOTIFY_SKILLUSINGEND:
-		NotifyMsg_SkillUsingEnd(pData);
-		break;
-
-	case NOTIFY_TOTALUSERS:
-		NotifyMsg_TotalUsers(pData);
-		break;
-
-	case NOTIFY_MAGICEFFECTOFF:
-		NotifyMsg_MagicEffectOff(pData);
-		break;
-
-	case NOTIFY_MAGICEFFECTON:
-		NotifyMsg_MagicEffectOn(pData);
-		break;
-
-	case NOTIFY_CANNOTITEMTOBANK:
-		AddEventList(NOTIFY_MSG_HANDLER63, 10);
-		break;
-
-	case NOTIFY_SERVERCHANGE:
-		NotifyMsg_ServerChange(pData);
-		break;
-
-	case NOTIFY_SKILL:
-		NotifyMsg_Skill(pData);
-		break;
-
-	case NOTIFY_SETITEMCOUNT:
-		NotifyMsg_SetItemCount(pData);
-		break;
-
-	case NOTIFY_ITEMDEPLETED_ERASEITEM:
-		NotifyMsg_ItemDepleted_EraseItem(pData);
-		break;
-
-	case NOTIFY_DROPITEMFIN_ERASEITEM:
-		NotifyMsg_DropItemFin_EraseItem(pData);
-		break;
-
-	case NOTIFY_GIVEITEMFIN_ERASEITEM:
-		NotifyMsg_GiveItemFin_EraseItem(pData);
-		break;
-
-	case NOTIFY_ENEMYKILLREWARD:
-		NotifyMsg_EnemyKillReward(pData);
-		break;
-
-	case NOTIFY_PKCAPTURED:
-		NotifyMsg_PKcaptured(pData);
-		break;
-
-	case NOTIFY_PKPENALTY:
-		NotifyMsg_PKpenalty(pData);
-		break;
-
-	case NOTIFY_ITEMTOBANK:
-		NotifyMsg_ItemToBank(pData);
-		break;
-
-	case NOTIFY_TRAVELERLIMITEDLEVEL:
-		AddEventList(NOTIFY_MSG_HANDLER64, 10);
-		break;
-
-	case NOTIFY_LIMITEDLEVEL:
-		AddEventList(NOTIFYMSG_LIMITED_LEVEL1, 10);
-		break;
-
-	case NOTIFY_ITEMLIFESPANEND:
-		NotifyMsg_ItemLifeSpanEnd(pData);
-		break;
-
-	case NOTIFY_ITEMRELEASED:
-		NotifyMsg_ItemReleased(pData);
-		break;
-
-	case NOTIFY_ITEMOBTAINED:
-		NotifyMsg_ItemObtained(pData);
-		break;
-
-	case NOTIFY_ITEMPURCHASED:
-		NotifyMsg_ItemPurchased(pData);
-		break;
-
-	case NOTIFY_QUERY_JOINGUILDREQPERMISSION:
-		NotifyMsg_QueryJoinGuildPermission(pData);
-		break;
-
-	case NOTIFY_QUERY_DISMISSGUILDREQPERMISSION:
-		NotifyMsg_QueryDismissGuildPermission(pData);
-		break;
-
-	case COMMONTYPE_JOINGUILDAPPROVE:
-		NotifyMsg_JoinGuildApprove(pData);
-		break;
-
-	case COMMONTYPE_JOINGUILDREJECT:
-		NotifyMsg_JoinGuildReject(pData);
-		break;
-
-	case COMMONTYPE_DISMISSGUILDAPPROVE:
-		NotifyMsg_DismissGuildApprove(pData);
-		break;
-
-	case COMMONTYPE_DISMISSGUILDREJECT:
-		NotifyMsg_DismissGuildReject(pData);
-		break;
-
-	case NOTIFY_CANNOTCARRYMOREITEM:
-		AddEventList(NOTIFY_MSG_HANDLER65, 10);//"
-		AddEventList(NOTIFY_MSG_HANDLER66, 10);//"
-		// Bank dialog Box
-		m_stDialogBoxInfo[14].cMode = 0;
-		break;
-
-	case NOTIFY_NOTENOUGHGOLD:
-		DisableDialogBox(23);
-		AddEventList(NOTIFY_MSG_HANDLER67, 10);//"Gold
-		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
-		if (*cp >= 0) {
-			m_bIsItemDisabled[*cp] = FALSE;
-		}
-		break;
-
-	case NOTIFY_HP:
-		NotifyMsg_HP(pData);
-		break;
-	case NOTIFY_MP:
-		NotifyMsg_MP(pData);
-		break;
-	case NOTIFY_SP:
-		NotifyMsg_SP(pData);
-		break;
-	case NOTIFY_KILLED:
-		NotifyMsg_Killed(pData);
-		break;
-	case NOTIFY_EXP:
-		NotifyMsg_Exp(pData);
-		break;
-	case NOTIFY_GUILDDISBANDED:
-		NotifyMsg_GuildDisbanded(pData);
-		break;
-	case NOTIFY_CANNOTJOINMOREGUILDSMAN:
-		NotifyMsg_CannotJoinMoreGuildsMan(pData);
-		break;
-	case NOTIFY_NEWGUILDSMAN:
-		NotifyMsg_NewGuildsMan(pData);
-		break;
-	case NOTIFY_DISMISSGUILDSMAN:
-		NotifyMsg_DismissGuildsMan(pData);
-		break;
-	case NOTIFY_MAGICSTUDYSUCCESS:
-		NotifyMsg_MagicStudySuccess(pData);
-		break;
-	case NOTIFY_MAGICSTUDYFAIL:
-		NotifyMsg_MagicStudyFail(pData);
-		break;
-	case NOTIFY_SKILLTRAINSUCCESS:
-		NotifyMsg_SkillTrainSuccess(pData);
-		break;
-	case NOTIFY_SKILLTRAINFAIL:
-		break;
-	case NOTIFY_FORCEDISCONN:
-		NotifyMsg_ForceDisconn(pData);
-		break;
-	case NOTIFY_FIGHTZONERESERVE:
+//
+//	case NOTIFY_SLATE_BERSERK:		// reversed by Snoopy: 0x0BED
+//		AddEventList( MSG_NOTIFY_SLATE_BERSERK, 10 );//"Berserk magic casted!"
+//		m_bUsingSlate = TRUE;
+//		break;
+//	
+//	case NOTIFY_LOTERY_LOST:		// reversed by Snoopy: 0x0BEE:	
+//		AddEventList( MSG_NOTIFY_LOTERY_LOST, 10 );//"You draw a blank. Please try again next time.."
+//		break;
+//
+//	case NOTIFY_0BEF:				// 0x0BEF: // Snoopy: Crash or closes the client? (Calls SE entry !)
+//		// I'm noot sure at all of this function's result, so let's quit game...
+//		
+//		break;
+//
+//	case NOTIFY_CRAFTING_SUCCESS:	//reversed by Snoopy: 0x0BF0:
+//		m_iContribution -= m_iContributionPrice;
+//		m_iContributionPrice = 0;
+//		DisableDialogBox(25);
+//		AddEventList(NOTIFY_MSG_HANDLER42, 10);		// "Item manufacture success!"
+//		PlaySound('E', 23, 5);
+//		switch (m_sPlayerType) {
+//		case 1:
+//		case 2:
+//		case 3:
+//			PlaySound('C', 21, 0);
+//			break;
+//		case 4:
+//		case 5:
+//		case 6:
+//			PlaySound('C', 22, 0);
+//			break;
+//		}
+//		break;
+//
+//	case NOTIFY_CRAFTING_FAIL:		//reversed by Snoopy: 0x0BF1:
+//		m_iContributionPrice = 0;
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		ip = (int *)cp;
+//		iV1 = *ip; // Error reason
+//		switch (iV1) {
+//		case 1: 
+//			AddEventList(MSG_NOTIFY_CRAFTING_NO_PART, 10);		// "There is not enough material"		
+//			PlaySound('E', 24, 5);
+//			break;
+//		case 2: 
+//			AddEventList(MSG_NOTIFY_CRAFTING_NO_CONTRIB, 10);	// "There is not enough Contribution Point"	
+//			PlaySound('E', 24, 5);
+//			break;
+//		default:
+//		case 3: 
+//			AddEventList(MSG_NOTIFY_CRAFTING_FAILED, 10);		// "Crafting failed"	
+//			PlaySound('E', 24, 5);
+//			break;
+//		}
+//		break;
+//
+//	case NOTIFY_ANGELIC_STATS:		// reversed by Snoopy: 0x0BF2
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		ip = (int *)cp;
+//		m_iAngelicStr = *ip;  // m_iAngelicStr
+//		cp +=4;
+//		ip = (int *)cp;
+//		m_iAngelicInt = *ip;  // m_iAngelicInt
+//		cp +=4;
+//		ip = (int *)cp;
+//		m_iAngelicDex = *ip;  // m_iAngelicDex
+//		cp +=4;
+//		ip = (int *)cp;
+//		m_iAngelicMag = *ip;  // m_iAngelicMag
+//		break;			
+//
+//	case NOTIFY_ITEM_CANT_RELEASE:	// reversed by Snoopy: 0x0BF3	
+//		AddEventList(MSG_NOTIFY_NOT_RELEASED , 10 );//"Item cannot be released"			
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		ItemEquipHandler(*cp);
+//		break;
+//
+//	case NOTIFY_ANGEL_FAILED:		// reversed by Snoopy: 0x0BF4
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		ip = (int *)cp;
+//		iV1 = *ip; // Error reason
+//		switch (iV1) {
+//		case 1: // "BFB9BBF3C4A120BECAC0BA20B9F6B1D7C0D4B4CFB4D92E20A4D02E2EA4D0" (Stolen bytes ?)
+//			AddEventList(MSG_NOTIFY_ANGEL_FAILED , 10 ); //"Impossible to get a Tutelary Angel." // Invented by Snoopy.
+//			break;
+//		case 2: //
+//			AddEventList(MSG_NOTIFY_ANGEL_MAJESTIC , 10 );//"You need additional Majesty Points."
+//			break;
+//		case 3: //
+//			AddEventList(MSG_NOTIFY_ANGEL_LOW_LVL , 10 ); //"Only Majesty characters can receive Tutelary Angel"
+//			break;
+//		}
+//		break;
+//
+//	case NOTIFY_ANGEL_RECEIVED:		// reversed by Snoopy: 0x0BF5:	
+//		AddEventList(MSG_NOTIFY_ANGEL_RECEIVED, 10 );// "You have received the Tutelary Angel."
+//		break;
+//
+//	case NOTIFY_SPELL_SKILL:		// reversed by Snoopy: 0x0BF6
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		for (i = 0; i < MAXMAGICTYPE; i++)
+//		{	m_cMagicMastery[i] = *cp;
+//			cp++;
+//		}
+//		for (i = 0; i < MAXSKILLTYPE; i++)
+//		{	m_cSkillMastery[i] = (unsigned char)*cp;
+//			if (m_pSkillCfgList[i] != NULL)
+//				m_pSkillCfgList[i]->m_iLevel = (int)*cp;
+//			cp++;
+//		}
+//		break;	
+//
+//	case NOTIFY_NORECALL: // Snoopy 0x0BD1
+//		AddEventList( "You can not recall in this map.", 10 );
+//		break;
+//
+//	case NOTIFY_APOCGATESTARTMSG: // Snoopy 0x0BD2
+//		SetTopMsg("The portal to the Apocalypse is opened.", 10);
+//		break;
+//
+//	case NOTIFY_APOCGATEENDMSG: // Snoopy 0x0BD3
+//		SetTopMsg("The portal to the Apocalypse is closed.", 10);
+//		break;
+//
+//	case NOTIFY_APOCGATEOPEN: // Snoopy ;  Case BD4 of switch 00454077
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		ip  = (int *)cp;
+//		m_iGatePositX = *ip;
+//		cp += 4;
+//		ip  = (int *)cp;
+//		m_iGatePositY = *ip;
+//		cp += 4;
+//		ZeroMemory(m_cGateMapName, sizeof(m_cGateMapName));
+//		memcpy(m_cGateMapName, cp, 10);
+//		cp += 10;
+//		break;
+//
+//	case NOTIFY_QUESTCOUNTER: // Snoopy;  Case BE2 of switch 00454077
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		ip  = (int *)cp;
+//		m_stQuest.sCurrentCount = (short)*ip;
+//		cp += 4;
+//		break;
+//
+//	case NOTIFY_MONSTERCOUNT: // Snoopy ;  Case BE3 of switch 00454077
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp  = (short *)cp;
+//		sV1 = *sp;
+//		cp+=2;
+//		wsprintf(cTxt,"Rest Monster :%d", sV1) ;
+//		AddEventList(cTxt, 10);
+//		break;
+//
+//	case NOTIFY_APOCGATECLOSE: // Snoopy ;  Case BD5 of switch 00454077
+//		m_iGatePositX = m_iGatePositY = -1;
+//		ZeroMemory(m_cGateMapName, sizeof(m_cGateMapName));
+//		break;
+//
+//	case NOTIFY_APOCFORCERECALLPLAYERS: // Snoopy ;  Case BD7 of switch 00454077
+//		AddEventList( "You are recalled by force, because the Apocalypse is started.", 10 );
+//		break;
+//
+//	case NOTIFY_ABADDONKILLED: // Snoopy ;  Case BD6 of switch 00454077
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		ZeroMemory(cTxt, sizeof(cTxt));
+//		memcpy(cTxt, cp, 10);
+//		cp += 10;
+//		wsprintf(G_cTxt, "Abaddon is destroyed by %s", cTxt);
+//		AddEventList(G_cTxt, 10);
+//		break;
+//
+//	case NOTIFY_0BE5: // Snoopy Abaddon's related? Thunder?;  Case BE5 of switch 00454077
+///*00454255  |> B8 01000000    MOV EAX,1         ;  Case BE5 of switch 00454077
+//0045425A  |. 5F             POP EDI
+//0045425B  |. 8985 D8380700  MOV DWORD PTR SS:[EBP+738D8],EAX
+//00454261  |. 8985 DC380700  MOV DWORD PTR SS:[EBP+738DC],EAX
+//00454267  |. 8B85 88250700  MOV EAX,DWORD PTR SS:[EBP+72588]
+//0045426D  |. 5E             POP ESI
+//0045426E  |. 8985 E0380700  MOV DWORD PTR SS:[EBP+738E0],EAX
+//00454274  |. 5D             POP EBP
+//00454275  |. 5B             POP EBX
+//00454276  |. 81C4 10080000  ADD ESP,810
+//0045427C  |. C2 0400        RETN 4*/
+//
+//		break;
+//
+//	case NOTIFY_RESURRECTPLAYER: // Case BE9 of switch 00454077
+//				EnableDialogBox(50, 0, NULL, NULL);
+//		break;
+//
+//	case NOTIFY_HELDENIANTELEPORT: //;  Case BE6 of switch 00454077
+//		SetTopMsg("Teleport to Heldenian field is available from now. Magic casting is forbidden until real battle.", 10);
+//		break;
+//
+//	case NOTIFY_HELDENIANEND: //    ;  Case BE7 of switch 00454077
+//		SetTopMsg("Heldenian holy war has been closed.", 10);
+//		break;
+//
+//	case NOTIFY_0BE8: // ;  Case BE8 of switch 00454077
+//		SetTopMsg("Characters will be recalled by force as Heldenian begins.", 10);
+//		break;
+//
+//	case NOTIFY_HELDENIANSTART: //  Case BEA of switch 00454077
+//		SetTopMsg("Heldenian real battle has been started form now on.", 10);
+//		break;
+//
+//	case NOTIFY_HELDENIANVICTORY: // Case BEB of switch 00454077
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp  = (short *)cp;
+//		sV1 = *sp;
+//		cp+=2;
+//		ShowHeldenianVictory(sV1);
+//		m_iHeldenianAresdenLeftTower	= -1;
+//		m_iHeldenianElvineLeftTower		= -1;
+//		m_iHeldenianAresdenFlags		= -1;
+//		m_iHeldenianElvineFlags			= -1;
+//		break;
+//
+//	case NOTIFY_HELDENIANCOUNT: // Case BEC of switch 00454077
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp  = (short *)cp;
+//		m_iHeldenianAresdenLeftTower = (int)*sp;
+//		cp+=2;
+//		sp  = (short *)cp;
+//		m_iHeldenianElvineLeftTower = (int)*sp;
+//		cp+=2;
+//		sp  = (short *)cp;
+//		m_iHeldenianAresdenFlags = (int)*sp;
+//		cp+=2;
+//		sp  = (short *)cp;
+//		m_iHeldenianElvineFlags = (int)*sp;
+//		cp+=2;
+//		break;
+//
+//	// Slates - Diuuude
+//	case NOTIFY_SLATE_CREATESUCCESS:	// 0x0BC1
+//		AddEventList( MSG_NOTIFY_SLATE_CREATESUCCESS, 10 );
+//		break;
+//	case NOTIFY_SLATE_CREATEFAIL:		// 0x0BC2
+//		AddEventList( MSG_NOTIFY_SLATE_CREATEFAIL, 10 );
+//		break;
+//	case NOTIFY_SLATE_INVINCIBLE:		// 0x0BD8
+//		AddEventList( MSG_NOTIFY_SLATE_INVINCIBLE, 10 );
+//		m_bUsingSlate = TRUE;
+//		break;
+//	case NOTIFY_SLATE_MANA:				// 0x0BD9
+//		AddEventList( MSG_NOTIFY_SLATE_MANA, 10 );
+//		m_bUsingSlate = TRUE;
+//		break;
+//	case NOTIFY_SLATE_EXP:				// 0x0BE0
+//		AddEventList( MSG_NOTIFY_SLATE_EXP, 10 );
+//		m_bUsingSlate = TRUE;
+//		break;
+//	case NOTIFY_SLATE_STATUS:			// 0x0BE1
+//		AddEventList( MSG_NOTIFY_SLATECLEAR, 10 ); // "The effect of the prophecy-slate is disappeared."
+//		m_bUsingSlate = FALSE;
+//		break;
+//
+//	// MJ Stats Change - Diuuude: Erreur, ici il s'agit de sorts et skills, le serveur comme la v351 sont aussi bugués !
+//	case NOTIFY_STATECHANGE_SUCCESS:	// 0x0BB5
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		for (i = 0; i < MAXMAGICTYPE; i++)
+//		{	m_cMagicMastery[i] = *cp;
+//			cp++;
+//		}
+//		for (i = 0; i < MAXSKILLTYPE; i++)
+//		{	m_cSkillMastery[i] = (unsigned char)*cp;
+//			if (m_pSkillCfgList[i] != NULL)
+//				m_pSkillCfgList[i]->m_iLevel = (int)*cp;
+//			//else m_pSkillCfgList[i]->m_iLevel = 0;
+//			cp++;
+//		}
+//		// MJ Stats Change - Diuuude
+//		m_iStr += m_cLU_Str;
+//		m_iVit += m_cLU_Vit;
+//		m_iDex += m_cLU_Dex;
+//		m_iInt += m_cLU_Int;
+//		m_iMag += m_cLU_Mag;
+//		m_iCharisma += m_cLU_Char;
+//		m_iLU_Point = m_iLevel*3 - ((m_iStr + m_iVit + m_iDex + m_iInt + m_iMag + m_iCharisma) - 70) - 3;
+//		m_cLU_Str = m_cLU_Vit = m_cLU_Dex = m_cLU_Int = m_cLU_Mag = m_cLU_Char = 0;
+//		AddEventList( "Your stat has been changed.", 10 ); // "Your stat has been changed."
+//		break;
+//
+//	case NOTIFY_LEVELUP: // 0x0B16
+//		NotifyMsg_LevelUp(pData);
+//		break;
+//
+//	case NOTIFY_STATECHANGE_FAILED:		// 0x0BB6
+//		m_cLU_Str = m_cLU_Vit = m_cLU_Dex = m_cLU_Int = m_cLU_Mag = m_cLU_Char = 0;
+//		m_iLU_Point = m_iLevel*3 - ((m_iStr + m_iVit + m_iDex + m_iInt + m_iMag + m_iCharisma) - 70) - 3;
+//		AddEventList( "Your stat has not been changed.", 10 );
+//		break;
+//
+//	case NOTIFY_SETTING_FAILED: // 0x0BB4 -  Case BB4 of switch 00454077
+//		AddEventList( "Your stat has not been changed.", 10 );
+//		m_cLU_Str = m_cLU_Vit = m_cLU_Dex = m_cLU_Int = m_cLU_Mag = m_cLU_Char = 0;
+//		m_iLU_Point = m_iLevel*3 - ((m_iStr + m_iVit + m_iDex + m_iInt + m_iMag + m_iCharisma) - 70) - 3;
+//		break;
+//
+//	// CLEROTH - LU
+//	case NOTIFY_SETTING_SUCCESS: // 0x0BB3 - envoie le niv et les stats
+//		NotifyMsg_SettingSuccess(pData);
+//		break;
+//
+//	case NOTIFY_AGRICULTURENOAREA:		// 0x0BB2
+//		AddEventList( MSG_NOTIFY_AGRICULTURENOAREA, 10 );
+//		break;
+//	case NOTIFY_AGRICULTURESKILLLIMIT:	// 0x0BB1
+//		AddEventList( MSG_NOTIFY_AGRICULTURESKILLLIMIT, 10 );
+//		break;
+//
+//	case NOTIFY_NOMOREAGRICULTURE:		// 0x0BB0
+//		AddEventList( MSG_NOTIFY_NOMOREAGRICULTURE, 10 );
+//		break;
+//	case NOTIFY_SPAWNEVENT:				// 0x0BAA
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		m_sMonsterID = (short)(*cp);
+//		cp++;
+//		sp  = (short *)cp;
+//		m_sEventX = *sp;
+//		cp+=2;
+//		sp  = (short *)cp;
+//		m_sEventY = *sp;
+//		cp+=2;
+//		m_dwMonsterEventTime = dwTime;
+//		break;
+//
+//	case NOTIFY_CHANGEPLAYMODE:			// 0x0BA9
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		memcpy(m_cLocation, cp, 10);
+//		cp += 10;
+//		if (memcmp(m_cLocation, "aresden", 7) == 0)
+//		{	m_bAresden = TRUE;
+//			m_bCitizen = TRUE;
+//			m_bHunter = FALSE;
+//		}else if (memcmp(m_cLocation, "arehunter", 9) == 0)
+//		{	m_bAresden = TRUE;
+//			m_bCitizen = TRUE;
+//			m_bHunter = TRUE;
+//		}else if (memcmp(m_cLocation, "elvine", 6) == 0)
+//		{	m_bAresden = FALSE;
+//			m_bCitizen = TRUE;
+//			m_bHunter = FALSE;
+//		}else if (memcmp(m_cLocation, "elvhunter", 9) == 0)
+//		{	m_bAresden = FALSE;
+//			m_bCitizen = TRUE;
+//			m_bHunter = TRUE;
+//		}else
+//		{	m_bAresden = TRUE;
+//			m_bCitizen = FALSE;
+//			m_bHunter = TRUE;
+//		}
+//		AddEventList( MSG_GAMEMODE_CHANGED, 10 );
+//		break;
+//
+//	case NOTIFY_REQGUILDNAMEANSWER:	 //   0x0BA6
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp  = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//		sp  = (short *)cp;
+//		sV2 = *sp;
+//		cp += 2;
+//		ZeroMemory(cTemp, sizeof(cTemp));
+//		memcpy(cTemp, cp, 20);
+//		cp += 20;
+//
+//		ZeroMemory( m_stGuildName[sV2].cGuildName, sizeof(m_stGuildName[sV2].cGuildName) );
+//		strcpy(m_stGuildName[sV2].cGuildName, cTemp);
+//		m_stGuildName[sV2].iGuildRank = sV1;
+//		for (i = 0; i < 20; i++) if (m_stGuildName[sV2].cGuildName[i] == '_') m_stGuildName[sV2].cGuildName[i] = ' ';
+//		break;
+//
+//	case NOTIFY_FORCERECALLTIME: // 0x0BA7
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp  = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//		if ( (int)(sV1/20) > 0)
+//			wsprintf(G_cTxt,NOTIFY_MSG_FORCERECALLTIME1,(int) (sV1/20)) ;
+//		else
+//			wsprintf(G_cTxt,NOTIFY_MSG_FORCERECALLTIME2) ;
+//		AddEventList(G_cTxt, 10);
+//		break;
+//
+//	case NOTIFY_GIZONITEMUPGRADELEFT: // 0x0BA4// Item upgrade is possible.
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp  = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//		m_iGizonItemUpgradeLeft = sV1;
+//		dwp = (DWORD *)cp;
+//		switch (*dwp) {
+//		case 1: //
+//			AddEventList(NOTIFY_MSG_HANDLER_GIZONITEMUPGRADELEFT1, 10);
+//			break;
+//		}
+//		//wsprintf(G_cTxt,"majesty: %d", m_iGizonItemUpgradeLeft);
+//		//DebugLog(G_cTxt);
+//		cp += 4;
+//		break;
+//
+//	case NOTIFY_GIZONEITEMCHANGE: // 0x0BA5
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp  = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//		m_pItemList[sV1]->m_cItemType = *cp ;
+//		cp++ ;
+//		wp  = (WORD *)cp;
+//		m_pItemList[sV1]->m_wCurLifeSpan = *wp;
+//		cp += 2;
+//		sp  = (short *)cp;
+//		m_pItemList[sV1]->m_sSprite = *sp;
+//		cp += 2;
+//		sp  = (short *)cp;
+//		m_pItemList[sV1]->m_sSpriteFrame = *sp;
+//		cp += 2;
+//		m_pItemList[sV1]->m_cItemColor = *cp ;
+//		cp++ ;
+//		m_pItemList[sV1]->m_sItemSpecEffectValue2 = *cp ;
+//		cp++ ;
+//		dwp = (DWORD *) cp ;
+//		m_pItemList[sV1]->m_dwAttribute =  *dwp ;
+//		cp +=4 ;
+//		ZeroMemory( m_pItemList[sV1]->m_cName, sizeof(m_pItemList[sV1]->m_cName) );
+//		memcpy(m_pItemList[sV1]->m_cName,cp,20) ;
+//		cp += 20 ;
+//		if (m_bIsDialogEnabled[34] == TRUE)
+//		{	m_stDialogBoxInfo[34].cMode = 3; // succes
+//		}
+//		PlaySound('E', 23, 5);
+//		switch (m_sPlayerType) {
+//		case 1:
+//		case 2:
+//		case 3:
+//			PlaySound('C', 21, 0);
+//			break;
+//
+//		case 4:
+//		case 5:
+//		case 6:
+//			PlaySound('C', 22, 0);
+//			break;
+//		}
+//		break;
+//
+//	case NOTIFY_ITEMATTRIBUTECHANGE: // 0x0BA3
+//	case 0x0BC0: // 0x0BC0 Unknown msg, but real in client v3.51
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp  = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//		dwTemp = m_pItemList[sV1]->m_dwAttribute;
+//		dwp  = (DWORD *)cp;
+//		m_pItemList[sV1]->m_dwAttribute = *dwp;
+//		cp += 4;
+//		dwp  = (DWORD *)cp;
+//		if (*dwp != 0) m_pItemList[sV1]->m_sItemSpecEffectValue1 = (short)*dwp;
+//		cp += 4;
+//		dwp  = (DWORD *)cp;
+//		if (*dwp != 0) m_pItemList[sV1]->m_sItemSpecEffectValue2 = (short)*dwp;
+//		cp += 4;
+//		if (dwTemp == m_pItemList[sV1]->m_dwAttribute)
+//		{	if (m_bIsDialogEnabled[34] == TRUE)
+//			{	m_stDialogBoxInfo[34].cMode = 4;// Failed
+//			}
+//			PlaySound('E', 24, 5);
+//		}else
+//		{	if (m_bIsDialogEnabled[34] == TRUE)
+//			{	m_stDialogBoxInfo[34].cMode = 3; // Success
+//			}
+//			PlaySound('E', 23, 5);
+//			switch (m_sPlayerType) {
+//			case 1:
+//			case 2:
+//			case 3:
+//				PlaySound('C', 21, 0);
+//				break;
+//			case 4:
+//			case 5:
+//			case 6:
+//				PlaySound('C', 22, 0);
+//				break;
+//		}	}
+//		break;
+//
+//	case NOTIFY_ITEMUPGRADEFAIL:
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp  = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//		if (m_bIsDialogEnabled[34] == FALSE) return ;
+//		PlaySound('E', 24, 5);
+//		switch(sV1){
+//		case 1:
+//			m_stDialogBoxInfo[34].cMode = 8 ; // Failed
+//			break ;
+//		case 2:
+//			m_stDialogBoxInfo[34].cMode = 9 ; // Failed
+//			break ;
+//		case 3:
+//			m_stDialogBoxInfo[34].cMode = 10 ; // Failed
+//			break ;
+//		}
+//		break;
+//
+//	case NOTIFY_PARTY:
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp  = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//		sp  = (short *)cp;
+//		sV2 = *sp;
+//		cp += 2;
+//		sp  = (short *)cp;
+//		sV3 = *sp;
+//		cp += 2;
+//		switch (sV1) {
+//		case 1: //
+//			switch (sV2) {
+//			case 0:
+//				EnableDialogBox(32, NULL, NULL, NULL);
+//				m_stDialogBoxInfo[32].cMode = 9;
+//				break;
+//
+//			case 1:
+//				m_iPartyStatus = 1;
+//				m_iTotalPartyMember = NULL;
+//				EnableDialogBox(32, NULL, NULL, NULL);
+//				m_stDialogBoxInfo[32].cMode = 8;
+//				for (i = 0; i < MAXPARTYMEMBERS; i++) ZeroMemory(m_stPartyMemberNameList[i].cName, sizeof(m_stPartyMemberNameList[i].cName));
+//				//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_JOINPARTY, NULL, 2, NULL, NULL, m_cMCName);
+//				break;
+//			}
+//			break;
+//
+//		case 2: //
+//			m_iPartyStatus = 0;
+//			m_iTotalPartyMember = NULL;
+//			EnableDialogBox(32, NULL, NULL, NULL);
+//			m_stDialogBoxInfo[32].cMode = 10;
+//			for (i = 0; i < MAXPARTYMEMBERS; i++) ZeroMemory(m_stPartyMemberNameList[i].cName, sizeof(m_stPartyMemberNameList[i].cName));
+//			break;
+//
+//		case 4:
+//			ZeroMemory(cTxt, sizeof(cTxt));
+//			memcpy(cTxt, cp, 10);
+//			cp += 10;
+//
+//			switch (sV2) {
+//			case 0: //
+//				EnableDialogBox(32, NULL, NULL, NULL);
+//				m_stDialogBoxInfo[32].cMode = 9;
+//				break;
+//
+//			case 1: //
+//				if (strcmp(cTxt, m_cPlayerName) == 0) {
+//					m_iPartyStatus = 2;
+//					EnableDialogBox(32, NULL, NULL, NULL);
+//					m_stDialogBoxInfo[32].cMode = 8;
+//				}
+//				else {
+//					wsprintf(G_cTxt, NOTIFY_MSG_HANDLER1, cTxt);
+//					AddEventList(G_cTxt, 10);
+//				}
+//
+//				m_iTotalPartyMember++;
+//				for (i = 0; i < MAXPARTYMEMBERS; i++)
+//				if (strlen(m_stPartyMemberNameList[i].cName) == 0) {
+//					ZeroMemory(m_stPartyMemberNameList[i].cName, sizeof(m_stPartyMemberNameList[i].cName));
+//					memcpy(m_stPartyMemberNameList[i].cName, cTxt, 10);
+//					goto NMH_LOOPBREAK1;
+//				}
+//NMH_LOOPBREAK1:;
+//				break;
+//
+//			case 2: //
+//				break;
+//			}
+//			break;
+//
+//		case 5: //
+//			m_iTotalPartyMember = NULL;
+//			for (i = 0; i < MAXPARTYMEMBERS; i++) ZeroMemory(m_stPartyMemberNameList[i].cName, sizeof(m_stPartyMemberNameList[i].cName));
+//
+//			m_iTotalPartyMember = sV3;
+//			for (i = 1; i <= sV3; i++) {
+//				ZeroMemory(m_stPartyMemberNameList[i-1].cName, sizeof(m_stPartyMemberNameList[i-1].cName));
+//				memcpy(m_stPartyMemberNameList[i-1].cName, cp, 10);
+//				cp += 11;
+//			}
+//			break;
+//
+//		default:
+//			sp  = (short *)cp;
+//			sV4 = *sp;
+//			cp += 2;
+//			break;
+//
+//		case 6:
+//			ZeroMemory(cTxt, sizeof(cTxt));
+//			memcpy(cTxt, cp, 10);
+//			cp += 10;
+//
+//			switch (sV2) {
+//			case 0: //
+//				EnableDialogBox(32, NULL, NULL, NULL);
+//				m_stDialogBoxInfo[32].cMode = 7;
+//				break;
+//
+//			case 1: //
+//				if (strcmp(cTxt, m_cPlayerName) == 0) {
+//					m_iPartyStatus = 0;
+//					EnableDialogBox(32, NULL, NULL, NULL);
+//					m_stDialogBoxInfo[32].cMode = 6;
+//				}
+//				else {
+//					wsprintf(G_cTxt, NOTIFY_MSG_HANDLER2 , cTxt);
+//					AddEventList(G_cTxt, 10);
+//				}
+//				for (i = 0; i < MAXPARTYMEMBERS; i++)
+//				if (strcmp(m_stPartyMemberNameList[i].cName, cTxt) == 0) {
+//					ZeroMemory(m_stPartyMemberNameList[i].cName, sizeof(m_stPartyMemberNameList[i].cName));
+//					m_iTotalPartyMember--;
+//					goto NMH_LOOPBREAK2;
+//				}
+//NMH_LOOPBREAK2:;
+//				break;
+//			}
+//			break;
+//
+//		case 7: //
+//			EnableDialogBox(32, NULL, NULL, NULL);
+//			m_stDialogBoxInfo[32].cMode = 9;
+//			break;
+//
+//		case 8: //
+//			m_iPartyStatus = 0;
+//			m_iTotalPartyMember = NULL;
+//			for (i = 0; i < MAXPARTYMEMBERS; i++) ZeroMemory(m_stPartyMemberNameList[i].cName, sizeof(m_stPartyMemberNameList[i].cName));
+//			break;
+//		}
+//		break;
+//
+//	case NOTIFY_CANNOTCONSTRUCT:
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//
+//		sp  = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//
+//		CannotConstruct(sV1);
+//		PlaySound('E', 25, 0, 0);
+//		break;
+//
+//	case NOTIFY_TCLOC:
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//
+//		sp  = (short *)cp;
+//		m_iTeleportLocX = *sp;
+//		cp += 2;
+//
+//		sp  = (short *)cp;
+//		m_iTeleportLocY = *sp;
+//		cp += 2;
+//
+//		ZeroMemory(m_cTeleportMapName, sizeof(m_cTeleportMapName));
+//		memcpy(m_cTeleportMapName, cp, 10);
+//		cp += 10;
+//
+//		sp  = (short *)cp;
+//		m_iConstructLocX = *sp;
+//		cp += 2;
+//
+//		sp  = (short *)cp;
+//		m_iConstructLocY = *sp;
+//		cp += 2;
+//
+//		ZeroMemory(m_cConstructMapName, sizeof(m_cConstructMapName));
+//		memcpy(m_cConstructMapName, cp, 10);
+//		cp += 10;
+//		break;
+//
+//	case NOTIFY_CONSTRUCTIONPOINT:
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//
+//		sp  = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//
+//		sp  = (short *)cp;
+//		sV2 = *sp;
+//		cp += 2;
+//
+//		sp  = (short *)cp;
+//		sV3 = *sp;
+//		cp += 2;
+//
+//		if (sV3 == 0) {
+//			if ((sV1 > m_iConstructionPoint) && (sV2 > m_iWarContribution)) {
+//				wsprintf(G_cTxt, "%s +%d, %s +%d", m_pGameMsgList[13]->m_pMsg, (sV1 - m_iConstructionPoint), m_pGameMsgList[21]->m_pMsg, (sV2 - m_iWarContribution));
+//				SetTopMsg(G_cTxt, 5);
+//				PlaySound('E', 23, 0, 0);
+//			}
+//
+//			if ((sV1 > m_iConstructionPoint) && (sV2 == m_iWarContribution)) {
+//				if (m_iCrusadeDuty == 3) {
+//					wsprintf(G_cTxt, "%s +%d", m_pGameMsgList[13]->m_pMsg, sV1 - m_iConstructionPoint);
+//					SetTopMsg(G_cTxt, 5);
+//					PlaySound('E', 23, 0, 0);
+//				}
+//			}
+//
+//			if ((sV1 == m_iConstructionPoint) && (sV2 > m_iWarContribution)) {
+//				wsprintf(G_cTxt, "%s +%d", m_pGameMsgList[21]->m_pMsg, sV2 - m_iWarContribution);
+//				SetTopMsg(G_cTxt, 5);
+//				PlaySound('E', 23, 0, 0);
+//			}
+//
+//			if (sV1 < m_iConstructionPoint) {
+//				if (m_iCrusadeDuty == 3) {
+//					wsprintf(G_cTxt, "%s -%d", m_pGameMsgList[13]->m_pMsg, m_iConstructionPoint - sV1);
+//					SetTopMsg(G_cTxt, 5);
+//					PlaySound('E', 25, 0, 0);
+//				}
+//			}
+//
+//			if (sV2 < m_iWarContribution) {
+//				wsprintf(G_cTxt, "%s -%d", m_pGameMsgList[21]->m_pMsg, m_iWarContribution - sV2);
+//				SetTopMsg(G_cTxt, 5);
+//				PlaySound('E', 24, 0, 0);
+//			}
+//		}
+//
+//		m_iConstructionPoint = sV1;
+//		m_iWarContribution   = sV2;
+//		break;
+//
+//	case NOTIFY_NOMORECRUSADESTRUCTURE:
+//		SetTopMsg(m_pGameMsgList[12]->m_pMsg, 5);
+//		PlaySound('E', 25, 0, 0);
+//		break;
+//
+//	case NOTIFY_GRANDMAGICRESULT:
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//
+//		wp  = (WORD *)cp;
+//		sV1 = *wp;
+//		cp += 2;
+//
+//		wp  = (WORD *)cp;
+//		sV2 = *wp;
+//		cp += 2;
+//
+//		wp  = (WORD *)cp;
+//		sV3 = *wp;
+//		cp += 2;
+//
+//		ZeroMemory(cTxt, sizeof(cTxt));
+//		memcpy(cTxt, cp, 10);
+//		cp += 10;
+//
+//		wp  = (WORD *)cp;
+//		sV4 = *wp;
+//		cp += 2;
+//
+//		wp  = (WORD *)cp;
+//		sV5 = *wp;  //
+//		cp += 2;
+//
+//		if (sV5  > 0 ) {
+//			wp  = (WORD *)cp;
+//			sV6 = *wp;
+//			cp += 2;
+//			sV5-- ;
+//		}
+//		else sV6 = 0 ;
+//
+//		if ( sV5  > 0 ) {
+//			wp  = (WORD *)cp;
+//			sV7 = *wp;
+//			cp += 2;
+//			sV5-- ;
+//		}
+//		else sV7 = 0 ;
+//
+//		if ( sV5  > 0 ) {
+//			wp  = (WORD *)cp;
+//			sV8 = *wp;
+//			cp += 2;
+//			sV5-- ;
+//		}
+//		else sV8 = 0 ;
+//
+//		if ( sV5  > 0 ) {
+//			wp  = (WORD *)cp;
+//			sV9 = *wp;
+//			cp += 2;
+//			sV5-- ;
+//		}
+//		else sV9 = 0 ;
+//
+//		GrandMagicResult(cTxt, sV1, sV2, sV3, sV4, sV6, sV7, sV8, sV9);
+//		break;
+//
+//	case NOTIFY_METEORSTRIKECOMING:
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		wp  = (WORD *)cp;
+//		sV1 = *wp;
+//		cp += 2;
+//		MeteorStrikeComing(sV1);
+//		PlaySound('E', 25, 0, 0);
+//		break;
+//
+//	case NOTIFY_METEORSTRIKEHIT:
+//		SetTopMsg(m_pGameMsgList[17]->m_pMsg, 5);
+//		//StartMeteorStrikeEffect
+//		for( i=0 ; i<36 ; i++ ) bAddNewEffect(60, m_sViewPointX +(rand() % 640), m_sViewPointY +(rand() % 480), NULL, NULL, -(rand() % 80));
+//		break;
+//
+//	case NOTIFY_MAPSTATUSNEXT:
+//		AddMapStatusInfo(pData, FALSE);
+//		break;
+//
+//	case NOTIFY_MAPSTATUSLAST:
+//		AddMapStatusInfo(pData, TRUE);
+//		break;
+//
+//	case NOTIFY_LOCKEDMAP:
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//
+//		ZeroMemory(cTemp, sizeof(cTemp));
+//		ZeroMemory(cTxt, sizeof(cTxt));
+//		memcpy(cTxt, cp, 10);
+//		cp += 10;
+//
+//		GetOfficialMapName(cTxt, cTemp);
+//		wsprintf( G_cTxt, NOTIFY_MSG_HANDLER3, sV1, cTemp );
+//		SetTopMsg(G_cTxt, 10);
+//		PlaySound('E', 25, 0, 0);
+//		break;
+//
+//	case NOTIFY_CRUSADE: // Crusade msg
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		ip = (int *)cp;
+//		iV1 = *ip; // Crusademode
+//		cp += 4;
+//		ip = (int *)cp;
+//		iV2 = *ip; // crusade duty
+//		cp += 4;
+//		ip = (int *)cp;
+//		iV3 = *ip;
+//		cp += 4;
+//		ip = (int *)cp;
+//		iV4 = *ip;
+//		cp += 4;
+//		if (m_bIsCrusadeMode == FALSE)
+//		{	if (iV1 != 0) // begin crusade
+//			{	m_bIsCrusadeMode = TRUE;
+//				m_iCrusadeDuty = iV2;
+//				if( (m_iCrusadeDuty != 3) && (m_bCitizen==TRUE) )
+//					_RequestMapStatus("middleland", 3);
+//				if (m_iCrusadeDuty != NULL)
+//					 EnableDialogBox(33, 2, iV2, NULL);
+//				else EnableDialogBox(33, 1, NULL, NULL);
+//				if( m_bCitizen == FALSE ) EnableDialogBox(18, 800, NULL, NULL);
+//				else if( m_bAresden == TRUE ) EnableDialogBox(18, 801, NULL, NULL);
+//				else if( m_bAresden == FALSE ) EnableDialogBox(18, 802, NULL, NULL);
+//				if (m_bCitizen == FALSE) SetTopMsg(NOTIFY_MSG_CRUSADESTART_NONE, 10);
+//				else SetTopMsg(m_pGameMsgList[9]->m_pMsg, 10);
+//				PlaySound('E', 25, 0, 0);
+//			}
+//			if (iV3 != 0) // Crusade finished, show XP result screen
+//			{	CrusadeContributionResult(iV3);
+//			}
+//			if (iV4 == -1) // The crusade you played in was finished.
+//			{	CrusadeContributionResult(0); // You connect in this crusade, but did not connect after previous one => no XP....
+//			}
+//		}else
+//		{	if (iV1 == 0) // crusade finished show result (1st result: winner)
+//			{	m_bIsCrusadeMode = FALSE;
+//				m_iCrusadeDuty   = NULL;
+//				CrusadeWarResult(iV4);
+//				SetTopMsg(m_pGameMsgList[57]->m_pMsg, 8);
+//			}else
+//			{	if (m_iCrusadeDuty != iV2)
+//				{	m_iCrusadeDuty = iV2;
+//					EnableDialogBox(33, 2, iV2, NULL);
+//					PlaySound('E', 25, 0, 0);
+//			}	}
+//			if (iV4 == -1)
+//			{	CrusadeContributionResult(0); // You connect in this crusade, but did not connect after previous one => no XP....
+//		}	}
+//		break;
+//
+//	case NOTIFY_SPECIALABILITYSTATUS:
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//		sp = (short *)cp;
+//		sV2 = *sp;
+//		cp += 2;
+//		sp = (short *)cp;
+//		sV3 = *sp;
+//		cp += 2;
+//		if (sV1 == 1) // Use SA
+//		{	PlaySound('E', 35, 0);
+//			AddEventList(NOTIFY_MSG_HANDLER4, 10); // "Use special ability!"
+//			switch (sV2) {
+//			case 1: wsprintf(G_cTxt, NOTIFY_MSG_HANDLER5,sV3); break;//"You are untouchable for %d seconds!"
+//			case 2: wsprintf(G_cTxt, NOTIFY_MSG_HANDLER6, sV3); break;//"
+//			case 3: wsprintf(G_cTxt, NOTIFY_MSG_HANDLER7, sV3); break;//"
+//			case 4: wsprintf(G_cTxt, NOTIFY_MSG_HANDLER8, sV3); break;//"
+//			case 5: wsprintf(G_cTxt, NOTIFY_MSG_HANDLER9, sV3); break;//"
+//			case 50:wsprintf(G_cTxt, NOTIFY_MSG_HANDLER10, sV3); break;//"
+//			case 51:wsprintf(G_cTxt, NOTIFY_MSG_HANDLER11, sV3); break;//"
+//			case 52:wsprintf(G_cTxt, NOTIFY_MSG_HANDLER12, sV3); break;//"
+//			case 55: // Spell effect
+//				if (sV3 >90)
+//					wsprintf(G_cTxt, "You cast a powerfull incantation, you can't use it again before %d minutes.", sV3/60);
+//				else
+//					wsprintf(G_cTxt, "You cast a powerfull incantation, you can't use it again before %d seconds.", sV3);
+//				break;
+//			}
+//			AddEventList(G_cTxt, 10);
+//		}else if (sV1 == 2) // Finished using
+//		{	if (m_iSpecialAbilityType != (int)sV2)
+//			{	PlaySound('E', 34, 0);
+//				AddEventList(NOTIFY_MSG_HANDLER13, 10);//"Special ability has been set!"
+//				if (sV3 >= 60)
+//				{	switch (sV2) {
+//					case 1: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER14, sV3/60); AddEventList(G_cTxt, 10); break;//"Ability that decreases enemy's HP by 50%: Can use after %dMin"
+//					case 2: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER15, sV3/60); AddEventList(G_cTxt, 10); break;//"
+//					case 3: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER16, sV3/60); AddEventList(G_cTxt, 10); break;//"
+//					case 4: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER17, sV3/60); AddEventList(G_cTxt, 10); break;//"
+//					case 5: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER18, sV3/60); AddEventList(G_cTxt, 10); break;//"
+//					case 50:wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER19, sV3/60); AddEventList(G_cTxt, 10); break;//"
+//					case 51:wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER20, sV3/60); AddEventList(G_cTxt, 10); break;//"
+//					case 52:wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER21, sV3/60); AddEventList(G_cTxt, 10); break;//"
+//					}
+//				}else
+//				{	switch (sV2) {
+//					case 1: wsprintf(G_cTxt, NOTIFY_MSG_HANDLER22, sV3); AddEventList(G_cTxt, 10); break;//"
+//					case 2: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER23, sV3); AddEventList(G_cTxt, 10); break;//"
+//					case 3: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER24, sV3); AddEventList(G_cTxt, 10); break;//"
+//					case 4: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER25, sV3); AddEventList(G_cTxt, 10); break;//"
+//					case 5: wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER26, sV3); AddEventList(G_cTxt, 10); break;//"
+//					case 50:wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER27, sV3); AddEventList(G_cTxt, 10); break;//"
+//					case 51:wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER28, sV3); AddEventList(G_cTxt, 10); break;//"
+//					case 52:wsprintf(G_cTxt,  NOTIFY_MSG_HANDLER29, sV3); AddEventList(G_cTxt, 10); break;//""Ability that makes character untouchable: Can use after %dSec"
+//			}	}	}
+//			m_iSpecialAbilityType = (int)sV2;
+//			m_dwSpecialAbilitySettingTime = dwTime;
+//			m_iSpecialAbilityTimeLeftSec  = (int)sV3;
+//		}else if (sV1 == 3)  // End of using time
+//		{	m_bIsSpecialAbilityEnabled = FALSE;
+//			m_dwSpecialAbilitySettingTime = dwTime;
+//			if (sV3 == 0)
+//			{	m_iSpecialAbilityTimeLeftSec  = 1200;
+//				AddEventList(NOTIFY_MSG_HANDLER30, 10);//"Special ability has run out! Will be available in 20 minutes."
+//			}else
+//			{	m_iSpecialAbilityTimeLeftSec  = (int)sV3;
+//				if (sV3 >90)
+//					 wsprintf(G_cTxt, "Special ability has run out! Will be available in %d minutes." , sV3/60);
+//				else wsprintf(G_cTxt, "Special ability has run out! Will be available in %d seconds." , sV3);
+//				AddEventList(G_cTxt, 10);
+//			}
+//		}else if (sV1 == 4) // Unequiped the SA item
+//		{	AddEventList(NOTIFY_MSG_HANDLER31, 10);//"Special ability has been released."
+//			m_iSpecialAbilityType = 0;
+//		}else if (sV1 == 5) // Angel
+//		{	PlaySound('E', 52, 0); // Angel
+//		}
+//		break;
+//
+//	case NOTIFY_SPECIALABILITYENABLED:
+//		if (m_bIsSpecialAbilityEnabled == FALSE) {
+//			PlaySound('E', 30, 5);
+//			AddEventList(NOTIFY_MSG_HANDLER32, 10);//"
+//		}
+//		m_bIsSpecialAbilityEnabled = TRUE;
+//		break;
+//
+//	case NOTIFY_ENERGYSPHEREGOALIN:
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//		sp = (short *)cp;
+//		sV2 = *sp;
+//		cp += 2;
+//		sp = (short *)cp;
+//		sV3 = *sp;
+//		cp += 2;
+//		ZeroMemory(cTxt, sizeof(cTxt));
+//		memcpy(cTxt, cp, 20);
+//
+//		if (sV2 == sV3)
+//		{	PlaySound('E', 24, 0);
+//			if (strcmp(cTxt, m_cPlayerName) == 0)
+//			{	AddEventList(NOTIFY_MSG_HANDLER33, 10);//You pushed energy sphere to enemy's energy portal! Contribution point will be decreased by 10 points."
+//				m_iContribution += sV1; // fixed, server must match...
+//				m_iContributionPrice = 0;
+//				if (m_iContribution < 0) m_iContribution = 0;
+//			}
+//			else {
+//				ZeroMemory(G_cTxt, sizeof(G_cTxt));
+//				if( m_bAresden == TRUE ) wsprintf(G_cTxt, NOTIFY_MSG_HANDLER34, cTxt);//"%s(Aresden) pushed energy sphere to enemy's portal!!..."
+//				else if (m_bAresden == FALSE) wsprintf(G_cTxt, NOTIFY_MSG_HANDLER34_ELV, cTxt);//"%s(Elvine) pushed energy sphere to enemy's portal!!..."
+//				AddEventList(G_cTxt, 10);
+//			}
+//		}else
+//		{	PlaySound('E', 23, 0);
+//			if (strcmp(cTxt, m_cPlayerName) == 0)
+//			{	switch (m_sPlayerType) {
+//				case 1:
+//				case 2:
+//				case 3:	PlaySound('C', 21, 0); break;
+//				case 4:
+//				case 5:
+//				case 6:	PlaySound('C', 22, 0); break;
+//				}
+//				AddEventList(NOTIFY_MSG_HANDLER35, 10);//"Congulaturations! You brought energy sphere to energy portal and earned experience and prize gold!"
+//
+//				m_iContribution += 5;
+//				if (m_iContribution < 0) m_iContribution = 0;
+//			}else
+//			{	ZeroMemory(G_cTxt, sizeof(G_cTxt));
+//				if (sV3 == 1)
+//				{	wsprintf(G_cTxt, NOTIFY_MSG_HANDLER36, cTxt);//"Elvine %s : Goal in!"
+//					AddEventList(G_cTxt, 10);
+//				}else if (sV3 == 2)
+//				{	wsprintf(G_cTxt, NOTIFY_MSG_HANDLER37, cTxt);//"Aresden %s : Goal in!"
+//					AddEventList(G_cTxt, 10);
+//		}	}	}
+//		break;
+//
+//	case NOTIFY_ENERGYSPHERECREATED:
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//		sp = (short *)cp;
+//		sV2 = *sp;
+//		cp += 2;
+//		ZeroMemory(G_cTxt, sizeof(G_cTxt));
+//		wsprintf(G_cTxt, NOTIFY_MSG_HANDLER38, sV1, sV2);//"Energy sphere was dropped in (%d, %d) of middleland!"
+//		AddEventList(G_cTxt, 10);
+//		AddEventList(NOTIFY_MSG_HANDLER39, 10);//"A player who pushed energy sphere to the energy portal of his city will earn many Exp and Contribution."
+//		break;
+//
+//	case NOTIFY_QUERY_JOINPARTY:
+//		EnableDialogBox(32, NULL, NULL, NULL);
+//		m_stDialogBoxInfo[32].cMode = 1;
+//		ZeroMemory(m_stDialogBoxInfo[32].cStr, sizeof(m_stDialogBoxInfo[32].cStr));
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		strcpy(m_stDialogBoxInfo[32].cStr, cp);
+//		break;
+//
+//	case NOTIFY_RESPONSE_CREATENEWPARTY:
+//		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
+//		sp = (short *)cp;
+//
+//		if ((BOOL)*sp == TRUE)
+//		{	m_stDialogBoxInfo[32].cMode = 2;
+//		}else
+//		{	m_stDialogBoxInfo[32].cMode = 3;
+//		}
+//		break;
+//
+//	case NOTIFY_DAMAGEMOVE:
+//		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
+//		sp = (short *)cp;
+//		m_sDamageMove = *sp;
+//		cp += 2;
+//		sp = (short *)cp;
+//		m_sDamageMoveAmount = *sp;
+//		cp += 2;
+//		break;
+//
+//	case NOTIFY_OBSERVERMODE:
+//		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
+//		sp = (short *)cp;
+//		if (*sp == 1)
+//		{	AddEventList(NOTIFY_MSG_HANDLER40);//"Observer Mode On. Press 'SHIFT + ESC' to Log Out..."
+//			m_bIsObserverMode = TRUE;
+//			m_dwObserverCamTime = timeGetTime();
+//			char cName[12];
+//			ZeroMemory(cName, sizeof(cName));
+//			memcpy(cName, m_cPlayerName, 10);
+//			m_pMapData->bSetOwner(m_sPlayerObjectID, -1, -1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, cName, NULL, NULL, NULL, NULL);
+//		}else
+//		{	AddEventList(NOTIFY_MSG_HANDLER41);//"Observer Mode Off"
+//			m_bIsObserverMode = FALSE;
+//			m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir, m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor, m_iPlayerStatus, m_cPlayerName, OBJECTSTOP, NULL, NULL, NULL);
+//		}
+//		break;
+//
+//	case NOTIFY_BUILDITEMSUCCESS:
+//		DisableDialogBox(26);
+//		cp = (char *)(pData	+ INDEX2_MSGTYPE + 2);
+//		sp = (short *)cp;
+//		sV1 = *sp;
+//		cp += 2;
+//		sp = (short *)cp;
+//		sV2 = *sp;
+//		cp += 2;
+//		if (sV1 < 10000)
+//		{	EnableDialogBox(26, 6, 1, sV1, NULL);
+//			m_stDialogBoxInfo[26].sV1 = sV2;
+//		}else
+//		{	EnableDialogBox(26, 6, 1, -1*(sV1 - 10000), NULL);
+//			m_stDialogBoxInfo[26].sV1 = sV2;
+//		}
+//		AddEventList(NOTIFY_MSG_HANDLER42, 10);
+//		PlaySound('E', 23, 5);
+//		switch (m_sPlayerType) {
+//		case 1:
+//		case 2:
+//		case 3:
+//			PlaySound('C', 21, 0);
+//			break;
+//
+//		case 4:
+//		case 5:
+//		case 6:
+//			PlaySound('C', 22, 0);
+//			break;
+//		}
+//		break;
+//
+//	case NOTIFY_BUILDITEMFAIL:
+//		DisableDialogBox(26);
+//		EnableDialogBox(26, 6, 0, NULL);
+//		AddEventList(NOTIFY_MSG_HANDLER43, 10);
+//		PlaySound('E', 24, 5);
+//		break;
+//
+//	case NOTIFY_QUESTREWARD:
+//		NotifyMsg_QuestReward(pData);
+//		break;
+//
+//	case NOTIFY_QUESTCOMPLETED:
+//		m_stQuest.bIsQuestCompleted = TRUE;
+//		DisableDialogBox(28);
+//		EnableDialogBox(28, 1, NULL, NULL);
+//		switch (m_sPlayerType) {
+//		case 1:
+//		case 2:
+//		case 3:	PlaySound('C', 21, 0); break;
+//		case 4:
+//		case 5:
+//		case 6:	PlaySound('C', 22, 0); break;
+//		}
+//		PlaySound('E', 23, 0);
+//		AddEventList(NOTIFY_MSG_HANDLER44, 10);
+//		break;
+//
+//	case NOTIFY_QUESTABORTED:
+//		m_stQuest.sQuestType = NULL;
+//		DisableDialogBox(28);
+//		EnableDialogBox(28, 2, NULL, NULL);
+//		break;
+//
+//	case NOTIFY_QUESTCONTENTS:
+//		NotifyMsg_QuestContents(pData);
+//		break;
+//
+//	case NOTIFY_ITEMCOLORCHANGE:
+//		NotifyMsg_ItemColorChange(pData);
+//		break;
+//
+//	case NOTIFY_DROPITEMFIN_COUNTCHANGED:
+//		NotifyMsg_DropItemFin_CountChanged(pData);
+//		break;
+//
+//	case NOTIFY_CANNOTGIVEITEM:
+//		NotifyMsg_CannotGiveItem(pData);
+//		break;
+//
+//	case NOTIFY_GIVEITEMFIN_COUNTCHANGED:
+//		NotifyMsg_GiveItemFin_CountChanged(pData);
+//		break;
+//
+//	case NOTIFY_EXCHANGEITEMCOMPLETE:
+//		AddEventList(NOTIFYMSG_EXCHANGEITEM_COMPLETE1, 10);
+//		DisableDialogBox(27);
+//		//Snoopy: MultiTrade
+//		DisableDialogBox(41);
+//		PlaySound('E', 23, 5);
+//		break;
+//
+//	case NOTIFY_CANCELEXCHANGEITEM:
+//		PlaySound('E', 24, 5);
+//		AddEventList(NOTIFYMSG_CANCEL_EXCHANGEITEM1, 10);
+//		AddEventList(NOTIFYMSG_CANCEL_EXCHANGEITEM2, 10);
+//		//Snoopy: MultiTrade
+//		DisableDialogBox(41);
+//		DisableDialogBox(27);
+//		break;
+//
+//	case NOTIFY_SETEXCHANGEITEM:
+//		NotifyMsg_SetExchangeItem(pData);
+//		break;
+//
+//	case NOTIFY_OPENEXCHANGEWINDOW:
+//		NotifyMsg_OpenExchageWindow(pData);
+//		break;
+//
+//	case NOTIFY_NOTFLAGSPOT:
+//		AddEventList(NOTIFY_MSG_HANDLER45, 10);
+//		break;
+//
+//	case NOTIFY_ITEMPOSLIST:
+//		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
+//		for (i = 0; i < MAXITEMS; i++) {
+//			sp = (short *)cp;
+//			sX = *sp;
+//			cp += 2;
+//			sp = (short *)cp;
+//			sY = *sp;
+//			cp += 2;
+//			if (m_pItemList[i] != NULL) {
+//				if (sY < -10) sY = -10;
+//				if (sX < 0)   sX = 0;
+//				if (sX > 170) sX = 170;
+//				if (sY > 95)  sY = 95;
+//
+//				m_pItemList[i]->m_sX = sX;
+//				m_pItemList[i]->m_sY = sY;
+//			}
+//		}
+//		break;
+//
+//	case NOTIFY_ENEMYKILLS:
+//		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
+//		ip = (int *)cp;
+//		m_iEnemyKillCount = *ip;
+//		break;
+//
+//	case NOTIFY_DOWNSKILLINDEXSET:
+//		NotifyMsg_DownSkillIndexSet(pData);
+//		break;
+//
+//	case NOTIFY_ADMINIFO:
+//		NotifyMsg_AdminInfo(pData);
+//		break;
+//
+//	case NOTIFY_NPCTALK:
+//		NpcTalkHandler(pData);
+//		break;
+//
+//	case NOTIFY_POTIONSUCCESS:
+//		AddEventList(NOTIFY_MSG_HANDLER46, 10);
+//		break;
+//
+//	case NOTIFY_POTIONFAIL:
+//		AddEventList(NOTIFY_MSG_HANDLER47, 10);
+//		break;
+//
+//	case NOTIFY_LOWPOTIONSKILL:
+//		AddEventList(NOTIFY_MSG_HANDLER48, 10);
+//		break;
+//
+//	case NOTIFY_NOMATCHINGPOTION:
+//		AddEventList(NOTIFY_MSG_HANDLER49, 10);
+//		break;
+//
+//	case NOTIFY_SUPERATTACKLEFT:
+//		sp = (short *)(pData + INDEX2_MSGTYPE + 2);
+//		m_iSuperAttackLeft = (int)*sp;
+//		break;
+//
+//	case NOTIFY_SAFEATTACKMODE:
+//		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
+//		switch (*cp) {
+//		case 1:
+//			if(!m_bIsSafeAttackMode) AddEventList(NOTIFY_MSG_HANDLER50, 10);//"
+//			m_bIsSafeAttackMode = TRUE;
+//			break;
+//		case 0:
+//			if(m_bIsSafeAttackMode) AddEventList(NOTIFY_MSG_HANDLER51, 10);//"
+//			m_bIsSafeAttackMode = FALSE;
+//			break;
+//		}
+//		break;
+//
+//	case NOTIFY_IPACCOUNTINFO:
+//		ZeroMemory(cTemp, sizeof(cTemp));
+//		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
+//		strcpy(cTemp, cp);
+//		AddEventList(cTemp);
+//		break;
+//
+//	case NOTIFY_REWARDGOLD:
+//		dwp = (DWORD *)(pData + INDEX2_MSGTYPE + 2);
+//		m_iRewardGold = *dwp;
+//		break;
+//
+//	case NOTIFY_SERVERSHUTDOWN:
+//		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
+//		if (m_bIsDialogEnabled[25] == FALSE)
+//			 EnableDialogBox(25, *cp, NULL, NULL);
+//		else m_stDialogBoxInfo[25].cMode = *cp;
+//		PlaySound('E', 27, NULL);
+//		break;
+//
+//	case NOTIFY_GLOBALATTACKMODE:
+//		NotifyMsg_GlobalAttackMode(pData);
+//		break;
+//
+//	case NOTIFY_WHETHERCHANGE:
+//		NotifyMsg_WhetherChange(pData);
+//		break;
+//
+//	case NOTIFY_FISHCANCELED:
+//		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
+//		wp = (WORD *)cp;
+//		switch (*wp) {
+//		case NULL:
+//			AddEventList(NOTIFY_MSG_HANDLER52, 10);
+//			DisableDialogBox(24);
+//			break;
+//
+//		case 1:
+//			AddEventList(NOTIFY_MSG_HANDLER53, 10);
+//			DisableDialogBox(24);
+//			break;
+//
+//		case 2:
+//			AddEventList(NOTIFY_MSG_HANDLER54, 10);
+//			DisableDialogBox(24);
+//			break;
+//		}
+//		break;
+//
+//	case NOTIFY_FISHSUCCESS:
+//		AddEventList(NOTIFY_MSG_HANDLER55, 10);
+//		PlaySound('E', 23, 5);
+//		PlaySound('E', 17, 5);
+//		switch (m_sPlayerType) {
+//		case 1:
+//		case 2:
+//		case 3:
+//			PlaySound('C', 21, 0);
+//			break;
+//
+//		case 4:
+//		case 5:
+//		case 6:
+//			PlaySound('C', 22, 0);
+//			break;
+//		}
+//		break;
+//
+//	case NOTIFY_FISHFAIL:
+//		AddEventList(NOTIFY_MSG_HANDLER56, 10);
+//		PlaySound('E', 24, 5);
+//		break;
+//
+//	case NOTIFY_FISHCHANCE:
+//		NotifyMsg_FishChance(pData);
+//		break;
+//
+//	case NOTIFY_EVENTFISHMODE:
+//		NotifyMsg_EventFishMode(pData);
+//		break;
+//
+//	case NOTIFY_NOTICEMSG:
+//		NotifyMsg_NoticeMsg(pData);
+//		break;
+//
+//	case NOTIFY_RATINGPLAYER:
+//		NotifyMsg_RatingPlayer(pData);
+//		break;
+//
+//	case NOTIFY_CANNOTRATING:
+//		NotifyMsg_CannotRating(pData);
+//		break;
+//
+//	case NOTIFY_ADMINUSERLEVELLOW:
+//		AddEventList(NOTIFY_MSG_HANDLER58, 10);
+//		break;
+//
+//	case NOTIFY_NOGUILDMASTERLEVEL:
+//		AddEventList(NOTIFY_MSG_HANDLER59, 10);
+//		break;
+//	case NOTIFY_SUCCESSBANGUILDMAN:
+//		AddEventList(NOTIFY_MSG_HANDLER60, 10);
+//		break;
+//	case NOTIFY_CANNOTBANGUILDMAN:
+//		AddEventList(NOTIFY_MSG_HANDLER61, 10);
+//		break;
+//
+//	case NOTIFY_PLAYERSHUTUP:
+//		NotifyMsg_PlayerShutUp(pData);
+//		break;
+//
+//	case NOTIFY_TIMECHANGE:
+//		NotifyMsg_TimeChange(pData);
+//		break;
+//
+//	case NOTIFY_TOBERECALLED:
+//		AddEventList(NOTIFY_MSG_HANDLER62, 10);
+//		break;
+//
+//	case NOTIFY_HUNGER:
+//		NotifyMsg_Hunger(pData);
+//		break;
+//
+//	case NOTIFY_PLAYERPROFILE:
+//		NotifyMsg_PlayerProfile(pData);
+//		break;
+//
+//	case NOTIFY_WHISPERMODEON:
+//		NotifyMsg_WhisperMode(TRUE, pData);
+//		break;
+//
+//	case NOTIFY_WHISPERMODEOFF:
+//		NotifyMsg_WhisperMode(FALSE, pData);
+//		break;
+//
+//	case NOTIFY_PLAYERONGAME:
+//		NotifyMsg_PlayerStatus(TRUE, pData);
+//		break;
+//
+//	case NOTIFY_PLAYERNOTONGAME:
+//		NotifyMsg_PlayerStatus(FALSE, pData);
+//		break;
+//
+//	case NOTIFY_CHARISMA:
+//		NotifyMsg_Charisma(pData);
+//		break;
+//
+//	case NOTIFY_ITEMSOLD:
+//		DisableDialogBox(23);
+//		break;
+//
+//	case NOTIFY_ITEMREPAIRED:
+//		DisableDialogBox(23);
+//		NotifyMsg_ItemRepaired(pData);
+//		break;
+//
+//	case NOTIFY_CANNOTREPAIRITEM:
+//		NotifyMsg_CannotRepairItem(pData);
+//		break;
+//
+//	case NOTIFY_CANNOTSELLITEM:
+//		NotifyMsg_CannotSellItem(pData);
+//		break;
+//
+//	case NOTIFY_REPAIRITEMPRICE:
+//		NotifyMsg_RepairItemPrice(pData);
+//		break;
+//
+//	case NOTIFY_SELLITEMPRICE:
+//		NotifyMsg_SellItemPrice(pData);
+//		break;
+//
+//	case NOTIFY_SHOWMAP:
+//		NotifyMsg_ShowMap(pData);
+//		break;
+//
+//	case NOTIFY_SKILLUSINGEND:
+//		NotifyMsg_SkillUsingEnd(pData);
+//		break;
+//
+//	case NOTIFY_TOTALUSERS:
+//		NotifyMsg_TotalUsers(pData);
+//		break;
+//
+//	case NOTIFY_MAGICEFFECTOFF:
+//		NotifyMsg_MagicEffectOff(pData);
+//		break;
+//
+//	case NOTIFY_MAGICEFFECTON:
+//		NotifyMsg_MagicEffectOn(pData);
+//		break;
+//
+//	case NOTIFY_CANNOTITEMTOBANK:
+//		AddEventList(NOTIFY_MSG_HANDLER63, 10);
+//		break;
+//
+//	case NOTIFY_SERVERCHANGE:
+//		NotifyMsg_ServerChange(pData);
+//		break;
+//
+//	case NOTIFY_SKILL:
+//		NotifyMsg_Skill(pData);
+//		break;
+//
+//	case NOTIFY_SETITEMCOUNT:
+//		NotifyMsg_SetItemCount(pData);
+//		break;
+//
+//	case NOTIFY_ITEMDEPLETED_ERASEITEM:
+//		NotifyMsg_ItemDepleted_EraseItem(pData);
+//		break;
+//
+//	case NOTIFY_DROPITEMFIN_ERASEITEM:
+//		NotifyMsg_DropItemFin_EraseItem(pData);
+//		break;
+//
+//	case NOTIFY_GIVEITEMFIN_ERASEITEM:
+//		NotifyMsg_GiveItemFin_EraseItem(pData);
+//		break;
+//
+//	case NOTIFY_ENEMYKILLREWARD:
+//		NotifyMsg_EnemyKillReward(pData);
+//		break;
+//
+//	case NOTIFY_PKCAPTURED:
+//		NotifyMsg_PKcaptured(pData);
+//		break;
+//
+//	case NOTIFY_PKPENALTY:
+//		NotifyMsg_PKpenalty(pData);
+//		break;
+//
+//	case NOTIFY_ITEMTOBANK:
+//		NotifyMsg_ItemToBank(pData);
+//		break;
+//
+//	case NOTIFY_TRAVELERLIMITEDLEVEL:
+//		AddEventList(NOTIFY_MSG_HANDLER64, 10);
+//		break;
+//
+//	case NOTIFY_LIMITEDLEVEL:
+//		AddEventList(NOTIFYMSG_LIMITED_LEVEL1, 10);
+//		break;
+//
+//	case NOTIFY_ITEMLIFESPANEND:
+//		NotifyMsg_ItemLifeSpanEnd(pData);
+//		break;
+//
+//	case NOTIFY_ITEMRELEASED:
+//		NotifyMsg_ItemReleased(pData);
+//		break;
+//
+//	case NOTIFY_ITEMOBTAINED:
+//		NotifyMsg_ItemObtained(pData);
+//		break;
+//
+//	case NOTIFY_ITEMPURCHASED:
+//		NotifyMsg_ItemPurchased(pData);
+//		break;
+//
+//	case NOTIFY_QUERY_JOINGUILDREQPERMISSION:
+//		NotifyMsg_QueryJoinGuildPermission(pData);
+//		break;
+//
+//	case NOTIFY_QUERY_DISMISSGUILDREQPERMISSION:
+//		NotifyMsg_QueryDismissGuildPermission(pData);
+//		break;
+//
+//	case COMMONTYPE_JOINGUILDAPPROVE:
+//		NotifyMsg_JoinGuildApprove(pData);
+//		break;
+//
+//	case COMMONTYPE_JOINGUILDREJECT:
+//		NotifyMsg_JoinGuildReject(pData);
+//		break;
+//
+//	case COMMONTYPE_DISMISSGUILDAPPROVE:
+//		NotifyMsg_DismissGuildApprove(pData);
+//		break;
+//
+//	case COMMONTYPE_DISMISSGUILDREJECT:
+//		NotifyMsg_DismissGuildReject(pData);
+//		break;
+//
+//	case NOTIFY_CANNOTCARRYMOREITEM:
+//		AddEventList(NOTIFY_MSG_HANDLER65, 10);//"
+//		AddEventList(NOTIFY_MSG_HANDLER66, 10);//"
+//		// Bank dialog Box
+//		m_stDialogBoxInfo[14].cMode = 0;
+//		break;
+//
+//	case NOTIFY_NOTENOUGHGOLD:
+//		DisableDialogBox(23);
+//		AddEventList(NOTIFY_MSG_HANDLER67, 10);//"Gold
+//		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
+//		if (*cp >= 0) {
+//			m_bIsItemDisabled[*cp] = FALSE;
+//		}
+//		break;
+//
+//	case NOTIFY_HP:
+//		NotifyMsg_HP(pData);
+//		break;
+//	case NOTIFY_MP:
+//		NotifyMsg_MP(pData);
+//		break;
+//	case NOTIFY_SP:
+//		NotifyMsg_SP(pData);
+//		break;
+//	case NOTIFY_KILLED:
+//		NotifyMsg_Killed(pData);
+//		break;
+//	case NOTIFY_EXP:
+//		NotifyMsg_Exp(pData);
+//		break;
+//	case NOTIFY_GUILDDISBANDED:
+//		NotifyMsg_GuildDisbanded(pData);
+//		break;
+//	case NOTIFY_CANNOTJOINMOREGUILDSMAN:
+//		NotifyMsg_CannotJoinMoreGuildsMan(pData);
+//		break;
+//	case NOTIFY_NEWGUILDSMAN:
+//		NotifyMsg_NewGuildsMan(pData);
+//		break;
+//	case NOTIFY_DISMISSGUILDSMAN:
+//		NotifyMsg_DismissGuildsMan(pData);
+//		break;
+//	case NOTIFY_MAGICSTUDYSUCCESS:
+//		NotifyMsg_MagicStudySuccess(pData);
+//		break;
+//	case NOTIFY_MAGICSTUDYFAIL:
+//		NotifyMsg_MagicStudyFail(pData);
+//		break;
+//	case NOTIFY_SKILLTRAINSUCCESS:
+//		NotifyMsg_SkillTrainSuccess(pData);
+//		break;
+//	case NOTIFY_SKILLTRAINFAIL:
+//		break;
+//	case NOTIFY_FORCEDISCONN:
+//		NotifyMsg_ForceDisconn(pData);
+//		break;
+	/*case NOTIFY_FIGHTZONERESERVE:
 		cp = (char *)(pData + INDEX2_MSGTYPE + 2);
 		ip = (int *)cp;
 		switch (*ip) {
@@ -26737,6 +26737,7 @@ NMH_LOOPBREAK2:;
 			break;
 		}
 		break;
+		*/
 	}
 }
 
@@ -27138,7 +27139,7 @@ RIH_STEP2:;
 				m_pItemList[cItemIndex] = m_pBankList[cBankItemIndex];
 				m_pItemList[cItemIndex]->m_sX =	nX;
 				m_pItemList[cItemIndex]->m_sY =	nY;
-                bSendCommand(MSGID_REQUEST_SETITEMPOS, NULL, cItemIndex, nX, nY, NULL, NULL);
+                //bSendCommand(MSGID_REQUEST_SETITEMPOS, NULL, cItemIndex, nX, nY, NULL, NULL);
 
 				for (j = 0; j < MAXITEMS; j++)
 				if (m_cItemOrder[j] == -1)
@@ -27372,39 +27373,39 @@ void CGame::DlbBoxDoubleClick_Character(short msX, short msY)
 		}
 	}
 
-	if( cItemID == -1 || m_pItemList[cItemID] == NULL ) return;
-	if ( (m_pItemList[cItemID]->m_cItemType == ITEMTYPE_EAT) || (m_pItemList[cItemID]->m_cItemType == ITEMTYPE_CONSUME) || (m_pItemList[cItemID]->m_cItemType == ITEMTYPE_ARROW) || (m_pItemList[cItemID]->m_dwCount > 1) ) return;
-	if ( (m_bIsDialogEnabled[11]==TRUE) && (m_bIsDialogEnabled[23] == FALSE) && (m_stDialogBoxInfo[39].sV3 == 24))
-		bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_REPAIRITEM, NULL, cItemID, m_stDialogBoxInfo[39].sV3, NULL, m_pItemList[cItemID]->m_cName, m_stDialogBoxInfo[39].sV4); // v1.4
-	else {
-		if (m_bIsItemEquipped[m_stMCursor.sSelectedObjectID] == TRUE) 
-		{	char cStr1[64], cStr2[64], cStr3[64];
-			GetItemName(m_pItemList[m_stMCursor.sSelectedObjectID], cStr1, cStr2, cStr3);
-			ZeroMemory(G_cTxt, sizeof(G_cTxt) );
-			wsprintf(G_cTxt, ITEM_EQUIPMENT_RELEASED, cStr1);//"
-			AddEventList(G_cTxt, 10);
-			if(memcmp(m_pItemList[m_stMCursor.sSelectedObjectID]->m_cName, "AngelicPendant", 14) == 0) PlaySound('E', 53, 0);
-			else PlaySound('E', 29, 0);
+	//if( cItemID == -1 || m_pItemList[cItemID] == NULL ) return;
+	//if ( (m_pItemList[cItemID]->m_cItemType == ITEMTYPE_EAT) || (m_pItemList[cItemID]->m_cItemType == ITEMTYPE_CONSUME) || (m_pItemList[cItemID]->m_cItemType == ITEMTYPE_ARROW) || (m_pItemList[cItemID]->m_dwCount > 1) ) return;
+	//if ( (m_bIsDialogEnabled[11]==TRUE) && (m_bIsDialogEnabled[23] == FALSE) && (m_stDialogBoxInfo[39].sV3 == 24))
+	//	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_REPAIRITEM, NULL, cItemID, m_stDialogBoxInfo[39].sV3, NULL, m_pItemList[cItemID]->m_cName, m_stDialogBoxInfo[39].sV4); // v1.4
+	//else {
+	//	if (m_bIsItemEquipped[m_stMCursor.sSelectedObjectID] == TRUE) 
+	//	{	char cStr1[64], cStr2[64], cStr3[64];
+	//		GetItemName(m_pItemList[m_stMCursor.sSelectedObjectID], cStr1, cStr2, cStr3);
+	//		ZeroMemory(G_cTxt, sizeof(G_cTxt) );
+	//		wsprintf(G_cTxt, ITEM_EQUIPMENT_RELEASED, cStr1);//"
+	//		AddEventList(G_cTxt, 10);
+	//		if(memcmp(m_pItemList[m_stMCursor.sSelectedObjectID]->m_cName, "AngelicPendant", 14) == 0) PlaySound('E', 53, 0);
+	//		else PlaySound('E', 29, 0);
 
-			// Remove Angelic Stats
-			if (   (m_pItemList[m_stMCursor.sSelectedObjectID]->m_cEquipPos >= 11)
-				&& (m_pItemList[m_stMCursor.sSelectedObjectID]->m_cItemType == 1))
-			{	char cItemID = m_stMCursor.sSelectedObjectID;
-				if(memcmp(m_pItemList[cItemID]->m_cName, "AngelicPandent(STR)", 19) == 0)
-				{	m_iAngelicStr = 0; 
-				}else if(memcmp(m_pItemList[cItemID]->m_cName, "AngelicPandent(DEX)", 19) == 0)
-				{	m_iAngelicDex = 0;
-				}else if(memcmp(m_pItemList[cItemID]->m_cName, "AngelicPandent(INT)", 19) == 0)
-				{	m_iAngelicInt = 0;
-				}else if(memcmp(m_pItemList[cItemID]->m_cName, "AngelicPandent(MAG)", 19) == 0)
-				{	m_iAngelicMag = 0;
-			}	}
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_RELEASEITEM, NULL, m_stMCursor.sSelectedObjectID, NULL, NULL, NULL);
-			m_bIsItemEquipped[m_stMCursor.sSelectedObjectID] = FALSE;
-			m_sItemEquipmentStatus[	m_pItemList[m_stMCursor.sSelectedObjectID]->m_cEquipPos ] = -1;
-			m_stMCursor.cSelectedObjectType	= NULL;
-			m_stMCursor.sSelectedObjectID   = NULL;
-	}	}
+	//		// Remove Angelic Stats
+	//		if (   (m_pItemList[m_stMCursor.sSelectedObjectID]->m_cEquipPos >= 11)
+	//			&& (m_pItemList[m_stMCursor.sSelectedObjectID]->m_cItemType == 1))
+	//		{	char cItemID = m_stMCursor.sSelectedObjectID;
+	//			if(memcmp(m_pItemList[cItemID]->m_cName, "AngelicPandent(STR)", 19) == 0)
+	//			{	m_iAngelicStr = 0; 
+	//			}else if(memcmp(m_pItemList[cItemID]->m_cName, "AngelicPandent(DEX)", 19) == 0)
+	//			{	m_iAngelicDex = 0;
+	//			}else if(memcmp(m_pItemList[cItemID]->m_cName, "AngelicPandent(INT)", 19) == 0)
+	//			{	m_iAngelicInt = 0;
+	//			}else if(memcmp(m_pItemList[cItemID]->m_cName, "AngelicPandent(MAG)", 19) == 0)
+	//			{	m_iAngelicMag = 0;
+	//		}	}
+	//		//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_RELEASEITEM, NULL, m_stMCursor.sSelectedObjectID, NULL, NULL, NULL);
+	//		m_bIsItemEquipped[m_stMCursor.sSelectedObjectID] = FALSE;
+	//		m_sItemEquipmentStatus[	m_pItemList[m_stMCursor.sSelectedObjectID]->m_cEquipPos ] = -1;
+	//		m_stMCursor.cSelectedObjectType	= NULL;
+	//		m_stMCursor.sSelectedObjectID   = NULL;
+	//}	}
 }
 
 void CGame::DlbBoxDoubleClick_GuideMap(short msX, short msY)
@@ -27476,7 +27477,7 @@ void CGame::DlbBoxDoubleClick_Inventory(short msX, short msY)
 
 			if ( m_bIsDialogEnabled[11] && (m_bIsDialogEnabled[23] == FALSE) && (m_bIsDialogEnabled[23] == FALSE) && (m_stDialogBoxInfo[39].sV3 == 24) )
 			{	if (m_pItemList[cItemID]->m_cEquipPos != EQUIPPOS_NONE)
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_REPAIRITEM, NULL, cItemID, m_stDialogBoxInfo[39].sV3, NULL, m_pItemList[cItemID]->m_cName, m_stDialogBoxInfo[39].sV4); // v1.4
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_REPAIRITEM, NULL, cItemID, m_stDialogBoxInfo[39].sV3, NULL, m_pItemList[cItemID]->m_cName, m_stDialogBoxInfo[39].sV4); // v1.4
 					return;
 			}	}
 
@@ -27496,7 +27497,7 @@ void CGame::DlbBoxDoubleClick_Inventory(short msX, short msY)
 						AddEventList(G_cTxt, 10);
 						return;
 				}	}
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USEITEM, NULL, cItemID, NULL, NULL, NULL);
+				//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USEITEM, NULL, cItemID, NULL, NULL, NULL);
 
 				if (   (m_pItemList[cItemID]->m_cItemType == ITEMTYPE_USE_DEPLETE)
 					|| (m_pItemList[cItemID]->m_cItemType == ITEMTYPE_EAT) )
@@ -27726,7 +27727,7 @@ void CGame::UpdateScreen_OnChangePassword()
 			//m_pLSock->bConnect(m_cLogServerAddr, m_iLogServerPort, WM_USER_LOGSOCKETEVENT);
 			//m_pLSock->bInitBufferSize(30000);
 			ChangeGameMode(GAMEMODE_ONCONNECTING);
-			m_dwConnectMode = MSGID_REQUEST_CHANGEPASSWORD;
+			//m_dwConnectMode = MSGID_REQUEST_CHANGEPASSWORD;
 			ZeroMemory(m_cMsg, sizeof(m_cMsg));
 			strcpy(m_cMsg, "41");
 			delete pMI;
@@ -27859,7 +27860,7 @@ void CGame::UpdateScreen_OnChangePassword()
 			//m_pLSock->bConnect(m_cLogServerAddr, m_iLogServerPort, WM_USER_LOGSOCKETEVENT);
 			//m_pLSock->bInitBufferSize(30000);
 			ChangeGameMode(GAMEMODE_ONCONNECTING);
-			m_dwConnectMode = MSGID_REQUEST_CHANGEPASSWORD;
+			//m_dwConnectMode = MSGID_REQUEST_CHANGEPASSWORD;
 			ZeroMemory(m_cMsg, sizeof(m_cMsg));
 			strcpy(m_cMsg, "41");
 			delete pMI;
@@ -28039,116 +28040,116 @@ void CGame::DrawNpcName(short sX, short sY, short sOwnerType, int iStatus)
 
 void CGame::DrawObjectName(short sX, short sY, char * pName, int iStatus)
 {	char cTxt[64], cTxt2[64];
-	short sR, sG, sB;
-	int i, iGuildIndex, iFOE, iAddY=0;
-	BOOL bPK, bCitizen, bAresden, bHunter;
-	iFOE = _iGetFOE(iStatus);
-	if( iFOE < 0 )
-	{	sR = 255; sG = 0; sB = 0;
-	}else if( iFOE == 0 )
-	{	sR = 50; sG = 50; sB = 255;
-	}else
-	{	sR = 30; sG = 200; sB = 30;
-	}
-	ZeroMemory(cTxt, sizeof(cTxt));
-	ZeroMemory(cTxt2, sizeof(cTxt2));
-
-	if (m_iIlusionOwnerH == NULL)
-	{	if (m_bIsCrusadeMode == FALSE) wsprintf(cTxt, "%s", pName);
-		else
-		{	if (_tmp_wObjectID >= 10000) strcpy(cTxt, NPC_NAME_MERCENARY); //"Mercenary"
-			else
-			{	if( iFOE == -1 ) wsprintf(cTxt, "%d", _tmp_wObjectID);
-				else strcpy(cTxt, pName);
-		}	}
-		if (m_iPartyStatus != NULL)
-		{	for (i = 0; i < MAXPARTYMEMBERS; i++)
-			{	if (strcmp(m_stPartyMemberNameList[i].cName, pName) == 0)
-				{	strcat(cTxt, BGET_NPC_NAME23); // ", Party Member"
-					break;
-		}	}	}
-	}else strcpy(cTxt, "?????");
-
-	if ((iStatus & 0x20) != 0) strcat(cTxt, DRAW_OBJECT_NAME50);//" Berserk"
-	if ((iStatus & 0x40) != 0) strcat(cTxt, DRAW_OBJECT_NAME51);//" Frozen"
-
-	PutString2(sX, sY, cTxt, 255,255,255);
-	ZeroMemory(cTxt, sizeof(cTxt));
-
-	if( memcmp(m_cPlayerName, pName, 10) == 0 )
-	{	if( m_iGuildRank == 0 )
-		{	wsprintf( G_cTxt, MSG_GUILDMASTER, m_cGuildName );//" Guildmaster)"
-			PutString2(sX, sY+14, G_cTxt, 180,180,180);
-			iAddY = 14;
-		}
-		if( m_iGuildRank > 0 )
-		{	wsprintf( G_cTxt, MSG_GUILDSMAN, m_cGuildName );//" Guildsman)"
-			PutString2(sX, sY+14, G_cTxt, 180,180,180);
-			iAddY = 14;
-		}
-		if( m_iPKCount != 0 )
-		{	bPK = TRUE;
-			sR = 255; sG = 0; sB = 0;
-		}else
-		{	bPK = FALSE;
-			sR = 30; sG = 200; sB = 30;
-		}
-		bCitizen = m_bCitizen;
-		bAresden = m_bAresden;
-		bHunter = m_bHunter;
-	}else
-	{	// CLEROTH - CRASH BUG ( STATUS )
-		if( iStatus & 0x80000000 ) bPK = TRUE;
-		else bPK = FALSE;
-		if( iStatus & 0x40000000 ) bCitizen = TRUE;
-		else bCitizen = FALSE;
-		if( iStatus & 0x20000000 ) bAresden = TRUE;
-		else bAresden = FALSE;
-		if( iStatus & 0x10000000 ) bHunter = TRUE;
-		else bHunter = FALSE;
-		if( m_bIsCrusadeMode==FALSE || iFOE>=0 )
-		{	if( FindGuildName(pName, &iGuildIndex) == TRUE )
-			{	if (m_stGuildName[iGuildIndex].cGuildName[0] != NULL)
-				{	if( strcmp(m_stGuildName[iGuildIndex].cGuildName, "NONE" )!=0 )
-					{	if( m_stGuildName[iGuildIndex].iGuildRank == 0 )
-						{	wsprintf( G_cTxt, MSG_GUILDMASTER, m_stGuildName[iGuildIndex].cGuildName );//
-							PutString2(sX, sY+14, G_cTxt, 180,180,180);
-							m_stGuildName[iGuildIndex].dwRefTime = m_dwCurTime;
-							iAddY = 14;
-						}else if( m_stGuildName[iGuildIndex].iGuildRank > 0 )
-						{	wsprintf( G_cTxt, MSG_GUILDSMAN, m_stGuildName[iGuildIndex].cGuildName );//"
-							PutString2(sX, sY+14, G_cTxt, 180,180,180);
-							m_stGuildName[iGuildIndex].dwRefTime = m_dwCurTime;
-							iAddY = 14;
-						}
-					}else
-					{	m_stGuildName[iGuildIndex].dwRefTime = 0;
-				}	}
-			}else bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQGUILDNAME, NULL, _tmp_wObjectID, iGuildIndex, NULL, NULL);
-	}	}
-
-	if( bCitizen == FALSE )	strcpy(cTxt, DRAW_OBJECT_NAME60);// "Traveller"
-	else
-	{	if( bAresden )
-		{	if( bHunter == TRUE ) strcpy(cTxt, MSG_ARECIVIL); // "Aresden Civilian"
-			else strcpy(cTxt, MSG_ARESOLDIER); // "Aresden Combatant"
-		}else
-		{	if( bHunter == TRUE ) strcpy(cTxt, MSG_ELVCIVIL);// "Elvine Civilian"
-			else strcpy(cTxt, MSG_ELVSOLDIER);	// "Elvine Combatant"
-	}	}
-	if( bPK == TRUE )
-	{	if( bCitizen == FALSE ) strcpy( cTxt, MSG_PK );	//"Criminal"
-		else
-		{	if( bAresden ) strcpy( cTxt, MSG_AREPK );// "Aresden Criminal"
-			else strcpy( cTxt, MSG_ELVPK );  // "Elvine Criminal"
-	}	}
-	PutString2(sX, sY+14 +iAddY, cTxt, sR, sG, sB);
-
-#ifdef _DEBUG
-	wsprintf(cTxt2,"Status: 0x%.8X ",iStatus);
-	PutString2(sX, sY+42, cTxt2, 30,255,30);
-	ZeroMemory(cTxt2, sizeof(cTxt2));
-#endif
+//	short sR, sG, sB;
+//	int i, iGuildIndex, iFOE, iAddY=0;
+//	BOOL bPK, bCitizen, bAresden, bHunter;
+//	iFOE = _iGetFOE(iStatus);
+//	if( iFOE < 0 )
+//	{	sR = 255; sG = 0; sB = 0;
+//	}else if( iFOE == 0 )
+//	{	sR = 50; sG = 50; sB = 255;
+//	}else
+//	{	sR = 30; sG = 200; sB = 30;
+//	}
+//	ZeroMemory(cTxt, sizeof(cTxt));
+//	ZeroMemory(cTxt2, sizeof(cTxt2));
+//
+//	if (m_iIlusionOwnerH == NULL)
+//	{	if (m_bIsCrusadeMode == FALSE) wsprintf(cTxt, "%s", pName);
+//		else
+//		{	if (_tmp_wObjectID >= 10000) strcpy(cTxt, NPC_NAME_MERCENARY); //"Mercenary"
+//			else
+//			{	if( iFOE == -1 ) wsprintf(cTxt, "%d", _tmp_wObjectID);
+//				else strcpy(cTxt, pName);
+//		}	}
+//		if (m_iPartyStatus != NULL)
+//		{	for (i = 0; i < MAXPARTYMEMBERS; i++)
+//			{	if (strcmp(m_stPartyMemberNameList[i].cName, pName) == 0)
+//				{	strcat(cTxt, BGET_NPC_NAME23); // ", Party Member"
+//					break;
+//		}	}	}
+//	}else strcpy(cTxt, "?????");
+//
+//	if ((iStatus & 0x20) != 0) strcat(cTxt, DRAW_OBJECT_NAME50);//" Berserk"
+//	if ((iStatus & 0x40) != 0) strcat(cTxt, DRAW_OBJECT_NAME51);//" Frozen"
+//
+//	PutString2(sX, sY, cTxt, 255,255,255);
+//	ZeroMemory(cTxt, sizeof(cTxt));
+//
+//	if( memcmp(m_cPlayerName, pName, 10) == 0 )
+//	{	if( m_iGuildRank == 0 )
+//		{	wsprintf( G_cTxt, MSG_GUILDMASTER, m_cGuildName );//" Guildmaster)"
+//			PutString2(sX, sY+14, G_cTxt, 180,180,180);
+//			iAddY = 14;
+//		}
+//		if( m_iGuildRank > 0 )
+//		{	wsprintf( G_cTxt, MSG_GUILDSMAN, m_cGuildName );//" Guildsman)"
+//			PutString2(sX, sY+14, G_cTxt, 180,180,180);
+//			iAddY = 14;
+//		}
+//		if( m_iPKCount != 0 )
+//		{	bPK = TRUE;
+//			sR = 255; sG = 0; sB = 0;
+//		}else
+//		{	bPK = FALSE;
+//			sR = 30; sG = 200; sB = 30;
+//		}
+//		bCitizen = m_bCitizen;
+//		bAresden = m_bAresden;
+//		bHunter = m_bHunter;
+//	}else
+//	{	// CLEROTH - CRASH BUG ( STATUS )
+//		if( iStatus & 0x80000000 ) bPK = TRUE;
+//		else bPK = FALSE;
+//		if( iStatus & 0x40000000 ) bCitizen = TRUE;
+//		else bCitizen = FALSE;
+//		if( iStatus & 0x20000000 ) bAresden = TRUE;
+//		else bAresden = FALSE;
+//		if( iStatus & 0x10000000 ) bHunter = TRUE;
+//		else bHunter = FALSE;
+//		if( m_bIsCrusadeMode==FALSE || iFOE>=0 )
+//		{	if( FindGuildName(pName, &iGuildIndex) == TRUE )
+//			{	if (m_stGuildName[iGuildIndex].cGuildName[0] != NULL)
+//				{	if( strcmp(m_stGuildName[iGuildIndex].cGuildName, "NONE" )!=0 )
+//					{	if( m_stGuildName[iGuildIndex].iGuildRank == 0 )
+//						{	wsprintf( G_cTxt, MSG_GUILDMASTER, m_stGuildName[iGuildIndex].cGuildName );//
+//							PutString2(sX, sY+14, G_cTxt, 180,180,180);
+//							m_stGuildName[iGuildIndex].dwRefTime = m_dwCurTime;
+//							iAddY = 14;
+//						}else if( m_stGuildName[iGuildIndex].iGuildRank > 0 )
+//						{	wsprintf( G_cTxt, MSG_GUILDSMAN, m_stGuildName[iGuildIndex].cGuildName );//"
+//							PutString2(sX, sY+14, G_cTxt, 180,180,180);
+//							m_stGuildName[iGuildIndex].dwRefTime = m_dwCurTime;
+//							iAddY = 14;
+//						}
+//					}else
+//					{	m_stGuildName[iGuildIndex].dwRefTime = 0;
+//				}	}
+//			}else bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQGUILDNAME, NULL, _tmp_wObjectID, iGuildIndex, NULL, NULL);
+//	}	}
+//
+//	if( bCitizen == FALSE )	strcpy(cTxt, DRAW_OBJECT_NAME60);// "Traveller"
+//	else
+//	{	if( bAresden )
+//		{	if( bHunter == TRUE ) strcpy(cTxt, MSG_ARECIVIL); // "Aresden Civilian"
+//			else strcpy(cTxt, MSG_ARESOLDIER); // "Aresden Combatant"
+//		}else
+//		{	if( bHunter == TRUE ) strcpy(cTxt, MSG_ELVCIVIL);// "Elvine Civilian"
+//			else strcpy(cTxt, MSG_ELVSOLDIER);	// "Elvine Combatant"
+//	}	}
+//	if( bPK == TRUE )
+//	{	if( bCitizen == FALSE ) strcpy( cTxt, MSG_PK );	//"Criminal"
+//		else
+//		{	if( bAresden ) strcpy( cTxt, MSG_AREPK );// "Aresden Criminal"
+//			else strcpy( cTxt, MSG_ELVPK );  // "Elvine Criminal"
+//	}	}
+//	PutString2(sX, sY+14 +iAddY, cTxt, sR, sG, sB);
+//
+//#ifdef _DEBUG
+//	wsprintf(cTxt2,"Status: 0x%.8X ",iStatus);
+//	PutString2(sX, sY+42, cTxt2, 30,255,30);
+//	ZeroMemory(cTxt2, sizeof(cTxt2));
+//#endif
 }
 
 BOOL CGame::FindGuildName(char* pName, int* ipIndex)
@@ -29249,9 +29250,9 @@ void CGame::_CalcSocketClosed()
 void CGame::PointCommandHandler(int indexX, int indexY, char cItemID)
 {char cTemp[31];
 	if ((m_iPointCommandType >= 100) && (m_iPointCommandType < 200))
-	{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_MAGIC, NULL, indexX, indexY, m_iPointCommandType, NULL);
+	{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_MAGIC, NULL, indexX, indexY, m_iPointCommandType, NULL);
 	}else if ((m_iPointCommandType >= 0) && (m_iPointCommandType < 50))
-	{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USEITEM, NULL, m_iPointCommandType, indexX, indexY, cTemp, cItemID); // v1.4
+	{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USEITEM, NULL, m_iPointCommandType, indexX, indexY, cTemp, cItemID); // v1.4
 
 		if (m_pItemList[m_iPointCommandType]->m_cItemType == ITEMTYPE_USE_SKILL)
 			m_bSkillUsingStatus = TRUE;
@@ -29265,7 +29266,7 @@ void CGame::PointCommandHandler(int indexX, int indexY, char cItemID)
 			PlaySound('E', 14, 5);
 			ZeroMemory(m_stDialogBoxInfo[32].cStr, sizeof(m_stDialogBoxInfo[32].cStr));
 			strcpy(m_stDialogBoxInfo[32].cStr, m_cMCName);
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_JOINPARTY, NULL, 1, NULL, NULL, m_cMCName);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQUEST_JOINPARTY, NULL, 1, NULL, NULL, m_cMCName);
 			return;
 	}	}
 }
@@ -29308,7 +29309,7 @@ void CGame::UpdateScreen_OnGame()
 			m_bEnterPressed = FALSE;
 			if (strlen(m_cGuildName) == 0) return;
 			if (strcmp(m_cGuildName, "NONE") != 0) {
-				bSendCommand(MSGID_REQUEST_CREATENEWGUILD, MSGTYPE_CONFIRM, NULL, NULL, NULL, NULL, NULL);
+				//bSendCommand(MSGID_REQUEST_CREATENEWGUILD, MSGTYPE_CONFIRM, NULL, NULL, NULL, NULL, NULL);
 				m_stDialogBoxInfo[7].cMode = 2;
 				//
 			}
@@ -29429,7 +29430,7 @@ void CGame::UpdateScreen_OnGame()
 								else if (m_stDialogBoxExchangeInfo[3].sV1 == -1)	m_stDialogBoxExchangeInfo[3].sItemID = m_stDialogBoxInfo[17].sV4;
 								else return; // Impossible case, tested at function beginning
 
-								bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SETEXCHANGEITEM, NULL, m_stDialogBoxInfo[17].sV4, iAmount, NULL, NULL);
+								//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_SETEXCHANGEITEM, NULL, m_stDialogBoxInfo[17].sV4, iAmount, NULL, NULL);
 								break;
 
 							case 1001:
@@ -29446,11 +29447,11 @@ void CGame::UpdateScreen_OnGame()
 
 							case 1002:
 								if (_iGetBankItemCount() >= (MAXBANKITEMS-1)) AddEventList(DLGBOX_CLICK_NPCACTION_QUERY9, 10);
-								else bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, m_stDialogBoxInfo[39].sV1, iAmount, m_stDialogBoxInfo[39].sV5, m_stDialogBoxInfo[39].sV6, m_pItemList[m_stDialogBoxInfo[39].sV1]->m_cName, m_stDialogBoxInfo[39].sV4); //v1.4
+								else //bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, m_stDialogBoxInfo[39].sV1, iAmount, m_stDialogBoxInfo[39].sV5, m_stDialogBoxInfo[39].sV6, m_pItemList[m_stDialogBoxInfo[39].sV1]->m_cName, m_stDialogBoxInfo[39].sV4); //v1.4
 								break;
 
 							default:
-								bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, (char)(m_stDialogBoxInfo[17].sView), iAmount, m_stDialogBoxInfo[17].sV1, m_stDialogBoxInfo[17].sV2, m_pItemList[m_stDialogBoxInfo[17].sView]->m_cName);
+								//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, (char)(m_stDialogBoxInfo[17].sView), iAmount, m_stDialogBoxInfo[17].sV1, m_stDialogBoxInfo[17].sV2, m_pItemList[m_stDialogBoxInfo[17].sView]->m_cName);
 								break;
 							}
 							m_bIsItemDisabled[m_stDialogBoxInfo[17].sView] = TRUE;
@@ -29459,7 +29460,7 @@ void CGame::UpdateScreen_OnGame()
 						if (iAmount <= 0)
 						{	AddEventList(UPDATE_SCREEN_ONGAME8, 10);
 						}else
-						{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_ITEMDROP, NULL, m_stDialogBoxInfo[17].sView, iAmount, NULL, m_pItemList[m_stDialogBoxInfo[17].sView]->m_cName);
+						{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_ITEMDROP, NULL, m_stDialogBoxInfo[17].sView, iAmount, NULL, m_pItemList[m_stDialogBoxInfo[17].sView]->m_cName);
 							m_bIsItemDisabled[m_stDialogBoxInfo[17].sView] = TRUE;
 					}	}
 				}else
@@ -29498,7 +29499,7 @@ void CGame::UpdateScreen_OnGame()
 					{	if( (G_cTxt[0]=='!') || (G_cTxt[0]=='~'))
 						{	if( m_Misc.bCheckIMEString(G_cTxt) == FALSE ) return;
 						}
-						bSendCommand(MSGID_COMMAND_CHATMSG, NULL, NULL, NULL, NULL, NULL, G_cTxt);
+						//bSendCommand(MSGID_COMMAND_CHATMSG, NULL, NULL, NULL, NULL, NULL, G_cTxt);
 	}	}	}	}	}
 
 	sVPXsave = m_sViewPointX;
@@ -29694,7 +29695,7 @@ void CGame::UpdateScreen_OnGame()
 	// Restart
 	if (m_cRestartCount == 0)
 	{	m_cRestartCount = -1;
-		bSendCommand(MSGID_REQUEST_RESTART, NULL, NULL, NULL, NULL, NULL, NULL);
+		//bSendCommand(MSGID_REQUEST_RESTART, NULL, NULL, NULL, NULL, NULL, NULL);
 		return;
 	}
 
@@ -29970,1300 +29971,1300 @@ void CGame::MotionResponseHandler(char * pData)
 
 void CGame::CommandProcessor(short msX, short msY, short indexX, short indexY, char cLB, char cRB)
 {
- char   cDir, absX, absY, cName[12];
- short  sX, sY, sObjectType, tX, tY;
- int iObjectStatus;
- int    iRet;
- DWORD  dwTime = timeGetTime();
- WORD   wType = 0;
- int i;//, iFOE;
- char   cTxt[120];
-
- char  pDstName[21];
- short sDstOwnerType;
- int iDstOwnerStatus;
-
- BOOL  bGORet;
- // Fixed by Snoopy
-	if ((m_bIsObserverCommanded == FALSE) && (m_bIsObserverMode == TRUE))
-	{	if ((msX == 0) && (msY == 0) && (m_sViewDstX > 32*21) && (m_sViewDstY > 32*16)) bSendCommand(MSGID_REQUEST_PANNING, NULL, 8, NULL, NULL, NULL, NULL);
-		else
-		if ((msX == 639) && (msY == 0) && (m_sViewDstX < 32*m_pMapData->m_sMapSizeX - 32*21) && (m_sViewDstY > 32*16)) bSendCommand(MSGID_REQUEST_PANNING, NULL, 2, NULL, NULL, NULL, NULL);
-		else
-		if ((msX == 639) && (msY == 479) && (m_sViewDstX < 32*m_pMapData->m_sMapSizeX - 32*21) && (m_sViewDstY < 32*m_pMapData->m_sMapSizeY - 32*16)) bSendCommand(MSGID_REQUEST_PANNING, NULL, 4, NULL, NULL, NULL, NULL);
-		else
-		if ((msX == 0) && (msY == 479)) bSendCommand(MSGID_REQUEST_PANNING, NULL, 6, NULL, NULL, NULL, NULL);
-		else
-		if ((msX == 0) && (m_sViewDstX > 32*21)) bSendCommand(MSGID_REQUEST_PANNING, NULL, 7, NULL, NULL, NULL, NULL);
-		else
-		if ((msX == 639) && (m_sViewDstX < 32*m_pMapData->m_sMapSizeX - 32*21)) bSendCommand(MSGID_REQUEST_PANNING, NULL, 3, NULL, NULL, NULL, NULL);
-		else
-		if ((msY == 0) && (m_sViewDstY > 32*16)) bSendCommand(MSGID_REQUEST_PANNING, NULL, 1, NULL, NULL, NULL, NULL);
-		else
-		if ((msY == 479) && (m_sViewDstY < 32*m_pMapData->m_sMapSizeY - 32*16)) bSendCommand(MSGID_REQUEST_PANNING, NULL, 5, NULL, NULL, NULL, NULL);
-		else return;
-
-		m_bIsObserverCommanded = TRUE;
-		m_cArrowPressed = 0;
-		return;
-	}
-
-	if (m_bIsObserverMode == TRUE) return;
-
-	if (GetAsyncKeyState(VK_MENU)>>15) // [ALT]
-		 m_bSuperAttackMode = TRUE;
-	else m_bSuperAttackMode = FALSE;
-
-	switch (m_stMCursor.cPrevStatus) {
-	case CURSORSTATUS_NULL:
-		if (cLB != 0)
-		{	iRet = _iCheckDlgBoxFocus(msX, msY, 1);
-			if (iRet == 1)
-			{	m_stMCursor.cPrevStatus	= CURSORSTATUS_SELECTED;
-				return;
-			}else if (iRet == 0)
-			{	m_stMCursor.cPrevStatus = CURSORSTATUS_PRESSED;
-				// Snoopy: Added Golden LevelUp
-				if (   (msX >560) && (msX <620) && (msY>390) && (msY<405)
-					&& (m_iLU_Point >0))
-				{	if (m_bIsDialogEnabled[12] != TRUE)
-					{	EnableDialogBox(12, NULL, NULL, NULL);
-						PlaySound('E', 14, 5);
-					}
-					m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
-					return;
-				}
-			}else if (iRet == -1)
-			{	return;
-			}
-		}else if (cRB != 0)
-		{	iRet = _iCheckDlgBoxFocus(msX, msY, 2);
-			if (iRet == 1) return;
-		}
-		break;
-	case CURSORSTATUS_PRESSED:
-		if (cLB == 0) // Normal Click
-		{	m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
-		}
-		break;
-	case CURSORSTATUS_SELECTED:
-		if (cLB == 0)
-		{	if (   ((dwTime - m_stMCursor.dwSelectClickTime) < DOUBLECLICKTIME) 	// Double Click
-				&& (msX == m_stMCursor.sClickX) && (msY == m_stMCursor.sClickY) ) 
-			{	m_stMCursor.dwSelectClickTime = m_stMCursor.dwSelectClickTime;
-				_bCheckDlgBoxDoubleClick(msX, msY);
-			}else // Click
-			{	_bCheckDlgBoxClick(msX, msY);
-				m_stMCursor.sClickX = msX;
-				m_stMCursor.sClickY = msY;
-			}
-			m_stMCursor.dwSelectClickTime = dwTime;
-			m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
-			if (m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_ITEM)
-			{	_bCheckDraggingItemRelease(msX, msY);
-				m_stMCursor.cSelectedObjectType = NULL;
-				m_stMCursor.sSelectedObjectID   = NULL;
-			}
-			return;
-		}
-		if (cLB != 0) 			// v2.05 01-11-30
-		{	if ((m_pMapData->bIsTeleportLoc(m_sPlayerX, m_sPlayerY) == TRUE) && (m_cCommandCount == 0)) goto CP_SKIPMOUSEBUTTONSTATUS;
-
-			if ((m_stMCursor.sPrevX != msX)	|| (m_stMCursor.sPrevY != msY))
-			{	m_stMCursor.cPrevStatus = CURSORSTATUS_DRAGGING;
-				m_stMCursor.sPrevX = msX;
-				m_stMCursor.sPrevY = msY;
-				if ( (m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_DLGBOX) &&
-					 ((m_stMCursor.sSelectedObjectID == 30) || (m_stMCursor.sSelectedObjectID == 29)) )
-				{	m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
-				}
-				if ((m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_DLGBOX) &&
-					(m_stMCursor.sSelectedObjectID == 7) && (m_stDialogBoxInfo[7].cMode == 1))
-				{	EndInputString();
-					m_stDialogBoxInfo[7].cMode = 20;
-				}
-				// Query Drop Item Amount
-				if ((m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_DLGBOX) &&
-					(m_stMCursor.sSelectedObjectID == 17) && (m_stDialogBoxInfo[17].cMode == 1))
-					// Guild Menu
-				{	EndInputString();
-					m_stDialogBoxInfo[17].cMode = 20;
-				}
-				return;
-			}
-			if ((m_cCommand == OBJECTMOVE) || (m_cCommand == OBJECTRUN)) goto MOTION_COMMAND_PROCESS;
-			return;
-		}
-		break;
-	case CURSORSTATUS_DRAGGING:
-		if (cLB != 0)
-		{	if ((m_pMapData->bIsTeleportLoc(m_sPlayerX, m_sPlayerY) == TRUE) && (m_cCommandCount == 0)) goto CP_SKIPMOUSEBUTTONSTATUS;
-			if (m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_DLGBOX)
-			{	m_stDialogBoxInfo[m_stMCursor.sSelectedObjectID].sX = msX - m_stMCursor.sDistX;
-				m_stDialogBoxInfo[m_stMCursor.sSelectedObjectID].sY = msY - m_stMCursor.sDistY;
-			}
-			m_stMCursor.sPrevX = msX;
-			m_stMCursor.sPrevY = msY;
-
-			if ((m_cCommand == OBJECTMOVE) || (m_cCommand == OBJECTRUN)) goto MOTION_COMMAND_PROCESS;
-			return;
-		}
-		if (cLB == 0) {
-			switch (m_stMCursor.cSelectedObjectType) {
-			case SELECTEDOBJTYPE_DLGBOX:
-				if ((m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_DLGBOX) &&
-					(m_stMCursor.sSelectedObjectID == 7) && (m_stDialogBoxInfo[7].cMode == 20))
-				{	sX = m_stDialogBoxInfo[7].sX;
-					sY = m_stDialogBoxInfo[7].sY;
-					StartInputString(sX + 75, sY + 140, 21, m_cGuildName);
-					m_stDialogBoxInfo[7].cMode = 1;
-				}
-
-				if ((m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_DLGBOX) &&
-					(m_stMCursor.sSelectedObjectID == 17) && (m_stDialogBoxInfo[17].cMode == 20))
-				{	// Query Drop Item Amount
-					sX = m_stDialogBoxInfo[17].sX;
-					sY = m_stDialogBoxInfo[17].sY;
-					StartInputString(sX + 40, sY + 57, 11, m_cAmountString);
-					m_stDialogBoxInfo[17].cMode = 1;
-				}
-
-				if ( m_stMCursor.sSelectedObjectID == 9 )
-				{	if( msX < 320 ) m_stDialogBoxInfo[9].sX = 0;
-					else m_stDialogBoxInfo[9].sX = 640 - m_stDialogBoxInfo[9].sSizeX;
-					if( msY < 213 ) m_stDialogBoxInfo[9].sY = 0;
-					else m_stDialogBoxInfo[9].sY = 427 - m_stDialogBoxInfo[9].sSizeY;
-				}
-
-				m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
-				m_stMCursor.cSelectedObjectType = NULL;
-				m_stMCursor.sSelectedObjectID   = NULL;
-				break;
-
-			case SELECTEDOBJTYPE_ITEM:
-				_bCheckDraggingItemRelease(msX, msY);
-				m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
-				m_stMCursor.cSelectedObjectType = NULL;
-				m_stMCursor.sSelectedObjectID   = NULL;
-				break;
-
-			default:
-				m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
-				m_stMCursor.cSelectedObjectType = NULL;
-				m_stMCursor.sSelectedObjectID   = NULL;
-				break;
-			}
-			return;
-		}
-		break;
-	}
-
-CP_SKIPMOUSEBUTTONSTATUS:;
-	if (m_bCommandAvailable == FALSE) return;
-	if ( (dwTime - m_dwCommandTime) < 300 )
-	{	//delete m_pGSock;
-		//m_pGSock = NULL;
-		m_bEscPressed = FALSE;
-		PlaySound('E', 14, 5);
-		if (m_bSoundFlag) m_pESound[38]->bStop();
-		if ((m_bSoundFlag) && (m_bMusicStat == TRUE))
-		{	
-			if (m_pBGM != NULL) m_pBGM->bStop();
-		}
-		if (strlen(G_cCmdLineTokenA) != 0)
-			 ChangeGameMode(GAMEMODE_ONQUIT);
-		else ChangeGameMode(GAMEMODE_ONMAINMENU);
-		return;
-	}
-	if (m_iHP <= 0) return;
-
-	if (m_sDamageMove != 0)
-	{	m_cCommand = OBJECTDAMAGEMOVE;
-		goto MOTION_COMMAND_PROCESS;
-	}
-
-	if ((m_pMapData->bIsTeleportLoc(m_sPlayerX, m_sPlayerY) == TRUE) && (m_cCommandCount == 0))
-		RequestTeleportAndWaitData();
-
-	// indexX, indexY
-	if (cLB != 0) // Mouse Left button
-	{	if (m_bIsGetPointingMode == TRUE)
-		{	if ((m_sMCX != 0) || (m_sMCY != 0))
-				 PointCommandHandler(m_sMCX, m_sMCY);
-			else PointCommandHandler(indexX, indexY);
-
-			m_bCommandAvailable  = FALSE;
-			m_dwCommandTime = timeGetTime();
-			m_bIsGetPointingMode = FALSE;
-			return;
-		}
-
-		m_pMapData->bGetOwner(m_sMCX, m_sMCY-1, cName, &sObjectType, &iObjectStatus, &m_wCommObjectID); // v1.4
-		//m_pMapData->m_pData[dX][dY].m_sItemSprite
-		if (memcmp(m_cMCName, m_cPlayerName, 10) == 0 && ( sObjectType <= 6 || m_pMapData->m_pData[m_sPlayerX-m_pMapData->m_sPivotX][m_sPlayerY-m_pMapData->m_sPivotY].m_sItemSprite != 0 ))
-		{//if (memcmp(m_cMCName, m_cPlayerName, 10) == 0 && ( sObjectType <= 6 || m_pMapData->m_pData[15][15].m_sItemSprite != 0 )) {
-		 //if (memcmp(m_cMCName, m_cPlayerName, 10) == 0 && sObjectType <= 6){
-			if ((m_sPlayerType >= 1) && (m_sPlayerType <= 6)/* && ((m_sPlayerAppr2 & 0xF000) == 0)*/)
-			{	m_cCommand = OBJECTGETITEM;
-				m_sCommX = m_sPlayerX;
-				m_sCommY = m_sPlayerY;
-			}
-		}else
-		{	if( memcmp(m_cMCName, m_cPlayerName, 10) == 0 ) m_sMCY -= 1;
-			if ((m_sMCX != 0) && (m_sMCY != 0)) // m_sMCX, m_sMCY
-			{	if (m_bCtrlPressed == TRUE)
-				{	m_pMapData->bGetOwner(m_sMCX, m_sMCY, cName, &sObjectType, &iObjectStatus, &m_wCommObjectID);
-					if ( (iObjectStatus & 0x10) != 0) return;
-					if ((sObjectType == 15) || (sObjectType == 20) || (sObjectType == 24)) return;
-					m_stMCursor.sCursorFrame = 3;
-					absX = abs(m_sPlayerX - m_sMCX);
-					absY = abs(m_sPlayerY - m_sMCY);
-					if ((absX <= 1) && (absY <= 1))
-					{	wType = _iGetAttackType();
-						m_cCommand = OBJECTATTACK;
-						m_sCommX = m_sMCX;
-						m_sCommY = m_sMCY;
-					}else if ( (absX <= 2) && (absY <= 2) // strike on Big mobs & gate from a range
-							&& ((sObjectType == 66)||(sObjectType == 73)||(sObjectType == 81)||(sObjectType == 91)))
-					{	wType = _iGetAttackType();
-						m_cCommand = OBJECTATTACK;
-						m_sCommX = m_sMCX;
-						m_sCommY = m_sMCY;
-					}else // Pas au corp à corp
-					{	switch (_iGetWeaponSkillType()) {
-						case 6: // Bow
-							m_cCommand = OBJECTATTACK;
-							m_sCommX = m_sMCX;
-							m_sCommY = m_sMCY;
-							wType = _iGetAttackType();
-							break;
-
-						case 5: // OpenHand
-						case 7: // SS
-							if (((absX == 2) && (absY == 2)) || ((absX == 0) && (absY == 2)) || ((absX == 2) && (absY == 0)))
-							{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
-								{	if (m_cSkillMastery[_iGetWeaponSkillType()] == 100)
-									{	m_cCommand = OBJECTATTACKMOVE;
-										wType = _iGetAttackType();
-									}else
-									{	m_cCommand = OBJECTRUN;
-										GetPlayerTurn();
-									}
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-								}else
-								{	m_cCommand = OBJECTMOVE;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-									GetPlayerTurn();
-								}
-							}else
-							{	if (   (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)
-									&& (m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-									 m_cCommand = OBJECTRUN;	// Staminar
-								else m_cCommand = OBJECTMOVE;
-								m_sCommX = m_sMCX;
-								m_sCommY = m_sMCY;
-								GetPlayerTurn();
-							}
-							break;
-
-						case 8: // LS
-							if (   (absX <= 3) && (absY <= 3) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
-								&& (_iGetAttackType() != 30)) // Crit without StormBlade
-							{	wType = _iGetAttackType();
-								m_cCommand = OBJECTATTACK;
-								m_sCommX = m_sMCX;
-								m_sCommY = m_sMCY;
-							}else if ( (absX <= 5) && (absY <= 5) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
-								&& (_iGetAttackType() == 30))  // Crit with StormBlade (by Snoopy)
-							{	wType = _iGetAttackType();
-								m_cCommand = OBJECTATTACK;
-								m_sCommX = m_sMCX;
-								m_sCommY = m_sMCY;
-							}else if ( (absX <= 3) && (absY <= 3)
-								&& (_iGetAttackType() == 5))  // Normal hit with StormBlade (by Snoopy)
-							{	wType = _iGetAttackType();
-								m_cCommand = OBJECTATTACK;
-								m_sCommX = m_sMCX;
-								m_sCommY = m_sMCY;
-							}else // Swing
-							{	if (((absX == 2) && (absY == 2)) || ((absX == 0) && (absY == 2)) || ((absX == 2) && (absY == 0))
-									&& (_iGetAttackType() != 5)) // no Dash possible with StormBlade
-								{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
-									{	if (m_cSkillMastery[_iGetWeaponSkillType()] == 100)
-										{	m_cCommand = OBJECTATTACKMOVE;
-											wType = _iGetAttackType();
-										}else
-										{	m_cCommand = OBJECTRUN;
-											GetPlayerTurn();
-										}
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-									}else
-									{	m_cCommand = OBJECTMOVE;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										GetPlayerTurn();
-									}
-								}else
-								{	if (   (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)
-										&& (m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-										 m_cCommand = OBJECTRUN;
-									else m_cCommand = OBJECTMOVE;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-									GetPlayerTurn();
-							}	}
-							break;
-
-						case 9: // Fencing
-							if ((absX <= 4) && (absY <= 4) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE))
-							{	m_cCommand = OBJECTATTACK;
-								m_sCommX = m_sMCX;
-								m_sCommY = m_sMCY;
-								wType = _iGetAttackType();
-							}
-							else {
-								if (((absX == 2) && (absY == 2)) || ((absX == 0) && (absY == 2)) || ((absX == 2) && (absY == 0))) {
-									if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)) {
-										if (m_cSkillMastery[_iGetWeaponSkillType()] == 100) {
-											m_cCommand = OBJECTATTACKMOVE;
-											wType = _iGetAttackType();
-										}
-										else {
-											m_cCommand = OBJECTRUN;
-											GetPlayerTurn();
-										}
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-									}
-									else {
-										m_cCommand = OBJECTMOVE;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										GetPlayerTurn();
-									}
-								}
-								else {
-									if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
-										(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-										 m_cCommand = OBJECTRUN;
-									else m_cCommand = OBJECTMOVE;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-									GetPlayerTurn();
-								}
-							}
-							break;
-
-						case 10: // Axe
-							if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) 
-							{	m_cCommand = OBJECTATTACK;
-								m_sCommX = m_sMCX;
-								m_sCommY = m_sMCY;
-								wType = _iGetAttackType();
-							}else
-							{	if (((absX == 2) && (absY == 2)) || ((absX == 0) && (absY == 2)) || ((absX == 2) && (absY == 0))) 
-								{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)) 
-									{	if (m_cSkillMastery[_iGetWeaponSkillType()] == 100) 
-										{	m_cCommand = OBJECTATTACKMOVE;
-											wType = _iGetAttackType();
-										}else 
-										{	m_cCommand = OBJECTRUN;
-											GetPlayerTurn();
-										}
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-									}else 
-									{	m_cCommand = OBJECTMOVE;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										GetPlayerTurn();
-									}
-								}else
-								{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
-										(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-										 m_cCommand = OBJECTRUN;
-									else m_cCommand = OBJECTMOVE;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-									GetPlayerTurn();
-							}	}
-							break;
-						case 14: // Hammer
-							if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
-								m_cCommand = OBJECTATTACK;
-								m_sCommX = m_sMCX;
-								m_sCommY = m_sMCY;
-								wType = _iGetAttackType();
-							}
-							else {
-								if (((absX == 2) && (absY == 2)) || ((absX == 0) && (absY == 2)) || ((absX == 2) && (absY == 0))) {
-									if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)) {
-										if (m_cSkillMastery[_iGetWeaponSkillType()] == 100) {
-											m_cCommand = OBJECTATTACKMOVE;
-											wType = _iGetAttackType();
-										}
-										else {
-											m_cCommand = OBJECTRUN;
-											GetPlayerTurn();
-										}
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-									}
-									else {
-										m_cCommand = OBJECTMOVE;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										GetPlayerTurn();
-									}
-								}
-								else {
-									if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
-										(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-										 m_cCommand = OBJECTRUN;
-									else m_cCommand = OBJECTMOVE;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-									GetPlayerTurn();
-							}	}
-							break;
-						case 21: // Wand
-							if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
-								m_cCommand = OBJECTATTACK;
-								m_sCommX = m_sMCX;
-								m_sCommY = m_sMCY;
-								wType = _iGetAttackType();
-							}
-							else {
-								if (((absX == 2) && (absY == 2)) || ((absX == 0) && (absY == 2)) || ((absX == 2) && (absY == 0))) {
-									if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)) {
-										if (m_cSkillMastery[_iGetWeaponSkillType()] == 100) {
-											m_cCommand = OBJECTATTACKMOVE;
-											wType = _iGetAttackType();
-										}
-										else {
-											m_cCommand = OBJECTRUN;
-											GetPlayerTurn();
-										}
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-									}
-									else {
-										m_cCommand = OBJECTMOVE;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										GetPlayerTurn();
-									}
-								}
-								else {
-									if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
-										(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-										 m_cCommand = OBJECTRUN;
-									else m_cCommand = OBJECTMOVE;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-									GetPlayerTurn();
-								}
-							}
-							break;
-						}
-					}
-				}else // CTRL not pressed
-				{	m_pMapData->bGetOwner(m_sMCX, m_sMCY, cName, &sObjectType, &iObjectStatus, &m_wCommObjectID);
-					if (sObjectType >= 10 || ((sObjectType >= 1) && (sObjectType <= 6)))
-					{	switch (sObjectType) { 	// CLEROTH - NPC TALK
-						case 15: // ShopKeeper-W°
-							/*switch (cName[0]) {
-							case '1':*/
-								EnableDialogBox(20, 5, 11, 1);
-								tX = msX - 117;
-								tY = msY - 50;
-								if (tX < 0) tX = 0;
-								if ((tX + 235) > 639) tX = 639 - 235;
-								if (tY < 0) tY = 0;
-								if ((tY + 100) > 479) tY = 479 - 100;
-								m_stDialogBoxInfo[20].sX  = tX;
-								m_stDialogBoxInfo[20].sY  = tY;
-								m_stDialogBoxInfo[20].sV3 = 15;
-							/*	break;
-							}*/
-							break;
-
-						case 19: // Gandlf
-							/*switch (cName[0]) {
-							case '1':*/
-								EnableDialogBox(20, 0, 16, NULL);
-								tX = msX - 117;
-								tY = msY - 50;
-								if (tX < 0) tX = 0;
-								if ((tX + 235) > 639) tX = 639 - 235;
-								if (tY < 0) tY = 0;
-								if ((tY + 100) > 479) tY = 479 - 100;
-								m_stDialogBoxInfo[20].sX  = tX;
-								m_stDialogBoxInfo[20].sY  = tY;
-								m_stDialogBoxInfo[20].sV3 = 19;
-							/*	break;
-						 	}*/
-							break;
-
-						case 20: // Howard
-							/*switch (cName[0]) {
-							case '1':*/
-								EnableDialogBox(20, 0, 14, NULL);
-								tX = msX - 117;
-								tY = msY - 50;
-								if (tX < 0) tX = 0;
-								if ((tX + 235) > 639) tX = 639 - 235;
-								if (tY < 0) tY = 0;
-								if ((tY + 100) > 479) tY = 479 - 100;
-								m_stDialogBoxInfo[20].sX  = tX;
-								m_stDialogBoxInfo[20].sY  = tY;
-								m_stDialogBoxInfo[20].sV3 = 20;
-								m_stDialogBoxInfo[39].sV3 = 20;
-								m_stDialogBoxInfo[39].sV4 = m_wCommObjectID;
-								m_stDialogBoxInfo[39].sV5 = m_sMCX;
-								m_stDialogBoxInfo[39].sV6 = m_sMCY;
-							/*	break;
-						 	}*/
-							break;
-
-						case 24: // Tom
-							/*switch (cName[0]) {
-							case '1':*/
-								EnableDialogBox(20, 5, 11, 2);
-								tX = msX - 117;
-								tY = msY - 50;
-								if (tX < 0) tX = 0;
-								if ((tX + 235) > 639) tX = 639 - 235;
-								if (tY < 0) tY = 0;
-								if ((tY + 100) > 479) tY = 479 - 100;
-								m_stDialogBoxInfo[20].sX  = tX;
-								m_stDialogBoxInfo[20].sY  = tY;
-								m_stDialogBoxInfo[20].sV3 = 24;
-								m_stDialogBoxInfo[39].sV3 = 24;
-								m_stDialogBoxInfo[39].sV4 = m_wCommObjectID;
-								m_stDialogBoxInfo[39].sV5 = m_sMCX;
-								m_stDialogBoxInfo[39].sV6 = m_sMCY;
-							/*	break;
-						 	}*/
-							break;
-
-						case 25: // William
-							/*switch (cName[0]) {
-							case '1':*/
-								EnableDialogBox(20, 0, 13, NULL);
-								tX = msX - 117;
-								tY = msY - 50;
-								if (tX < 0) tX = 0;
-								if ((tX + 235) > 639) tX = 639 - 235;
-								if (tY < 0) tY = 0;
-								if ((tY + 100) > 479) tY = 479 - 100;
-								m_stDialogBoxInfo[20].sX  = tX;
-								m_stDialogBoxInfo[20].sY  = tY;
-								m_stDialogBoxInfo[20].sV3 = 25;
-							/*	break;
-						 	}*/
-							break;
-
-						case 26: // Kennedy
-							/*switch (cName[0]) {
-							case '1':*/
-								EnableDialogBox(20, 0, 7, NULL);
-								tX = msX - 117;
-								tY = msY - 50;
-								if (tX < 0) tX = 0;
-								if ((tX + 235) > 639) tX = 639 - 235;
-								if (tY < 0) tY = 0;
-								if ((tY + 100) > 479) tY = 479 - 100;
-								m_stDialogBoxInfo[20].sX  = tX;
-								m_stDialogBoxInfo[20].sY  = tY;
-								m_stDialogBoxInfo[20].sV3 = 26;
-							/*	break;
-						 	}*/
-							break;
-
-						case 21: // Guard
-							if ((_iGetFOE(iObjectStatus)>=0) && (!m_bIsCombatMode)) 
-							{	EnableDialogBox(20, 4, NULL, NULL);
-								tX = msX - 117;
-								tY = msY - 50;
-								if (tX < 0) tX = 0;
-								if ((tX + 235) > 639) tX = 639 - 235;
-								if (tY < 0) tY = 0;
-								if ((tY + 100) > 479) tY = 479 - 100;
-								m_stDialogBoxInfo[20].sX  = tX;
-								m_stDialogBoxInfo[20].sY  = tY;
-								m_stDialogBoxInfo[20].sV3 = 21;
-							}
-							break;
-						case 67: // McGaffin
-						case 68: // Perry
-						case 69: // Devlin
-							if (!m_bIsCombatMode)
-							{	EnableDialogBox(20, 4, NULL, NULL);
-								tX = msX - 117;
-								tY = msY - 50;
-								if (tX < 0) tX = 0;
-								if ((tX + 235) > 639) tX = 639 - 235;
-								if (tY < 0) tY = 0;
-								if ((tY + 100) > 479) tY = 479 - 100;
-								m_stDialogBoxInfo[20].sX  = tX;
-								m_stDialogBoxInfo[20].sY  = tY;
-								m_stDialogBoxInfo[20].sV3 = sObjectType;
-							}
-							break;
-
-						case 32: // Unicorn
-							if (!m_bIsCombatMode)
-							{	EnableDialogBox(20, 4, NULL, NULL);
-								tX = msX - 117;
-								tY = msY - 50;
-								if (tX < 0) tX = 0;
-								if ((tX + 235) > 639) tX = 639 - 235;
-								if (tY < 0) tY = 0;
-								if ((tY + 100) > 479) tY = 479 - 100;
-								m_stDialogBoxInfo[20].sX  = tX;
-								m_stDialogBoxInfo[20].sY  = tY;
-								m_stDialogBoxInfo[20].sV3 = 32;
-							}
-							break;
-
-						case 90: // Snoopy: Gail
-							/*switch (cName[0]) {
-							case '1':*/
-								EnableDialogBox(20, 6, 0, NULL);
-								tX = msX - 117;
-								tY = msY - 50;
-								if (tX < 0) tX = 0;
-								if ((tX + 235) > 639) tX = 639 - 235;
-								if (tY < 0) tY = 0;
-								if ((tY + 100) > 479) tY = 479 - 100;
-								m_stDialogBoxInfo[20].sX  = tX;
-								m_stDialogBoxInfo[20].sY  = tY;
-								m_stDialogBoxInfo[20].sV3 = 90;
-								/*break;
-						 	}*/
-							break;
-
-						default: // Other mobs
-							if ( _iGetFOE(iObjectStatus) >= 0 ) break;
-							if ( (sObjectType>=1) && (sObjectType<=6) && (m_bForceAttack==FALSE) ) break;
-							absX = abs(m_sPlayerX - m_sMCX);
-							absY = abs(m_sPlayerY - m_sMCY);
-							if ((absX <= 1) && (absY <= 1))
-							{	wType = _iGetAttackType();
-								m_cCommand = OBJECTATTACK;
-								m_sCommX = m_sMCX;
-								m_sCommY = m_sMCY;
-							}else if ( (absX <= 2) && (absY <= 2) // strike on Big mobs & gate from a range
-							&& ((sObjectType == 66)||(sObjectType == 73)||(sObjectType == 81)||(sObjectType == 91)))
-							{	wType = _iGetAttackType();
-								m_cCommand = OBJECTATTACK;
-								m_sCommX = m_sMCX;
-								m_sCommY = m_sMCY;
-							}else // Normal hit from a range.
-							{	switch (_iGetWeaponSkillType()) {
-								case 6: // Bow
-									m_cCommand = OBJECTATTACK;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-									wType = _iGetAttackType();
-									break;
-
-								case 5: // Boxe
-								case 7: // SS
-									if (   (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)
-										&& (m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-										m_cCommand = OBJECTRUN;
-									else m_cCommand = OBJECTMOVE;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-									GetPlayerTurn();
-									break;
-
-								case 8: // LS
-									if (   (absX <= 3) && (absY <= 3) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
-										&& (_iGetAttackType() != 30)) // Crit without StormBlade by Snoopy
-									{	if ((absX <= 1) && (absY <= 1) && (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
-											 m_cCommand = OBJECTATTACKMOVE;
-										else m_cCommand = OBJECTATTACK;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										wType = _iGetAttackType();
-									}else if ((absX <= 5) && (absY <= 5) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
-										   && (_iGetAttackType() == 30)) // Crit with StormBlade by Snoopy
-									{	if ((absX <= 1) && (absY <= 1) && (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
-											 m_cCommand = OBJECTATTACKMOVE;
-										else m_cCommand = OBJECTATTACK;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										wType = _iGetAttackType();
-									}else if ((absX <= 3) && (absY <= 3)
-										   && (_iGetAttackType() == 5)) // Normal hit with StormBlade by Snoopy
-									{	m_cCommand = OBJECTATTACK;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										wType = _iGetAttackType();
-									}else
-									{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
-											(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-											m_cCommand = OBJECTRUN;
-										else m_cCommand = OBJECTMOVE;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										GetPlayerTurn();
-									}
-									break;
-
-								case 9: // Fencing
-									if ((absX <= 4) && (absY <= 4) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE))
-									{	if ((absX <= 1) && (absY <= 1) && (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
-											 m_cCommand = OBJECTATTACKMOVE;
-										else m_cCommand = OBJECTATTACK;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										wType = _iGetAttackType();
-									}else
-									{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
-											(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-											m_cCommand = OBJECTRUN;
-										else m_cCommand = OBJECTMOVE;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										GetPlayerTurn();
-									}
-									break;
-
-								case 10: //
-									if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
-										if ((absX <= 1) && (absY <= 1) && (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
-											 m_cCommand = OBJECTATTACKMOVE;
-										else m_cCommand = OBJECTATTACK;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										wType = _iGetAttackType();
-									}
-									else {
-										if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
-											(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-											m_cCommand = OBJECTRUN;
-										else m_cCommand = OBJECTMOVE;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										GetPlayerTurn();
-									}
-									break;
-								case 14: //
-									if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
-										if ((absX <= 1) && (absY <= 1) && (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
-											 m_cCommand = OBJECTATTACKMOVE;
-										else m_cCommand = OBJECTATTACK;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										wType = _iGetAttackType();
-									}
-									else {
-										if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
-											(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-											m_cCommand = OBJECTRUN;
-										else m_cCommand = OBJECTMOVE;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										GetPlayerTurn();
-									}
-									break;
-								case 21: //
-									if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
-										if ((absX <= 1) && (absY <= 1) && (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
-											 m_cCommand = OBJECTATTACKMOVE;
-										else m_cCommand = OBJECTATTACK;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										wType = _iGetAttackType();
-									}
-									else {
-										if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
-											(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-											m_cCommand = OBJECTRUN;
-										else m_cCommand = OBJECTMOVE;
-										m_sCommX = m_sMCX;
-										m_sCommY = m_sMCY;
-										GetPlayerTurn();
-									}
-									break;
-								}
-							}
-							break;
-						}
-					}
-					else {
-						if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
-							(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-							 m_cCommand = OBJECTRUN;
-						else m_cCommand = OBJECTMOVE;
-						m_sCommX = m_sMCX;
-						m_sCommY = m_sMCY;
-						GetPlayerTurn();
-					}
-				}
-			}else
-			{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
-					(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
-					 m_cCommand = OBJECTRUN;
-				else m_cCommand = OBJECTMOVE;
-				m_sCommX = indexX;
-				m_sCommY = indexY;
-				GetPlayerTurn();
-			}
-		}
-	}else if (cRB != 0) // Mouse Right button
-	{	m_cCommand = OBJECTSTOP;
-		if (m_bIsGetPointingMode == TRUE)
-		{	m_bIsGetPointingMode = FALSE;
-			AddEventList(COMMAND_PROCESSOR1, 10);
-		}
-		if (m_bCommandAvailable == FALSE) return;
-		if (m_cCommandCount >= 6) return;
-
-		if ((m_sMCX != 0) && (m_sMCY != 0))
-		{	absX = abs(m_sPlayerX - m_sMCX);
-			absY = abs(m_sPlayerY - m_sMCY);
-			if( absX==0 && absY==0 ) return;
-
-			if (m_bCtrlPressed == TRUE)
-			{	m_pMapData->bGetOwner(m_sMCX, m_sMCY, cName, &sObjectType, &iObjectStatus, &m_wCommObjectID);
-				if ( (iObjectStatus & 0x10) != 0) return;
-				if ((sObjectType == 15) || (sObjectType == 20) || (sObjectType == 24)) return;
-
-				if ((absX <= 1) && (absY <= 1))
-				{	wType = _iGetAttackType();
-					m_cCommand = OBJECTATTACK;
-					m_sCommX = m_sMCX;
-					m_sCommY = m_sMCY;
-				}else if ( (absX <= 2) && (absY <= 2) // strike on Big mobs & gate from a range
-							&& ((sObjectType == 66)||(sObjectType == 73)||(sObjectType == 81)||(sObjectType == 91)))
-				{	wType = _iGetAttackType();
-					m_cCommand = OBJECTATTACK;
-					m_sCommX = m_sMCX;
-					m_sCommY = m_sMCY;
-				}else
-				{	switch (_iGetWeaponSkillType()) {
-					case 6: // Bow
-						m_cCommand = OBJECTATTACK;
-						m_sCommX = m_sMCX;
-						m_sCommY = m_sMCY;
-						wType = _iGetAttackType();
-						break;
-
-					case 5: // Boxe
-					case 7: // SS
-						break;
-
-					case 8: // LS
-						if (   (absX <= 3) && (absY <= 3) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
-							&& (_iGetAttackType() != 30)) // without StormBlade by Snoopy
-						{	wType = _iGetAttackType();
-							m_cCommand = OBJECTATTACK;
-							m_sCommX = m_sMCX;
-							m_sCommY = m_sMCY;
-						}else if (   (absX <= 5) && (absY <= 5) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
-							&& (_iGetAttackType() == 30)) // with stormBlade crit by Snoopy
-						{	wType = _iGetAttackType();
-							m_cCommand = OBJECTATTACK;
-							m_sCommX = m_sMCX;
-							m_sCommY = m_sMCY;
-						}else if (   (absX <= 3) && (absY <= 3)
-							&& (_iGetAttackType() == 5)) // with stormBlade no crit by Snoopy
-						{	wType = _iGetAttackType();
-							m_cCommand = OBJECTATTACK;
-							m_sCommX = m_sMCX;
-							m_sCommY = m_sMCY;
-						}
-						break;
-
-					case 9: // Fencing
-						if ((absX <= 4) && (absY <= 4) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
-							m_cCommand = OBJECTATTACK;
-							m_sCommX = m_sMCX;
-							m_sCommY = m_sMCY;
-							wType = _iGetAttackType();
-						}
-						break;
-
-					case 10: //
-						if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
-							m_cCommand = OBJECTATTACK;
-							m_sCommX = m_sMCX;
-							m_sCommY = m_sMCY;
-							wType = _iGetAttackType();
-						}
-						break;
-
-					case 14: //
-						if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
-							m_cCommand = OBJECTATTACK;
-							m_sCommX = m_sMCX;
-							m_sCommY = m_sMCY;
-							wType = _iGetAttackType();
-						}
-						break;
-					case 21: //
-						if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
-							m_cCommand = OBJECTATTACK;
-							m_sCommX = m_sMCX;
-							m_sCommY = m_sMCY;
-							wType = _iGetAttackType();
-						}
-						break;
-					}
-				}
-			}else // CTRL not pressed
-			{	absX = abs(m_sPlayerX - m_sMCX);
-				absY = abs(m_sPlayerY - m_sMCY);
-				m_pMapData->bGetOwner(m_sMCX, m_sMCY, cName, &sObjectType, &iObjectStatus, &m_wCommObjectID);
-				if (sObjectType >= 10 || ((sObjectType >= 1) && (sObjectType <= 6))) {
-					switch (sObjectType) {
-					case 15:
-					case 19:
-					case 20:
-					case 24:
-					case 25:
-					case 26: // npcs
-						break;
-
-					default: // All "normal mobs"
-						if ( _iGetFOE(iObjectStatus) >= 0 ) break;
-						if ( (sObjectType>=1) && (sObjectType<=6) && (m_bForceAttack==FALSE) ) break;
-						if ((absX <= 1) && (absY <= 1))
-						{	wType = _iGetAttackType();
-							m_cCommand = OBJECTATTACK;
-							m_sCommX = m_sMCX;
-							m_sCommY = m_sMCY;
-						}else if ( (absX <= 2) && (absY <= 2) // strike on Big mobs & gate from a range
-							&& ((sObjectType == 66)||(sObjectType == 73)||(sObjectType == 81)||(sObjectType == 91)))
-						{	wType = _iGetAttackType();
-							m_cCommand = OBJECTATTACK;
-							m_sCommX = m_sMCX;
-							m_sCommY = m_sMCY;
-						}else //
-						{	switch (_iGetWeaponSkillType()) {
-							case 6: // Bow
-								m_cCommand = OBJECTATTACK;
-								m_sCommX = m_sMCX;
-								m_sCommY = m_sMCY;
-								wType = _iGetAttackType();
-								break;
-
-							case 5: // Boxe
-							case 7: // SS
-								break;
-
-							case 8: // LS
-								if (   (absX <= 3) && (absY <= 3) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
-									&& (_iGetAttackType() != 30)) // crit without StormBlade by Snoopy
-								{	wType = _iGetAttackType();
-									m_cCommand = OBJECTATTACK;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-								}else if (   (absX <= 5) && (absY <= 5) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
-									&& (_iGetAttackType() == 30)) // with stormBlade crit by Snoopy
-								{	wType = _iGetAttackType();
-									m_cCommand = OBJECTATTACK;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-								}else if (   (absX <= 3) && (absY <= 3)
-									&& (_iGetAttackType() == 5)) // with stormBlade no crit by Snoopy
-								{	wType = _iGetAttackType();
-									m_cCommand = OBJECTATTACK;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-								}
-								break;
-
-							case 9: // fencing
-								if ((absX <= 4) && (absY <= 4) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
-									m_cCommand = OBJECTATTACK;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-									wType = _iGetAttackType();
-								}
-								break;
-
-							case 10: //
-								if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
-									m_cCommand = OBJECTATTACK;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-									wType = _iGetAttackType();
-								}
-								break;
-							case 14: // hammer
-								if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
-									m_cCommand = OBJECTATTACK;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-									wType = _iGetAttackType();
-								}
-								break;
-							case 21: // wand
-								if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
-									m_cCommand = OBJECTATTACK;
-									m_sCommX = m_sMCX;
-									m_sCommY = m_sMCY;
-									wType = _iGetAttackType();
-								}
-								break;
-						}	}
-						break;
-			}	}	}
-		}else
-		{	cDir = m_Misc.cGetNextMoveDir(m_sPlayerX, m_sPlayerY, indexX, indexY);
-			if (m_iHP <= 0) return;
-			if (cDir == 0) return;
-			if (m_cPlayerDir  == cDir) return;
-			ClearSkillUsingStatus();
-			m_cPlayerDir = cDir;
-			bSendCommand(MSGID_COMMAND_MOTION, OBJECTSTOP, m_cPlayerDir, NULL, NULL, NULL, NULL);
-
-			m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir,
-							                  m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor,
-											  m_iPlayerStatus, m_cPlayerName,
-											  m_cCommand, NULL, NULL, NULL, 0,
-											  10);
-			m_bCommandAvailable = FALSE;
-			m_dwCommandTime = timeGetTime();
-			return;
-	}	}
-
-MOTION_COMMAND_PROCESS:;
-
-	if (m_cCommand != OBJECTSTOP)
-	{	if (m_iHP <= 0) return;
-		if (m_cCommandCount == 5) AddEventList(COMMAND_PROCESSOR2, 10, FALSE);
-		if (m_bCommandAvailable == FALSE) return;
-		if (m_cCommandCount >= 6) return;
-
-		if ((m_sPlayerType >= 0) && (m_sPlayerType > 6))
-		{	switch (m_cCommand) {
-			case OBJECTRUN:
-			case OBJECTMAGIC:
-			case OBJECTGETITEM:
-				m_cCommand = OBJECTSTOP;
-				break;
-		}	}
-
-		ClearSkillUsingStatus();
-
-		if (m_sDamageMove != 0)
-		{	m_cCommand = OBJECTDAMAGEMOVE;
-			m_sCommX = m_sPlayerX;
-			m_sCommY = m_sPlayerY;
-
-			switch (m_sDamageMove) {
-			case 1: m_sCommY--; break;
-			case 2: m_sCommX++; m_sCommY--; break;
-			case 3: m_sCommX++; break;
-			case 4: m_sCommX++; m_sCommY++; break;
-			case 5: m_sCommY++; break;
-			case 6: m_sCommX--; m_sCommY++; break;
-			case 7: m_sCommX--; break;
-			case 8: m_sCommX--; m_sCommY--; break;
-			}
-
-			for (i = 1; i < MAXCHATMSGS; i++)
-			if (m_pChatMsgList[i] == NULL)
-			{	ZeroMemory(cTxt, sizeof(cTxt));
-				if (m_sDamageMoveAmount > 0)
-					wsprintf(cTxt, "-%dPts", m_sDamageMoveAmount); //pts
-				else strcpy(cTxt, "Critical!");
-
-				int iFontType;
-				if ((m_sDamageMoveAmount >= 0) && (m_sDamageMoveAmount < 12))		iFontType = 21;
-				else if ((m_sDamageMoveAmount >= 12) && (m_sDamageMoveAmount < 40)) iFontType = 22;
-				else if ((m_sDamageMoveAmount >= 40) || (m_sDamageMoveAmount < 0))	iFontType = 23;
-
-				m_pChatMsgList[i] = new class CMsg(iFontType, cTxt, m_dwCurTime);
-				m_pChatMsgList[i]->m_iObjectID = m_sPlayerObjectID;
-
-				if (m_pMapData->bSetChatMsgOwner(m_sPlayerObjectID, -10, -10, i) == FALSE) {
-					delete m_pChatMsgList[i];
-					m_pChatMsgList[i] = NULL;
-				}
-				break;
-			}
-			m_sDamageMove = 0;
-		}
-
-		switch (m_cCommand) {
-		case OBJECTRUN:
-		case OBJECTMOVE:
-		case OBJECTDAMAGEMOVE: // v1.43
-
-			if( m_bParalyze ) return;
-			bGORet = m_pMapData->bGetOwner(m_sCommX, m_sCommY, pDstName, &sDstOwnerType, &iDstOwnerStatus, &m_wCommObjectID); // v1.4
-
-			if ((m_sPlayerX == m_sCommX) && (m_sPlayerY == m_sCommY))
-				m_cCommand = OBJECTSTOP;
-			else if ( (abs(m_sPlayerX - m_sCommX) <= 1) && (abs(m_sPlayerY - m_sCommY) <= 1) &&
-				      (bGORet == TRUE) && (sDstOwnerType != NULL) )
-				m_cCommand = OBJECTSTOP;
-			else if((abs(m_sPlayerX - m_sCommX) <= 2) && (abs(m_sPlayerY - m_sCommY) <= 2) &&
-				(m_pMapData->m_tile[m_sCommX][m_sCommY].m_bIsMoveAllowed == FALSE))
-				m_cCommand = OBJECTSTOP;
-			else
-			{	if( m_cCommand == OBJECTMOVE )
-				{	if(m_bRunningMode || m_bShiftPressed) m_cCommand = OBJECTRUN;
-				}
-				if( m_cCommand == OBJECTRUN )
-				{	if( (m_bRunningMode == FALSE) && (m_bShiftPressed == FALSE) ) m_cCommand = OBJECTMOVE;
-					if( m_iSP < 1 ) m_cCommand = OBJECTMOVE;
-				}
-
-				cDir = cGetNextMoveDir(m_sPlayerX, m_sPlayerY, m_sCommX, m_sCommY, TRUE);
-				// Snoopy: Illusion Movement
-				if ((m_bIllusionMVT == TRUE)&&(m_cCommand != OBJECTDAMAGEMOVE))
-				{	cDir +=4;
-					if (cDir >8) cDir -=8;
-				}
-				if (cDir != 0)
-				{	m_cPlayerDir = cDir;
-					bSendCommand(MSGID_COMMAND_MOTION, m_cCommand, cDir, NULL, NULL, NULL, NULL);
-					switch (cDir) {
-					case 1:	m_sPlayerY--; break;
-					case 2:	m_sPlayerY--; m_sPlayerX++;	break;
-					case 3:	m_sPlayerX++; break;
-					case 4:	m_sPlayerX++; m_sPlayerY++;	break;
-					case 5:	m_sPlayerY++; break;
-					case 6:	m_sPlayerX--; m_sPlayerY++;	break;
-					case 7:	m_sPlayerX--; break;
-					case 8:	m_sPlayerX--; m_sPlayerY--;	break;
-					}
-					m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir,
-						                  m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor, // v1.4
-										  m_iPlayerStatus, m_cPlayerName,
-										  m_cCommand, NULL, NULL, NULL);
-					m_bCommandAvailable = FALSE;
-					m_dwCommandTime = timeGetTime();
-					m_iPrevMoveX = m_sPlayerX;
-					m_iPrevMoveY = m_sPlayerY;
-			}	}
-
-			if (m_cCommand == OBJECTDAMAGEMOVE)
-			{	m_bIsGetPointingMode = FALSE;
-				m_iPointCommandType	 = -1;
-				m_stMCursor.sCursorFrame = 0;
-				ClearSkillUsingStatus();
-				m_cCommand = OBJECTSTOP;
-			}
-			break;
-
-		case OBJECTATTACK:
-			cDir = m_Misc.cGetNextMoveDir(m_sPlayerX, m_sPlayerY, m_sCommX, m_sCommY);
-			// Snoopy: Illusion movement
-			if (m_bIllusionMVT == TRUE)
-			{	cDir +=4;
-				if (cDir >8) cDir -=8;
-			}
-			if (cDir != 0)
-			{	if ((wType == 2) || (wType == 25))
-				{	if (_bCheckItemByType(ITEMTYPE_ARROW) == FALSE)
-						wType = 0;
-				}
-				if (wType >= 20)
-				{	m_iSuperAttackLeft--;
-					if (m_iSuperAttackLeft < 0) m_iSuperAttackLeft = 0;
-				}
-				m_cPlayerDir = cDir;
-				bSendCommand(MSGID_COMMAND_MOTION, OBJECTATTACK, cDir, m_sCommX, m_sCommY, wType, NULL, m_wCommObjectID);
-				m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir,
-					                  m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor,
-									  m_iPlayerStatus, m_cPlayerName,
-									  OBJECTATTACK,
-									  m_sCommX - m_sPlayerX, m_sCommY - m_sPlayerY, wType);
-				m_bCommandAvailable = FALSE;
-				m_dwCommandTime = timeGetTime();
-			}
-			m_cCommand = OBJECTSTOP;
-			break;
-
-		case OBJECTATTACKMOVE:
-			if( m_bParalyze ) return;
-			bGORet = m_pMapData->bGetOwner(m_sCommX, m_sCommY, pDstName, &sDstOwnerType, &iDstOwnerStatus, &m_wCommObjectID);
-			if ((m_sPlayerX == m_sCommX) && (m_sPlayerY == m_sCommY))
-				m_cCommand = OBJECTSTOP;
-			else if ( (abs(m_sPlayerX - m_sCommX) <= 1) && (abs(m_sPlayerY - m_sCommY) <= 1) &&
-				      (bGORet == TRUE) && (sDstOwnerType != NULL) )
-				m_cCommand = OBJECTSTOP;
-			else
-			{	cDir = cGetNextMoveDir(m_sPlayerX, m_sPlayerY, m_sCommX, m_sCommY, TRUE);
-				// Snoopy: Illusion mvt
-				if (m_bIllusionMVT == TRUE)
-				{	cDir +=4;
-					if (cDir >8) cDir -=8;
-				}
-				if (cDir != 0)
-				{	m_cPlayerDir = cDir;
-					bSendCommand(MSGID_COMMAND_MOTION, OBJECTATTACKMOVE, cDir, m_sCommX, m_sCommY, wType, NULL, m_wCommObjectID);
-					switch (cDir) {
-					case 1:	m_sPlayerY--; break;
-					case 2:	m_sPlayerY--; m_sPlayerX++;	break;
-					case 3:	m_sPlayerX++; break;
-					case 4:	m_sPlayerX++; m_sPlayerY++;	break;
-					case 5:	m_sPlayerY++; break;
-					case 6:	m_sPlayerX--; m_sPlayerY++;	break;
-					case 7:	m_sPlayerX--; break;
-					case 8:	m_sPlayerX--; m_sPlayerY--;	break;
-					}
-
-					m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir,
-						                  m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor,
-										  m_iPlayerStatus, m_cPlayerName,
-										  m_cCommand, m_sCommX - m_sPlayerX, m_sCommY - m_sPlayerY, wType);
-					m_bCommandAvailable = FALSE;
-					m_dwCommandTime = timeGetTime();
-					m_iPrevMoveX = m_sPlayerX;
-					m_iPrevMoveY = m_sPlayerY;
-			}	}
-			m_cCommand = OBJECTSTOP;
-			break;
-
-		case OBJECTGETITEM:
-			bSendCommand(MSGID_COMMAND_MOTION, OBJECTGETITEM, m_cPlayerDir, NULL, NULL, NULL, NULL);
-			m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir,
-				                  m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor,
-								  m_iPlayerStatus, m_cPlayerName,
-								  OBJECTGETITEM, NULL, NULL, NULL);
-			m_bCommandAvailable = FALSE;
-			m_cCommand = OBJECTSTOP;
-			break;
-
-		case OBJECTMAGIC:
-			bSendCommand(MSGID_COMMAND_MOTION, OBJECTMAGIC, m_cPlayerDir, m_iCastingMagicType, NULL, NULL, NULL);
-			m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir,
-				                  m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor,
-								  m_iPlayerStatus, m_cPlayerName,
-								  OBJECTMAGIC, m_iCastingMagicType, NULL, NULL);
-			m_bCommandAvailable = FALSE;
-			m_dwCommandTime = timeGetTime();
-			m_bIsGetPointingMode = TRUE;
-			m_cCommand = OBJECTSTOP;
-			_RemoveChatMsgListByObjectID(m_sPlayerObjectID);
-			for (i = 1; i < MAXCHATMSGS; i++)
-			if (m_pChatMsgList[i] == NULL)
-			{	ZeroMemory(cTxt, sizeof(cTxt));
-				wsprintf(cTxt, "%s!", m_pMagicCfgList[m_iCastingMagicType]->m_cName);
-				m_pChatMsgList[i] = new class CMsg(41, cTxt, timeGetTime());
-				m_pChatMsgList[i]->m_iObjectID = m_sPlayerObjectID;
-				m_pMapData->bSetChatMsgOwner(m_sPlayerObjectID, -10, -10, i);
-				return;
-			}
-			break;
-
-		default:
-			break;
-	}	}
+// char   cDir, absX, absY, cName[12];
+// short  sX, sY, sObjectType, tX, tY;
+// int iObjectStatus;
+// int    iRet;
+// DWORD  dwTime = timeGetTime();
+// WORD   wType = 0;
+// int i;//, iFOE;
+// char   cTxt[120];
+//
+// char  pDstName[21];
+// short sDstOwnerType;
+// int iDstOwnerStatus;
+//
+// BOOL  bGORet;
+// // Fixed by Snoopy
+//	if ((m_bIsObserverCommanded == FALSE) && (m_bIsObserverMode == TRUE))
+//	{	if ((msX == 0) && (msY == 0) && (m_sViewDstX > 32*21) && (m_sViewDstY > 32*16)) //bSendCommand(MSGID_REQUEST_PANNING, NULL, 8, NULL, NULL, NULL, NULL);
+//		else
+//		if ((msX == 639) && (msY == 0) && (m_sViewDstX < 32*m_pMapData->m_sMapSizeX - 32*21) && (m_sViewDstY > 32*16)) //bSendCommand(MSGID_REQUEST_PANNING, NULL, 2, NULL, NULL, NULL, NULL);
+//		else
+//		if ((msX == 639) && (msY == 479) && (m_sViewDstX < 32*m_pMapData->m_sMapSizeX - 32*21) && (m_sViewDstY < 32*m_pMapData->m_sMapSizeY - 32*16)) //bSendCommand(MSGID_REQUEST_PANNING, NULL, 4, NULL, NULL, NULL, NULL);
+//		else
+//		if ((msX == 0) && (msY == 479)) //bSendCommand(MSGID_REQUEST_PANNING, NULL, 6, NULL, NULL, NULL, NULL);
+//		else
+//		if ((msX == 0) && (m_sViewDstX > 32*21)) //bSendCommand(MSGID_REQUEST_PANNING, NULL, 7, NULL, NULL, NULL, NULL);
+//		else
+//		if ((msX == 639) && (m_sViewDstX < 32*m_pMapData->m_sMapSizeX - 32*21)) //bSendCommand(MSGID_REQUEST_PANNING, NULL, 3, NULL, NULL, NULL, NULL);
+//		else
+//		if ((msY == 0) && (m_sViewDstY > 32*16)) //bSendCommand(MSGID_REQUEST_PANNING, NULL, 1, NULL, NULL, NULL, NULL);
+//		else
+//		if ((msY == 479) && (m_sViewDstY < 32*m_pMapData->m_sMapSizeY - 32*16)) //bSendCommand(MSGID_REQUEST_PANNING, NULL, 5, NULL, NULL, NULL, NULL);
+//		else return;
+//
+//		m_bIsObserverCommanded = TRUE;
+//		m_cArrowPressed = 0;
+//		return;
+//	}
+//
+//	if (m_bIsObserverMode == TRUE) return;
+//
+//	if (GetAsyncKeyState(VK_MENU)>>15) // [ALT]
+//		 m_bSuperAttackMode = TRUE;
+//	else m_bSuperAttackMode = FALSE;
+//
+//	switch (m_stMCursor.cPrevStatus) {
+//	case CURSORSTATUS_NULL:
+//		if (cLB != 0)
+//		{	iRet = _iCheckDlgBoxFocus(msX, msY, 1);
+//			if (iRet == 1)
+//			{	m_stMCursor.cPrevStatus	= CURSORSTATUS_SELECTED;
+//				return;
+//			}else if (iRet == 0)
+//			{	m_stMCursor.cPrevStatus = CURSORSTATUS_PRESSED;
+//				// Snoopy: Added Golden LevelUp
+//				if (   (msX >560) && (msX <620) && (msY>390) && (msY<405)
+//					&& (m_iLU_Point >0))
+//				{	if (m_bIsDialogEnabled[12] != TRUE)
+//					{	EnableDialogBox(12, NULL, NULL, NULL);
+//						PlaySound('E', 14, 5);
+//					}
+//					m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
+//					return;
+//				}
+//			}else if (iRet == -1)
+//			{	return;
+//			}
+//		}else if (cRB != 0)
+//		{	iRet = _iCheckDlgBoxFocus(msX, msY, 2);
+//			if (iRet == 1) return;
+//		}
+//		break;
+//	case CURSORSTATUS_PRESSED:
+//		if (cLB == 0) // Normal Click
+//		{	m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
+//		}
+//		break;
+//	case CURSORSTATUS_SELECTED:
+//		if (cLB == 0)
+//		{	if (   ((dwTime - m_stMCursor.dwSelectClickTime) < DOUBLECLICKTIME) 	// Double Click
+//				&& (msX == m_stMCursor.sClickX) && (msY == m_stMCursor.sClickY) ) 
+//			{	m_stMCursor.dwSelectClickTime = m_stMCursor.dwSelectClickTime;
+//				_bCheckDlgBoxDoubleClick(msX, msY);
+//			}else // Click
+//			{	_bCheckDlgBoxClick(msX, msY);
+//				m_stMCursor.sClickX = msX;
+//				m_stMCursor.sClickY = msY;
+//			}
+//			m_stMCursor.dwSelectClickTime = dwTime;
+//			m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
+//			if (m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_ITEM)
+//			{	_bCheckDraggingItemRelease(msX, msY);
+//				m_stMCursor.cSelectedObjectType = NULL;
+//				m_stMCursor.sSelectedObjectID   = NULL;
+//			}
+//			return;
+//		}
+//		if (cLB != 0) 			// v2.05 01-11-30
+//		{	if ((m_pMapData->bIsTeleportLoc(m_sPlayerX, m_sPlayerY) == TRUE) && (m_cCommandCount == 0)) goto CP_SKIPMOUSEBUTTONSTATUS;
+//
+//			if ((m_stMCursor.sPrevX != msX)	|| (m_stMCursor.sPrevY != msY))
+//			{	m_stMCursor.cPrevStatus = CURSORSTATUS_DRAGGING;
+//				m_stMCursor.sPrevX = msX;
+//				m_stMCursor.sPrevY = msY;
+//				if ( (m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_DLGBOX) &&
+//					 ((m_stMCursor.sSelectedObjectID == 30) || (m_stMCursor.sSelectedObjectID == 29)) )
+//				{	m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
+//				}
+//				if ((m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_DLGBOX) &&
+//					(m_stMCursor.sSelectedObjectID == 7) && (m_stDialogBoxInfo[7].cMode == 1))
+//				{	EndInputString();
+//					m_stDialogBoxInfo[7].cMode = 20;
+//				}
+//				// Query Drop Item Amount
+//				if ((m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_DLGBOX) &&
+//					(m_stMCursor.sSelectedObjectID == 17) && (m_stDialogBoxInfo[17].cMode == 1))
+//					// Guild Menu
+//				{	EndInputString();
+//					m_stDialogBoxInfo[17].cMode = 20;
+//				}
+//				return;
+//			}
+//			if ((m_cCommand == OBJECTMOVE) || (m_cCommand == OBJECTRUN)) goto MOTION_COMMAND_PROCESS;
+//			return;
+//		}
+//		break;
+//	case CURSORSTATUS_DRAGGING:
+//		if (cLB != 0)
+//		{	if ((m_pMapData->bIsTeleportLoc(m_sPlayerX, m_sPlayerY) == TRUE) && (m_cCommandCount == 0)) goto CP_SKIPMOUSEBUTTONSTATUS;
+//			if (m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_DLGBOX)
+//			{	m_stDialogBoxInfo[m_stMCursor.sSelectedObjectID].sX = msX - m_stMCursor.sDistX;
+//				m_stDialogBoxInfo[m_stMCursor.sSelectedObjectID].sY = msY - m_stMCursor.sDistY;
+//			}
+//			m_stMCursor.sPrevX = msX;
+//			m_stMCursor.sPrevY = msY;
+//
+//			if ((m_cCommand == OBJECTMOVE) || (m_cCommand == OBJECTRUN)) goto MOTION_COMMAND_PROCESS;
+//			return;
+//		}
+//		if (cLB == 0) {
+//			switch (m_stMCursor.cSelectedObjectType) {
+//			case SELECTEDOBJTYPE_DLGBOX:
+//				if ((m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_DLGBOX) &&
+//					(m_stMCursor.sSelectedObjectID == 7) && (m_stDialogBoxInfo[7].cMode == 20))
+//				{	sX = m_stDialogBoxInfo[7].sX;
+//					sY = m_stDialogBoxInfo[7].sY;
+//					StartInputString(sX + 75, sY + 140, 21, m_cGuildName);
+//					m_stDialogBoxInfo[7].cMode = 1;
+//				}
+//
+//				if ((m_stMCursor.cSelectedObjectType == SELECTEDOBJTYPE_DLGBOX) &&
+//					(m_stMCursor.sSelectedObjectID == 17) && (m_stDialogBoxInfo[17].cMode == 20))
+//				{	// Query Drop Item Amount
+//					sX = m_stDialogBoxInfo[17].sX;
+//					sY = m_stDialogBoxInfo[17].sY;
+//					StartInputString(sX + 40, sY + 57, 11, m_cAmountString);
+//					m_stDialogBoxInfo[17].cMode = 1;
+//				}
+//
+//				if ( m_stMCursor.sSelectedObjectID == 9 )
+//				{	if( msX < 320 ) m_stDialogBoxInfo[9].sX = 0;
+//					else m_stDialogBoxInfo[9].sX = 640 - m_stDialogBoxInfo[9].sSizeX;
+//					if( msY < 213 ) m_stDialogBoxInfo[9].sY = 0;
+//					else m_stDialogBoxInfo[9].sY = 427 - m_stDialogBoxInfo[9].sSizeY;
+//				}
+//
+//				m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
+//				m_stMCursor.cSelectedObjectType = NULL;
+//				m_stMCursor.sSelectedObjectID   = NULL;
+//				break;
+//
+//			case SELECTEDOBJTYPE_ITEM:
+//				_bCheckDraggingItemRelease(msX, msY);
+//				m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
+//				m_stMCursor.cSelectedObjectType = NULL;
+//				m_stMCursor.sSelectedObjectID   = NULL;
+//				break;
+//
+//			default:
+//				m_stMCursor.cPrevStatus = CURSORSTATUS_NULL;
+//				m_stMCursor.cSelectedObjectType = NULL;
+//				m_stMCursor.sSelectedObjectID   = NULL;
+//				break;
+//			}
+//			return;
+//		}
+//		break;
+//	}
+//
+//CP_SKIPMOUSEBUTTONSTATUS:;
+//	if (m_bCommandAvailable == FALSE) return;
+//	if ( (dwTime - m_dwCommandTime) < 300 )
+//	{	//delete m_pGSock;
+//		//m_pGSock = NULL;
+//		m_bEscPressed = FALSE;
+//		PlaySound('E', 14, 5);
+//		if (m_bSoundFlag) m_pESound[38]->bStop();
+//		if ((m_bSoundFlag) && (m_bMusicStat == TRUE))
+//		{	
+//			if (m_pBGM != NULL) m_pBGM->bStop();
+//		}
+//		if (strlen(G_cCmdLineTokenA) != 0)
+//			 ChangeGameMode(GAMEMODE_ONQUIT);
+//		else ChangeGameMode(GAMEMODE_ONMAINMENU);
+//		return;
+//	}
+//	if (m_iHP <= 0) return;
+//
+//	if (m_sDamageMove != 0)
+//	{	m_cCommand = OBJECTDAMAGEMOVE;
+//		goto MOTION_COMMAND_PROCESS;
+//	}
+//
+//	if ((m_pMapData->bIsTeleportLoc(m_sPlayerX, m_sPlayerY) == TRUE) && (m_cCommandCount == 0))
+//		RequestTeleportAndWaitData();
+//
+//	// indexX, indexY
+//	if (cLB != 0) // Mouse Left button
+//	{	if (m_bIsGetPointingMode == TRUE)
+//		{	if ((m_sMCX != 0) || (m_sMCY != 0))
+//				 PointCommandHandler(m_sMCX, m_sMCY);
+//			else PointCommandHandler(indexX, indexY);
+//
+//			m_bCommandAvailable  = FALSE;
+//			m_dwCommandTime = timeGetTime();
+//			m_bIsGetPointingMode = FALSE;
+//			return;
+//		}
+//
+//		m_pMapData->bGetOwner(m_sMCX, m_sMCY-1, cName, &sObjectType, &iObjectStatus, &m_wCommObjectID); // v1.4
+//		//m_pMapData->m_pData[dX][dY].m_sItemSprite
+//		if (memcmp(m_cMCName, m_cPlayerName, 10) == 0 && ( sObjectType <= 6 || m_pMapData->m_pData[m_sPlayerX-m_pMapData->m_sPivotX][m_sPlayerY-m_pMapData->m_sPivotY].m_sItemSprite != 0 ))
+//		{//if (memcmp(m_cMCName, m_cPlayerName, 10) == 0 && ( sObjectType <= 6 || m_pMapData->m_pData[15][15].m_sItemSprite != 0 )) {
+//		 //if (memcmp(m_cMCName, m_cPlayerName, 10) == 0 && sObjectType <= 6){
+//			if ((m_sPlayerType >= 1) && (m_sPlayerType <= 6)/* && ((m_sPlayerAppr2 & 0xF000) == 0)*/)
+//			{	m_cCommand = OBJECTGETITEM;
+//				m_sCommX = m_sPlayerX;
+//				m_sCommY = m_sPlayerY;
+//			}
+//		}else
+//		{	if( memcmp(m_cMCName, m_cPlayerName, 10) == 0 ) m_sMCY -= 1;
+//			if ((m_sMCX != 0) && (m_sMCY != 0)) // m_sMCX, m_sMCY
+//			{	if (m_bCtrlPressed == TRUE)
+//				{	m_pMapData->bGetOwner(m_sMCX, m_sMCY, cName, &sObjectType, &iObjectStatus, &m_wCommObjectID);
+//					if ( (iObjectStatus & 0x10) != 0) return;
+//					if ((sObjectType == 15) || (sObjectType == 20) || (sObjectType == 24)) return;
+//					m_stMCursor.sCursorFrame = 3;
+//					absX = abs(m_sPlayerX - m_sMCX);
+//					absY = abs(m_sPlayerY - m_sMCY);
+//					if ((absX <= 1) && (absY <= 1))
+//					{	wType = _iGetAttackType();
+//						m_cCommand = OBJECTATTACK;
+//						m_sCommX = m_sMCX;
+//						m_sCommY = m_sMCY;
+//					}else if ( (absX <= 2) && (absY <= 2) // strike on Big mobs & gate from a range
+//							&& ((sObjectType == 66)||(sObjectType == 73)||(sObjectType == 81)||(sObjectType == 91)))
+//					{	wType = _iGetAttackType();
+//						m_cCommand = OBJECTATTACK;
+//						m_sCommX = m_sMCX;
+//						m_sCommY = m_sMCY;
+//					}else // Pas au corp à corp
+//					{	switch (_iGetWeaponSkillType()) {
+//						case 6: // Bow
+//							m_cCommand = OBJECTATTACK;
+//							m_sCommX = m_sMCX;
+//							m_sCommY = m_sMCY;
+//							wType = _iGetAttackType();
+//							break;
+//
+//						case 5: // OpenHand
+//						case 7: // SS
+//							if (((absX == 2) && (absY == 2)) || ((absX == 0) && (absY == 2)) || ((absX == 2) && (absY == 0)))
+//							{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
+//								{	if (m_cSkillMastery[_iGetWeaponSkillType()] == 100)
+//									{	m_cCommand = OBJECTATTACKMOVE;
+//										wType = _iGetAttackType();
+//									}else
+//									{	m_cCommand = OBJECTRUN;
+//										GetPlayerTurn();
+//									}
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//								}else
+//								{	m_cCommand = OBJECTMOVE;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//									GetPlayerTurn();
+//								}
+//							}else
+//							{	if (   (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)
+//									&& (m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//									 m_cCommand = OBJECTRUN;	// Staminar
+//								else m_cCommand = OBJECTMOVE;
+//								m_sCommX = m_sMCX;
+//								m_sCommY = m_sMCY;
+//								GetPlayerTurn();
+//							}
+//							break;
+//
+//						case 8: // LS
+//							if (   (absX <= 3) && (absY <= 3) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
+//								&& (_iGetAttackType() != 30)) // Crit without StormBlade
+//							{	wType = _iGetAttackType();
+//								m_cCommand = OBJECTATTACK;
+//								m_sCommX = m_sMCX;
+//								m_sCommY = m_sMCY;
+//							}else if ( (absX <= 5) && (absY <= 5) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
+//								&& (_iGetAttackType() == 30))  // Crit with StormBlade (by Snoopy)
+//							{	wType = _iGetAttackType();
+//								m_cCommand = OBJECTATTACK;
+//								m_sCommX = m_sMCX;
+//								m_sCommY = m_sMCY;
+//							}else if ( (absX <= 3) && (absY <= 3)
+//								&& (_iGetAttackType() == 5))  // Normal hit with StormBlade (by Snoopy)
+//							{	wType = _iGetAttackType();
+//								m_cCommand = OBJECTATTACK;
+//								m_sCommX = m_sMCX;
+//								m_sCommY = m_sMCY;
+//							}else // Swing
+//							{	if (((absX == 2) && (absY == 2)) || ((absX == 0) && (absY == 2)) || ((absX == 2) && (absY == 0))
+//									&& (_iGetAttackType() != 5)) // no Dash possible with StormBlade
+//								{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
+//									{	if (m_cSkillMastery[_iGetWeaponSkillType()] == 100)
+//										{	m_cCommand = OBJECTATTACKMOVE;
+//											wType = _iGetAttackType();
+//										}else
+//										{	m_cCommand = OBJECTRUN;
+//											GetPlayerTurn();
+//										}
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//									}else
+//									{	m_cCommand = OBJECTMOVE;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										GetPlayerTurn();
+//									}
+//								}else
+//								{	if (   (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)
+//										&& (m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//										 m_cCommand = OBJECTRUN;
+//									else m_cCommand = OBJECTMOVE;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//									GetPlayerTurn();
+//							}	}
+//							break;
+//
+//						case 9: // Fencing
+//							if ((absX <= 4) && (absY <= 4) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE))
+//							{	m_cCommand = OBJECTATTACK;
+//								m_sCommX = m_sMCX;
+//								m_sCommY = m_sMCY;
+//								wType = _iGetAttackType();
+//							}
+//							else {
+//								if (((absX == 2) && (absY == 2)) || ((absX == 0) && (absY == 2)) || ((absX == 2) && (absY == 0))) {
+//									if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)) {
+//										if (m_cSkillMastery[_iGetWeaponSkillType()] == 100) {
+//											m_cCommand = OBJECTATTACKMOVE;
+//											wType = _iGetAttackType();
+//										}
+//										else {
+//											m_cCommand = OBJECTRUN;
+//											GetPlayerTurn();
+//										}
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//									}
+//									else {
+//										m_cCommand = OBJECTMOVE;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										GetPlayerTurn();
+//									}
+//								}
+//								else {
+//									if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
+//										(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//										 m_cCommand = OBJECTRUN;
+//									else m_cCommand = OBJECTMOVE;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//									GetPlayerTurn();
+//								}
+//							}
+//							break;
+//
+//						case 10: // Axe
+//							if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) 
+//							{	m_cCommand = OBJECTATTACK;
+//								m_sCommX = m_sMCX;
+//								m_sCommY = m_sMCY;
+//								wType = _iGetAttackType();
+//							}else
+//							{	if (((absX == 2) && (absY == 2)) || ((absX == 0) && (absY == 2)) || ((absX == 2) && (absY == 0))) 
+//								{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)) 
+//									{	if (m_cSkillMastery[_iGetWeaponSkillType()] == 100) 
+//										{	m_cCommand = OBJECTATTACKMOVE;
+//											wType = _iGetAttackType();
+//										}else 
+//										{	m_cCommand = OBJECTRUN;
+//											GetPlayerTurn();
+//										}
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//									}else 
+//									{	m_cCommand = OBJECTMOVE;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										GetPlayerTurn();
+//									}
+//								}else
+//								{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
+//										(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//										 m_cCommand = OBJECTRUN;
+//									else m_cCommand = OBJECTMOVE;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//									GetPlayerTurn();
+//							}	}
+//							break;
+//						case 14: // Hammer
+//							if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
+//								m_cCommand = OBJECTATTACK;
+//								m_sCommX = m_sMCX;
+//								m_sCommY = m_sMCY;
+//								wType = _iGetAttackType();
+//							}
+//							else {
+//								if (((absX == 2) && (absY == 2)) || ((absX == 0) && (absY == 2)) || ((absX == 2) && (absY == 0))) {
+//									if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)) {
+//										if (m_cSkillMastery[_iGetWeaponSkillType()] == 100) {
+//											m_cCommand = OBJECTATTACKMOVE;
+//											wType = _iGetAttackType();
+//										}
+//										else {
+//											m_cCommand = OBJECTRUN;
+//											GetPlayerTurn();
+//										}
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//									}
+//									else {
+//										m_cCommand = OBJECTMOVE;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										GetPlayerTurn();
+//									}
+//								}
+//								else {
+//									if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
+//										(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//										 m_cCommand = OBJECTRUN;
+//									else m_cCommand = OBJECTMOVE;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//									GetPlayerTurn();
+//							}	}
+//							break;
+//						case 21: // Wand
+//							if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
+//								m_cCommand = OBJECTATTACK;
+//								m_sCommX = m_sMCX;
+//								m_sCommY = m_sMCY;
+//								wType = _iGetAttackType();
+//							}
+//							else {
+//								if (((absX == 2) && (absY == 2)) || ((absX == 0) && (absY == 2)) || ((absX == 2) && (absY == 0))) {
+//									if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)) {
+//										if (m_cSkillMastery[_iGetWeaponSkillType()] == 100) {
+//											m_cCommand = OBJECTATTACKMOVE;
+//											wType = _iGetAttackType();
+//										}
+//										else {
+//											m_cCommand = OBJECTRUN;
+//											GetPlayerTurn();
+//										}
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//									}
+//									else {
+//										m_cCommand = OBJECTMOVE;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										GetPlayerTurn();
+//									}
+//								}
+//								else {
+//									if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
+//										(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//										 m_cCommand = OBJECTRUN;
+//									else m_cCommand = OBJECTMOVE;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//									GetPlayerTurn();
+//								}
+//							}
+//							break;
+//						}
+//					}
+//				}else // CTRL not pressed
+//				{	m_pMapData->bGetOwner(m_sMCX, m_sMCY, cName, &sObjectType, &iObjectStatus, &m_wCommObjectID);
+//					if (sObjectType >= 10 || ((sObjectType >= 1) && (sObjectType <= 6)))
+//					{	switch (sObjectType) { 	// CLEROTH - NPC TALK
+//						case 15: // ShopKeeper-W°
+//							/*switch (cName[0]) {
+//							case '1':*/
+//								EnableDialogBox(20, 5, 11, 1);
+//								tX = msX - 117;
+//								tY = msY - 50;
+//								if (tX < 0) tX = 0;
+//								if ((tX + 235) > 639) tX = 639 - 235;
+//								if (tY < 0) tY = 0;
+//								if ((tY + 100) > 479) tY = 479 - 100;
+//								m_stDialogBoxInfo[20].sX  = tX;
+//								m_stDialogBoxInfo[20].sY  = tY;
+//								m_stDialogBoxInfo[20].sV3 = 15;
+//							/*	break;
+//							}*/
+//							break;
+//
+//						case 19: // Gandlf
+//							/*switch (cName[0]) {
+//							case '1':*/
+//								EnableDialogBox(20, 0, 16, NULL);
+//								tX = msX - 117;
+//								tY = msY - 50;
+//								if (tX < 0) tX = 0;
+//								if ((tX + 235) > 639) tX = 639 - 235;
+//								if (tY < 0) tY = 0;
+//								if ((tY + 100) > 479) tY = 479 - 100;
+//								m_stDialogBoxInfo[20].sX  = tX;
+//								m_stDialogBoxInfo[20].sY  = tY;
+//								m_stDialogBoxInfo[20].sV3 = 19;
+//							/*	break;
+//						 	}*/
+//							break;
+//
+//						case 20: // Howard
+//							/*switch (cName[0]) {
+//							case '1':*/
+//								EnableDialogBox(20, 0, 14, NULL);
+//								tX = msX - 117;
+//								tY = msY - 50;
+//								if (tX < 0) tX = 0;
+//								if ((tX + 235) > 639) tX = 639 - 235;
+//								if (tY < 0) tY = 0;
+//								if ((tY + 100) > 479) tY = 479 - 100;
+//								m_stDialogBoxInfo[20].sX  = tX;
+//								m_stDialogBoxInfo[20].sY  = tY;
+//								m_stDialogBoxInfo[20].sV3 = 20;
+//								m_stDialogBoxInfo[39].sV3 = 20;
+//								m_stDialogBoxInfo[39].sV4 = m_wCommObjectID;
+//								m_stDialogBoxInfo[39].sV5 = m_sMCX;
+//								m_stDialogBoxInfo[39].sV6 = m_sMCY;
+//							/*	break;
+//						 	}*/
+//							break;
+//
+//						case 24: // Tom
+//							/*switch (cName[0]) {
+//							case '1':*/
+//								EnableDialogBox(20, 5, 11, 2);
+//								tX = msX - 117;
+//								tY = msY - 50;
+//								if (tX < 0) tX = 0;
+//								if ((tX + 235) > 639) tX = 639 - 235;
+//								if (tY < 0) tY = 0;
+//								if ((tY + 100) > 479) tY = 479 - 100;
+//								m_stDialogBoxInfo[20].sX  = tX;
+//								m_stDialogBoxInfo[20].sY  = tY;
+//								m_stDialogBoxInfo[20].sV3 = 24;
+//								m_stDialogBoxInfo[39].sV3 = 24;
+//								m_stDialogBoxInfo[39].sV4 = m_wCommObjectID;
+//								m_stDialogBoxInfo[39].sV5 = m_sMCX;
+//								m_stDialogBoxInfo[39].sV6 = m_sMCY;
+//							/*	break;
+//						 	}*/
+//							break;
+//
+//						case 25: // William
+//							/*switch (cName[0]) {
+//							case '1':*/
+//								EnableDialogBox(20, 0, 13, NULL);
+//								tX = msX - 117;
+//								tY = msY - 50;
+//								if (tX < 0) tX = 0;
+//								if ((tX + 235) > 639) tX = 639 - 235;
+//								if (tY < 0) tY = 0;
+//								if ((tY + 100) > 479) tY = 479 - 100;
+//								m_stDialogBoxInfo[20].sX  = tX;
+//								m_stDialogBoxInfo[20].sY  = tY;
+//								m_stDialogBoxInfo[20].sV3 = 25;
+//							/*	break;
+//						 	}*/
+//							break;
+//
+//						case 26: // Kennedy
+//							/*switch (cName[0]) {
+//							case '1':*/
+//								EnableDialogBox(20, 0, 7, NULL);
+//								tX = msX - 117;
+//								tY = msY - 50;
+//								if (tX < 0) tX = 0;
+//								if ((tX + 235) > 639) tX = 639 - 235;
+//								if (tY < 0) tY = 0;
+//								if ((tY + 100) > 479) tY = 479 - 100;
+//								m_stDialogBoxInfo[20].sX  = tX;
+//								m_stDialogBoxInfo[20].sY  = tY;
+//								m_stDialogBoxInfo[20].sV3 = 26;
+//							/*	break;
+//						 	}*/
+//							break;
+//
+//						case 21: // Guard
+//							if ((_iGetFOE(iObjectStatus)>=0) && (!m_bIsCombatMode)) 
+//							{	EnableDialogBox(20, 4, NULL, NULL);
+//								tX = msX - 117;
+//								tY = msY - 50;
+//								if (tX < 0) tX = 0;
+//								if ((tX + 235) > 639) tX = 639 - 235;
+//								if (tY < 0) tY = 0;
+//								if ((tY + 100) > 479) tY = 479 - 100;
+//								m_stDialogBoxInfo[20].sX  = tX;
+//								m_stDialogBoxInfo[20].sY  = tY;
+//								m_stDialogBoxInfo[20].sV3 = 21;
+//							}
+//							break;
+//						case 67: // McGaffin
+//						case 68: // Perry
+//						case 69: // Devlin
+//							if (!m_bIsCombatMode)
+//							{	EnableDialogBox(20, 4, NULL, NULL);
+//								tX = msX - 117;
+//								tY = msY - 50;
+//								if (tX < 0) tX = 0;
+//								if ((tX + 235) > 639) tX = 639 - 235;
+//								if (tY < 0) tY = 0;
+//								if ((tY + 100) > 479) tY = 479 - 100;
+//								m_stDialogBoxInfo[20].sX  = tX;
+//								m_stDialogBoxInfo[20].sY  = tY;
+//								m_stDialogBoxInfo[20].sV3 = sObjectType;
+//							}
+//							break;
+//
+//						case 32: // Unicorn
+//							if (!m_bIsCombatMode)
+//							{	EnableDialogBox(20, 4, NULL, NULL);
+//								tX = msX - 117;
+//								tY = msY - 50;
+//								if (tX < 0) tX = 0;
+//								if ((tX + 235) > 639) tX = 639 - 235;
+//								if (tY < 0) tY = 0;
+//								if ((tY + 100) > 479) tY = 479 - 100;
+//								m_stDialogBoxInfo[20].sX  = tX;
+//								m_stDialogBoxInfo[20].sY  = tY;
+//								m_stDialogBoxInfo[20].sV3 = 32;
+//							}
+//							break;
+//
+//						case 90: // Snoopy: Gail
+//							/*switch (cName[0]) {
+//							case '1':*/
+//								EnableDialogBox(20, 6, 0, NULL);
+//								tX = msX - 117;
+//								tY = msY - 50;
+//								if (tX < 0) tX = 0;
+//								if ((tX + 235) > 639) tX = 639 - 235;
+//								if (tY < 0) tY = 0;
+//								if ((tY + 100) > 479) tY = 479 - 100;
+//								m_stDialogBoxInfo[20].sX  = tX;
+//								m_stDialogBoxInfo[20].sY  = tY;
+//								m_stDialogBoxInfo[20].sV3 = 90;
+//								/*break;
+//						 	}*/
+//							break;
+//
+//						default: // Other mobs
+//							if ( _iGetFOE(iObjectStatus) >= 0 ) break;
+//							if ( (sObjectType>=1) && (sObjectType<=6) && (m_bForceAttack==FALSE) ) break;
+//							absX = abs(m_sPlayerX - m_sMCX);
+//							absY = abs(m_sPlayerY - m_sMCY);
+//							if ((absX <= 1) && (absY <= 1))
+//							{	wType = _iGetAttackType();
+//								m_cCommand = OBJECTATTACK;
+//								m_sCommX = m_sMCX;
+//								m_sCommY = m_sMCY;
+//							}else if ( (absX <= 2) && (absY <= 2) // strike on Big mobs & gate from a range
+//							&& ((sObjectType == 66)||(sObjectType == 73)||(sObjectType == 81)||(sObjectType == 91)))
+//							{	wType = _iGetAttackType();
+//								m_cCommand = OBJECTATTACK;
+//								m_sCommX = m_sMCX;
+//								m_sCommY = m_sMCY;
+//							}else // Normal hit from a range.
+//							{	switch (_iGetWeaponSkillType()) {
+//								case 6: // Bow
+//									m_cCommand = OBJECTATTACK;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//									wType = _iGetAttackType();
+//									break;
+//
+//								case 5: // Boxe
+//								case 7: // SS
+//									if (   (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0)
+//										&& (m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//										m_cCommand = OBJECTRUN;
+//									else m_cCommand = OBJECTMOVE;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//									GetPlayerTurn();
+//									break;
+//
+//								case 8: // LS
+//									if (   (absX <= 3) && (absY <= 3) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
+//										&& (_iGetAttackType() != 30)) // Crit without StormBlade by Snoopy
+//									{	if ((absX <= 1) && (absY <= 1) && (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
+//											 m_cCommand = OBJECTATTACKMOVE;
+//										else m_cCommand = OBJECTATTACK;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										wType = _iGetAttackType();
+//									}else if ((absX <= 5) && (absY <= 5) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
+//										   && (_iGetAttackType() == 30)) // Crit with StormBlade by Snoopy
+//									{	if ((absX <= 1) && (absY <= 1) && (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
+//											 m_cCommand = OBJECTATTACKMOVE;
+//										else m_cCommand = OBJECTATTACK;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										wType = _iGetAttackType();
+//									}else if ((absX <= 3) && (absY <= 3)
+//										   && (_iGetAttackType() == 5)) // Normal hit with StormBlade by Snoopy
+//									{	m_cCommand = OBJECTATTACK;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										wType = _iGetAttackType();
+//									}else
+//									{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
+//											(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//											m_cCommand = OBJECTRUN;
+//										else m_cCommand = OBJECTMOVE;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										GetPlayerTurn();
+//									}
+//									break;
+//
+//								case 9: // Fencing
+//									if ((absX <= 4) && (absY <= 4) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE))
+//									{	if ((absX <= 1) && (absY <= 1) && (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
+//											 m_cCommand = OBJECTATTACKMOVE;
+//										else m_cCommand = OBJECTATTACK;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										wType = _iGetAttackType();
+//									}else
+//									{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
+//											(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//											m_cCommand = OBJECTRUN;
+//										else m_cCommand = OBJECTMOVE;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										GetPlayerTurn();
+//									}
+//									break;
+//
+//								case 10: //
+//									if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
+//										if ((absX <= 1) && (absY <= 1) && (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
+//											 m_cCommand = OBJECTATTACKMOVE;
+//										else m_cCommand = OBJECTATTACK;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										wType = _iGetAttackType();
+//									}
+//									else {
+//										if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
+//											(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//											m_cCommand = OBJECTRUN;
+//										else m_cCommand = OBJECTMOVE;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										GetPlayerTurn();
+//									}
+//									break;
+//								case 14: //
+//									if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
+//										if ((absX <= 1) && (absY <= 1) && (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
+//											 m_cCommand = OBJECTATTACKMOVE;
+//										else m_cCommand = OBJECTATTACK;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										wType = _iGetAttackType();
+//									}
+//									else {
+//										if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
+//											(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//											m_cCommand = OBJECTRUN;
+//										else m_cCommand = OBJECTMOVE;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										GetPlayerTurn();
+//									}
+//									break;
+//								case 21: //
+//									if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
+//										if ((absX <= 1) && (absY <= 1) && (m_bShiftPressed || m_bRunningMode) && (m_iSP > 0))
+//											 m_cCommand = OBJECTATTACKMOVE;
+//										else m_cCommand = OBJECTATTACK;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										wType = _iGetAttackType();
+//									}
+//									else {
+//										if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
+//											(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//											m_cCommand = OBJECTRUN;
+//										else m_cCommand = OBJECTMOVE;
+//										m_sCommX = m_sMCX;
+//										m_sCommY = m_sMCY;
+//										GetPlayerTurn();
+//									}
+//									break;
+//								}
+//							}
+//							break;
+//						}
+//					}
+//					else {
+//						if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
+//							(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//							 m_cCommand = OBJECTRUN;
+//						else m_cCommand = OBJECTMOVE;
+//						m_sCommX = m_sMCX;
+//						m_sCommY = m_sMCY;
+//						GetPlayerTurn();
+//					}
+//				}
+//			}else
+//			{	if ((m_bShiftPressed || m_bRunningMode) && (m_iSP > 0) &&
+//					(m_sPlayerType >= 1) && (m_sPlayerType <= 6))
+//					 m_cCommand = OBJECTRUN;
+//				else m_cCommand = OBJECTMOVE;
+//				m_sCommX = indexX;
+//				m_sCommY = indexY;
+//				GetPlayerTurn();
+//			}
+//		}
+//	}else if (cRB != 0) // Mouse Right button
+//	{	m_cCommand = OBJECTSTOP;
+//		if (m_bIsGetPointingMode == TRUE)
+//		{	m_bIsGetPointingMode = FALSE;
+//			AddEventList(COMMAND_PROCESSOR1, 10);
+//		}
+//		if (m_bCommandAvailable == FALSE) return;
+//		if (m_cCommandCount >= 6) return;
+//
+//		if ((m_sMCX != 0) && (m_sMCY != 0))
+//		{	absX = abs(m_sPlayerX - m_sMCX);
+//			absY = abs(m_sPlayerY - m_sMCY);
+//			if( absX==0 && absY==0 ) return;
+//
+//			if (m_bCtrlPressed == TRUE)
+//			{	m_pMapData->bGetOwner(m_sMCX, m_sMCY, cName, &sObjectType, &iObjectStatus, &m_wCommObjectID);
+//				if ( (iObjectStatus & 0x10) != 0) return;
+//				if ((sObjectType == 15) || (sObjectType == 20) || (sObjectType == 24)) return;
+//
+//				if ((absX <= 1) && (absY <= 1))
+//				{	wType = _iGetAttackType();
+//					m_cCommand = OBJECTATTACK;
+//					m_sCommX = m_sMCX;
+//					m_sCommY = m_sMCY;
+//				}else if ( (absX <= 2) && (absY <= 2) // strike on Big mobs & gate from a range
+//							&& ((sObjectType == 66)||(sObjectType == 73)||(sObjectType == 81)||(sObjectType == 91)))
+//				{	wType = _iGetAttackType();
+//					m_cCommand = OBJECTATTACK;
+//					m_sCommX = m_sMCX;
+//					m_sCommY = m_sMCY;
+//				}else
+//				{	switch (_iGetWeaponSkillType()) {
+//					case 6: // Bow
+//						m_cCommand = OBJECTATTACK;
+//						m_sCommX = m_sMCX;
+//						m_sCommY = m_sMCY;
+//						wType = _iGetAttackType();
+//						break;
+//
+//					case 5: // Boxe
+//					case 7: // SS
+//						break;
+//
+//					case 8: // LS
+//						if (   (absX <= 3) && (absY <= 3) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
+//							&& (_iGetAttackType() != 30)) // without StormBlade by Snoopy
+//						{	wType = _iGetAttackType();
+//							m_cCommand = OBJECTATTACK;
+//							m_sCommX = m_sMCX;
+//							m_sCommY = m_sMCY;
+//						}else if (   (absX <= 5) && (absY <= 5) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
+//							&& (_iGetAttackType() == 30)) // with stormBlade crit by Snoopy
+//						{	wType = _iGetAttackType();
+//							m_cCommand = OBJECTATTACK;
+//							m_sCommX = m_sMCX;
+//							m_sCommY = m_sMCY;
+//						}else if (   (absX <= 3) && (absY <= 3)
+//							&& (_iGetAttackType() == 5)) // with stormBlade no crit by Snoopy
+//						{	wType = _iGetAttackType();
+//							m_cCommand = OBJECTATTACK;
+//							m_sCommX = m_sMCX;
+//							m_sCommY = m_sMCY;
+//						}
+//						break;
+//
+//					case 9: // Fencing
+//						if ((absX <= 4) && (absY <= 4) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
+//							m_cCommand = OBJECTATTACK;
+//							m_sCommX = m_sMCX;
+//							m_sCommY = m_sMCY;
+//							wType = _iGetAttackType();
+//						}
+//						break;
+//
+//					case 10: //
+//						if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
+//							m_cCommand = OBJECTATTACK;
+//							m_sCommX = m_sMCX;
+//							m_sCommY = m_sMCY;
+//							wType = _iGetAttackType();
+//						}
+//						break;
+//
+//					case 14: //
+//						if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
+//							m_cCommand = OBJECTATTACK;
+//							m_sCommX = m_sMCX;
+//							m_sCommY = m_sMCY;
+//							wType = _iGetAttackType();
+//						}
+//						break;
+//					case 21: //
+//						if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
+//							m_cCommand = OBJECTATTACK;
+//							m_sCommX = m_sMCX;
+//							m_sCommY = m_sMCY;
+//							wType = _iGetAttackType();
+//						}
+//						break;
+//					}
+//				}
+//			}else // CTRL not pressed
+//			{	absX = abs(m_sPlayerX - m_sMCX);
+//				absY = abs(m_sPlayerY - m_sMCY);
+//				m_pMapData->bGetOwner(m_sMCX, m_sMCY, cName, &sObjectType, &iObjectStatus, &m_wCommObjectID);
+//				if (sObjectType >= 10 || ((sObjectType >= 1) && (sObjectType <= 6))) {
+//					switch (sObjectType) {
+//					case 15:
+//					case 19:
+//					case 20:
+//					case 24:
+//					case 25:
+//					case 26: // npcs
+//						break;
+//
+//					default: // All "normal mobs"
+//						if ( _iGetFOE(iObjectStatus) >= 0 ) break;
+//						if ( (sObjectType>=1) && (sObjectType<=6) && (m_bForceAttack==FALSE) ) break;
+//						if ((absX <= 1) && (absY <= 1))
+//						{	wType = _iGetAttackType();
+//							m_cCommand = OBJECTATTACK;
+//							m_sCommX = m_sMCX;
+//							m_sCommY = m_sMCY;
+//						}else if ( (absX <= 2) && (absY <= 2) // strike on Big mobs & gate from a range
+//							&& ((sObjectType == 66)||(sObjectType == 73)||(sObjectType == 81)||(sObjectType == 91)))
+//						{	wType = _iGetAttackType();
+//							m_cCommand = OBJECTATTACK;
+//							m_sCommX = m_sMCX;
+//							m_sCommY = m_sMCY;
+//						}else //
+//						{	switch (_iGetWeaponSkillType()) {
+//							case 6: // Bow
+//								m_cCommand = OBJECTATTACK;
+//								m_sCommX = m_sMCX;
+//								m_sCommY = m_sMCY;
+//								wType = _iGetAttackType();
+//								break;
+//
+//							case 5: // Boxe
+//							case 7: // SS
+//								break;
+//
+//							case 8: // LS
+//								if (   (absX <= 3) && (absY <= 3) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
+//									&& (_iGetAttackType() != 30)) // crit without StormBlade by Snoopy
+//								{	wType = _iGetAttackType();
+//									m_cCommand = OBJECTATTACK;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//								}else if (   (absX <= 5) && (absY <= 5) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)
+//									&& (_iGetAttackType() == 30)) // with stormBlade crit by Snoopy
+//								{	wType = _iGetAttackType();
+//									m_cCommand = OBJECTATTACK;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//								}else if (   (absX <= 3) && (absY <= 3)
+//									&& (_iGetAttackType() == 5)) // with stormBlade no crit by Snoopy
+//								{	wType = _iGetAttackType();
+//									m_cCommand = OBJECTATTACK;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//								}
+//								break;
+//
+//							case 9: // fencing
+//								if ((absX <= 4) && (absY <= 4) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
+//									m_cCommand = OBJECTATTACK;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//									wType = _iGetAttackType();
+//								}
+//								break;
+//
+//							case 10: //
+//								if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
+//									m_cCommand = OBJECTATTACK;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//									wType = _iGetAttackType();
+//								}
+//								break;
+//							case 14: // hammer
+//								if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
+//									m_cCommand = OBJECTATTACK;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//									wType = _iGetAttackType();
+//								}
+//								break;
+//							case 21: // wand
+//								if ((absX <= 2) && (absY <= 2) && (m_iSuperAttackLeft > 0) && (m_bSuperAttackMode == TRUE)) {
+//									m_cCommand = OBJECTATTACK;
+//									m_sCommX = m_sMCX;
+//									m_sCommY = m_sMCY;
+//									wType = _iGetAttackType();
+//								}
+//								break;
+//						}	}
+//						break;
+//			}	}	}
+//		}else
+//		{	cDir = m_Misc.cGetNextMoveDir(m_sPlayerX, m_sPlayerY, indexX, indexY);
+//			if (m_iHP <= 0) return;
+//			if (cDir == 0) return;
+//			if (m_cPlayerDir  == cDir) return;
+//			ClearSkillUsingStatus();
+//			m_cPlayerDir = cDir;
+//			//bSendCommand(MSGID_COMMAND_MOTION, OBJECTSTOP, m_cPlayerDir, NULL, NULL, NULL, NULL);
+//
+//			m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir,
+//							                  m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor,
+//											  m_iPlayerStatus, m_cPlayerName,
+//											  m_cCommand, NULL, NULL, NULL, 0,
+//											  10);
+//			m_bCommandAvailable = FALSE;
+//			m_dwCommandTime = timeGetTime();
+//			return;
+//	}	}
+//
+//MOTION_COMMAND_PROCESS:;
+//
+//	if (m_cCommand != OBJECTSTOP)
+//	{	if (m_iHP <= 0) return;
+//		if (m_cCommandCount == 5) AddEventList(COMMAND_PROCESSOR2, 10, FALSE);
+//		if (m_bCommandAvailable == FALSE) return;
+//		if (m_cCommandCount >= 6) return;
+//
+//		if ((m_sPlayerType >= 0) && (m_sPlayerType > 6))
+//		{	switch (m_cCommand) {
+//			case OBJECTRUN:
+//			case OBJECTMAGIC:
+//			case OBJECTGETITEM:
+//				m_cCommand = OBJECTSTOP;
+//				break;
+//		}	}
+//
+//		ClearSkillUsingStatus();
+//
+//		if (m_sDamageMove != 0)
+//		{	m_cCommand = OBJECTDAMAGEMOVE;
+//			m_sCommX = m_sPlayerX;
+//			m_sCommY = m_sPlayerY;
+//
+//			switch (m_sDamageMove) {
+//			case 1: m_sCommY--; break;
+//			case 2: m_sCommX++; m_sCommY--; break;
+//			case 3: m_sCommX++; break;
+//			case 4: m_sCommX++; m_sCommY++; break;
+//			case 5: m_sCommY++; break;
+//			case 6: m_sCommX--; m_sCommY++; break;
+//			case 7: m_sCommX--; break;
+//			case 8: m_sCommX--; m_sCommY--; break;
+//			}
+//
+//			for (i = 1; i < MAXCHATMSGS; i++)
+//			if (m_pChatMsgList[i] == NULL)
+//			{	ZeroMemory(cTxt, sizeof(cTxt));
+//				if (m_sDamageMoveAmount > 0)
+//					wsprintf(cTxt, "-%dPts", m_sDamageMoveAmount); //pts
+//				else strcpy(cTxt, "Critical!");
+//
+//				int iFontType;
+//				if ((m_sDamageMoveAmount >= 0) && (m_sDamageMoveAmount < 12))		iFontType = 21;
+//				else if ((m_sDamageMoveAmount >= 12) && (m_sDamageMoveAmount < 40)) iFontType = 22;
+//				else if ((m_sDamageMoveAmount >= 40) || (m_sDamageMoveAmount < 0))	iFontType = 23;
+//
+//				m_pChatMsgList[i] = new class CMsg(iFontType, cTxt, m_dwCurTime);
+//				m_pChatMsgList[i]->m_iObjectID = m_sPlayerObjectID;
+//
+//				if (m_pMapData->bSetChatMsgOwner(m_sPlayerObjectID, -10, -10, i) == FALSE) {
+//					delete m_pChatMsgList[i];
+//					m_pChatMsgList[i] = NULL;
+//				}
+//				break;
+//			}
+//			m_sDamageMove = 0;
+//		}
+//
+//		switch (m_cCommand) {
+//		case OBJECTRUN:
+//		case OBJECTMOVE:
+//		case OBJECTDAMAGEMOVE: // v1.43
+//
+//			if( m_bParalyze ) return;
+//			bGORet = m_pMapData->bGetOwner(m_sCommX, m_sCommY, pDstName, &sDstOwnerType, &iDstOwnerStatus, &m_wCommObjectID); // v1.4
+//
+//			if ((m_sPlayerX == m_sCommX) && (m_sPlayerY == m_sCommY))
+//				m_cCommand = OBJECTSTOP;
+//			else if ( (abs(m_sPlayerX - m_sCommX) <= 1) && (abs(m_sPlayerY - m_sCommY) <= 1) &&
+//				      (bGORet == TRUE) && (sDstOwnerType != NULL) )
+//				m_cCommand = OBJECTSTOP;
+//			else if((abs(m_sPlayerX - m_sCommX) <= 2) && (abs(m_sPlayerY - m_sCommY) <= 2) &&
+//				(m_pMapData->m_tile[m_sCommX][m_sCommY].m_bIsMoveAllowed == FALSE))
+//				m_cCommand = OBJECTSTOP;
+//			else
+//			{	if( m_cCommand == OBJECTMOVE )
+//				{	if(m_bRunningMode || m_bShiftPressed) m_cCommand = OBJECTRUN;
+//				}
+//				if( m_cCommand == OBJECTRUN )
+//				{	if( (m_bRunningMode == FALSE) && (m_bShiftPressed == FALSE) ) m_cCommand = OBJECTMOVE;
+//					if( m_iSP < 1 ) m_cCommand = OBJECTMOVE;
+//				}
+//
+//				cDir = cGetNextMoveDir(m_sPlayerX, m_sPlayerY, m_sCommX, m_sCommY, TRUE);
+//				// Snoopy: Illusion Movement
+//				if ((m_bIllusionMVT == TRUE)&&(m_cCommand != OBJECTDAMAGEMOVE))
+//				{	cDir +=4;
+//					if (cDir >8) cDir -=8;
+//				}
+//				if (cDir != 0)
+//				{	m_cPlayerDir = cDir;
+//					//bSendCommand(MSGID_COMMAND_MOTION, m_cCommand, cDir, NULL, NULL, NULL, NULL);
+//					switch (cDir) {
+//					case 1:	m_sPlayerY--; break;
+//					case 2:	m_sPlayerY--; m_sPlayerX++;	break;
+//					case 3:	m_sPlayerX++; break;
+//					case 4:	m_sPlayerX++; m_sPlayerY++;	break;
+//					case 5:	m_sPlayerY++; break;
+//					case 6:	m_sPlayerX--; m_sPlayerY++;	break;
+//					case 7:	m_sPlayerX--; break;
+//					case 8:	m_sPlayerX--; m_sPlayerY--;	break;
+//					}
+//					m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir,
+//						                  m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor, // v1.4
+//										  m_iPlayerStatus, m_cPlayerName,
+//										  m_cCommand, NULL, NULL, NULL);
+//					m_bCommandAvailable = FALSE;
+//					m_dwCommandTime = timeGetTime();
+//					m_iPrevMoveX = m_sPlayerX;
+//					m_iPrevMoveY = m_sPlayerY;
+//			}	}
+//
+//			if (m_cCommand == OBJECTDAMAGEMOVE)
+//			{	m_bIsGetPointingMode = FALSE;
+//				m_iPointCommandType	 = -1;
+//				m_stMCursor.sCursorFrame = 0;
+//				ClearSkillUsingStatus();
+//				m_cCommand = OBJECTSTOP;
+//			}
+//			break;
+//
+//		case OBJECTATTACK:
+//			cDir = m_Misc.cGetNextMoveDir(m_sPlayerX, m_sPlayerY, m_sCommX, m_sCommY);
+//			// Snoopy: Illusion movement
+//			if (m_bIllusionMVT == TRUE)
+//			{	cDir +=4;
+//				if (cDir >8) cDir -=8;
+//			}
+//			if (cDir != 0)
+//			{	if ((wType == 2) || (wType == 25))
+//				{	if (_bCheckItemByType(ITEMTYPE_ARROW) == FALSE)
+//						wType = 0;
+//				}
+//				if (wType >= 20)
+//				{	m_iSuperAttackLeft--;
+//					if (m_iSuperAttackLeft < 0) m_iSuperAttackLeft = 0;
+//				}
+//				m_cPlayerDir = cDir;
+//				//bSendCommand(MSGID_COMMAND_MOTION, OBJECTATTACK, cDir, m_sCommX, m_sCommY, wType, NULL, m_wCommObjectID);
+//				m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir,
+//					                  m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor,
+//									  m_iPlayerStatus, m_cPlayerName,
+//									  OBJECTATTACK,
+//									  m_sCommX - m_sPlayerX, m_sCommY - m_sPlayerY, wType);
+//				m_bCommandAvailable = FALSE;
+//				m_dwCommandTime = timeGetTime();
+//			}
+//			m_cCommand = OBJECTSTOP;
+//			break;
+//
+//		case OBJECTATTACKMOVE:
+//			if( m_bParalyze ) return;
+//			bGORet = m_pMapData->bGetOwner(m_sCommX, m_sCommY, pDstName, &sDstOwnerType, &iDstOwnerStatus, &m_wCommObjectID);
+//			if ((m_sPlayerX == m_sCommX) && (m_sPlayerY == m_sCommY))
+//				m_cCommand = OBJECTSTOP;
+//			else if ( (abs(m_sPlayerX - m_sCommX) <= 1) && (abs(m_sPlayerY - m_sCommY) <= 1) &&
+//				      (bGORet == TRUE) && (sDstOwnerType != NULL) )
+//				m_cCommand = OBJECTSTOP;
+//			else
+//			{	cDir = cGetNextMoveDir(m_sPlayerX, m_sPlayerY, m_sCommX, m_sCommY, TRUE);
+//				// Snoopy: Illusion mvt
+//				if (m_bIllusionMVT == TRUE)
+//				{	cDir +=4;
+//					if (cDir >8) cDir -=8;
+//				}
+//				if (cDir != 0)
+//				{	m_cPlayerDir = cDir;
+//					//bSendCommand(MSGID_COMMAND_MOTION, OBJECTATTACKMOVE, cDir, m_sCommX, m_sCommY, wType, NULL, m_wCommObjectID);
+//					switch (cDir) {
+//					case 1:	m_sPlayerY--; break;
+//					case 2:	m_sPlayerY--; m_sPlayerX++;	break;
+//					case 3:	m_sPlayerX++; break;
+//					case 4:	m_sPlayerX++; m_sPlayerY++;	break;
+//					case 5:	m_sPlayerY++; break;
+//					case 6:	m_sPlayerX--; m_sPlayerY++;	break;
+//					case 7:	m_sPlayerX--; break;
+//					case 8:	m_sPlayerX--; m_sPlayerY--;	break;
+//					}
+//
+//					m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir,
+//						                  m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor,
+//										  m_iPlayerStatus, m_cPlayerName,
+//										  m_cCommand, m_sCommX - m_sPlayerX, m_sCommY - m_sPlayerY, wType);
+//					m_bCommandAvailable = FALSE;
+//					m_dwCommandTime = timeGetTime();
+//					m_iPrevMoveX = m_sPlayerX;
+//					m_iPrevMoveY = m_sPlayerY;
+//			}	}
+//			m_cCommand = OBJECTSTOP;
+//			break;
+//
+//		case OBJECTGETITEM:
+//			//bSendCommand(MSGID_COMMAND_MOTION, OBJECTGETITEM, m_cPlayerDir, NULL, NULL, NULL, NULL);
+//			m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir,
+//				                  m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor,
+//								  m_iPlayerStatus, m_cPlayerName,
+//								  OBJECTGETITEM, NULL, NULL, NULL);
+//			m_bCommandAvailable = FALSE;
+//			m_cCommand = OBJECTSTOP;
+//			break;
+//
+//		case OBJECTMAGIC:
+//			//bSendCommand(MSGID_COMMAND_MOTION, OBJECTMAGIC, m_cPlayerDir, m_iCastingMagicType, NULL, NULL, NULL);
+//			m_pMapData->bSetOwner(m_sPlayerObjectID, m_sPlayerX, m_sPlayerY, m_sPlayerType, m_cPlayerDir,
+//				                  m_sPlayerAppr1, m_sPlayerAppr2, m_sPlayerAppr3, m_sPlayerAppr4, m_iPlayerApprColor,
+//								  m_iPlayerStatus, m_cPlayerName,
+//								  OBJECTMAGIC, m_iCastingMagicType, NULL, NULL);
+//			m_bCommandAvailable = FALSE;
+//			m_dwCommandTime = timeGetTime();
+//			m_bIsGetPointingMode = TRUE;
+//			m_cCommand = OBJECTSTOP;
+//			_RemoveChatMsgListByObjectID(m_sPlayerObjectID);
+//			for (i = 1; i < MAXCHATMSGS; i++)
+//			if (m_pChatMsgList[i] == NULL)
+//			{	ZeroMemory(cTxt, sizeof(cTxt));
+//				wsprintf(cTxt, "%s!", m_pMagicCfgList[m_iCastingMagicType]->m_cName);
+//				m_pChatMsgList[i] = new class CMsg(41, cTxt, timeGetTime());
+//				m_pChatMsgList[i]->m_iObjectID = m_sPlayerObjectID;
+//				m_pMapData->bSetChatMsgOwner(m_sPlayerObjectID, -10, -10, i);
+//				return;
+//			}
+//			break;
+//
+//		default:
+//			break;
+//	}	}
 }
 
 void CGame::DrawDialogBox_Bank(short msX, short msY, short msZ, char cLB)
@@ -33035,7 +33036,7 @@ void CGame::DrawDialogBox_GuildMenu(short msX, short msY)
 
 	case 19:
 		if( m_iFightzoneNumber >0 )
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_GETOCCUPYFIGHTZONETICKET, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_GETOCCUPYFIGHTZONETICKET, NULL, NULL, NULL, NULL, NULL);
 		m_stDialogBoxInfo[7].cMode = 0;
 		break;
 
@@ -34899,7 +34900,7 @@ void CGame::DrawDialogBox_SkillDlg(short msX, short msY, short msZ, char cLB)
 		}
 
 		if (m_stDialogBoxInfo[26].cStr[0] >= 5)
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_CREATEPOTION, NULL, NULL, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_CREATEPOTION, NULL, NULL, NULL, NULL, NULL);
 			DisableDialogBox(26);
 			PlaySound('E', 42, 0);
 		}
@@ -35247,7 +35248,7 @@ void CGame::DrawDialogBox_SkillDlg(short msX, short msY, short msZ, char cLB)
 		}
 
 		if (m_stDialogBoxInfo[26].cStr[1] == 4) 
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_BUILDITEM, NULL, NULL, NULL, NULL, m_pDispBuildItemList[m_stDialogBoxInfo[26].cStr[0]]->m_cName);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_BUILDITEM, NULL, NULL, NULL, NULL, m_pDispBuildItemList[m_stDialogBoxInfo[26].cStr[0]]->m_cName);
 			m_stDialogBoxInfo[26].cStr[1]++;
 		}
 		break;
@@ -35400,7 +35401,7 @@ void CGame::DrawDialogBox_SkillDlg(short msX, short msY, short msZ, char cLB)
 			m_stDialogBoxInfo[26].cStr[1]++;
 		}
 		if (m_stDialogBoxInfo[26].cStr[1] >= 5)//m_pDispCraftItemList
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_CRAFTITEM, NULL, NULL, NULL, NULL, NULL);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_CRAFTITEM, NULL, NULL, NULL, NULL, NULL);
 			DisableDialogBox(26);
 			PlaySound('E', 42, 0);
 		}	
@@ -35638,9 +35639,9 @@ void CGame::bItemDrop_Inventory(short msX, short msY)
 				if (m_pItemList[cItemID] != NULL && memcmp(m_pItemList[cItemID]->m_cName, m_pItemList[m_stMCursor.sSelectedObjectID]->m_cName, 20) == 0 )
 				{	m_pItemList[cItemID]->m_sX = dX;
 					m_pItemList[cItemID]->m_sY = dY;
-					bSendCommand(MSGID_REQUEST_SETITEMPOS, NULL, cItemID, dX, dY, NULL, NULL);
+					//bSendCommand(MSGID_REQUEST_SETITEMPOS, NULL, cItemID, dX, dY, NULL, NULL);
 		}	}	}
-    }else bSendCommand(MSGID_REQUEST_SETITEMPOS, NULL, (char)(m_stMCursor.sSelectedObjectID), dX, dY, NULL, NULL);
+    }else //bSendCommand(MSGID_REQUEST_SETITEMPOS, NULL, (char)(m_stMCursor.sSelectedObjectID), dX, dY, NULL, NULL);
 
 	if (m_bIsItemEquipped[m_stMCursor.sSelectedObjectID] == TRUE)
 	{	char cStr1[64], cStr2[64], cStr3[64];
@@ -35664,7 +35665,7 @@ void CGame::bItemDrop_Inventory(short msX, short msY)
 			}else if(memcmp(m_pItemList[cItemID]->m_cName, "AngelicPandent(MAG)", 19) == 0)
 			{	m_iAngelicMag = 0;
 		}	}
-		bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_RELEASEITEM, NULL, m_stMCursor.sSelectedObjectID, NULL, NULL, NULL);
+		//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_RELEASEITEM, NULL, m_stMCursor.sSelectedObjectID, NULL, NULL, NULL);
 		m_bIsItemEquipped[m_stMCursor.sSelectedObjectID] = FALSE;
 		m_sItemEquipmentStatus[	m_pItemList[m_stMCursor.sSelectedObjectID]->m_cEquipPos ] = -1;
 	}
@@ -35781,10 +35782,11 @@ void CGame::bItemDrop_Bank(short msX, short msY)
 
 		ZeroMemory(m_stDialogBoxInfo[17].cStr, sizeof(m_stDialogBoxInfo[17].cStr));
 		EnableDialogBox(17, m_stDialogBoxInfo[39].sV1, m_pItemList[m_stDialogBoxInfo[39].sV1]->m_dwCount, NULL);
-	}else
-	{	if (_iGetBankItemCount() >= (MAXBANKITEMS-1)) AddEventList(DLGBOX_CLICK_NPCACTION_QUERY9, 10);
-		else bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, m_stDialogBoxInfo[39].sV1, 1, m_stDialogBoxInfo[39].sV5, m_stDialogBoxInfo[39].sV6, m_pItemList[m_stDialogBoxInfo[39].sV1]->m_cName, m_stDialogBoxInfo[39].sV4); //v1.4
-	}
+	}//else
+	//{	
+		//if (_iGetBankItemCount() >= (MAXBANKITEMS-1)) AddEventList(DLGBOX_CLICK_NPCACTION_QUERY9, 10);
+		//else //bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, m_stDialogBoxInfo[39].sV1, 1, m_stDialogBoxInfo[39].sV5, m_stDialogBoxInfo[39].sV6, m_pItemList[m_stDialogBoxInfo[39].sV1]->m_cName, m_stDialogBoxInfo[39].sV4); //v1.4
+	
 }
 
 void CGame::bItemDrop_SkillDialog()
@@ -36055,7 +36057,7 @@ void CGame::DlgBoxClick_Bank(short msX, short msY)
 					AddEventList(DLGBOX_CLICK_BANK1, 10);
 					return;
 				}
-				bSendCommand(MSGID_REQUEST_RETRIEVEITEM, NULL, NULL, (m_stDialogBoxInfo[14].sView + i), NULL, NULL, NULL);
+				//bSendCommand(MSGID_REQUEST_RETRIEVEITEM, NULL, NULL, (m_stDialogBoxInfo[14].sView + i), NULL, NULL, NULL);
 				m_stDialogBoxInfo[14].cMode = -1;
 				PlaySound('E', 14, 5);
 			}
@@ -36076,7 +36078,7 @@ void CGame::DlgBoxClick_Fish(short msX, short msY)
 	switch (m_stDialogBoxInfo[24].cMode) {
 	case 0:
 		if ((msX >= sX + 160) && (msX <= sX + 253) && (msY >= sY + 70) && (msY <= sY + 90)) {
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_GETFISHTHISTIME, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_GETFISHTHISTIME, NULL, NULL, NULL, NULL, NULL);
 			AddEventList(DLGBOX_CLICK_FISH1, 10);
 			DisableDialogBox(24);
 
@@ -36161,31 +36163,31 @@ void CGame::DlgBoxClick_NpcActionQuery(short msX, short msY)
 		if ((m_bIsDialogEnabled[21] == FALSE) && (msX > sX + 125) && (msX < sX + 180) && (msY > sY + 55) && (msY < sY + 70))
 		{	switch (m_stDialogBoxInfo[20].sV1) {
 			case 7:	// Guild
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 1, NULL, NULL, NULL);
+				//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 1, NULL, NULL, NULL);
 				AddEventList(TALKING_TO_GUILDHALL_OFFICER, 10);
 				break;
 			case 11: // BS or Shop
 				switch (m_stDialogBoxInfo[20].sV2) {
 				case 1:
-					bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 2, NULL, NULL, NULL);
+					//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 2, NULL, NULL, NULL);
 					AddEventList(TALKING_TO_SHOP_KEEPER, 10);
 					break;
 				case 2:
-					bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 3, NULL, NULL, NULL);
+					//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 3, NULL, NULL, NULL);
 					AddEventList(TALKING_TO_BLACKSMITH_KEEPER, 10);
 					break;
 				}
 				break;
 			case 13: // CityHall officer
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 4, NULL, NULL, NULL);
+				//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 4, NULL, NULL, NULL);
 				AddEventList(TALKING_TO_CITYHALL_OFFICER, 10);
 				break;
 			case 14: // WH keeper
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 5, NULL, NULL, NULL);
+				//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 5, NULL, NULL, NULL);
 				AddEventList(TALKING_TO_WAREHOUSE_KEEPER, 10);
 				break;
 			case 16: // Magicmerchant
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 6, NULL, NULL, NULL);
+				//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 6, NULL, NULL, NULL);
 				AddEventList(TALKING_TO_MAGICIAN, 10);
 				break;
 			}
@@ -36193,132 +36195,132 @@ void CGame::DlgBoxClick_NpcActionQuery(short msX, short msY)
 		}
 		break;
 
-	case 1: // On other player
-		if ((msX > sX + 25) && (msX < sX + 100) && (msY > sY + 55) && (msY < sY + 70))
-		{	absX = abs(m_stDialogBoxInfo[20].sV5 - m_sPlayerX);
-			absY = abs(m_stDialogBoxInfo[20].sV6 - m_sPlayerY);
-			if ((absX <= 4) && (absY <= 4))
-				 bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV3, m_stDialogBoxInfo[20].sV5, m_stDialogBoxInfo[20].sV6, m_pItemList[m_stDialogBoxInfo[20].sV1]->m_cName, m_stDialogBoxInfo[20].sV4); //v1.4
-			else AddEventList(DLGBOX_CLICK_NPCACTION_QUERY7, 10); //"Too far to give the item."
-			DisableDialogBox(20);
-		}else if ((msX > sX + 155) && (msX < sX + 210) && (msY > sY + 55) && (msY < sY + 70))
-		{	absX = abs(m_stDialogBoxInfo[20].sV5 - m_sPlayerX);
-			absY = abs(m_stDialogBoxInfo[20].sV6 - m_sPlayerY);
-			if ((absX <= 4) && (absY <= 4))
-				 bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_EXCHANGEITEMTOCHAR, m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV3, m_stDialogBoxInfo[20].sV5, m_stDialogBoxInfo[20].sV6, m_pItemList[m_stDialogBoxInfo[20].sV1]->m_cName, m_stDialogBoxInfo[20].sV4); //v1.4
-			else AddEventList(DLGBOX_CLICK_NPCACTION_QUERY8, 10); //"Too far to exchange item."
-			DisableDialogBox(20);
-		}
-		break;
+	//case 1: // On other player
+	//	if ((msX > sX + 25) && (msX < sX + 100) && (msY > sY + 55) && (msY < sY + 70))
+	//	{	absX = abs(m_stDialogBoxInfo[20].sV5 - m_sPlayerX);
+	//		absY = abs(m_stDialogBoxInfo[20].sV6 - m_sPlayerY);
+	//		if ((absX <= 4) && (absY <= 4))
+	//			 bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV3, m_stDialogBoxInfo[20].sV5, m_stDialogBoxInfo[20].sV6, m_pItemList[m_stDialogBoxInfo[20].sV1]->m_cName, m_stDialogBoxInfo[20].sV4); //v1.4
+	//		else AddEventList(DLGBOX_CLICK_NPCACTION_QUERY7, 10); //"Too far to give the item."
+	//		DisableDialogBox(20);
+	//	}else if ((msX > sX + 155) && (msX < sX + 210) && (msY > sY + 55) && (msY < sY + 70))
+	//	{	absX = abs(m_stDialogBoxInfo[20].sV5 - m_sPlayerX);
+	//		absY = abs(m_stDialogBoxInfo[20].sV6 - m_sPlayerY);
+	//		if ((absX <= 4) && (absY <= 4))
+	//			 bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_EXCHANGEITEMTOCHAR, m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV3, m_stDialogBoxInfo[20].sV5, m_stDialogBoxInfo[20].sV6, m_pItemList[m_stDialogBoxInfo[20].sV1]->m_cName, m_stDialogBoxInfo[20].sV4); //v1.4
+	//		else AddEventList(DLGBOX_CLICK_NPCACTION_QUERY8, 10); //"Too far to exchange item."
+	//		DisableDialogBox(20);
+	//	}
+	//	break;
 
-	case 2: // Item on Shop/BS
-		if ((msX > sX + 25) && (msX < sX + 100) && (msY > sY + 55) && (msY < sY + 70))
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_SELLITEM, NULL, m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV2, m_stDialogBoxInfo[20].sV3, m_pItemList[m_stDialogBoxInfo[20].sV1]->m_cName, m_stDialogBoxInfo[20].sV4); // v1.4
-			DisableDialogBox(20);
-		}else if ((msX > sX + 125) && (msX < sX + 180) && (msY > sY + 55) && (msY < sY + 70))
-		{	if (m_stDialogBoxInfo[20].sV3 == 1)
-			{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_REPAIRITEM, NULL, m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV2, NULL, m_pItemList[m_stDialogBoxInfo[20].sV1]->m_cName, m_stDialogBoxInfo[20].sV4); // v1.4
-				DisableDialogBox(20);
-		}	}
-		break;
+	//case 2: // Item on Shop/BS
+	//	if ((msX > sX + 25) && (msX < sX + 100) && (msY > sY + 55) && (msY < sY + 70))
+	//	{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_SELLITEM, NULL, m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV2, m_stDialogBoxInfo[20].sV3, m_pItemList[m_stDialogBoxInfo[20].sV1]->m_cName, m_stDialogBoxInfo[20].sV4); // v1.4
+	//		DisableDialogBox(20);
+	//	}else if ((msX > sX + 125) && (msX < sX + 180) && (msY > sY + 55) && (msY < sY + 70))
+	//	{	if (m_stDialogBoxInfo[20].sV3 == 1)
+	//		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_REPAIRITEM, NULL, m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV2, NULL, m_pItemList[m_stDialogBoxInfo[20].sV1]->m_cName, m_stDialogBoxInfo[20].sV4); // v1.4
+	//			DisableDialogBox(20);
+	//	}	}
+	//	break;
 
-	case 3: // Put item in the WH
-		if ((msX > sX + 25) && (msX < sX + 105) && (msY > sY + 55) && (msY < sY + 70))
-		{	absX = abs(m_stDialogBoxInfo[20].sV5 - m_sPlayerX);
-			absY = abs(m_stDialogBoxInfo[20].sV6 - m_sPlayerY);
-			if ((absX <= 8) && (absY <= 8))
-			{	if (_iGetBankItemCount() >= (MAXBANKITEMS-1))
-				{	AddEventList(DLGBOX_CLICK_NPCACTION_QUERY9, 10);//"here is no empty space left in warehouse."
-				}else bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV3, m_stDialogBoxInfo[20].sV5, m_stDialogBoxInfo[20].sV6, m_pItemList[m_stDialogBoxInfo[20].sV1]->m_cName, m_stDialogBoxInfo[20].sV4); //v1.4
-			}else AddEventList(DLGBOX_CLICK_NPCACTION_QUERY7, 10);//"Too far to give the item."
+	//case 3: // Put item in the WH
+	//	if ((msX > sX + 25) && (msX < sX + 105) && (msY > sY + 55) && (msY < sY + 70))
+	//	{	absX = abs(m_stDialogBoxInfo[20].sV5 - m_sPlayerX);
+	//		absY = abs(m_stDialogBoxInfo[20].sV6 - m_sPlayerY);
+	//		if ((absX <= 8) && (absY <= 8))
+	//		{	if (_iGetBankItemCount() >= (MAXBANKITEMS-1))
+	//			{	AddEventList(DLGBOX_CLICK_NPCACTION_QUERY9, 10);//"here is no empty space left in warehouse."
+	//			}else bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_GIVEITEMTOCHAR, m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV3, m_stDialogBoxInfo[20].sV5, m_stDialogBoxInfo[20].sV6, m_pItemList[m_stDialogBoxInfo[20].sV1]->m_cName, m_stDialogBoxInfo[20].sV4); //v1.4
+	//		}else AddEventList(DLGBOX_CLICK_NPCACTION_QUERY7, 10);//"Too far to give the item."
 
-			DisableDialogBox(20);
-		}
-		break;
+	//		DisableDialogBox(20);
+	//	}
+	//	break;
 
-	case 4: // talk to npc or Unicorn
-		if ((m_bIsDialogEnabled[21] == FALSE) && (msX > sX + 125) && (msX < sX + 180) && (msY > sY + 55) && (msY < sY + 70))
-		{	switch (m_stDialogBoxInfo[20].sV3) {
-			case 21: // Guard
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 21, NULL, NULL, NULL);
-				AddEventList(TALKING_TO_GUARD, 10);//"Talking to Guard..."
-				break;
+	//case 4: // talk to npc or Unicorn
+	//	if ((m_bIsDialogEnabled[21] == FALSE) && (msX > sX + 125) && (msX < sX + 180) && (msY > sY + 55) && (msY < sY + 70))
+	//	{	switch (m_stDialogBoxInfo[20].sV3) {
+	//		case 21: // Guard
+	//			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 21, NULL, NULL, NULL);
+	//			AddEventList(TALKING_TO_GUARD, 10);//"Talking to Guard..."
+	//			break;
 
-			case 32: // Unicorn
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 32, NULL, NULL, NULL);
-				AddEventList(TALKING_TO_UNICORN, 10);//"Talking to Unicorn..."
-				break;
-			case 67:
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 67, NULL, NULL, NULL);
-				AddEventList(TALKING_TO_MCGAFFIN, 10);//"Talking to a town man..."
-				break;
-			case 68:
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 68, NULL, NULL, NULL);
-				AddEventList(TALKING_TO_PERRY, 10);//"Talking to a town maiden..."
-				break;
-			case 69:
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 69, NULL, NULL, NULL);
-				AddEventList(TALKING_TO_DEVLIN, 10);//"Talking to a town magician..."
-				break;
-		}	}
-		DisableDialogBox(20);
-		break;
+	//		case 32: // Unicorn
+	//			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 32, NULL, NULL, NULL);
+	//			AddEventList(TALKING_TO_UNICORN, 10);//"Talking to Unicorn..."
+	//			break;
+	//		case 67:
+	//			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 67, NULL, NULL, NULL);
+	//			AddEventList(TALKING_TO_MCGAFFIN, 10);//"Talking to a town man..."
+	//			break;
+	//		case 68:
+	//			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 68, NULL, NULL, NULL);
+	//			AddEventList(TALKING_TO_PERRY, 10);//"Talking to a town maiden..."
+	//			break;
+	//		case 69:
+	//			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 69, NULL, NULL, NULL);
+	//			AddEventList(TALKING_TO_DEVLIN, 10);//"Talking to a town magician..."
+	//			break;
+	//	}	}
+	//	DisableDialogBox(20);
+	//	break;
 
 
-	case 5: // Talk
-		if ((msX > sX + 25) && (msX < sX + 100) && (msY > sY + 55) && (msY < sY + 70))
-		{	EnableDialogBox(m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV2, NULL, NULL);
-			DisableDialogBox(20);
-		}
-		if ((msX > sX + 25 +75) && (msX < sX + 80 +75) && (msY > sY + 55) && (msY < sY + 70))
-		{	EnableDialogBox(31, NULL, NULL, NULL);
-			DisableDialogBox(20);
-		}
+	//case 5: // Talk
+	//	if ((msX > sX + 25) && (msX < sX + 100) && (msY > sY + 55) && (msY < sY + 70))
+	//	{	EnableDialogBox(m_stDialogBoxInfo[20].sV1, m_stDialogBoxInfo[20].sV2, NULL, NULL);
+	//		DisableDialogBox(20);
+	//	}
+	//	if ((msX > sX + 25 +75) && (msX < sX + 80 +75) && (msY > sY + 55) && (msY < sY + 70))
+	//	{	EnableDialogBox(31, NULL, NULL, NULL);
+	//		DisableDialogBox(20);
+	//	}
 
-		if ((m_bIsDialogEnabled[21] == FALSE) && (msX > sX + 155) && (msX < sX + 210) && (msY > sY + 55) && (msY < sY + 70))
-		{	switch (m_stDialogBoxInfo[20].sV1) {
-			case 7:	// Guild
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 1, NULL, NULL, NULL);
-				AddEventList(TALKING_TO_GUILDHALL_OFFICER, 10);//"Talking to Guildhall Officer..."
-				break;
+	//	if ((m_bIsDialogEnabled[21] == FALSE) && (msX > sX + 155) && (msX < sX + 210) && (msY > sY + 55) && (msY < sY + 70))
+	//	{	switch (m_stDialogBoxInfo[20].sV1) {
+	//		case 7:	// Guild
+	//			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 1, NULL, NULL, NULL);
+	//			AddEventList(TALKING_TO_GUILDHALL_OFFICER, 10);//"Talking to Guildhall Officer..."
+	//			break;
 
-			case 11: //
-				switch (m_stDialogBoxInfo[20].sV2) {
-				case 1:
-					bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 2, NULL, NULL, NULL);
-					AddEventList(TALKING_TO_SHOP_KEEPER, 10);//"Talking to Shop Keeper..."
-					break;
-				case 2:
-					bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 3, NULL, NULL, NULL);
-					AddEventList(TALKING_TO_BLACKSMITH_KEEPER, 10);//"
-					break;
-				}
-				break;
+	//		case 11: //
+	//			switch (m_stDialogBoxInfo[20].sV2) {
+	//			case 1:
+	//				//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 2, NULL, NULL, NULL);
+	//				AddEventList(TALKING_TO_SHOP_KEEPER, 10);//"Talking to Shop Keeper..."
+	//				break;
+	//			case 2:
+	//				//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 3, NULL, NULL, NULL);
+	//				AddEventList(TALKING_TO_BLACKSMITH_KEEPER, 10);//"
+	//				break;
+	//			}
+	//			break;
 
-			case 13: //
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 4, NULL, NULL, NULL);
-				AddEventList(TALKING_TO_CITYHALL_OFFICER, 10);//"
-				break;
+	//		case 13: //
+	//			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 4, NULL, NULL, NULL);
+	//			AddEventList(TALKING_TO_CITYHALL_OFFICER, 10);//"
+	//			break;
 
-			case 14: //
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 5, NULL, NULL, NULL);
-				AddEventList(TALKING_TO_WAREHOUSE_KEEPER, 10);//
-				break;
+	//		case 14: //
+	//			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 5, NULL, NULL, NULL);
+	//			AddEventList(TALKING_TO_WAREHOUSE_KEEPER, 10);//
+	//			break;
 
-			case 16: //
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 6, NULL, NULL, NULL);
-				AddEventList(TALKING_TO_MAGICIAN, 10);//"
-				break;
-			}
-			DisableDialogBox(20);
-		}
-		break;
+	//		case 16: //
+	//			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TALKTONPC, NULL, 6, NULL, NULL, NULL);
+	//			AddEventList(TALKING_TO_MAGICIAN, 10);//"
+	//			break;
+	//		}
+	//		DisableDialogBox(20);
+	//	}
+	//	break;
 
-	case 6: // Snoopy: Added Gail
-		if ((msX > sX + 25) && (msX < sX + 100) && (msY > sY + 55) && (msY < sY + 70))
-		{	EnableDialogBox(51, 0, NULL, NULL);
-			DisableDialogBox(20);
-		}
+	//case 6: // Snoopy: Added Gail
+	//	if ((msX > sX + 25) && (msX < sX + 100) && (msY > sY + 55) && (msY < sY + 70))
+	//	{	EnableDialogBox(51, 0, NULL, NULL);
+	//		DisableDialogBox(20);
+	//	}
 	}
 }
 
@@ -36379,7 +36381,7 @@ void CGame::DlgBoxClick_Shop(short msX, short msY)
 			}else
 			{	ZeroMemory(cTemp, sizeof(cTemp));
 				strcpy(cTemp, m_pItemForSaleList[m_stDialogBoxInfo[11].cMode - 1]->m_cName);
-				bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_PURCHASEITEM, NULL, m_stDialogBoxInfo[11].sV3, NULL, NULL, cTemp);
+				//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_PURCHASEITEM, NULL, m_stDialogBoxInfo[11].sV3, NULL, NULL, cTemp);
 			}
 			m_stDialogBoxInfo[11].cMode = 0;
 			m_stDialogBoxInfo[11].sV3   = 1;
@@ -36424,7 +36426,7 @@ void CGame::DlgBoxClick_Skill(short msX, short msY)
 					switch (m_pSkillCfgList[i + m_stDialogBoxInfo[15].sView]->m_cUseMethod) {
 					case 0:
 					case 2:
-						bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USESKILL, NULL, (i + m_stDialogBoxInfo[15].sView), NULL, NULL, NULL);
+						//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_USESKILL, NULL, (i + m_stDialogBoxInfo[15].sView), NULL, NULL, NULL);
 						m_bSkillUsingStatus = TRUE;
 						DisableDialogBox(15);
 						PlaySound('E', 14, 5);
@@ -36433,7 +36435,7 @@ void CGame::DlgBoxClick_Skill(short msX, short msY)
 				}
 			}else if ((msX >= sX + 215) && (msX <= sX + 240) && (msY >= sY + 45 + i*15) && (msY <= sY + 59 + i*15))
 			{	if (m_stDialogBoxInfo[15].bFlag == FALSE)
-				{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_SETDOWNSKILLINDEX, NULL, i + m_stDialogBoxInfo[15].sView, NULL, NULL, NULL);
+				{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_SETDOWNSKILLINDEX, NULL, i + m_stDialogBoxInfo[15].sView, NULL, NULL, NULL);
 					PlaySound('E', 14, 5);
 					m_stDialogBoxInfo[15].bFlag = TRUE;
 		}	}	}
@@ -37420,7 +37422,7 @@ void CGame::NotifyMsg_ItemObtained(char * pData)
 		//m_pItemList[i]->m_sY      =	30;
 		m_pItemList[i]->m_sX      =	nX;
 		m_pItemList[i]->m_sY      =	nY;
-		bSendCommand(MSGID_REQUEST_SETITEMPOS, NULL, i, nX, nY, NULL, NULL);
+		//bSendCommand(MSGID_REQUEST_SETITEMPOS, NULL, i, nX, nY, NULL, NULL);
 		m_pItemList[i]->m_cItemType = cItemType;
 		m_pItemList[i]->m_cEquipPos = cEquipPos;
 		m_bIsItemDisabled[i]        = FALSE;
@@ -37545,7 +37547,7 @@ void CGame::NotifyMsg_ItemPurchased(char * pData)
 		//m_pItemList[i]->m_sY           = 30;
 		m_pItemList[i]->m_sX           = nX;
 		m_pItemList[i]->m_sY           = nY;
-		bSendCommand(MSGID_REQUEST_SETITEMPOS, NULL, i, nX, nY, NULL, NULL);
+		//bSendCommand(MSGID_REQUEST_SETITEMPOS, NULL, i, nX, nY, NULL, NULL);
 		m_pItemList[i]->m_cItemType    = cItemType;
 		m_pItemList[i]->m_cEquipPos    = cEquipPos;
 		m_bIsItemDisabled[i]           = FALSE;
@@ -38394,9 +38396,9 @@ void CGame::NotifyMsg_ServerChange(char * pData)
 	m_bIsPoisoned = FALSE;
 
 	ChangeGameMode(GAMEMODE_ONCONNECTING);
-	m_dwConnectMode  = MSGID_REQUEST_ENTERGAME;
-	//m_wEnterGameType = ENTERGAMEMSGTYPE_NEW; //Gateway
-	m_wEnterGameType = ENTERGAMEMSGTYPE_NEW_TOWLSBUTMLS;
+	//m_dwConnectMode  = MSGID_REQUEST_ENTERGAME;
+	////m_wEnterGameType = ENTERGAMEMSGTYPE_NEW; //Gateway
+	//m_wEnterGameType = ENTERGAMEMSGTYPE_NEW_TOWLSBUTMLS;
 	ZeroMemory(m_cMsg, sizeof(m_cMsg));
 	strcpy(m_cMsg,"55");
 }
@@ -38775,7 +38777,7 @@ void CGame::RequestTeleportAndWaitData()
 			{	AddEventList(REQUEST_TELEPORT_AND_WAIT_DATA1, 10);
 				return;
 	}	}	}*/
-	bSendCommand(MSGID_REQUEST_TELEPORT, NULL, NULL, NULL, NULL, NULL, NULL);
+	//bSendCommand(MSGID_REQUEST_TELEPORT, NULL, NULL, NULL, NULL, NULL, NULL);
 	ChangeGameMode(GAMEMODE_ONWAITINGINITDATA);
 }
 
@@ -39026,7 +39028,7 @@ void CGame::InitDataResponseHandler(char * pData)
 		{	dwFileSize = GetFileSize(hFile, NULL);
 			CloseHandle(hFile);
 		}
-		bSendCommand(MSGID_REQUEST_NOTICEMENT, NULL, NULL, (int)dwFileSize, NULL, NULL, NULL);
+		//bSendCommand(MSGID_REQUEST_NOTICEMENT, NULL, NULL, (int)dwFileSize, NULL, NULL, NULL);
 	}
 	//cp += 2;
 }
@@ -40327,7 +40329,7 @@ void CGame::DrawDialogBox_ItemUpgrade(int msX, int msY)
 		}
 		if (((dwTime - m_stDialogBoxInfo[34].dwV1)/1000 > 4) && (m_stDialogBoxInfo[34].dwV1 != NULL))
 		{	m_stDialogBoxInfo[34].dwV1 = NULL;
-			bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_UPGRADEITEM, NULL, m_stDialogBoxInfo[34].sV1, NULL, NULL, NULL);
+			//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_UPGRADEITEM, NULL, m_stDialogBoxInfo[34].sV1, NULL, NULL, NULL);
 		}
 		break;
 
@@ -40663,7 +40665,7 @@ void CGame::UseMagic(int iMagicNo)
 	{	AddEventList(DLGBOX_CLICK_MAGIC2, 10);
 		return;
 	}
-	if ((m_sPlayerAppr2 & 0xF000) == 0) bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TOGGLECOMBATMODE, NULL, NULL, NULL, NULL, NULL);
+	if ((m_sPlayerAppr2 & 0xF000) == 0) //bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_TOGGLECOMBATMODE, NULL, NULL, NULL, NULL, NULL);
 	m_cCommand = OBJECTMAGIC;
 	m_iCastingMagicType = iMagicNo;
 	m_sMagicShortCut    = iMagicNo;
@@ -40741,7 +40743,7 @@ void CGame::ItemEquipHandler(char cItemID)
 			break;
 	}	}
 
-	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_EQUIPITEM, NULL, cItemID, NULL, NULL, NULL);
+	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_EQUIPITEM, NULL, cItemID, NULL, NULL, NULL);
 	m_sRecentShortCut = cItemID;
 	ReleaseEquipHandler(m_pItemList[cItemID]->m_cEquipPos);
 	switch( m_pItemList[cItemID]->m_cEquipPos )	{
@@ -40989,257 +40991,257 @@ void CGame::DrawDialogBox_ChangeStatsMajestic(short msX, short msY)
 // 3.51 LevelUp Box - Change stats using Majestic - Diuuude
 void CGame::DlgBoxClick_ChangeStatsMajestic(short msX, short msY)
 {
- short sX, sY;
+ //short sX, sY;
 
-	sX = m_stDialogBoxInfo[42].sX;
-	sY = m_stDialogBoxInfo[42].sY;
+	//sX = m_stDialogBoxInfo[42].sX;
+	//sY = m_stDialogBoxInfo[42].sY;
 
-	if ((cStateChange1 != 0) || (cStateChange2 != 0) || (cStateChange3 != 0)){
-	// Strength UP - Diuuude
-		if ((msX >= sX + 195) && (msX <= sX + 205) && (msY >= sY + 127) && (msY <= sY + 133) && (m_cLU_Str < 0))
-		{	if (cStateChange1 == STR)
-			{	cStateChange1 = 0;
-				m_cLU_Str += 1;
-				m_iLU_Point -= 1;
-			}else if (cStateChange2 == STR)
-			{	cStateChange2 = 0;
-				m_cLU_Str += 1;
-				m_iLU_Point -= 1;
-			}else if (cStateChange3 == STR)
-			{	cStateChange3 = 0;
-				m_cLU_Str += 1;
-				m_iLU_Point -= 1;
-			}
-			PlaySound('E', 14, 5);
-		}
+	//if ((cStateChange1 != 0) || (cStateChange2 != 0) || (cStateChange3 != 0)){
+	//// Strength UP - Diuuude
+	//	if ((msX >= sX + 195) && (msX <= sX + 205) && (msY >= sY + 127) && (msY <= sY + 133) && (m_cLU_Str < 0))
+	//	{	if (cStateChange1 == STR)
+	//		{	cStateChange1 = 0;
+	//			m_cLU_Str += 1;
+	//			m_iLU_Point -= 1;
+	//		}else if (cStateChange2 == STR)
+	//		{	cStateChange2 = 0;
+	//			m_cLU_Str += 1;
+	//			m_iLU_Point -= 1;
+	//		}else if (cStateChange3 == STR)
+	//		{	cStateChange3 = 0;
+	//			m_cLU_Str += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		PlaySound('E', 14, 5);
+	//	}
 
-		// Vitality UP - Diuuude
-		if ((msX >= sX + 195) && (msX <= sX + 205) && (msY >= sY + 146) && (msY <= sY + 152) && (m_cLU_Vit < 0)) {
-			if (cStateChange1 == VIT)
-			{	cStateChange1 = 0;
-				m_cLU_Vit += 1;
-				m_iLU_Point -= 1;
-			}else if (cStateChange2 == VIT)
-			{	cStateChange2 = 0;
-				m_cLU_Vit += 1;
-				m_iLU_Point -= 1;
-			}else if (cStateChange3 == VIT)
-			{	cStateChange3 = 0;
-				m_cLU_Vit += 1;
-				m_iLU_Point -= 1;
-			}
-			PlaySound('E', 14, 5);
-		}
+	//	// Vitality UP - Diuuude
+	//	if ((msX >= sX + 195) && (msX <= sX + 205) && (msY >= sY + 146) && (msY <= sY + 152) && (m_cLU_Vit < 0)) {
+	//		if (cStateChange1 == VIT)
+	//		{	cStateChange1 = 0;
+	//			m_cLU_Vit += 1;
+	//			m_iLU_Point -= 1;
+	//		}else if (cStateChange2 == VIT)
+	//		{	cStateChange2 = 0;
+	//			m_cLU_Vit += 1;
+	//			m_iLU_Point -= 1;
+	//		}else if (cStateChange3 == VIT)
+	//		{	cStateChange3 = 0;
+	//			m_cLU_Vit += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		PlaySound('E', 14, 5);
+	//	}
 
-		// Dexterity UP - Diuuude
-		if ((msX >= sX + 195) && (msX <= sX + 205) && (msY >= sY + 165) && (msY <= sY + 171) && (m_cLU_Dex < 0)) {
-			if (cStateChange1 == DEX){
-				cStateChange1 = 0;
-				m_cLU_Dex += 1;
-				m_iLU_Point -= 1;
-			}
-			else if (cStateChange2 == DEX){
-				cStateChange2 = 0;
-				m_cLU_Dex += 1;
-				m_iLU_Point -= 1;
-			}
-			else if (cStateChange3 == DEX){
-				cStateChange3 = 0;
-				m_cLU_Dex += 1;
-				m_iLU_Point -= 1;
-			}
-			PlaySound('E', 14, 5);
-		}
+	//	// Dexterity UP - Diuuude
+	//	if ((msX >= sX + 195) && (msX <= sX + 205) && (msY >= sY + 165) && (msY <= sY + 171) && (m_cLU_Dex < 0)) {
+	//		if (cStateChange1 == DEX){
+	//			cStateChange1 = 0;
+	//			m_cLU_Dex += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		else if (cStateChange2 == DEX){
+	//			cStateChange2 = 0;
+	//			m_cLU_Dex += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		else if (cStateChange3 == DEX){
+	//			cStateChange3 = 0;
+	//			m_cLU_Dex += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		PlaySound('E', 14, 5);
+	//	}
 
-		// Intelligence UP - Diuuude
-		if ((msX >= sX + 195) && (msX <= sX + 205) && (msY >= sY + 184) && (msY <= sY + 190) && (m_cLU_Int < 0)) {
-			if (cStateChange1 == DEF_INT){
-				cStateChange1 = 0;
-				m_cLU_Int += 1;
-				m_iLU_Point -= 1;
-			}
-			else if (cStateChange2 == DEF_INT){
-				cStateChange2 = 0;
-				m_cLU_Int += 1;
-				m_iLU_Point -= 1;
-			}
-			else if (cStateChange3 == DEF_INT){
-				cStateChange3 = 0;
-				m_cLU_Int += 1;
-				m_iLU_Point -= 1;
-			}
-			PlaySound('E', 14, 5);
-		}
+	//	// Intelligence UP - Diuuude
+	//	if ((msX >= sX + 195) && (msX <= sX + 205) && (msY >= sY + 184) && (msY <= sY + 190) && (m_cLU_Int < 0)) {
+	//		if (cStateChange1 == DEF_INT){
+	//			cStateChange1 = 0;
+	//			m_cLU_Int += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		else if (cStateChange2 == DEF_INT){
+	//			cStateChange2 = 0;
+	//			m_cLU_Int += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		else if (cStateChange3 == DEF_INT){
+	//			cStateChange3 = 0;
+	//			m_cLU_Int += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		PlaySound('E', 14, 5);
+	//	}
 
-		// Magic UP - Diuuude
-		if ((msX >= sX + 195) && (msX <= sX + 205) && (msY >= sY + 203) && (msY <= sY + 209) && (m_cLU_Mag < 0)) {
-			if (cStateChange1 == MAG){
-				cStateChange1 = 0;
-				m_cLU_Mag += 1;
-				m_iLU_Point -= 1;
-			}
-			else if (cStateChange2 == MAG){
-				cStateChange2 = 0;
-				m_cLU_Mag += 1;
-				m_iLU_Point -= 1;
-			}
-			else if (cStateChange3 == MAG){
-				cStateChange3 = 0;
-				m_cLU_Mag += 1;
-				m_iLU_Point -= 1;
-			}
-			PlaySound('E', 14, 5);
-		}
+	//	// Magic UP - Diuuude
+	//	if ((msX >= sX + 195) && (msX <= sX + 205) && (msY >= sY + 203) && (msY <= sY + 209) && (m_cLU_Mag < 0)) {
+	//		if (cStateChange1 == MAG){
+	//			cStateChange1 = 0;
+	//			m_cLU_Mag += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		else if (cStateChange2 == MAG){
+	//			cStateChange2 = 0;
+	//			m_cLU_Mag += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		else if (cStateChange3 == MAG){
+	//			cStateChange3 = 0;
+	//			m_cLU_Mag += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		PlaySound('E', 14, 5);
+	//	}
 
-		// Charisma UP - Diuuude
-		if ((msX >= sX + 195) && (msX <= sX + 205) && (msY >= sY + 222) && (msY <= sY + 228) && (m_cLU_Char < 0)) {
-			if (cStateChange1 == CHR){
-				cStateChange1 = 0;
-				m_cLU_Char += 1;
-				m_iLU_Point -= 1;
-			}
-			else if (cStateChange2 == CHR){
-				cStateChange2 = 0;
-				m_cLU_Char += 1;
-				m_iLU_Point -= 1;
-			}
-			else if (cStateChange3 == CHR){
-				cStateChange3 = 0;
-				m_cLU_Char += 1;
-				m_iLU_Point -= 1;
-			}
-			PlaySound('E', 14, 5);
-		}
-	}
+	//	// Charisma UP - Diuuude
+	//	if ((msX >= sX + 195) && (msX <= sX + 205) && (msY >= sY + 222) && (msY <= sY + 228) && (m_cLU_Char < 0)) {
+	//		if (cStateChange1 == CHR){
+	//			cStateChange1 = 0;
+	//			m_cLU_Char += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		else if (cStateChange2 == CHR){
+	//			cStateChange2 = 0;
+	//			m_cLU_Char += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		else if (cStateChange3 == CHR){
+	//			cStateChange3 = 0;
+	//			m_cLU_Char += 1;
+	//			m_iLU_Point -= 1;
+	//		}
+	//		PlaySound('E', 14, 5);
+	//	}
+	//}
 
-	if ((cStateChange1 == 0) || (cStateChange2 == 0) || (cStateChange3 == 0) && (m_iGizonItemUpgradeLeft > 0))
-	{	// Strength DOWN - Diuuude
-		if ((msX >= sX + 210) && (msX <= sX + 220) && (msY >= sY + 127) && (msY <= sY + 133) && (m_iStr > 10))
-		{	if (cStateChange1 == 0)
-			{	cStateChange1 = STR;
-				m_cLU_Str -= 1;
-				m_iLU_Point += 1;
-			}else if (cStateChange2 == 0)
-			{	cStateChange2 = STR;
-				m_cLU_Str -= 1;
-				m_iLU_Point += 1;
-			}else
-			{	cStateChange3 = STR;
-				m_cLU_Str -= 1;
-				m_iLU_Point += 1;
-			}
-			PlaySound('E', 14, 5);
-		}
+	//if ((cStateChange1 == 0) || (cStateChange2 == 0) || (cStateChange3 == 0) && (m_iGizonItemUpgradeLeft > 0))
+	//{	// Strength DOWN - Diuuude
+	//	if ((msX >= sX + 210) && (msX <= sX + 220) && (msY >= sY + 127) && (msY <= sY + 133) && (m_iStr > 10))
+	//	{	if (cStateChange1 == 0)
+	//		{	cStateChange1 = STR;
+	//			m_cLU_Str -= 1;
+	//			m_iLU_Point += 1;
+	//		}else if (cStateChange2 == 0)
+	//		{	cStateChange2 = STR;
+	//			m_cLU_Str -= 1;
+	//			m_iLU_Point += 1;
+	//		}else
+	//		{	cStateChange3 = STR;
+	//			m_cLU_Str -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		PlaySound('E', 14, 5);
+	//	}
 
-		// Vitality DOWN - Diuuude
-		if ((msX >= sX + 210) && (msX <= sX + 220) && (msY >= sY + 146) && (msY <= sY + 152) && (m_iVit > 10)) {
-			if (cStateChange1 == 0){
-				cStateChange1 = VIT;
-				m_cLU_Vit -= 1;
-				m_iLU_Point += 1;
-			}
-			else if (cStateChange2 == 0){
-				cStateChange2 = VIT;
-				m_cLU_Vit -= 1;
-				m_iLU_Point += 1;
-			}
-			else{
-				cStateChange3 = VIT;
-				m_cLU_Vit -= 1;
-				m_iLU_Point += 1;
-			}
-			PlaySound('E', 14, 5);
-		}
+	//	// Vitality DOWN - Diuuude
+	//	if ((msX >= sX + 210) && (msX <= sX + 220) && (msY >= sY + 146) && (msY <= sY + 152) && (m_iVit > 10)) {
+	//		if (cStateChange1 == 0){
+	//			cStateChange1 = VIT;
+	//			m_cLU_Vit -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		else if (cStateChange2 == 0){
+	//			cStateChange2 = VIT;
+	//			m_cLU_Vit -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		else{
+	//			cStateChange3 = VIT;
+	//			m_cLU_Vit -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		PlaySound('E', 14, 5);
+	//	}
 
-		// Dexterity DOWN - Diuuude
-		if ((msX >= sX + 210) && (msX <= sX + 220) && (msY >= sY + 165) && (msY <= sY + 171) && (m_iDex > 10)) {
-			if (cStateChange1 == 0){
-				cStateChange1 = DEX;
-				m_cLU_Dex -= 1;
-				m_iLU_Point += 1;
-			}
-			else if (cStateChange2 == 0){
-				cStateChange2 = DEX;
-				m_cLU_Dex -= 1;
-				m_iLU_Point += 1;
-			}
-			else{
-				cStateChange3 = DEX;
-				m_cLU_Dex -= 1;
-				m_iLU_Point += 1;
-			}
-			PlaySound('E', 14, 5);
-		}
+	//	// Dexterity DOWN - Diuuude
+	//	if ((msX >= sX + 210) && (msX <= sX + 220) && (msY >= sY + 165) && (msY <= sY + 171) && (m_iDex > 10)) {
+	//		if (cStateChange1 == 0){
+	//			cStateChange1 = DEX;
+	//			m_cLU_Dex -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		else if (cStateChange2 == 0){
+	//			cStateChange2 = DEX;
+	//			m_cLU_Dex -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		else{
+	//			cStateChange3 = DEX;
+	//			m_cLU_Dex -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		PlaySound('E', 14, 5);
+	//	}
 
-		// Intelligence DOWN - Diuuude
-		if ((msX >= sX + 210) && (msX <= sX + 220) && (msY >= sY + 184) && (msY <= sY + 190) && (m_iInt > 10))
-		{	if (cStateChange1 == 0)
-			{	cStateChange1 = DEF_INT;
-				m_cLU_Int -= 1;
-				m_iLU_Point += 1;
-			}else if (cStateChange2 == 0)
-			{	cStateChange2 = DEF_INT;
-				m_cLU_Int -= 1;
-				m_iLU_Point += 1;
-			}else
-			{
-				cStateChange3 = DEF_INT;
-				m_cLU_Int -= 1;
-				m_iLU_Point += 1;
-			}
-			PlaySound('E', 14, 5);
-		}
+	//	// Intelligence DOWN - Diuuude
+	//	if ((msX >= sX + 210) && (msX <= sX + 220) && (msY >= sY + 184) && (msY <= sY + 190) && (m_iInt > 10))
+	//	{	if (cStateChange1 == 0)
+	//		{	cStateChange1 = DEF_INT;
+	//			m_cLU_Int -= 1;
+	//			m_iLU_Point += 1;
+	//		}else if (cStateChange2 == 0)
+	//		{	cStateChange2 = DEF_INT;
+	//			m_cLU_Int -= 1;
+	//			m_iLU_Point += 1;
+	//		}else
+	//		{
+	//			cStateChange3 = DEF_INT;
+	//			m_cLU_Int -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		PlaySound('E', 14, 5);
+	//	}
 
-		// Magic DOWN - Diuuude
-		if ((msX >= sX + 210) && (msX <= sX + 220) && (msY >= sY + 203) && (msY <= sY + 209) && (m_iMag > 10)) {
-			if (cStateChange1 == 0){
-				cStateChange1 = MAG;
-				m_cLU_Mag -= 1;
-				m_iLU_Point += 1;
-			}
-			else if (cStateChange2 == 0){
-				cStateChange2 = MAG;
-				m_cLU_Mag -= 1;
-				m_iLU_Point += 1;
-			}
-			else{
-				cStateChange3 = MAG;
-				m_cLU_Mag -= 1;
-				m_iLU_Point += 1;
-			}
-			PlaySound('E', 14, 5);
-		}
+	//	// Magic DOWN - Diuuude
+	//	if ((msX >= sX + 210) && (msX <= sX + 220) && (msY >= sY + 203) && (msY <= sY + 209) && (m_iMag > 10)) {
+	//		if (cStateChange1 == 0){
+	//			cStateChange1 = MAG;
+	//			m_cLU_Mag -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		else if (cStateChange2 == 0){
+	//			cStateChange2 = MAG;
+	//			m_cLU_Mag -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		else{
+	//			cStateChange3 = MAG;
+	//			m_cLU_Mag -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		PlaySound('E', 14, 5);
+	//	}
 
-		// Charisma DOWN - Diuuude
-		if ((msX >= sX + 210) && (msX <= sX + 220) && (msY >= sY + 222) && (msY <= sY + 228) && (m_iCharisma > 10)) {
-			if (cStateChange1 == 0){
-				cStateChange1 = CHR;
-				m_cLU_Char -= 1;
-				m_iLU_Point += 1;
-			}
-			else if (cStateChange2 == 0){
-				cStateChange2 = CHR;
-				m_cLU_Char -= 1;
-				m_iLU_Point += 1;
-			}
-			else{
-				cStateChange3 = CHR;
-				m_cLU_Char -= 1;
-				m_iLU_Point += 1;
-			}
-			PlaySound('E', 14, 5);
-		}
-	}else
-	{	if ((msX >= sX + RBTNPOSX) && (msX <= sX + RBTNPOSX + BTNSZX) && (msY > sY + BTNPOSY) && (msY < sY + BTNPOSY + BTNSZY))
-		{	// Send command to HG - Diuuude
-			bSendCommand(MSGID_STATECHANGEPOINT, NULL, NULL, NULL, NULL, NULL, NULL);
-			DisableDialogBox(42);
-			PlaySound('E', 14, 5);
-	}	}
-	if ((msX >= sX + LBTNPOSX) && (msX <= sX + LBTNPOSX + BTNSZX) && (msY > sY + BTNPOSY) && (msY < sY + BTNPOSY + BTNSZY)) {
-		DisableDialogBox(42);
-		PlaySound('E', 14, 5);
-	}
+	//	// Charisma DOWN - Diuuude
+	//	if ((msX >= sX + 210) && (msX <= sX + 220) && (msY >= sY + 222) && (msY <= sY + 228) && (m_iCharisma > 10)) {
+	//		if (cStateChange1 == 0){
+	//			cStateChange1 = CHR;
+	//			m_cLU_Char -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		else if (cStateChange2 == 0){
+	//			cStateChange2 = CHR;
+	//			m_cLU_Char -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		else{
+	//			cStateChange3 = CHR;
+	//			m_cLU_Char -= 1;
+	//			m_iLU_Point += 1;
+	//		}
+	//		PlaySound('E', 14, 5);
+	//	}
+	//}else
+	//{	if ((msX >= sX + RBTNPOSX) && (msX <= sX + RBTNPOSX + BTNSZX) && (msY > sY + BTNPOSY) && (msY < sY + BTNPOSY + BTNSZY))
+	//	{	// Send command to HG - Diuuude
+	//		//bSendCommand(MSGID_STATECHANGEPOINT, NULL, NULL, NULL, NULL, NULL, NULL);
+	//		DisableDialogBox(42);
+	//		PlaySound('E', 14, 5);
+	//}	}
+	//if ((msX >= sX + LBTNPOSX) && (msX <= sX + LBTNPOSX + BTNSZX) && (msY > sY + BTNPOSY) && (msY < sY + BTNPOSY + BTNSZY)) {
+	//	DisableDialogBox(42);
+	//	PlaySound('E', 14, 5);
+	//}
 }
 
 void CGame::DrawAngel(int iSprite, short sX, short sY, char cFrame, DWORD dwTime)
@@ -41388,11 +41390,11 @@ void CGame::DlgBoxClick_Resurect(short msX, short msY)
 	sY = m_stDialogBoxInfo[50].sY;
 	if ((msX >= sX + 30) && (msX <= sX + 30 + BTNSZX) && (msY >= sY + 55) && (msY <= sY + 55 + BTNSZY))
 	{   // yes
-		bSendCommand(REQUEST_RESURRECTPLAYER_YES, 0, 0, 0, 0 ,0, NULL, 0);
+		//bSendCommand(REQUEST_RESURRECTPLAYER_YES, 0, 0, 0, 0 ,0, NULL, 0);
 		DisableDialogBox(50);
 	}else if ((msX >= sX + 170 ) && (msX <= sX + 170 + BTNSZX ) && (msY >= sY + 55 ) && (msY <= sY + 55 + BTNSZY))
 	{	// no
-		bSendCommand(REQUEST_RESURRECTPLAYER_NO, 0, 0, 0, 0 ,0, NULL, 0);
+		//bSendCommand(REQUEST_RESURRECTPLAYER_NO, 0, 0, 0, 0 ,0, NULL, 0);
 		DisableDialogBox(50);
 	}
 }
@@ -41583,7 +41585,7 @@ void CGame::DlgBoxClick_CMDHallMenu(short msX, short msY)
 		if ((msX > sX + 35) && (msX < sX + 220) && (msY > sY + 70) && (msY < sY + 95))
 		{	m_stDialogBoxInfo[51].cMode = 1; // TP diag
 			m_iTeleportMapCount = -1;
-			bSendCommand(MSGID_REQUEST_HELDENIAN_TP_LIST, NULL, NULL, NULL, NULL, NULL, NULL);
+			//bSendCommand(MSGID_REQUEST_HELDENIAN_TP_LIST, NULL, NULL, NULL, NULL, NULL, NULL);
 			PlaySound('E', 14, 5);
 		}
 		if ((msX > sX + 35) && (msX < sX + 220) && (msY > sY + 95) && (msY < sY + 120))
@@ -41612,7 +41614,7 @@ void CGame::DlgBoxClick_CMDHallMenu(short msX, short msY)
 		if( m_iTeleportMapCount > 0 )
 		{	for( int i=0 ; i<m_iTeleportMapCount ; i++ )
 			{	if( (msX >= sX + LBTNPOSX) && (msX <= sX + RBTNPOSX + BTNSZX) && (msY >= sY + 130 + i*15) && (msY <= sY + 144 + i*15) )
-				{	bSendCommand(MSGID_REQUEST_HELDENIAN_TP, NULL, NULL, m_stTeleportList[i].iIndex, NULL, NULL, NULL);
+				{	//bSendCommand(MSGID_REQUEST_HELDENIAN_TP, NULL, NULL, m_stTeleportList[i].iIndex, NULL, NULL, NULL);
 					DisableDialogBox(51);
 					return;
 		}	}	}
@@ -41621,32 +41623,32 @@ void CGame::DlgBoxClick_CMDHallMenu(short msX, short msY)
 	case 2: // Buy a soldier scroll
 		if (   (msX >= sX + 35) && (msX <= sX + 220) && (msY > sY + 70) && (msY < sY + 95)
 			&& (m_iConstructionPoint >= 2000) && (m_bIsCrusadeMode == FALSE)) // Sorceress
-		{	bSendCommand(MSGID_REQUEST_HELDENIAN_SCROLL, 875, 1, 2, 3, 4, "Gail", 5);
+		{	//bSendCommand(MSGID_REQUEST_HELDENIAN_SCROLL, 875, 1, 2, 3, 4, "Gail", 5);
 			PlaySound('E', 14, 5);
 		}
 		if (   (msX >= sX + 35) && (msX <= sX + 220) && (msY > sY + 95) && (msY < sY + 120)
 			&& (m_iConstructionPoint >= 3000) && (m_bIsCrusadeMode == FALSE)) // ATK
-		{	bSendCommand(MSGID_REQUEST_HELDENIAN_SCROLL, 876, 0, 0, 0, 0, "Gail", 0);
+		{	//bSendCommand(MSGID_REQUEST_HELDENIAN_SCROLL, 876, 0, 0, 0, 0, "Gail", 0);
 			PlaySound('E', 14, 5);
 		}
 		if (   (msX >= sX + 35) && (msX <= sX + 220) && (msY > sY + 120) && (msY < sY + 145)
 			&& (m_iConstructionPoint >= 1500) && (m_bIsCrusadeMode == FALSE)) // Elf
-		{	bSendCommand(MSGID_REQUEST_HELDENIAN_SCROLL, 877, 0, 0, 0, 0, "Gail", 0);
+		{	//bSendCommand(MSGID_REQUEST_HELDENIAN_SCROLL, 877, 0, 0, 0, 0, "Gail", 0);
 			PlaySound('E', 14, 5);
 		}
 		if (   (msX >= sX + 35) && (msX <= sX + 220) && (msY > sY + 145) && (msY < sY + 170)
 			&& (m_iConstructionPoint >= 3000) && (m_bIsCrusadeMode == FALSE)) // DSK
-		{	bSendCommand(MSGID_REQUEST_HELDENIAN_SCROLL, 878, 0, 0, 0, 0, "Gail", 0);
+		{	//bSendCommand(MSGID_REQUEST_HELDENIAN_SCROLL, 878, 0, 0, 0, 0, "Gail", 0);
 			PlaySound('E', 14, 5);
 		}
 		if (   (msX >= sX + 35) && (msX <= sX + 220) && (msY > sY + 170) && (msY < sY + 195)
 			&& (m_iConstructionPoint >= 4000) && (m_bIsCrusadeMode == FALSE)) // HBT
-		{	bSendCommand(MSGID_REQUEST_HELDENIAN_SCROLL, 879, 0, 0, 0, 0, "Gail", 0);
+		{	//bSendCommand(MSGID_REQUEST_HELDENIAN_SCROLL, 879, 0, 0, 0, 0, "Gail", 0);
 			PlaySound('E', 14, 5);
 		}
 		if (   (msX >= sX + 35) && (msX <= sX + 220) && (msY > sY + 195) && (msY < sY + 220)
 			&& (m_iConstructionPoint >= 3000) && (m_bIsCrusadeMode == FALSE)) // Barbarian
-		{	bSendCommand(MSGID_REQUEST_HELDENIAN_SCROLL, 880, 0, 0, 0, 0, "Gail", 0);
+		{	//bSendCommand(MSGID_REQUEST_HELDENIAN_SCROLL, 880, 0, 0, 0, 0, "Gail", 0);
 			PlaySound('E', 14, 5);
 		}
 		break;
@@ -41654,7 +41656,7 @@ void CGame::DlgBoxClick_CMDHallMenu(short msX, short msY)
 	case 3: // Buy a Flag
 		if (   (msX >= sX + 35) && (msX <= sX + 220) && (msY >= sY + 140) && (msY <= sY + 165)
 			&& (m_iEnemyKillCount >=3))
-		{	bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_GETOCCUPYFLAG, 0, 0, 0, 0, 0, 0);
+		{	//bSendCommand(MSGID_COMMAND_COMMON, COMMONTYPE_REQ_GETOCCUPYFLAG, 0, 0, 0, 0, 0, 0);
 			PlaySound('E', 14, 5);
 		}
 		break;
@@ -41662,22 +41664,22 @@ void CGame::DlgBoxClick_CMDHallMenu(short msX, short msY)
 	case 4: // Buy an Angel
 		if (   (msX >= sX + 35) && (msX <= sX + 220) && (msY >= sY + 175) && (msY <= sY + 200)
 			&& ( m_iGizonItemUpgradeLeft>=5))
-		{	bSendCommand(REQUEST_ANGEL, NULL, NULL, 1, NULL, NULL, "Gail", NULL);
+		{	//bSendCommand(REQUEST_ANGEL, NULL, NULL, 1, NULL, NULL, "Gail", NULL);
 			PlaySound('E', 14, 5);
 		}
 		if (   (msX >= sX + 35) && (msX <= sX + 220) && (msY >= sY + 200) && (msY <= sY + 225)
 			&& ( m_iGizonItemUpgradeLeft>=5))
-		{	bSendCommand(REQUEST_ANGEL, NULL, NULL, 2, NULL, NULL, "Gail", NULL);
+		{	//bSendCommand(REQUEST_ANGEL, NULL, NULL, 2, NULL, NULL, "Gail", NULL);
 			PlaySound('E', 14, 5);
 		}
 		if (   (msX >= sX + 35) && (msX <= sX + 220) && (msY >= sY + 225) && (msY <= sY + 250)
 			&& ( m_iGizonItemUpgradeLeft>=5))
-		{	bSendCommand(REQUEST_ANGEL, NULL, NULL, 3, NULL, NULL, "Gail", NULL);
+		{	//bSendCommand(REQUEST_ANGEL, NULL, NULL, 3, NULL, NULL, "Gail", NULL);
 			PlaySound('E', 14, 5);
 		}
 		if (   (msX >= sX + 35) && (msX <= sX + 220) && (msY >= sY + 250) && (msY <= sY + 275)
 			&& ( m_iGizonItemUpgradeLeft>=5))
-		{	bSendCommand(REQUEST_ANGEL, NULL, NULL, 4, NULL, NULL, "Gail", NULL);
+		{	//bSendCommand(REQUEST_ANGEL, NULL, NULL, 4, NULL, NULL, "Gail", NULL);
 			PlaySound('E', 14, 5);
 		}
 
